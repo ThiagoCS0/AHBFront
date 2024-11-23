@@ -1,0 +1,94 @@
+import { useEffect, useRef, useState } from "react";
+import "./Populares.css";
+import Visualizador from "../../Modal/API_Visualizador/Visualizador";
+
+export default function Populares({ populares }) {
+  const [api_selecionada, def_api_selecionada] = useState(null);
+  const [visualizar, def_visualizar] = useState(false);
+  const [foco, def_foco] = useState(0);
+  const total_itens = populares.length;
+  const intervaloRef = useRef(null);
+
+  useEffect(() => {
+    iniciarIntervalo();
+
+    const carousel = document.getElementById("carousel");
+    carousel.addEventListener("mouseover", pausarIntervalo);
+    carousel.addEventListener("mouseout", iniciarIntervalo);
+
+    return () => {
+      pausarIntervalo();
+      carousel.removeEventListener("mouseover", pausarIntervalo);
+      carousel.removeEventListener("mouseout", iniciarIntervalo);
+    };
+  }, [foco]);
+
+  const iniciarIntervalo = () => {
+    if (!intervaloRef.current) {
+      intervaloRef.current = setInterval(() => {
+        avancar();
+      }, 2000);
+    }
+  };
+
+  const pausarIntervalo = () => {
+    if (intervaloRef.current) {
+      clearInterval(intervaloRef.current);
+      intervaloRef.current = null;
+    }
+  };
+
+  const avancar = () => {
+    def_foco((foco + 1) % total_itens);
+  };
+
+  const ir_para = (indice) => {
+    def_foco(indice);
+  };
+
+  const itensVisiveis = (i) => {
+    if (i === (foco - 2 + total_itens) % total_itens) return "mais_esquerda";
+    if (i === (foco - 1 + total_itens) % total_itens) return "esquerda";
+    if (i === foco) return "centro";
+    if (i === (foco + 1) % total_itens) return "direita";
+    if (i === (foco + 2) % total_itens) return "mais_direita";
+    return "oculto";
+  };
+
+  const visualizarItem = (api) => {
+    def_api_selecionada(api ? api : null);
+  };
+
+  const fechar = () => {
+    def_visualizar(false);
+  };
+
+  return (
+    <div id="slider">
+      <div id="carousel">
+        {populares.map((api, i) => (
+          <div
+            className={`slide_itens ${itensVisiveis(i)}`}
+            key={api.id}
+            onClick={() => { ir_para(i); visualizarItem(api); def_visualizar(true); }}
+          >
+            <img src={api.imagem} alt={api.nome} />
+            <p>
+              {api.nome.length > 15 ? api.nome.slice(0, 15) + "..." : api.nome}
+            </p>
+          </div>
+        ))}
+      </div>
+      <div id="slide_botoes">
+        {populares.map((_, i) => (
+          <button
+            key={i}
+            className={foco === i ? "ativo" : ""}
+            onClick={() => ir_para(i)}
+          ></button>
+        ))}
+      </div>
+      {visualizar && api_selecionada && <Visualizador api={api_selecionada} fechar={fechar} />}
+    </div>
+  );
+}

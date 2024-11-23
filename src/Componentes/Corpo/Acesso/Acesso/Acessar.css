@@ -1,0 +1,169 @@
+#acessar {
+ animation: ondular 5s infinite ease-in-out;
+ background: var(--linear-acesso);
+ background-size: 300% 300%;
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+ display: flex;
+ height: 100vh;
+ width: 100vw;
+}
+
+@keyframes ondular {
+ 0% {
+  background-position: 0% 50%;
+ }
+
+ 50% {
+  background-position: 50% 10%;
+ }
+
+ 100% {
+  background-position: 0% 50%;
+ }
+}
+
+
+#acessar div:first-child {
+ justify-content: space-between;
+ background-color: var(--fundo);
+ box-shadow: var(--sombra-1);
+ flex-direction: column;
+ height: fit-content;
+ border-radius: 8px;
+ padding: 20px;
+ display: flex;
+ width: 300px;
+ gap: 20px;
+}
+
+.dados_titulos {
+ margin: 0;
+ padding: 0 5px;
+}
+
+.dados_usuario {
+ flex-direction: column;
+ position: relative;
+ display: flex;
+ width: 100%;
+ gap: 4px;
+}
+
+#tel_usuario {
+ flex-direction: row !important;
+ justify-content: start;
+ width: 100%;
+ padding: 0;
+ gap: 10px;
+ border: 0;
+ margin: 0;
+}
+
+#tel_usuario input:first-child {
+ text-align: center;
+ padding: 8px;
+ width: 50px;
+}
+
+#tel_usuario input:last-child {
+ width: 100%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+ -webkit-appearance: none;
+ margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+ -moz-appearance: textfield;
+ appearance: textfield;
+}
+
+.ver_senha {
+ opacity: 0.7;
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: contain;
+ position: absolute;
+ cursor: pointer;
+ bottom: 18%;
+ width: 30px;
+ right: 2%;
+}
+
+#div_search {
+ height: 80%;
+}
+
+.span_checkbox_especial {
+ border: 1px solid var(--destaque);
+ border-radius: 4px;
+ height: 21px;
+ width: 21px;
+}
+
+.span_checkbox_especial:after {
+ position: absolute;
+ display: none;
+ content: "";
+}
+
+.checkbox_especial {
+ justify-content: start;
+ align-items: center;
+ cursor: pointer;
+ display: flex;
+ gap: 10px;
+}
+
+.checkbox_especial input {
+ opacity: 0;
+}
+
+ .checkbox_especial input:checked~.span_checkbox_especial {
+ background-color: var(--destaque-escuro);
+}
+
+.checkbox_especial input:checked~.span_checkbox_especial:after {
+ display: block;
+}
+
+.checkbox_especial:hover input~.span_checkbox_especial {
+ border: 1px solid var(--destaque-claro);
+}
+
+.checkbox_especial .span_checkbox_especial:after {
+ border: 1px solid #FFF;
+ border-width: 0 2px 2px 0 !important;
+ transform: rotate(45deg);
+ position: relative;
+ height: 10px;
+ width: 5px;
+ left: 6px;
+ top: 2px;
+}
+
+.input_checkbox_especial {
+ display: none;
+}
+
+#botao_voltar {
+ background-image: url("../../../../assets/voltar.png");
+ background-color: transparent;
+ filter: var(--inverter);
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: contain;
+ position: absolute;
+ height: 40px;
+ border: none;
+ z-index: 10;
+ width: 40px;
+ left: 20px;
+ top: 20px;
+}

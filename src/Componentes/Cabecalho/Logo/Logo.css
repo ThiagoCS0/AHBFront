@@ -1,0 +1,44 @@
+#logo_AHB {
+ align-items: center;
+ width: fit-content;
+ flex: 0 1 260px;
+ color: #FFF;
+ display: flex;
+ gap: 10px;
+}
+
+#logo_AHB img {
+ padding: 2px;
+ height: 100%;
+}
+
+#logo_AHB div {
+ flex-direction: column;
+ display: flex;
+}
+
+#logo_AHB span {
+ border-bottom: 1px solid var(--destaque);
+ width: fit-content;
+ font-size: 14px;
+ padding: 0 2px;
+}
+
+#logo_AHB span:first-child {
+ display: none;
+}
+
+/* Smartphone  */
+@media (max-width: 600px) {
+ #logo_AHB span:not(#logo_AHB span:first-child) {
+  display: none;
+ }
+
+ #logo_AHB span:first-child {
+  display: block;
+ }
+
+ #logo_AHB img {
+  height: 90%;
+ }
+}

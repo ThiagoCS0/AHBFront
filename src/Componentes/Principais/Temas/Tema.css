@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+ /* Principal */
+ --texto: #000;
+ --fundo: #EEE;
+ --borda: #AAA;
+ --entrada-texto: #000;
+ --entrada-fundo: #DDD;
+ --link: #D52;
+ --link-hover: #F74;
+ --destaque: #C40;
+ --destaque-claro: #F74;
+ --destaque-escuro: #B40;
+ /* Botões, Imput's, Select's */
+ --tema-texto: #FFF;
+ --tema-fundo: #730;
+ --tema-placeholder: #BBB;
+ --tema-hover-texto: #FFF;
+ --tema-hover-fundo: #F74;
+
+ --icones-laranjas: contrast(0) brightness(2);
+ /* Lineares */
+ --linear-apis: linear-gradient(-45deg, #AAA, #FFF);
+ --linear-cabecalho: linear-gradient(to right, #F74 0%, #B41 30%, #B41 100%);
+ --linear-efeito: #EEE 0%, #EEE5 50%, #0000 100%;
+ --linear-acesso: linear-gradient(45deg, #FFF 0%, #777 100%);
+ /* Efeitos */
+ --fundo-selecionado: #D52;
+ --inverter: invert(1);
+ /* Não precisa repetir */
+ --texto-especial: #F74;
+ --texto-selecionado: #FFF;
+ --sombra-0: inset 0px 0px 15px #0006;
+ --sombra-1: -4px -4px 8px 0 #0005, 4px 4px 8px #AAA5;
+ --sombra-3: inset 0px 0px 8px #0004;
+}
+
+[data-tema="escuro"] {
+ /* Principal */
+ --texto: #FFF;
+ --fundo: #222;
+ --borda: #AAA;
+ --entrada-texto: #000;
+ --entrada-fundo: #AAA;
+ --link: #FFF;
+ --link-hover: #F74;
+ --destaque: #F74;
+ --destaque-claro: #888;
+ --destaque-escuro: #333;
+ /* Botões, Imput's, Select's */
+ --tema-texto: #FFF;
+ --tema-fundo: #555;
+ --tema-placeholder: #BBB;
+ --tema-hover-texto: #FFF;
+ --tema-hover-fundo: #D63;
+
+
+ --icones-laranjas: contrast(0) brightness(2);
+ /* Lineares */
+ --linear-apis: linear-gradient(-45deg, #000, #AAA);
+ --linear-cabecalho: linear-gradient(to right, #444 0%, #333 30%, #333 100%);
+ --linear-efeito: #222 0%, #2225 50%, #0000 100%;
+ --linear-acesso: linear-gradient(45deg, #222 0%, #777 100%);
+ /* Efeitos */
+ --texto-selecionado: #FFF;
+ --inverter: invert(0);
+}
+
+* {
+ box-sizing: border-box;
+ text-decoration: none;
+ user-select: none;
+ outline: none;
+ padding: 0;
+ margin: 0;
+}
+
+*::selection {
+ background-color: var(--selecionar-texto);
+ color: var();
+}
+
+body {
+ font-family: 'Montserrat', Verdana, sans-serif;
+ background: var(--fundo);
+ color: var(--texto);
+}
+
+a {
+ text-decoration: none;
+ color: var(--link);
+ font-weight: bold;
+}
+
+a:hover {
+ color: var(--link-hover);
+ text-decoration: none;
+}
+
+button {
+ background-color: var(--tema-fundo);
+ color: var(--tema-texto);
+ justify-content: center;
+ align-items: center;
+ border-radius: 8px;
+ font-size: large;
+ cursor: pointer;
+ display: flex;
+ padding: 5px;
+ height: 40px;
+ border: 0;
+}
+
+button:hover {
+ background-color: var(--tema-hover-fundo);
+ color: var(--tema-hover-texto);
+ border: 0;
+}
+
+input,
+select {
+ background-color: var(--entrada-fundo);
+ color: var(--entrada-texto);
+ box-shadow: var(--sombra-3);
+ border-radius: 8px;
+ padding: 5px 10px;
+ font-size: large;
+ height: 40px;
+ border: 0;
+}
+
+input::placeholder {
+ color: var(--tema-placeholder);
+}
+
+.alinhado {
+ justify-content: center;
+ align-items: center;
+ position: relative;
+ display: flex;
+}
+
+.juntos {
+ justify-content: center;
+}
+
+.juntos>* {
+ gap: 0;
+ margin: 0;
+ padding: 0;
+ width: fit-content;
+}
+
+.conteudo {
+ width: fit-content;
+ font-size: large;
+}
+
+.destaque {
+ border-bottom: 1px solid var(--destaque);
+ padding-bottom: 2px;
+}
+
+.icones {
+ filter: contrast(0) brightness(2);
+ object-fit: fill;
+ cursor: pointer;
+ padding: 5px;
+ height: 40px;
+ width: 40px;
+}
+
+.icones:hover {
+ filter: contrast(1) brightness(1);
+}
+
+.expandir {
+ width: 100% !important;
+ margin: 0 !important;
+}
+
+.campos_laterias {
+ justify-content: space-between;
+ flex-direction: row;
+ display: flex;
+ width: 100%;
+ gap: 20px;
+}
+
+.campos_laterias>* {
+ min-width: fit-content;
+ width: 100%;
+}
+
+#cabecalho {
+ background: var(--linear-cabecalho);
+ justify-content: space-between;
+ color: var(--texto);
+ padding: 5px 20px;
+ display: flex;
+ height: 70px;
+ width: 100vw;
+}
+
+
+
+/* carregamento */
+
+#container_carregando {
+ width: 100vw;
+ height: 100vh;
+ display: flex;
+ font-size: xx-large;
+ align-items: center;
+ flex-direction: column;
+ justify-content: center;
+ color: var(--cor-principal-texto);
+}
+
+#container_carregando p {
+ padding: 20px;
+ border-bottom: 2px solid var(--cor-principal-destaques);
+}
+
+#container_carregando_pontos {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+}
+
+.carregando_pontos {
+ width: 15px;
+ height: 15px;
+ margin: 0 5px;
+ background-color: #f74;
+ border-radius: 50%;
+}
+
+.animacao-normal {
+ transition: all 0.5s;
+ animation: anim_normal 1.5s infinite ease-in-out;
+}
+
+@keyframes anim_normal {
+
+ 0%,
+ 100% {
+  transform: translateY(0);
+ }
+
+ 50% {
+  transform: translateY(-20px);
+ }
+}
+
+.animacao-caindo {
+ animation: cair 2s forwards ease-in;
+}
+
+@keyframes cair {
+ 0% {
+  transform: translateY(0);
+  opacity: 1;
+ }
+
+ 100% {
+  transform: translateY(50px);
+  opacity: 0;
+ }
+}
+
+
+/* Smartphone  */
+@media (max-width: 600px) {
+ #cabecalho {
+  padding: 4px;
+  height: 50px;
+ }
+
+ .expansiveis {
+  width: 100%;
+ }
+}

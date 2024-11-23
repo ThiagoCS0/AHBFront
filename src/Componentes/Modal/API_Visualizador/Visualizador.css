@@ -1,0 +1,94 @@
+#modal_apis {
+ background-color: #000A;
+ font-size: large;
+ position: fixed;
+ height: 100vh;
+ z-index: 100;
+ width: 100vw;
+ inset: 0;
+}
+
+#modal_apis_conteudo {
+ transform: translate3d(-50%, -50%, 0);
+ border: 1px solid var(--destaque);
+ background-color: var(--fundo);
+ justify-content: space-between;
+ box-shadow: var(--sombra-0);
+ flex-direction: column;
+ border-radius: 8px;
+ position: absolute;
+ padding: 20px;
+ display: flex;
+ height: 300px;
+ width: 500px;
+ inset: 50%;
+ gap: 10px;
+}
+
+#modal_apis_conteudo span {
+ color: var(--destaque);
+ margin-right: 10px;
+ font-weight: bold;
+ font-size: large;
+}
+
+#modal_apis_conteudo a:first-child {
+ background: var(--linear-apis);
+ box-shadow: var(--sombra-0);
+ position: absolute;
+ height: 80px;
+ width: 100px;
+ top: -30px;
+ left: 70%;
+}
+
+#modal_apis_conteudo img {
+ border: 1px solid var(--destaque);
+ object-fit: contain;
+ height: 80px;
+ width: 100px;
+}
+
+#modal_apis_conteudo p {
+ flex: 1 0 fit-content;
+}
+
+#modal_apis_conteudo p:nth-child(2) {
+ max-width: 300px !important;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ overflow: hidden;
+}
+
+#modal_apis_conteudo div {
+ display: flex;
+}
+
+#modal_apis_conteudo div p:first-child {
+ flex: 0 1 fit-content;
+ position: relative;
+ min-height: 100px;
+ max-height: 150px;
+ overflow: hidden;
+}
+
+#modal_apis_conteudo div p:first-child::after {
+ background: linear-gradient(to top, var(--linear-efeito));
+ pointer-events: none;
+ position: absolute;
+ content: '';
+ inset: 0;
+}
+
+#modal_apis_conteudo div p:last-child {
+ flex: 1 0 fit-content;
+}
+
+#modal_lista_metodos {
+ flex-direction: row;
+ gap: 10px;
+}
+
+#modal_lista_metodos button {
+ width: fit-content;
+}
