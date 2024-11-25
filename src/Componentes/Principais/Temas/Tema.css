@@ -7,24 +7,29 @@
  --borda: #AAA;
  --entrada-texto: #000;
  --entrada-fundo: #DDD;
- --link: #D52;
- --link-hover: #F74;
+ --link: #830;
+ --link-hover: #000;
  --destaque: #C40;
  --destaque-claro: #F74;
  --destaque-escuro: #B40;
  /* Botões, Imput's, Select's */
  --tema-texto: #FFF;
  --tema-fundo: #730;
- --tema-placeholder: #BBB;
+ --tema-fundo-1: #B40;
+ --tema-fundo-2: #A30;
+ --tema-fundo-3: #DDD;
+ --tema-texto-disativar: #BBB;
+ --tema-fundo-disativar: #AAA;
+ --tema-placeholder: #AAA;
  --tema-hover-texto: #FFF;
- --tema-hover-fundo: #F74;
-
+ --tema-hover-fundo: #420;
  --icones-laranjas: contrast(0) brightness(2);
  /* Lineares */
  --linear-apis: linear-gradient(-45deg, #AAA, #FFF);
  --linear-cabecalho: linear-gradient(to right, #F74 0%, #B41 30%, #B41 100%);
  --linear-efeito: #EEE 0%, #EEE5 50%, #0000 100%;
  --linear-acesso: linear-gradient(45deg, #FFF 0%, #777 100%);
+ --linear-erro: linear-gradient(to right, #000 0%, #555 100%);
  /* Efeitos */
  --fundo-selecionado: #D52;
  --inverter: invert(1);
@@ -33,7 +38,9 @@
  --texto-selecionado: #FFF;
  --sombra-0: inset 0px 0px 15px #0006;
  --sombra-1: -4px -4px 8px 0 #0005, 4px 4px 8px #AAA5;
+ --sombra-2: 0px 0px 8px #0008;
  --sombra-3: inset 0px 0px 8px #0004;
+ --sombra-4: 0px 0px 8px #000;
 }
 
 [data-tema="escuro"] {
@@ -41,21 +48,24 @@
  --texto: #FFF;
  --fundo: #222;
  --borda: #AAA;
- --entrada-texto: #000;
- --entrada-fundo: #AAA;
- --link: #FFF;
- --link-hover: #F74;
+ --entrada-texto: #FFF;
+ --entrada-fundo: #777;
+ --link: #BBB;
+ --link-hover: #FFF;
  --destaque: #F74;
  --destaque-claro: #888;
  --destaque-escuro: #333;
  /* Botões, Imput's, Select's */
  --tema-texto: #FFF;
- --tema-fundo: #555;
+ --tema-fundo: #444;
+ --tema-fundo-1: #999;
+ --tema-fundo-2: #888;
+ --tema-fundo-3: #444;
+ --tema-texto-disativar: #777;
+ --tema-fundo-disativar: #000;
  --tema-placeholder: #BBB;
  --tema-hover-texto: #FFF;
- --tema-hover-fundo: #D63;
-
-
+ --tema-hover-fundo: #555;
  --icones-laranjas: contrast(0) brightness(2);
  /* Lineares */
  --linear-apis: linear-gradient(-45deg, #000, #AAA);
@@ -70,21 +80,34 @@
 * {
  box-sizing: border-box;
  text-decoration: none;
- user-select: none;
  outline: none;
  padding: 0;
  margin: 0;
 }
 
 *::selection {
- background-color: var(--selecionar-texto);
- color: var();
+ color: #FFF;
+ background-color: #D50;
+}
+
+*::-webkit-scrollbar {
+ display: none;
 }
 
 body {
  font-family: 'Montserrat', Verdana, sans-serif;
  background: var(--fundo);
  color: var(--texto);
+ user-select: none;
+ overflow: hidden;
+ height: 100vh;
+ width: 100vw;
+}
+
+#root {
+ flex-direction: column;
+ display: flex;
+ height: 100%;
 }
 
 a {
@@ -107,7 +130,7 @@ button {
  font-size: large;
  cursor: pointer;
  display: flex;
- padding: 5px;
+ padding: 10px;
  height: 40px;
  border: 0;
 }
@@ -119,7 +142,8 @@ button:hover {
 }
 
 input,
-select {
+select,
+textarea {
  background-color: var(--entrada-fundo);
  color: var(--entrada-texto);
  box-shadow: var(--sombra-3);
@@ -130,8 +154,31 @@ select {
  border: 0;
 }
 
+textarea::placeholder,
 input::placeholder {
  color: var(--tema-placeholder);
+}
+
+input:disabled::placeholder {
+ color: var(--tema-texto-disativar);
+}
+
+input:disabled {
+ background-color: var(--tema-fundo-disativar);
+ color: var(--tema-texto-disativar);
+}
+
+b {
+ border-bottom: 1px solid var(--destaque);
+ transition: border-bottom 0.4s;
+}
+
+b:hover {
+ border-bottom: 1px solid var(--destaque-claro);
+}
+
+p {
+ line-height: 1.5;
 }
 
 .alinhado {
@@ -152,16 +199,6 @@ input::placeholder {
  width: fit-content;
 }
 
-.conteudo {
- width: fit-content;
- font-size: large;
-}
-
-.destaque {
- border-bottom: 1px solid var(--destaque);
- padding-bottom: 2px;
-}
-
 .icones {
  filter: contrast(0) brightness(2);
  object-fit: fill;
@@ -180,7 +217,7 @@ input::placeholder {
  margin: 0 !important;
 }
 
-.campos_laterias {
+.campos_laterais {
  justify-content: space-between;
  flex-direction: row;
  display: flex;
@@ -188,9 +225,41 @@ input::placeholder {
  gap: 20px;
 }
 
-.campos_laterias>* {
+.campos_laterais>* {
  min-width: fit-content;
  width: 100%;
+}
+
+.aviso_erro {
+ position: absolute;
+ font-weight: 500;
+ bottom: -20px;
+ color: #F50;
+}
+
+.aviso_erro_borda {
+ border: 1px solid #F50;
+}
+
+/* Efeitos */
+
+.ondulacao {
+ animation: ondular 5s infinite ease-in-out;
+ background: var(--linear-acesso);
+}
+
+@keyframes ondular {
+ 0% {
+  background-position: 0% 50%;
+ }
+
+ 50% {
+  background-position: 50% 10%;
+ }
+
+ 100% {
+  background-position: 0% 50%;
+ }
 }
 
 #cabecalho {
@@ -203,44 +272,42 @@ input::placeholder {
  width: 100vw;
 }
 
-
-
 /* carregamento */
 
 #container_carregando {
- width: 100vw;
- height: 100vh;
- display: flex;
- font-size: xx-large;
- align-items: center;
- flex-direction: column;
- justify-content: center;
  color: var(--cor-principal-texto);
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+ font-size: xx-large;
+ display: flex;
+ height: 100vh;
+ width: 100vw;
 }
 
 #container_carregando p {
- padding: 20px;
  border-bottom: 2px solid var(--cor-principal-destaques);
+ padding: 20px;
 }
 
 #container_carregando_pontos {
- display: flex;
+ justify-content: center;
  flex-direction: row;
  align-items: center;
- justify-content: center;
+ display: flex;
 }
 
 .carregando_pontos {
- width: 15px;
- height: 15px;
- margin: 0 5px;
  background-color: #f74;
  border-radius: 50%;
+ margin: 0 5px;
+ height: 15px;
+ width: 15px;
 }
 
 .animacao-normal {
- transition: all 0.5s;
  animation: anim_normal 1.5s infinite ease-in-out;
+ transition: all 0.5s;
 }
 
 @keyframes anim_normal {
@@ -271,6 +338,25 @@ input::placeholder {
  }
 }
 
+@keyframes anima_erro {
+ 0% {
+   text-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Sem sombra no início */
+   transform: scale(1);
+ }
+ 30% {
+   text-shadow: 1px 1px 3px rgba(255, 0, 0, 0.5); /* Sombra com efeito de derretimento */
+   transform: scale(1.1); /* Aumenta um pouco o texto */
+ }
+ 50% {
+   text-shadow: 2px 2px 6px rgba(255, 0, 0, 0.8);
+   transform: scale(1.2); /* Aumenta ainda mais */
+ }
+ 100% {
+   text-shadow: 5px 5px 10px rgba(255, 0, 0, 1);
+   transform: scale(1.5) skew(10deg); /* Escorregando o texto para o lado */
+   opacity: 0; /* Torna o texto invisível no final */
+ }
+}
 
 /* Smartphone  */
 @media (max-width: 600px) {

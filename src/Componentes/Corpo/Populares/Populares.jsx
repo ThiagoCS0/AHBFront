@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./Populares.css";
 import Visualizador from "../../Modal/API_Visualizador/Visualizador";
+import API from "../API/API";
 
 export default function Populares({ populares }) {
   const [api_selecionada, def_api_selecionada] = useState(null);
@@ -64,22 +65,20 @@ export default function Populares({ populares }) {
   };
 
   return (
-    <div id="slider">
+    <div id="populares">
       <div id="carousel">
         {populares.map((api, i) => (
-          <div
-            className={`slide_itens ${itensVisiveis(i)}`}
+          <API api={api}
             key={api.id}
-            onClick={() => { ir_para(i); visualizarItem(api); def_visualizar(true); }}
-          >
-            <img src={api.imagem} alt={api.nome} />
-            <p>
-              {api.nome.length > 15 ? api.nome.slice(0, 15) + "..." : api.nome}
-            </p>
-          </div>
+            classe={`populares_itens ${itensVisiveis(i)}`}
+            click={() => {
+              ir_para(i);
+              visualizarItem(api);
+              def_visualizar(true);
+            }} />
         ))}
       </div>
-      <div id="slide_botoes">
+      <div id="populares_botoes">
         {populares.map((_, i) => (
           <button
             key={i}

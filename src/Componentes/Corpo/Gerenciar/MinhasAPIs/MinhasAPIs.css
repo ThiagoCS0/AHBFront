@@ -1,0 +1,283 @@
+#minhas_apis {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#minhas_apis button {
+  background-color: var(--tema-fundo-1);
+}
+
+#minhas_apis button:hover {
+  background-color: var(--tema-hover-fundo);
+}
+
+#nova_api {
+  box-shadow: var(--sombra-2);
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  position: absolute;
+  width: fit-content;
+  font-weight: 500;
+  font-size: large;
+  display: flex;
+  padding: 20px;
+  bottom: -10px;
+  height: 30px;
+  right: 10px;
+  z-index: 10;
+  top: 80px;
+}
+
+#nova_api::before {
+  content: "Nova API";
+}
+
+#lista_minhas_apis {
+  height: calc(100% - 100px);
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  width: 100%;
+  gap: 20px;
+}
+
+#lista_minhas_apis::after {
+  background: linear-gradient(to bottom, #0002 0%, #0000 100%);
+  pointer-events: none;
+  position: absolute;
+  bottom: 88%;
+  content: '';
+  top: 100px;
+  z-index: 9;
+  right: 0;
+  left: 0;
+}
+
+.apis {
+  border: 2px solid var(--destaque-claro);
+  background-color: var(--tema-fundo-3);
+  justify-content: space-between;
+  box-shadow: var(--sombra-0);
+  color: var(--entrada-texto);
+  box-sizing: border-box;
+  transition: all 0.3s;
+  border-radius: 10px;
+  flex-direction: row;
+  min-height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  height: 200px;
+  padding: 4px;
+  width: 100%;
+}
+
+.lista_minhas_apis_dados {
+  align-items: center;
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  gap: 10px;
+}
+
+.lista_minhas_apis_dados img {
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  object-fit: cover;
+  height: 188px;
+  width: 188px;
+}
+
+.lista_api_conteudo {
+  align-self: flex-start;
+  flex-direction: column;
+  padding-right: 4px;
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  flex: 1;
+}
+
+.lista_api_conteudo h3 {
+  border-bottom: 1px solid #DDD;
+  font-size: 18px;
+  padding: 5px;
+  margin: 0;
+}
+
+.api_infor {
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: 5px;
+  display: flex;
+  width: 100%;
+  flex: 1;
+}
+
+.api_infor p:first-child {
+  border: 1px solid transparent;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 6;
+  display: -webkit-box;
+  overflow: hidden;
+  line-clamp: 6;
+  height: 100%;
+  margin: 0;
+  flex: 1;
+}
+
+.api_infor p:last-child {
+  text-overflow: ellipsis;
+  align-items: center;
+  white-space: nowrap;
+  margin-top: auto;
+  overflow: hidden;
+  display: flex;
+  height: 30px;
+  width: 100%;
+  margin: 0;
+}
+
+.lista_minhas_apis_metodos {
+  display: flex;
+  gap: 5px;
+}
+
+#lista_minhas_apis_botoes {
+  justify-content: space-between;
+  width: 100px !important;
+  flex-direction: column;
+  display: flex;
+  height: 100%;
+}
+
+#lista_minhas_apis_botoes button {
+  border-radius: 0 5px 0 0;
+  font-weight: bold;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  border: 0;
+}
+
+#lista_minhas_apis_botoes button:last-child {
+  border-radius: 0 0 6px 0;
+  background-color: var(--tema-fundo-2);
+}
+
+#lista_minhas_apis_botoes button:last-child:hover {
+  background-color: var(--tema-hover-fundo);
+}
+
+#modal_excluir {
+  background-color: #000A;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  display: flex;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+#modal_excluir_conteudo {
+  border: 1px solid var(--cor-principal-destaques);
+  background: var(--cor-modal-fundo);
+  color: var(--texto);
+  text-align: center;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: large;
+  max-width: 80%;
+  padding: 20px;
+}
+
+#modal_excluir_texto {
+  margin: 10px;
+  overflow: hidden;
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+  #nova_api {
+    top: 20px;
+  }
+
+  #nova_api::before {
+    content: "+";
+  }
+
+  #lista_minhas_apis {
+    height: calc(100% - 40px);
+    position: relative;
+    padding: 4px;
+    width: 100%;
+    margin: 0;
+    gap: 4px;
+  }
+
+  .apis {
+    justify-content: space-between;
+    border-radius: 5px;
+    min-height: 100px;
+    height: 100px;
+    padding: 1px;
+  }
+
+  .lista_minhas_apis_dados {
+    width: 100%;
+  }
+
+  .lista_minhas_apis_dados img {
+    object-fit: contain;
+    height: 100px;
+    width: 100%;
+  }
+
+  .lista_api_conteudo {
+    display: none;
+  }
+
+  #lista_minhas_apis_botoes {
+    flex: 0 1 100px;
+  }
+
+  #lista_minhas_apis_botoes button {
+    font-size: small;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/* Smartwatch */
+@media (max-width: 300px) {
+  #lista_minhas_apis {
+    width: calc(100% - 27px);
+    height: 100%;
+  }
+
+  #nova_api {
+    font-weight: 500;
+    font-size: large;
+    position: fixed;
+    display: flex;
+    padding: 4px;
+    height: 25px;
+    width: 25px;
+    right: 2px;
+    top: 25px;
+    top: auto;
+  }
+
+}

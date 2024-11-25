@@ -1,6 +1,6 @@
-import { Erros } from "../../Erros/Erros"
+import { MeusErros } from "../../Erros/MeusErros"
 
-export function salvarToken(token) {
+export function salvar_token(token) {
   try {
     const expira = new Date();
     expira.setHours(expira.getHours() + 1); // Expira em 1 hora
@@ -8,11 +8,11 @@ export function salvarToken(token) {
     // Salva o token no cookie com Secure e SameSite
     document.cookie = `autenticado=${token}; path=/; expires=${expira.toUTCString()}; Secure; SameSite=Strict`;
   } catch (erro) {
-    Erros(import.meta.url.split('/').pop(), erro);
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_SLV: : ${erro.message}`));
   }
 }
 
-export function lerToken() {
+export function ler_token() {
   try {
     const nomeCookie = "autenticado=";
     const cookiesDecodificados = document.cookie.split(';');
@@ -27,12 +27,12 @@ export function lerToken() {
     return null; // Token não encontrado
 
   } catch (erro) {
-    Erros(import.meta.url.split('/').pop(), erro);
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_LER: : ${erro.message}`));
     return null;
   }
 }
 
-export async function atualizarToken() {
+export async function atualizar_token() {
   try {
     // Envia o refresh token para o backend para obter um novo token de acesso
     const resposta = await fetch("/api/atualizar_token", {
@@ -46,7 +46,7 @@ export async function atualizarToken() {
     if (!resposta.ok) {
       // Exibe o erro e retorna
       const erro = await resposta.text();
-      Erros(import.meta.url.split('/').pop(), new Error(erro));
+      MeusErros(import.meta.url.split('/').pop(), new Error(`ATL_TKN: : ${erro.message}`));
       return;
     }
 
@@ -54,10 +54,10 @@ export async function atualizarToken() {
     const novoToken = dados.token; // Recebe o novo token de acesso
 
     // Salva o novo token de acesso
-    salvarToken(novoToken);
+    salvar_token(novoToken);
 
   } catch (erro) {
-    Erros(import.meta.url.split('/').pop(), erro);
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_ATL: : ${erro.message}`));
     // Pode redirecionar para login ou exibir mensagem de erro
   }
 
@@ -66,7 +66,7 @@ export async function atualizarToken() {
   
   
   @PostMapping("/atualizar_token")
-public ResponseEntity<?> atualizarToken(@CookieValue("refreshToken") String refreshToken) {
+public ResponseEntity<?> atualizar_token(@CookieValue("refreshToken") String refreshToken) {
     // Verifique a validade do refresh token
     boolean valido = verificarRefreshToken(refreshToken);
     if (!valido) {
@@ -83,9 +83,9 @@ public ResponseEntity<?> atualizarToken(@CookieValue("refreshToken") String refr
   */
 }
 
-export function validarToken(token_passado) {
+export function validar_token(token_passado = null) {
   try {
-    const token = token_passado ? token_passado : lerToken();
+    const token = token_passado ? token_passado : ler_token();
     if (!token) { return false; }
 
     const partes = token.split('.');
@@ -97,15 +97,15 @@ export function validarToken(token_passado) {
     return token; // Valido
 
   } catch (erro) {
-    Erros(import.meta.url.split('/').pop(), erro);
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_VAL: : ${erro.message}`));
     return false;
   }
 }
 
-export function removerToken() {
+export function remover_token() {
   try {
     document.cookie = "autenticado=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=Strict";
   } catch (erro) {
-    Erros(import.meta.url.split('/').pop(), erro);
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_DEL: : ${erro.message}`));
   }
 }

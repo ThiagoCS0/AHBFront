@@ -1,4 +1,4 @@
-import Acesso from "../../Corpo/Acesso/Acesso";
+import Acesso from "../../Acesso/Acesso";
 
 export default function SemCabecalho() {
  return (

@@ -2,11 +2,11 @@ import Logo from "./Logo/Logo";
 import Ferramentas from "./Ferramentas/Ferramentas";
 import Conta from "./Conta/Conta";
 import { useEffect, useState } from "react";
-import { removerToken, validarToken } from "../Principais/Servicos/JWT/JWT";
-import { Erros } from "../Principais/Erros/Erros";
-const API_URL = import.meta.env.VITE_BACKEND_URL;
+import { remover_token, validar_token } from "../Principais/Servicos/JWT/JWT";
+import { MeusErros } from "../Principais/Erros/MeusErros";
+import { meu_get } from "../Principais/Servicos/APIs/Conexao";
 
-export default function Cabecalho() {
+export default function Cabecalho({ buscar, categorizar }) {
  const [token_valido, def_token_valido] = useState(false);
  const tela_grande = window.screen.width > 1000;
  const [expandir, def_expandir] = useState("");
@@ -15,33 +15,30 @@ export default function Cabecalho() {
  useEffect(() => {
   const iniciando = async () => {
    try {
-    const token = validarToken()
+    const token = validar_token()
     if (token) {
      def_token_valido(true);
-     const id = JSON.parse(atob(token.split('.')[1])).userId
-     const resposta = await fetch(`${API_URL}/users/${id}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
-     });
-     if (!resposta.ok) { acessar_novamente(); }
-     const dados = await resposta.json();
-     if (dados) {
-      if (dados.length < 1) { acessar_novamente(); }
-      if (dados.publicname) { def_usuario(dados.publicname.length > 8 ? dados.publicname.substring(0, 8) + "..." : dados.publicname); }
+     const id = JSON.parse(atob(token.split('.')[1])).userId;
+
+     const { status_get, dados_get } = await meu_get(`users/${id}`, true);
+     if (status_get !== 200) { return; }
+     if (dados_get) {
+      if (dados_get.length < 1) { novo_acesso(); }
+      if (dados_get.publicname) { def_usuario(dados_get.publicname.length > 8 ? dados_get.publicname.substring(0, 8) + "..." : dados_get.publicname); }
      } else {
-      acessar_novamente();
+      novo_acesso();
      }
     }
-   } catch (error) {
-    Erros(import.meta.url.split('/').pop(), error);
-    acessar_novamente();
+   } catch (erro) {
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_GET_USU: ${erro.message}`));
+    novo_acesso();
    }
   }
   iniciando();
  }, []);
 
- const acessar_novamente = () => {
-  removerToken();
+ const novo_acesso = () => {
+  remover_token();
   window.location.href = "/";
  }
 

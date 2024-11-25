@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
-import SenhaVisivel from "../../../../assets/senha_visivel.png"
-import SenhaInvisivel from "../../../../assets/senha_invisivel.png"
-import { meu_get, meu_post } from "../../../Principais/Servicos/APIs/Conexao";
-import { removerToken, salvarToken, validarToken } from "../../../Principais/Servicos/JWT/JWT"
+import SenhaVisivel from "../../../assets/senha_visivel.png"
+import SenhaInvisivel from "../../../assets/senha_invisivel.png"
+import { meu_get, meu_post } from "../../Principais/Servicos/APIs/Conexao";
+import { remover_token, salvar_token, validar_token } from "../../Principais/Servicos/JWT/JWT"
 import "./Acessar.css"
 const API_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -35,7 +35,7 @@ export default function Acessar() {
       localStorage.setItem("lembrarSenha", lembrarSenha);
       acessando();
     } else {
-      removerToken();
+      remover_token();
       defHttpResposta("Dados incorretos")
       defUsuario("");
       defSenha("");
@@ -57,16 +57,16 @@ export default function Acessar() {
       } else if (status_post >= 300) {
         return;
       } else if (status_post >= 200 && dados_post) {
-        const token_valido = validarToken(dados_post.token);
+        const token_valido = validar_token(dados_post.token);
         if (!token_valido) {
           defHttpResposta("Em manutenção, tente mais tarde!");
-          removerToken();
+          remover_token();
           return;
         }
-        salvarToken(dados_post.token);
+        salvar_token(dados_post.token);
         const id = JSON.parse(atob(dados_post.token.split('.')[1])).userId;
 
-        const { status_get, dados_get } = await meu_get(`users/${id}`, true);
+        const { status_get } = await meu_get(`users/${id}`, true);
 
         if (status_get === 200) {
           window.location.href = "/";
@@ -74,15 +74,15 @@ export default function Acessar() {
           defHttpResposta("Em manutenção");
         }
       }
-    } catch (error) {
-      defHttpResposta("Verifique os dados, já está cadastrado?");
-      console.error("Erro na requisição:", error);
+    } catch (erro) {
+      defHttpResposta("aVerifique os dados, já está cadastrado?");
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_POS_ACS: : ${erro.message}`));
     }
   };
 
   useEffect(() => {
     sessionStorage.clear();
-    removerToken();
+    remover_token();
     usuarioInputRef.current.focus();
   }, []);
 
@@ -96,7 +96,7 @@ export default function Acessar() {
   }, [httpResposta]);
 
   return (
-    <div id="acessar">
+    <div id="acessar" className="ondulacao">
       <button id="botao_voltar" onClick={() => { navegar("/") }} className="botao_voltar"></button>
       <form onSubmit={Enviar}>
         <div className="usuario_form_container">
@@ -141,7 +141,7 @@ export default function Acessar() {
             />
             <span className="span_checkbox_especial"></span>Lembrar-me
           </label>
-          <div className="campos_laterias">
+          <div className="campos_laterais">
             <button className="botoes_expansiveis" type="button" onClick={() => { navegar("/Cadastro") }}>Cadastro</button>
             <button className="botoes_expansiveis" type="submit">Entrar</button>
           </div>

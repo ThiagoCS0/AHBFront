@@ -1,0 +1,156 @@
+#gerenciador {
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+#gerenciador * {
+  margin: 0;
+}
+
+#menu_gerenciador {
+  flex-direction: column;
+  width: fit-content;
+  font-size: large;
+  min-width: 200px;
+  display: flex;
+  border: 0;
+  order: 1;
+  border-right: 2px solid var(--destaque-claro);
+}
+
+#menu_gerenciador ul {
+  padding: 0;
+  width: 100%;
+  list-style: none;
+}
+
+#menu_gerenciador a {
+  transition: background-color 0.3s ease;
+  padding: 15px 10px 15px 20px;
+  justify-content: start;
+  align-items: center;
+  color: var(--texto);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+}
+
+#menu_gerenciador a:hover {
+  background-color: var(--destaque-claro) !important;
+  color: var(--tema-texto);
+}
+
+#menu_gerenciador a.ativo {
+  background-color: var(--destaque-escuro);
+  color: var(--tema-texto);
+}
+
+#conteudo_gerenciador {
+  overflow: hidden;
+  height: 100%;
+  width: 90vw;
+  order: 2;
+}
+
+.titulos_genrenciar {
+  background-color: var(--borda);
+  box-shadow: var(--sombra-2);
+  background-size: 200% 100%;
+  justify-content: center;
+  align-items: center;
+  color: var(--texto);
+  padding: 20px 0;
+  overflow: auto;
+  display: flex;
+  height: 100px;
+}
+
+
+@media (max-width: 1024px) {
+
+  #gerenciador {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #conteudo_gerenciador {
+    order: 1;
+    width: 100%;
+  }
+
+  #menu_gerenciador {
+    order: 2;
+    border: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-top: 2px solid var(--cor-principal-destaques);
+  }
+
+  #menu_gerenciador ul {
+    border: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+  }
+
+  #menu_gerenciador a {
+    justify-content: center;
+    padding: 10px;
+  }
+
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+
+
+  .titulos_genrenciar::after {
+    background: linear-gradient(to bottom, #0004 0%, #0000 100%);
+    bottom: 87%;
+    top: 40px;
+  }
+
+  .titulos_genrenciar {
+    text-align: center;
+    font-size: large;
+    padding: 2px;
+    height: 40px;
+  }
+
+  #menu_gerenciador {
+    text-align: center;
+  }
+}
+
+/* Smartwatch */
+@media (max-width: 300px) {
+  #menu_gerenciador {
+    font-size: x-small;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 0;
+    height: fit-content;
+    margin: 0;
+    border-width: 1px;
+  }
+
+  #menu_gerenciador a {
+    margin: 0;
+    padding: 2px;
+    align-items: start;
+    padding-bottom: 8px;
+  }
+
+  .titulos_genrenciar {
+    display: none;
+  }
+}

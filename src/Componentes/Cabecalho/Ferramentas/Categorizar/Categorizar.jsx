@@ -21,7 +21,7 @@ export default function Categorizar({ expandir, filtragem }) {
     <option value="SAUDE">SAÚDE</option>
    </select>
    }
-   <img className="icones" src={Filtro} alt="Filtrar" onClick={() => { def_expandir(!expandi_local); expandir(!expandi_local ? "filtrar" : ""); filtragem({}) }} />
+   <img className="icones" src={Filtro} alt="Filtrar" onClick={() => { def_expandir(!expandi_local); expandir(!expandi_local ? "filtrar" : ""); filtragem({ tipo: "categorizar", conteudo: "NENHUMA" }) }} />
   </div>
  )
 }

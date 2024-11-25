@@ -1,9 +1,15 @@
 import Populares from "./Populares/Populares"
-export default function Corpo({populares, apis}) {
+import ListaAPIs from "./Lista_APIs/ListaAPIs"
+import "./corpo.css"
+import { createContext } from "react";
+export const CorpoContexto = createContext();
+export default function Corpo({ children }) {
 
- return(
-  <>
-  <Populares populares={populares}/>
-  </>
+ return (
+  <div id="corpo">
+   <CorpoContexto.Provider value={null}>
+    {children}
+   </CorpoContexto.Provider>
+  </div>
  )
 }

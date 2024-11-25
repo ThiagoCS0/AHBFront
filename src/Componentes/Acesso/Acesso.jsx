@@ -6,7 +6,7 @@ export default function Acesso() {
  const navegar = useNavigate();
  const [pagina, defPagina] = useState("Acessar");
 
- const renderComponent = () => {
+ const componente = () => {
   switch (pagina) {
    case "Acessar": return <Acessar />;
    case "Cadastrar": return <Acessar />;
@@ -17,7 +17,7 @@ export default function Acesso() {
 
  return (
   <div id="acesso">
-   {renderComponent()}
+   {componente()}
   </div>
  )
 }

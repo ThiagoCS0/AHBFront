@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { TemasContexto } from "../Temas/TemasContexto";
-import { buscarAPIs } from "../Servicos/APIs/BuscarAPIs";
+import { buscarAPIs } from "../Servicos/APIs/APIs";
 import Cabecalho from "../../Cabecalho/Cabecalho"
 import Corpo from "../../Corpo/Corpo"
+import Populares from "../../Corpo/Populares/Populares";
+import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
 
 const ComCabecalho = () => {
   const [apis, def_apis] = useState([]);
@@ -29,8 +31,8 @@ const ComCabecalho = () => {
 
     if (carregando) {
       atualizar_carregamento();
-    }else{
-      if(atualizar){ def_atualizar(false); window.location.href = "/";}
+    } else {
+      if (atualizar) { def_atualizar(false); window.location.href = "/"; }
     }
 
     return () => {
@@ -39,27 +41,31 @@ const ComCabecalho = () => {
   }, [carregando]);
 
   useEffect(() => {
-    const loadApis = async () => {
-      if (apis.length === 0 && populares.length === 0) {
-        const apisPopulares = await buscarAPIs(0, 5, "clickCount", "desc");
-        const apisTotais = await buscarAPIs(0, 20, "name", "asc");
-        def_apis(apisTotais);
-        def_populares(apisPopulares);
-        def_populares_tmp(apisPopulares);
-        def_filtros(apisTotais);
-        def_carregando(apisPopulares.length === 0 && apisTotais.length === 0);
-        def_pri_tentativa(false);
-      }
-    };
-    if (primeira_tentativa) {
-      loadApis();
-    } else {
-      const timeoutId = setTimeout(() => {
+    try {
+      const loadApis = async () => {
         if (apis.length === 0 && populares.length === 0) {
-          loadApis();
+          const apisPopulares = await buscarAPIs(0, 5, "clickCount", "desc");
+          const apisTotais = await buscarAPIs(0, 20, "name", "asc");
+          def_apis(apisTotais);
+          def_populares(apisPopulares);
+          def_populares_tmp(apisPopulares);
+          def_filtros(apisTotais);
+          def_carregando(apisPopulares.length === 0 && apisTotais.length === 0);
+          def_pri_tentativa(false);
         }
-      }, 2000);
-      return () => clearTimeout(timeoutId);
+      };
+      if (primeira_tentativa) {
+        loadApis();
+      } else {
+        const timeoutId = setTimeout(() => {
+          if (apis.length === 0 && populares.length === 0) {
+            loadApis();
+          }
+        }, 2000);
+        return () => clearTimeout(timeoutId);
+      }
+    } catch (erro) {
+      MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_CAR_APIs: ${erro}`));
     }
   }, [apis, populares]);
 
@@ -69,7 +75,7 @@ const ComCabecalho = () => {
     }
   }, [populares, apis]);
 
-  const handleSearchChange = (value) => {
+  const filtragem_busca = (value) => {
     if (value.length > 0) {
       def_populares([]);
     } else {
@@ -83,7 +89,7 @@ const ComCabecalho = () => {
     def_filtros(filteredApisBusca);
   };
 
-  const alterarCategoria = (value) => {
+  const filtragem_categoria = (value) => {
     if (value === "NENHUMA") {
       def_populares(populares_tmp);
       def_filtros(apis);
@@ -98,7 +104,7 @@ const ComCabecalho = () => {
 
   return (
     <TemasContexto>
-         {carregando ? (
+      {carregando ? (
         <div id="container_carregando">
           <div id="container_carregando_pontos">
             <div id="container_carregando_pontos">
@@ -111,15 +117,20 @@ const ComCabecalho = () => {
           <p id="texto_carregando">{texto_carregamento}</p>
         </div>
       ) : (
-        <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <Cabecalho />
-      {/* <Header buscar={handleSearchChange} trocarCategoria={alterarCategoria} /> */}
-          {local.pathname === "/" ? (
-      <Corpo populares={populares} apis={apis}/>
-          ) : (
-            <Outlet />
-          )}
-        </div>
+        <>
+          <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} />
+          {/* <Header buscar={handleSearchChange} trocarCategoria={alterarCategoria} /> */}
+          <Corpo>
+            {local.pathname === "/" ? (
+          <>
+                <Populares populares={populares} />
+                <ListaAPIs apis={apis} />
+          </>
+            ) : (
+              <Outlet />
+            )}
+          </Corpo>
+        </>
       )}
     </TemasContexto>
   );

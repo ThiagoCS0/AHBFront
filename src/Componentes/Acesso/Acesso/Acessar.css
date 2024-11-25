@@ -1,6 +1,4 @@
 #acessar {
- animation: ondular 5s infinite ease-in-out;
- background: var(--linear-acesso);
  background-size: 300% 300%;
  justify-content: center;
  flex-direction: column;
@@ -9,21 +7,6 @@
  height: 100vh;
  width: 100vw;
 }
-
-@keyframes ondular {
- 0% {
-  background-position: 0% 50%;
- }
-
- 50% {
-  background-position: 50% 10%;
- }
-
- 100% {
-  background-position: 0% 50%;
- }
-}
-
 
 #acessar div:first-child {
  justify-content: space-between;
@@ -125,7 +108,7 @@ input[type=number] {
  opacity: 0;
 }
 
- .checkbox_especial input:checked~.span_checkbox_especial {
+.checkbox_especial input:checked~.span_checkbox_especial {
  background-color: var(--destaque-escuro);
 }
 

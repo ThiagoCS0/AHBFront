@@ -1,28 +1,31 @@
 #modal_apis {
  background-color: #000A;
  font-size: large;
+ font-weight: 500;
  position: fixed;
  height: 100vh;
  z-index: 100;
  width: 100vw;
- inset: 0;
+ left: 0;
+ top: 0;
 }
 
 #modal_apis_conteudo {
  transform: translate3d(-50%, -50%, 0);
  border: 1px solid var(--destaque);
- background-color: var(--fundo);
  justify-content: space-between;
  box-shadow: var(--sombra-0);
+ background-size: 300% 300%;
  flex-direction: column;
+ height: fit-content;
  border-radius: 8px;
  position: absolute;
  padding: 20px;
  display: flex;
- height: 300px;
  width: 500px;
- inset: 50%;
+ left: 50%;
  gap: 10px;
+ top: 50%;
 }
 
 #modal_apis_conteudo span {
@@ -39,18 +42,20 @@
  height: 80px;
  width: 100px;
  top: -30px;
- left: 70%;
+ right: 20px;
 }
 
 #modal_apis_conteudo img {
  border: 1px solid var(--destaque);
  object-fit: contain;
- height: 80px;
- width: 100px;
+ height: 100%;
+ width: 100%;
 }
 
 #modal_apis_conteudo p {
- flex: 1 0 fit-content;
+ flex: 1 1 fit-content;
+ text-overflow: ellipsis;
+ overflow: hidden;
 }
 
 #modal_apis_conteudo p:nth-child(2) {
@@ -62,22 +67,19 @@
 
 #modal_apis_conteudo div {
  display: flex;
+ gap: 10px;
 }
 
 #modal_apis_conteudo div p:first-child {
- flex: 0 1 fit-content;
- position: relative;
- min-height: 100px;
- max-height: 150px;
+ -webkit-box-orient: vertical;
+ max-height: calc(1.5em * 4);
+ text-overflow: ellipsis;
+ -webkit-line-clamp: 4;
+ display: -webkit-box;
+ white-space: normal;
  overflow: hidden;
-}
-
-#modal_apis_conteudo div p:first-child::after {
- background: linear-gradient(to top, var(--linear-efeito));
- pointer-events: none;
- position: absolute;
- content: '';
- inset: 0;
+ line-height: 1.5;
+ line-clamp: 4;
 }
 
 #modal_apis_conteudo div p:last-child {
@@ -85,10 +87,27 @@
 }
 
 #modal_lista_metodos {
- flex-direction: row;
+ flex-direction: column;
  gap: 10px;
 }
 
-#modal_lista_metodos button {
- width: fit-content;
+/* Smartphone  */
+@media (max-width: 600px) {
+ #modal_apis_conteudo {
+  height: fit-content;
+  border-radius: 8px;
+  max-height: 90%;
+  padding: 20px;
+  width: 90%;
+  gap: 10px;
+  padding-top: 40px;
+ }
+
+ #modal_apis_conteudo a:first-child {
+  transform: translateX(50%);
+  height: 100px;
+  width: 120px;
+  right: 50%;
+  top: -70px;
+ }
 }

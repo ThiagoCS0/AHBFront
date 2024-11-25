@@ -1,0 +1,7 @@
+#corpo {
+ height: calc(100% - 70px);
+}
+
+#inicial {
+ height: 100%;
+}

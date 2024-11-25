@@ -1,0 +1,217 @@
+#conteudo_perfil {
+ height: calc(100% - 100px);
+ overflow: hidden;
+ width: 100%;
+}
+
+.formularios {
+ height: calc(100% - 40px);
+ max-height: fit-content;
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+ overflow-y: scroll;
+ max-width: 800px;
+ display: none;
+ padding: 10px;
+ width: 100%;
+}
+
+#conteudo_editavel_perfil {
+ justify-content: center;
+ display: flex;
+ padding: 10px;
+ height: 100%;
+ width: 100%;
+}
+
+.formularios.ativo {
+ overflow-y: scroll;
+ display: block;
+}
+
+.menu_perfil {
+ justify-content: center;
+ list-style: none;
+ display: flex;
+ height: 50px;
+ padding: 0;
+ gap: 5%;
+}
+
+.menu_perfil li {
+ color: var(--cor-principal-texto);
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ text-align: center;
+ font-weight: bold;
+ font-size: large;
+ overflow: hidden;
+ cursor: pointer;
+ padding: 10px;
+ width: 40%;
+}
+
+.menu_perfil li.ativo {
+ border-bottom: 2px solid #F74;
+}
+
+#tel_usuario {
+ display: flex;
+}
+
+.campo_senha {
+ width: 100%;
+}
+
+#campos_senha_perfil {
+ flex-direction: row;
+ align-items: end;
+ display: flex;
+}
+
+.div_pai_nova_senha_perfil {
+ flex-direction: column;
+ display: flex;
+ width: 100%;
+}
+
+#conteudo_perfil .dados_titulos {
+ margin-top: 10px;
+}
+
+#div_filho_nova_senha_perfil {
+ margin: 4px !important;
+}
+
+#nome_usuario .dados_usuario {
+ margin-bottom: 10px;
+}
+
+.ver_senha {
+ bottom: 10px;
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+ .formularios {
+  height: 100%;
+  padding: 0;
+ }
+
+ .dados_usuario input {
+  border-radius: 4px;
+  padding: 8px;
+  width: 100%;
+ }
+
+ .campos_laterais {
+  flex-direction: column;
+  gap: 0;
+ }
+
+ #campos_senha_perfil {
+  flex-direction: column;
+ }
+
+ #conteudo_perfil {
+  height: 100%;
+  padding-bottom: 10px;
+ }
+
+ #conteudo_editavel_perfil {
+  height: calc(100% - 80px);
+  overflow-y: scroll;
+ }
+
+ .botoes_lateria{
+  flex-direction: row;
+  gap: 10px;
+ }
+}
+
+/* Smartwatch  */
+@media (max-width: 300px) {
+ #conteudo_perfil {
+  height: 100%;
+ }
+
+ .formularios {
+  font-size: x-small;
+  padding: 2px 8px;
+  height: 100%;
+  margin: 0;
+ }
+
+ .formularios input {
+  height: fit-content;
+  border-radius: 4px;
+  font-size: small;
+  padding: 2px 4px;
+ }
+
+ .formularios .dados_usuario {
+  gap: 0;
+ }
+
+ .formularios .dados_titulos {
+  padding: 2px 0;
+  margin: 0 !important;
+ }
+
+ .menu_perfil {
+  height: fit-content;
+ }
+
+ .menu_perfil li {
+  margin: 0;
+  padding: 2px;
+  font-size: x-small;
+  height: fit-content;
+ }
+
+ #conteudo_editavel_perfil {
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+  max-height: none;
+  height: 150px !important;
+ }
+
+ #tel_usuario {
+  gap: 2px;
+ }
+
+ #tel_usuario input:first-child {
+  width: 40px;
+  padding: 2px;
+ }
+
+ .aviso_erro {
+  font-size: xx-small;
+ }
+
+ .ver_senha {
+  right: 3%;
+  height: 15px;
+  width: auto;
+ }
+
+ .checkbox_especial .span_checkbox_especial:after {
+  top: 2px;
+  left: 6px;
+  width: 4px;
+  height: 8px;
+  border-width: 0 2px 2px 0 !important;
+ }
+
+ .span_checkbox_especial {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+ }
+
+ .checkbox_especial {
+  gap: 8px;
+ }
+}

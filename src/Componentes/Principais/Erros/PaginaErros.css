@@ -1,0 +1,54 @@
+#pagina_erros {
+ background: #000;
+ background: var(--linear-erro);
+ background-size: 200% 200%;
+ justify-content: center;
+ flex-direction: column;
+ align-items: end;
+ display: flex;
+ padding: 40px;
+ height: 100vh;
+ width: 100vw;
+}
+
+#pagina_erros h1 {
+ border-bottom: 4px solid #F74;
+ font-size: 100px;
+ text-align: end;
+ margin: 20px 0;
+ color: #F74;
+}
+
+#pagina_erros p {
+ font-size: xx-large;
+ overflow-y: hidden;
+ text-align: end;
+ max-height: 50%;
+ color: #FFF;
+}
+
+#pagina_erros b {
+ color: #F74;
+ border: 0;
+}
+
+#tentar_novamente {
+ justify-content: end;
+ flex-direction: row;
+ align-items: center;
+ font-size: x-large;
+ display: flex;
+ color: #FFF;
+ gap: 10px;
+}
+
+#tentar_novamente button {
+ background-color: #F74;
+ font-weight: bold;
+ padding: 22px;
+ color: #000;
+}
+
+#tentar_novamente button:hover {
+ background-color: #FFF;
+}

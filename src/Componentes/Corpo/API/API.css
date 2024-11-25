@@ -1,0 +1,53 @@
+.api {
+ background: var(--linear-apis);
+ box-shadow: var(--sombra-1);
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+ border-radius: 8px;
+ transition: 0.3s;
+ overflow: hidden;
+ cursor: pointer;
+ flex: 0 0 250px;
+ display: flex;
+ height: 250px;
+}
+
+.api img {
+ object-fit: cover;
+ max-height: 215px;
+ height: 215px;
+ width: 100%;
+}
+
+.api p {
+ background: linear-gradient(to top, #888D 0%, #AAAA 30%, #0000 100%);
+ justify-content: center;
+ align-items: center;
+ font-weight: 500;
+ overflow: hidden;
+ font-size: large;
+ display: flex;
+ height: 35px;
+ width: 100%;
+}
+
+/* Smartphone  */
+@media (max-width: 600px) {
+ .api {
+  border-radius: 5px;
+  flex: 0 0 150px;
+  display: flex;
+  height: 150px;
+  width: 150px;
+ }
+ 
+.api img {
+ flex: 0 0 115px;
+}
+
+.api p {
+ font-size: medium;
+ font-weight: 500;
+}
+}

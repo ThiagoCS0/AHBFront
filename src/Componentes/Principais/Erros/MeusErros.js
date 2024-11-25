@@ -1,7 +1,6 @@
-export function Erros(local, conteudo) {
+export function MeusErros(local, conteudo) {
  console.log("");
- console.log("-------- ERRO --------");
- console.log("");
+ console.log("---------------- ERRO ----------------");
  console.log(`>> Local: ${local}`);
  console.log(`>> Data e Hora: ${new Date().toLocaleString()}`);
  console.log("");
@@ -11,6 +10,6 @@ export function Erros(local, conteudo) {
  } else {
   console.log(conteudo);
  }
- console.log("-------- ---- --------");
+ console.log("---------------- ---- ----------------");
  console.log("");
 }

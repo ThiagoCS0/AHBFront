@@ -1,0 +1,44 @@
+.conteudo_termos {
+  user-select: text;
+  overflow-y: scroll;
+  padding: 20px 40px;
+  padding-bottom: 60px;
+  height: calc(100% - 100px);
+}
+
+.conteudo_termos div {
+  text-align: center;
+}
+
+.conteudo_termos h2 {
+  padding: 20px;
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+  .conteudo_termos {
+    padding: 8px;
+    height: calc(100% - 40px);
+  }
+
+  .conteudo_termos h2 {
+    margin: 0;
+    font-size: large;
+    padding: 8px 4px;
+  }
+}
+
+/* Smartwatch */
+@media (max-width: 300px) {
+  .conteudo_termos {
+    height: 100%;
+    padding: 2px;
+    font-size: x-small;
+  }
+
+  .conteudo_termos h2 {
+    margin: 0;
+    padding: 4px;
+    font-size: small;
+  }
+}
