@@ -67,7 +67,7 @@ export default function Acessar() {
         const { status_get, dados_get } = await meu_get(`users/${id}`, true);
 
         if (status_get === 200) {
-          window.location.href = "/";
+          window.location.href = "/AHBFront";
         } else {
           defHttpResposta("Em manutenção");
           return;
@@ -96,7 +96,7 @@ export default function Acessar() {
 
   return (
     <div id="acessar" className="ondulacao-1">
-      <button id="botao_voltar" onClick={() => { navegar("/") }} className="botao_voltar"></button>
+      <button id="botao_voltar" onClick={() => { navegar("/AHBFront/") }} className="botao_voltar"></button>
       <form onSubmit={enviar}>
         <div className="usuario_form_container">
           <label className="dados_usuario">
@@ -141,7 +141,7 @@ export default function Acessar() {
             <span className="span_checkbox_especial"></span>Lembrar-me
           </label>
           <div className="campos_laterais">
-            <button className="botoes_expansiveis" type="button" onClick={() => { navegar("/Cadastro") }}>Cadastro</button>
+            <button className="botoes_expansiveis" type="button" onClick={() => { navegar("/AHBFront/Cadastro") }}>Cadastro</button>
             <button className="botoes_expansiveis" type="submit">Entrar</button>
           </div>
           <Link to="/Recuperacao" style={{ textAlign: "center", color: "var(--cor-principal-destaques)", fontWeight: "bold" }}> Esqueceu sua senha? </Link>

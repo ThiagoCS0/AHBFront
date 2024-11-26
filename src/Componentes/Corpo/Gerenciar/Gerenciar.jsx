@@ -56,7 +56,7 @@ export default function Gerenciar() {
       case "ger_apis": return <MinhasAPIs />;
       case "ger_termos": return <Termos />;
       case "ger_perfil": return <Perfil />;
-      default: window.location.href = "/";
+      default: window.location.href = "/AHBFront";
     }
   };
 

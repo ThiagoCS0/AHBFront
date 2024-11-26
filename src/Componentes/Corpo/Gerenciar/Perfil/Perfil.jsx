@@ -156,7 +156,7 @@ export default function Perfil() {
   const novo_acesso = () => {
     sessionStorage.clear();
     remover_token();
-    window.location.href = "/";
+    window.location.href = "/AHBFront";
     return;
   }
 

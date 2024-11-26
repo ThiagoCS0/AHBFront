@@ -114,7 +114,7 @@ export default function Editor({ exibir_modal, fechar, cadastrar_minha_api, atua
      const novo_acesso = () => {
           sessionStorage.clear();
           remover_token();
-          navegar("/")
+          navegar("/AHBFront/")
           return;
      }
 

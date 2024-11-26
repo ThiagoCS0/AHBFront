@@ -12,7 +12,7 @@ export default function Acesso() {
    case "Acessar": return <Acessar/>;
    case "Cadastrar": return <Acessar />;
    case "Recuperar": return <Acessar />;
-   default: window.location.href = "/";
+   default: window.location.href = "/AHBFront";
   }
  };
 

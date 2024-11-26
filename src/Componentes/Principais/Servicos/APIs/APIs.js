@@ -1,5 +1,3 @@
-const API_URL = import.meta.env.VITE_BACKEND_URL;
-
 import { MeusErros } from "../../Erros/MeusErros"
 import { meu_get } from "./Conexao";
 

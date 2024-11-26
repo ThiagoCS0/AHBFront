@@ -1,7 +1,8 @@
 import { MeusErros } from "../../Erros/MeusErros"
 import { ler_token, validar_token } from "../JWT/JWT";
 
-const API_URL = import.meta.env.VITE_BACKEND_URL;
+const API_URL = "https://gui-video1.onrender.com/api";
+// import.meta.env.VITE_BACKEND_URL;
 
 export async function meu_get(url, usar_token = false, nosso_servidor = true) {
   try {

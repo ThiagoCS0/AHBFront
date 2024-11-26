@@ -102,7 +102,7 @@ const MinhasApis = () => {
       } else {
         sessionStorage.clear();
         remover_token();
-        window.location.href = "/";
+        window.location.href = "/AHBFront";
         return;
       }
     } catch (erro) {

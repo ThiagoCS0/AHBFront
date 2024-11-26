@@ -32,7 +32,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
     if (carregando) {
       atualizar_carregamento();
     } else {
-      if (atualizar) { def_atualizar(false); window.location.href = "/"; }
+      if (atualizar) { def_atualizar(false); window.location.href = "/AHBFront"; }
     }
 
     return () => {

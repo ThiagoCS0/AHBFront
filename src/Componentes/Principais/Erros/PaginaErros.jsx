@@ -15,7 +15,7 @@ export default function PaginaErros() {
      window.location.href != "/" &&
      <div id="tentar_novamente">
       <p>Tente voltar ao</p>
-      <button onClick={() => { window.location.href = "/"; }}>INICIO</button>
+      <button onClick={() => { window.location.href = "/AHBFront"; }}>INICIO</button>
      </div>
     }
    </div>
