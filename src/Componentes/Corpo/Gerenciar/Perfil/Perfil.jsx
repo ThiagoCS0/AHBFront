@@ -6,6 +6,8 @@ import SenhaInvisivel from "../../../../assets/senha_invisivel.png"
 import SenhaVisivel from "../../../../assets/senha_visivel.png"
 import "./Perfil.css"
 
+const site = import.meta.env.VITE_BACKEND_SITE;
+
 export default function Perfil() {
   const [carregando, def_carregando] = useState(true);
   const [userData, setUserData] = useState({ login: "", nomePublico: "", cpf: "", email: "", ddd: "", telefone: "", senhaAtual: "", novaSenha: "", });
@@ -156,7 +158,7 @@ export default function Perfil() {
   const novo_acesso = () => {
     sessionStorage.clear();
     remover_token();
-    window.location.href = "/AHBFront";
+    window.location.href = site;
     return;
   }
 

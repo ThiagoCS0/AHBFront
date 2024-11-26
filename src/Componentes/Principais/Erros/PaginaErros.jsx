@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import "./PaginaErros.css"
 
+const site = import.meta.env.VITE_BACKEND_SITE;
+
 export default function PaginaErros() {
 
  return (
@@ -12,10 +14,10 @@ export default function PaginaErros() {
     </p>
     <br />
     {
-     window.location.href != "/" &&
+     window.location.href != site &&
      <div id="tentar_novamente">
       <p>Tente voltar ao</p>
-      <button onClick={() => { window.location.href = "/AHBFront"; }}>INICIO</button>
+      <button onClick={() => { window.location.href = site; }}>INICIO</button>
      </div>
     }
    </div>

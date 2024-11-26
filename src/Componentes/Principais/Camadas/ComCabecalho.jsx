@@ -7,6 +7,8 @@ import Corpo from "../../Corpo/Corpo"
 import Populares from "../../Corpo/Populares/Populares";
 import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
 
+const site = import.meta.env.VITE_BACKEND_SITE;
+
 export default function ComCabecalho({ token_valido, usuario }) {
   const [apis, def_apis] = useState([]);
   const [populares, def_populares] = useState([]);
@@ -32,7 +34,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
     if (carregando) {
       atualizar_carregamento();
     } else {
-      if (atualizar) { def_atualizar(false); window.location.href = "/AHBFront"; }
+      if (atualizar) { def_atualizar(false); window.location.href = site; }
     }
 
     return () => {
@@ -122,7 +124,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
           <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} token_valido={token_valido} usuario={usuario} />
           <Corpo>
             {
-              window.location.pathname === "/" ?
+              window.location.pathname === "AHBFront" ?
                 <>
                   <Populares populares={populares} />
                   <ListaAPIs apis={apis} />

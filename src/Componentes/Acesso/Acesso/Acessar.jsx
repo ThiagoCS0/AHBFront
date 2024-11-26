@@ -67,7 +67,7 @@ export default function Acessar() {
         const { status_get, dados_get } = await meu_get(`users/${id}`, true);
 
         if (status_get === 200) {
-          window.location.href = "/AHBFront";
+          window.location.href = site;
         } else {
           defHttpResposta("Em manutenção");
           return;

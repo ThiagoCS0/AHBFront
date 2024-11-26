@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../Gerenciar.css";
 import "./MinhasAPIs.css";
-// import ModalNovaAPI from "./Modal/ModalNovaAPI";
-// import ModalApi from "../../../Body/ComponentsBody/Listaapis/ModalApis";
 import { validar_token } from "../../../Principais/Servicos/JWT/JWT";
 import { meu_delete, meu_get } from "../../../Principais/Servicos/APIs/Conexao";
 import { MeusErros } from "../../../Principais/Erros/MeusErros";
@@ -11,7 +9,7 @@ import Editor from "../../../Modal/API_Editor/Editor"
 import image_padrao from "../../../../assets/image_padrao.png";
 import API from "../../API/API";
 
-const API_URL = import.meta.env.VITE_BACKEND_URL;
+const site = import.meta.env.VITE_BACKEND_SITE;
 
 const MinhasApis = () => {
   const [carregando, def_carregando] = useState(true);
@@ -21,7 +19,6 @@ const MinhasApis = () => {
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
   const [api_selec, def_api_selec] = useState(null);
   const [imagem, setImagem] = useState(image_padrao);
-  const [tamanhoImg, defTamanhoImg] = useState({ lar: 0, alt: 0 });
 
   const verificarEValidarImagem = (url) => {
     return new Promise((resolve) => {
@@ -102,7 +99,7 @@ const MinhasApis = () => {
       } else {
         sessionStorage.clear();
         remover_token();
-        window.location.href = "/AHBFront";
+        window.location.href = site;
         return;
       }
     } catch (erro) {

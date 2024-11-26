@@ -6,6 +6,8 @@ import { validar_token } from "../../Principais/Servicos/JWT/JWT";
 import "./Gerenciar.css"
 import Termos from "../../AHB/Termos/Termos";
 
+const site = import.meta.env.VITE_BACKEND_SITE;
+
 export default function Gerenciar() {
   const navegar = useNavigate();
   const [carregando, def_carregando] = useState(true);
@@ -56,7 +58,7 @@ export default function Gerenciar() {
       case "ger_apis": return <MinhasAPIs />;
       case "ger_termos": return <Termos />;
       case "ger_perfil": return <Perfil />;
-      default: window.location.href = "/AHBFront";
+      default: window.location.href = site;
     }
   };
 

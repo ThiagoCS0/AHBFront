@@ -66,7 +66,7 @@ export default function Conta() {
       () => sessionStorage.setItem("Gerenciar", "ger_apis")}>Minhas Apis</Link>
      <Link to="Gerenciar" onClick={
       () => sessionStorage.setItem("Gerenciar", "ger_termos")}>Termos</Link>
-     <a href="/" onClick={remover_token}>Sair</a>
+     <a href="AHBFront" onClick={remover_token}>Sair</a>
     </div>
    )}
   </div>

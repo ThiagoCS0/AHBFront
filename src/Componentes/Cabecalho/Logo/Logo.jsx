@@ -5,7 +5,7 @@ import "./Logo.css"
 export default function Logo() {
 
  return (
-  <a id="logo_AHB" href="/" >
+  <a id="logo_AHB" href="AHBFront" >
    <img src={LogoAHB} alt="Logo" />
    <div>
     <span>AHB</span>
