@@ -9,7 +9,8 @@ import Gerenciar from './Componentes/Corpo/Gerenciar/Gerenciar';
 import PaginaErros from './Componentes/Principais/Erros/PaginaErros';
 
 const rotas = createBrowserRouter(
-  [
+ {
+  path: '/', element: <ComCabecalho />, errorElement: <PaginaErros />, children:[
     {
       path: "/AHBFront/",
       element: <ComCabecalho />,
@@ -29,6 +30,7 @@ const rotas = createBrowserRouter(
       element: <PaginaErros />,  // Componente de erro 404
     }
   ]
+ }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
