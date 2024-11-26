@@ -1,6 +1,5 @@
 # AHB
 node_modules*
-*.env
 .vscode/*
 !.vscode/extensions.json
 
