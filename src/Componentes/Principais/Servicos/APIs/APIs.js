@@ -6,13 +6,9 @@ export const buscarAPIs = async (pagina, tamanho, organizar, ordem) => {
  try {
   const { status_get, dados_get } = await meu_get(`apis?page=${pagina}&size=${tamanho}&organizar=${organizar},${ordem}`);
 
-  console.log(status_get);
-  
   if (status_get !== 200) {
    MeusErros(import.meta.url.split('/').pop(), new Error(`BSC_APIs: ${status_get}`));
   }
-
-  console.log(dados_get);
 
   if (dados_get && dados_get.content) {
    return dados_get.content.map((api) => ({

@@ -124,7 +124,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
           <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} token_valido={token_valido} usuario={usuario} />
           <Corpo>
             {
-              window.location.pathname === "AHBFront" ?
+              window.location.pathname === "/AHBFront" ?
                 <>
                   <Populares populares={populares} />
                   <ListaAPIs apis={apis} />
