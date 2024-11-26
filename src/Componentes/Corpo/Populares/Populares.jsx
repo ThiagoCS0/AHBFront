@@ -11,16 +11,23 @@ export default function Populares({ populares }) {
   const intervaloRef = useRef(null);
 
   useEffect(() => {
+    const carousel = document.getElementById("carousel");
+
+    if (!carousel) {
+      return;
+    }
+
     iniciarIntervalo();
 
-    const carousel = document.getElementById("carousel");
     carousel.addEventListener("mouseover", pausarIntervalo);
     carousel.addEventListener("mouseout", iniciarIntervalo);
 
     return () => {
       pausarIntervalo();
-      carousel.removeEventListener("mouseover", pausarIntervalo);
-      carousel.removeEventListener("mouseout", iniciarIntervalo);
+      if (carousel) {
+        carousel.removeEventListener("mouseover", pausarIntervalo);
+        carousel.removeEventListener("mouseout", iniciarIntervalo);
+      }
     };
   }, [foco]);
 

@@ -71,7 +71,7 @@ export default function Gerenciar() {
           <Link id="ger_termos" onClick={(e) => { opcao_ativa(e.target); alterar_componente(e, "ger_termos") }}>Termos</Link>
         </div>
         <div id="conteudo_gerenciador">
-          {pagina != "ger_apis" && <h1 className="titulos_genrenciar ondulacao">{pagina == "ger_perfil" ? "Perfil" : "Termos de Uso"}</h1>}
+          {pagina != "ger_apis" && <h1 className="titulos_genrenciar ondulacao-1">{pagina == "ger_perfil" ? "Perfil" : "Termos de Uso"}</h1>}
           {componente()}
         </div>
       </div>

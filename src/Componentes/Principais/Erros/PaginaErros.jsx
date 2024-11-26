@@ -4,7 +4,7 @@ import "./PaginaErros.css"
 export default function PaginaErros() {
 
  return (
-  <div id="pagina_erros" className="ondulacao" >
+  <div id="pagina_erros" className="ondulacao-1" >
    <div>
     <h1>404</h1>
     <p>

@@ -1,9 +1,10 @@
 .conteudo_termos {
-  user-select: text;
-  overflow-y: scroll;
-  padding: 20px 40px;
-  padding-bottom: 60px;
   height: calc(100% - 100px);
+  padding: 20px 40px;
+  overflow-y: scroll;
+  user-select: text;
+  font-size: large;
+  padding-bottom: 40px;
 }
 
 .conteudo_termos div {
@@ -14,31 +15,39 @@
   padding: 20px;
 }
 
+li {
+  margin-left: 25px !important;
+}
+
 /* Smartphone */
 @media (max-width: 600px) {
+
   .conteudo_termos {
-    padding: 8px;
     height: calc(100% - 40px);
+    padding: 8px;
   }
 
   .conteudo_termos h2 {
-    margin: 0;
-    font-size: large;
     padding: 8px 4px;
+    font-size: large;
+    margin: 0;
   }
+
 }
 
 /* Smartwatch */
 @media (max-width: 300px) {
+
   .conteudo_termos {
-    height: 100%;
-    padding: 2px;
     font-size: x-small;
+    padding: 2px;
+    height: 100%;
   }
 
   .conteudo_termos h2 {
-    margin: 0;
-    padding: 4px;
     font-size: small;
+    padding: 4px;
+    margin: 0;
   }
+
 }

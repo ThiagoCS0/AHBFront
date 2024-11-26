@@ -8,7 +8,7 @@ export function salvar_token(token) {
     // Salva o token no cookie com Secure e SameSite
     document.cookie = `autenticado=${token}; path=/; expires=${expira.toUTCString()}; Secure; SameSite=Strict`;
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_SLV: : ${erro.message}`));
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_SLV: ${erro}`));
   }
 }
 
@@ -27,7 +27,7 @@ export function ler_token() {
     return null; // Token não encontrado
 
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_LER: : ${erro.message}`));
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_LER: ${erro}`));
     return null;
   }
 }
@@ -46,7 +46,7 @@ export async function atualizar_token() {
     if (!resposta.ok) {
       // Exibe o erro e retorna
       const erro = await resposta.text();
-      MeusErros(import.meta.url.split('/').pop(), new Error(`ATL_TKN: : ${erro.message}`));
+      MeusErros(import.meta.url.split('/').pop(), new Error(`ATL_TKN: ${erro}`));
       return;
     }
 
@@ -57,7 +57,7 @@ export async function atualizar_token() {
     salvar_token(novoToken);
 
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_ATL: : ${erro.message}`));
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_ATL: ${erro}`));
     // Pode redirecionar para login ou exibir mensagem de erro
   }
 
@@ -97,7 +97,7 @@ export function validar_token(token_passado = null) {
     return token; // Valido
 
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_VAL: : ${erro.message}`));
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_VAL: ${erro}`));
     return false;
   }
 }
@@ -106,6 +106,6 @@ export function remover_token() {
   try {
     document.cookie = "autenticado=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; SameSite=Strict";
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_DEL: : ${erro.message}`));
+    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_TKN_DEL: ${erro}`));
   }
 }

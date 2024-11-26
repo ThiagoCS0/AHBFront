@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ComCabecalho from './Componentes/Principais/Camadas/ComCabecalho';
@@ -19,7 +19,7 @@ const rotas = createBrowserRouter(
     },
     {
       path: "/",
-      element: <SemCabecalho />,
+      element: <SemCabecalho/>,
       children: [
         { path: "/Acesso", element: <Acesso /> },
       ],

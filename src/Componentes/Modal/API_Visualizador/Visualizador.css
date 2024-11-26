@@ -1,9 +1,12 @@
 #modal_apis {
  background-color: #000A;
+ justify-content: center;
+ align-items: center;
  font-size: large;
  font-weight: 500;
  position: fixed;
  height: 100vh;
+ display: flex;
  z-index: 100;
  width: 100vw;
  left: 0;
@@ -11,7 +14,6 @@
 }
 
 #modal_apis_conteudo {
- transform: translate3d(-50%, -50%, 0);
  border: 1px solid var(--destaque);
  justify-content: space-between;
  box-shadow: var(--sombra-0);
@@ -23,9 +25,7 @@
  padding: 20px;
  display: flex;
  width: 500px;
- left: 50%;
  gap: 10px;
- top: 50%;
 }
 
 #modal_apis_conteudo span {

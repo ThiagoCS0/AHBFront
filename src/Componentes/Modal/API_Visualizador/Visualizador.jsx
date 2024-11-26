@@ -7,6 +7,7 @@ import "./Visualizador.css";
 export default function Visualizador({ api, fechar }) {
   const [tamanhoImg, defTamanhoImg] = useState({ lar: 0, alt: 0 });
   const [publicador, def_publicador] = useState('');
+  const [modal_simples, def_modal_simples] = useState(true);
   const [imagem, setImagem] = React.useState(image_padrao);
 
   const verificarEValidarImagem = (url) => {
@@ -40,15 +41,19 @@ export default function Visualizador({ api, fechar }) {
 
   return (
     <div id="modal_apis" onClick={fechar}>
-      <div id="modal_apis_conteudo" className="ondulacao" onClick={e => { e.stopPropagation(); }}>
-        <a href={api.link}><img src={imagem} alt={api.nome} style={{ objectFit: tamanhoImg.lar > tamanhoImg.alt ? "contain" : "cover" }} onLoad={e => { defTamanhoImg({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }}/></a>
+      <div id="modal_apis_conteudo" className="ondulacao-1" onClick={e => { e.stopPropagation(); }}>
+        <a href={modal_simples ? "#" : api.link}><img src={imagem} alt={api.nome} style={{ objectFit: tamanhoImg.lar > tamanhoImg.alt ? "contain" : "cover" }} onLoad={e => { defTamanhoImg({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }} /></a>
         <p><span>Nome</span>{api.nome}</p>
         <div>
           <p><span>Descrição</span><br />{api.descricao}</p>
           <p><span>Categoria</span><br />{api.categoria}</p>
         </div>
-        <p><span>Link</span><a href={api.link}>{api.link}</a></p>
-        <p><span>Publicador</span>{publicador}</p>
+        {!modal_simples && (
+          <>
+            <p><span>Link</span><a href={api.link}>{api.link}</a></p>
+            <p><span>Publicador</span>{publicador}</p>
+          </>
+        )}
         <div id="modal_lista_metodos">
           <span>Metodos</span>
           <div>

@@ -4,11 +4,10 @@ import SenhaVisivel from "../../../assets/senha_visivel.png"
 import SenhaInvisivel from "../../../assets/senha_invisivel.png"
 import { meu_get, meu_post } from "../../Principais/Servicos/APIs/Conexao";
 import { remover_token, salvar_token, validar_token } from "../../Principais/Servicos/JWT/JWT"
+import { MeusErros } from "../../Principais/Erros/MeusErros";
 import "./Acessar.css"
-const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Acessar() {
-  const [statusHttpResposta, defStatusHttpResposta] = useState("");
   const [httpResposta, defHttpResposta] = useState("");
   const [usuario, defUsuario] = useState("");
   const [senha, defSenha] = useState("");
@@ -29,7 +28,7 @@ export default function Acessar() {
     }
   };
 
-  const Enviar = (e) => {
+  const enviar = (e) => {
     e.preventDefault();
     if (usuarioValido && senha.length >= 8) {
       localStorage.setItem("lembrarSenha", lembrarSenha);
@@ -44,10 +43,9 @@ export default function Acessar() {
 
   const acessando = async () => {
     try {
-      const { status_post, dados_post } = await meu_post("auth/login", false, { "username": usuario, "password": senha });
+      const { status_post, dados_post } = await meu_post("auth/login", { "username": usuario, "password": senha });
 
       //const dados = await respostaPost.json();
-
       if (status_post >= 500) {
         defHttpResposta("Estamos em manutenção!");
         return;
@@ -66,17 +64,18 @@ export default function Acessar() {
         salvar_token(dados_post.token);
         const id = JSON.parse(atob(dados_post.token.split('.')[1])).userId;
 
-        const { status_get } = await meu_get(`users/${id}`, true);
+        const { status_get, dados_get } = await meu_get(`users/${id}`, true);
 
         if (status_get === 200) {
           window.location.href = "/";
         } else {
           defHttpResposta("Em manutenção");
+          return;
         }
       }
     } catch (erro) {
-      defHttpResposta("aVerifique os dados, já está cadastrado?");
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_POS_ACS: : ${erro.message}`));
+      defHttpResposta("Verifique os dados, já está cadastrado?");
+      MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_POS_ACS: ${erro}`));
     }
   };
 
@@ -96,9 +95,9 @@ export default function Acessar() {
   }, [httpResposta]);
 
   return (
-    <div id="acessar" className="ondulacao">
+    <div id="acessar" className="ondulacao-1">
       <button id="botao_voltar" onClick={() => { navegar("/") }} className="botao_voltar"></button>
-      <form onSubmit={Enviar}>
+      <form onSubmit={enviar}>
         <div className="usuario_form_container">
           <label className="dados_usuario">
             <p className="dados_titulos">Usuário</p>

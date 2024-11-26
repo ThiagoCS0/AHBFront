@@ -136,7 +136,7 @@ input[type=number] {
 }
 
 #botao_voltar {
- background-image: url("../../../../assets/voltar.png");
+ background-image: url("../../../assets/voltar.png");
  background-color: transparent;
  filter: var(--inverter);
  background-repeat: no-repeat;
@@ -149,4 +149,13 @@ input[type=number] {
  width: 40px;
  left: 20px;
  top: 20px;
+}
+
+@media (max-width: 600px) {
+
+ .campos_laterais {
+  flex-direction: row !important;
+  gap: 10px !important;
+ }
+ 
 }

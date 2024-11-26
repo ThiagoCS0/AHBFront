@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { validar_token } from "../../../Principais/Servicos/JWT/JWT";
+import { meu_get, meu_put } from "../../../Principais/Servicos/APIs/Conexao";
+import { MeusErros } from "../../../Principais/Erros/MeusErros";
 import SenhaInvisivel from "../../../../assets/senha_invisivel.png"
 import SenhaVisivel from "../../../../assets/senha_visivel.png"
 import "./Perfil.css"
-import { MeusErros } from "../../../Principais/Erros/MeusErros";
-import { meu_get } from "../../../Principais/Servicos/APIs/Conexao";
 
 export default function Perfil() {
-  const [carregando, defCarregando] = useState(true);
+  const [carregando, def_carregando] = useState(true);
   const [userData, setUserData] = useState({ login: "", nomePublico: "", cpf: "", email: "", ddd: "", telefone: "", senhaAtual: "", novaSenha: "", });
-  const [senhaVisibilidade, setSenhaVisibilidade] = useState({ senhaAtual: false, novaSenha: false, });
-  const [exibirNovaSenha, setExibirNovaSenha] = useState(false);
+  const [visibilidade_senha, def_visibilidade_senha] = useState({ senhaAtual: false, novaSenha: false, });
+  const [visibilidade_nova_senha, def_visibilidade_nova_senha] = useState(false);
 
   const DDDValidos = [
     "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28", "31", "32", "33", "34", "35", "37", "38", "41",
@@ -18,7 +18,7 @@ export default function Perfil() {
     "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "88", "91", "93", "94", "96", "97", "98", "99"
   ];
 
-  const [erros, setErros] = useState({
+  const [erros, def_erros] = useState({
     loginErro: false,
     nomePublicoErro: false,
     cpfErro: false,
@@ -28,7 +28,7 @@ export default function Perfil() {
     senhaErro: false,
   });
 
-  const [validacoes, setValidacoes] = useState({
+  const [validacoes, def_validacoes] = useState({
     loginValidar: false,
     nomePublicoValidar: false,
     cpfValidar: false,
@@ -38,7 +38,7 @@ export default function Perfil() {
     senhaValidar: false,
   });
 
-  const validarCampos = () => {
+  const validar_campos = () => {
     const novosErros = { ...erros };
     const novasValidacoes = { ...validacoes };
 
@@ -107,12 +107,12 @@ export default function Perfil() {
       novosErros.senhaErro = userData.senhaAtual.length > 0;
     }
 
-    setErros(novosErros);
-    setValidacoes(novasValidacoes);
+    def_erros(novosErros);
+    def_validacoes(novasValidacoes);
   };
 
   useEffect(() => {
-    defCarregando(true);
+    def_carregando(true);
     sessionStorage.setItem("Gerenciar", "ger_perfil")
     const Get = async () => {
       try {
@@ -137,16 +137,16 @@ export default function Perfil() {
         } else {
         }
       } catch (erro) {
-        MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_PRF_: ${erro.message}`));
+        MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_PRF_: ${erro}`));
         return false;
       }
     }
     if (!Get()) { novo_acesso(); }
-    defCarregando(false);
+    def_carregando(false);
   }, [])
 
   useEffect(() => {
-    validarCampos();
+    validar_campos();
   }, [userData.login, userData.nomePublico, userData.cpf, userData.email, userData.ddd, userData.telefone, userData.senha, userData.novaSenha]);
 
   if (carregando) {
@@ -172,29 +172,19 @@ export default function Perfil() {
     try {
       const token = validar_token();
       if (!token) { novo_acesso(); }
-      const resposta = await fetch(`${API_URL}/users/${idAPI}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          username: userData.login,
-          publicname: userData.nomePublico,
-          cpf: userData.cpf,
-          email: userData.email,
-          phone: userData.telefone,
-          password: userData.senhaAtual
-        }),
-      });
-      const status = resposta.status;
-      defStatusHttpResposta(status);
-      if (!resposta.ok) {
+      const idUser = JSON.parse(atob(token.split('.')[1])).userId;
+
+      const { status_put, dados_put } = await meu_put(`users/${idUser}`, {
+        username: userData.login,
+        publicname: userData.nomePublico,
+        cpf: userData.cpf,
+        email: userData.email,
+        phone: userData.telefone,
+        password: userData.senhaAtual
+      }, true);
+
+      if (status_put !== 200) {
         defHttpResposta("Dados incorretos ou já cadastrados!"); return;
-      }
-      const dados = await resposta.json();
-      if (dados) {
-        await Acessar(dados);
       }
     } catch (erro) {
       defHttpResposta("Estamos em manutenção!");
@@ -294,40 +284,40 @@ export default function Perfil() {
                   className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
                   value={userData.senhaAtual || ""}
                   onChange={(e) => setUserData({ ...userData, senhaAtual: e.target.value })}
-                  type={senhaVisibilidade.senhaAtual ? "text" : "password"}
+                  type={visibilidade_senha.senhaAtual ? "text" : "password"}
                   autoComplete="current-password"
-                  placeholder={senhaVisibilidade.senhaAtual ? "" : "********"}
+                  placeholder={visibilidade_senha.senhaAtual ? "" : "********"}
                 />
                 <img
                   className="ver_senha"
-                  src={senhaVisibilidade.senhaAtual ? SenhaVisivel : SenhaInvisivel}
-                  onClick={() => setSenhaVisibilidade({ ...senhaVisibilidade, senhaAtual: !senhaVisibilidade.senhaAtual })}
+                  src={visibilidade_senha.senhaAtual ? SenhaVisivel : SenhaInvisivel}
+                  onClick={() => def_visibilidade_senha({ ...visibilidade_senha, senhaAtual: !visibilidade_senha.senhaAtual })}
                   alt="Visibilidade"
                 />
               </label>
             </div>
             <div className="div_pai_nova_senha_perfil">
               <label id="div_filho_nova_senha_perfil" className="checkbox_especial">
-                <input className="input_checkbox_especial" type="checkbox" onChange={(e) => setExibirNovaSenha(e.target.checked)} checked={exibirNovaSenha} />
+                <input className="input_checkbox_especial" type="checkbox" onChange={(e) => def_visibilidade_nova_senha(e.target.checked)} checked={visibilidade_nova_senha} />
                 <span className="span_checkbox_especial"></span>
-                <p className="dados_titulos">{exibirNovaSenha ? "Digite a Nova Senha" : "Alterar senha"}</p>
+                <p className="dados_titulos">{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}</p>
               </label>
               <label className="dados_usuario">
                 <input
                   className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
                   value={userData.novaSenha || ""}
                   onChange={(e) => setUserData({ ...userData, novaSenha: e.target.value })}
-                  type={exibirNovaSenha ? senhaVisibilidade.novaSenha ? "text" : "password" : "password"}
+                  type={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? "text" : "password" : "password"}
                   autoComplete="new-password"
                   placeholder="********"
-                  disabled={!exibirNovaSenha}
+                  disabled={!visibilidade_nova_senha}
                 />
                 <img
                   className="ver_senha"
-                  src={exibirNovaSenha ? senhaVisibilidade.novaSenha ? SenhaVisivel : SenhaInvisivel : SenhaInvisivel}
-                  onClick={() => setSenhaVisibilidade({ ...senhaVisibilidade, novaSenha: !senhaVisibilidade.novaSenha })}
+                  src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? SenhaVisivel : SenhaInvisivel : SenhaInvisivel}
+                  onClick={() => def_visibilidade_senha({ ...visibilidade_senha, novaSenha: !visibilidade_senha.novaSenha })}
                   alt="Visibilidade"
-                  style={{ pointerEvents: exibirNovaSenha ? "auto" : "none" }}
+                  style={{ pointerEvents: visibilidade_nova_senha ? "auto" : "none" }}
                 />
               </label>
             </div>

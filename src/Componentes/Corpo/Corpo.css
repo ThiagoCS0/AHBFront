@@ -5,3 +5,9 @@
 #inicial {
  height: 100%;
 }
+
+@media (max-width: 600px) {
+ #corpo {
+  height: calc(100% - 50px);
+ }
+}

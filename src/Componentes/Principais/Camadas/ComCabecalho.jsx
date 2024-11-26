@@ -7,7 +7,7 @@ import Corpo from "../../Corpo/Corpo"
 import Populares from "../../Corpo/Populares/Populares";
 import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
 
-const ComCabecalho = () => {
+export default function ComCabecalho({ token_valido, usuario }) {
   const [apis, def_apis] = useState([]);
   const [populares, def_populares] = useState([]);
   const [populares_tmp, def_populares_tmp] = useState([]);
@@ -102,6 +102,7 @@ const ComCabecalho = () => {
     }
   };
 
+
   return (
     <TemasContexto>
       {carregando ? (
@@ -118,22 +119,20 @@ const ComCabecalho = () => {
         </div>
       ) : (
         <>
-          <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} />
-          {/* <Header buscar={handleSearchChange} trocarCategoria={alterarCategoria} /> */}
+          <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} token_valido={token_valido} usuario={usuario} />
           <Corpo>
-            {local.pathname === "/" ? (
-          <>
-                <Populares populares={populares} />
-                <ListaAPIs apis={apis} />
-          </>
-            ) : (
-              <Outlet />
-            )}
+            {
+              window.location.pathname === "/" ?
+                <>
+                  <Populares populares={populares} />
+                  <ListaAPIs apis={apis} />
+                </>
+                :
+                <Outlet />
+            }
           </Corpo>
         </>
       )}
     </TemasContexto>
   );
 };
-
-export default ComCabecalho;

@@ -2,7 +2,7 @@ import "./API.css";
 import image_padrao from "../../../assets/image_padrao.png";
 import React, { useEffect, useState } from "react";
 
-export default function API({ api, classe, click, simples = true, def_api_excluir, editar_api }) {
+export default function API({ api, classe, click, simples = true, def_api_excluir, editar_minhas_api }) {
  const [imagem, setImagem] = useState(image_padrao);
  const [tamanhoImg, defTamanhoImg] = useState({ lar: 0, alt: 0 });
 
@@ -31,7 +31,7 @@ export default function API({ api, classe, click, simples = true, def_api_exclui
       <p> {api.nome.length > 15 ? api.nome.slice(0, 15) + "..." : api.nome}</p>
      </div>
      :
-     <div className="apis" key={api.id} onClick={click}>
+     <div className="apis" onClick={click}>
       <div className="lista_minhas_apis_dados">
        <img src={imagem} alt={api.nome || ""} style={{ objectFit: tamanhoImg.lar > tamanhoImg.alt ? "contain" : "cover" }} onLoad={e => { defTamanhoImg({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }} />
        <div className="lista_api_conteudo">
@@ -51,7 +51,7 @@ export default function API({ api, classe, click, simples = true, def_api_exclui
        </div>
       </div>
       <div id="lista_minhas_apis_botoes" onClick={e => { e.stopPropagation(); }}>
-       <button onClick={() => { if (api.id) { editar_api(api.id) } }}>Editar</button>
+       <button onClick={() => { if (api.id) { editar_minhas_api(api.id) } }}>Editar</button>
        <button onClick={() => { if (api.id) { def_api_excluir({ id: api.id, name: api.name }) } }}>Excluir</button>
       </div>
      </div>

@@ -19,7 +19,9 @@ export const TemasContexto = ({ children }) => {
 
   return (
     <ContextoTema.Provider value={{ temas, alterar_tema }}>
-      {children}
+      <div style={{ height: "100%", width: "100%" }} >
+        {children}
+      </div>
     </ContextoTema.Provider>
   );
 };
