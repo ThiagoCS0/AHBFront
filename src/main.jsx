@@ -13,14 +13,14 @@ const rotas = createBrowserRouter([
     path: "/AHBFront",
     element: <ComCabecalho />,
     children: [
-      { path: "Gerenciar", element: <Gerenciar /> }, 
+      { path: "/AHBFront/Gerenciar", element: <Gerenciar /> }, 
     ],
   },
   {
     path: "/AHBFront",
     element: <SemCabecalho />,
     children: [
-      { path: "Acesso", element: <Acesso /> }, 
+      { path: "/AHBFront/Acesso", element: <Acesso /> }, 
     ],
   },
   {
