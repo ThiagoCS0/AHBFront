@@ -7,6 +7,9 @@ import { remover_token, salvar_token, validar_token } from "../../Principais/Ser
 import { MeusErros } from "../../Principais/Erros/MeusErros";
 import "./Acessar.css"
 
+const inicio = import.meta.env.VITE_BACKEND_INICIAL;
+const site = import.meta.env.VITE_BACKEND_SITE;
+
 export default function Acessar() {
   const [httpResposta, defHttpResposta] = useState("");
   const [usuario, defUsuario] = useState("");
@@ -96,7 +99,7 @@ export default function Acessar() {
 
   return (
     <div id="acessar" className="ondulacao-1">
-      <button id="botao_voltar" onClick={() => { navegar("/AHBFront/") }} className="botao_voltar"></button>
+      <button id="botao_voltar" onClick={() => { navegar(inicio) }} className="botao_voltar"></button>
       <form onSubmit={enviar}>
         <div className="usuario_form_container">
           <label className="dados_usuario">

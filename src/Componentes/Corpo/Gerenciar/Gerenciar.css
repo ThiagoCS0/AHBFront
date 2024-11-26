@@ -17,6 +17,7 @@
   width: fit-content;
   font-size: large;
   min-width: 200px;
+  height: 100%;
   display: flex;
   border: 0;
   order: 1;

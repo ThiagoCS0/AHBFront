@@ -2,10 +2,12 @@ import React from "react"
 import LogoAHB from "../../../assets/logo.png"
 import "./Logo.css"
 
+const inicio = import.meta.env.VITE_BACKEND_INICIAL;
+
 export default function Logo() {
 
  return (
-  <a id="logo_AHB" href="AHBFront" >
+  <a id="logo_AHB" href={inicio} >
    <img src={LogoAHB} alt="Logo" />
    <div>
     <span>AHB</span>

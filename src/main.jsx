@@ -8,18 +8,18 @@ import Acesso from './Componentes/Acesso/Acesso';
 import Gerenciar from './Componentes/Corpo/Gerenciar/Gerenciar';
 import PaginaErros from './Componentes/Principais/Erros/PaginaErros';
 
+const inicio =  import.meta.env.VITE_BACKEND_INICIAL;
+
 const rotas = createBrowserRouter([
   {
-    path: "/AHBFront",
-    // path: "/",
+    path: inicio,
     element: <ComCabecalho />,
     children: [
       { path: "Gerenciar", element: <Gerenciar /> },
     ],
   },
   {
-    path: "/AHBFront",
-    // path: "/",
+    path: inicio,
     element: <SemCabecalho />,
     children: [
       { path: "Acesso", element: <Acesso /> },

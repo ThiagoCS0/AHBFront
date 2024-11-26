@@ -5,6 +5,8 @@ import { meu_post, meu_put } from "../../Principais/Servicos/APIs/Conexao";
 import "./Editor.css"
 import { MeusErros } from "../../Principais/Erros/MeusErros";
 
+const inicio = import.meta.env.VITE_BACKEND_INICIAL;
+
 export default function Editor({ exibir_modal, fechar, cadastrar_minha_api, atualizar_minha_api, dados_minha_api }) {
      const [categoria_api, def_categoria_api] = useState(dados_minha_api ? dados_minha_api.categoria : "");
      const [descricao_api, def_descricao_api] = useState(dados_minha_api ? dados_minha_api.descricao : "");
@@ -114,7 +116,7 @@ export default function Editor({ exibir_modal, fechar, cadastrar_minha_api, atua
      const novo_acesso = () => {
           sessionStorage.clear();
           remover_token();
-          navegar("/AHBFront/")
+          navegar(inicio)
           return;
      }
 

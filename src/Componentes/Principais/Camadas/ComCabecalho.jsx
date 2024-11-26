@@ -8,6 +8,7 @@ import Populares from "../../Corpo/Populares/Populares";
 import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
 
 const site = import.meta.env.VITE_BACKEND_SITE;
+const nome_desta_pagina = import.meta.env.VITE_BACKEND_INICIAL;
 
 export default function ComCabecalho({ token_valido, usuario }) {
   const [apis, def_apis] = useState([]);
@@ -124,7 +125,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
           <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} token_valido={token_valido} usuario={usuario} />
           <Corpo>
             {
-              window.location.pathname === "/AHBFront/" ?
+              window.location.pathname === nome_desta_pagina ?
                 <>
                   <Populares populares={populares} />
                   <ListaAPIs apis={apis} />
