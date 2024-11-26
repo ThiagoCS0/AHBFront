@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "predeploy":"npm run build",
-    "deploy":"pg-pages -d dist",
+    "deploy":"ph-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
