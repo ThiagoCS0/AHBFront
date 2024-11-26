@@ -1,16 +1,16 @@
 {
-  "homepage": "https://ThiagoCS0.github.io/AHBFront",
+  "homepage": "https://thiagocs0.github.io/AHBFront",
   "name": "ahb",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.3.1",
