@@ -8,30 +8,27 @@ import Acesso from './Componentes/Acesso/Acesso';
 import Gerenciar from './Componentes/Corpo/Gerenciar/Gerenciar';
 import PaginaErros from './Componentes/Principais/Erros/PaginaErros';
 
-const rotas = createBrowserRouter(
- {
-  path: '/', element: <ComCabecalho />, errorElement: <PaginaErros />, children:[
-    {
-      path: "/AHBFront/",
-      element: <ComCabecalho />,
-      children: [
-        { path: "/Gerenciar", element: <Gerenciar /> },
-      ],
-    },
-    {
-      path: "/AHBFront/",
-      element: <SemCabecalho/>,
-      children: [
-        { path: "/Acesso", element: <Acesso /> },
-      ],
-    },
-    {
-      path: "*",
-      element: <PaginaErros />,  // Componente de erro 404
-    }
-  ]
- }
-);
+const rotas = createBrowserRouter([
+  {
+    path: '/',
+    element: <ComCabecalho />,
+    errorElement: <PaginaErros />,
+    children: [
+      { path: "/Gerenciar", element: <Gerenciar /> },
+    ],
+  },
+  {
+    path: '/Acesso',
+    element: <SemCabecalho />,
+    children: [
+      { path: "", element: <Acesso /> },
+    ],
+  },
+  {
+    path: '*',
+    element: <PaginaErros />, // Componente para erros 404
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
