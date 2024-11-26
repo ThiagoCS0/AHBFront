@@ -10,7 +10,7 @@ import PaginaErros from './Componentes/Principais/Erros/PaginaErros';
 
 const rotas = createBrowserRouter([
   {
-    path: '/',
+    path: '/AHBFront',
     element: <ComCabecalho />,
     errorElement: <PaginaErros />,
     children: [
