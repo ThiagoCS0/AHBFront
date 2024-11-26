@@ -13,19 +13,19 @@ const rotas = createBrowserRouter([
     path: "/AHBFront",
     element: <ComCabecalho />,
     children: [
-      { path: "/AHBFront/Gerenciar", element: <Gerenciar /> }, 
+      { path: "Gerenciar", element: <Gerenciar /> },
     ],
   },
   {
-    path: "/AHBFront",
+    path: "/AHBFront",  // Caminho principal
     element: <SemCabecalho />,
     children: [
-      { path: "/AHBFront/Acesso", element: <Acesso /> }, 
+      { path: "Acesso", element: <Acesso /> },
     ],
   },
   {
-    path: "*",
-    element: <PaginaErros />, 
+    path: "*",  // Rota de erro (404)
+    element: <PaginaErros />,
   },
 ]);
 

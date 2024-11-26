@@ -141,7 +141,7 @@ export default function Acessar() {
             <span className="span_checkbox_especial"></span>Lembrar-me
           </label>
           <div className="campos_laterais">
-            <button className="botoes_expansiveis" type="button" onClick={() => { navegar("/AHBFront/Cadastro") }}>Cadastro</button>
+            <button className="botoes_expansiveis" type="button" onClick={() => { navegar("Cadastro") }}>Cadastro</button>
             <button className="botoes_expansiveis" type="submit">Entrar</button>
           </div>
           <Link to="/Recuperacao" style={{ textAlign: "center", color: "var(--cor-principal-destaques)", fontWeight: "bold" }}> Esqueceu sua senha? </Link>

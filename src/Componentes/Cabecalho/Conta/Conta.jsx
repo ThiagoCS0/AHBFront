@@ -54,17 +54,17 @@ export default function Conta() {
 
  return (
   <div id="conta" className="alinhado">
-   <button onClick={() => { token_valido ? def_menu_visivel(!menu_visivel) : navegar("/AHBFront/Acesso") }} ref={acessarRef}>
+   <button onClick={() => { token_valido ? def_menu_visivel(!menu_visivel) : navegar("Acesso") }} ref={acessarRef}>
     <img src={Person} alt="Usuário" />
     <span>{usuario ? (usuario || "...") : "Entrar"}</span>
    </button>
    {token_valido && menu_visivel && (
     <div ref={menuRef}>
-     <Link to="/AHBFront/Gerenciar/" onClick={
+     <Link to="Gerenciar" onClick={
       () => sessionStorage.setItem("Gerenciar", "ger_perfil")}>Perfil</Link>
-     <Link to="/AHBFront/Gerenciar/" onClick={
+     <Link to="Gerenciar" onClick={
       () => sessionStorage.setItem("Gerenciar", "ger_apis")}>Minhas Apis</Link>
-     <Link to="/AHBFront/Gerenciar/" onClick={
+     <Link to="Gerenciar" onClick={
       () => sessionStorage.setItem("Gerenciar", "ger_termos")}>Termos</Link>
      <a href="/" onClick={remover_token}>Sair</a>
     </div>
