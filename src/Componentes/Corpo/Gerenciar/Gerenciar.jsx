@@ -34,7 +34,7 @@ export default function Gerenciar() {
 
   useEffect(() => {
     if (!validar_token()) {
-      navegar("/Acesso");
+      navegar("/AHBFront/Acesso");
       return;
     }
     def_carregando(false);
