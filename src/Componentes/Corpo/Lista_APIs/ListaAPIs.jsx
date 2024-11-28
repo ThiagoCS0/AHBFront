@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { clicarAPI } from "../../Principais/Servicos/APIs/APIs";
+import { clicar_apis } from "../../Principais/Servicos/APIs/APIs";
 import "./ListaAPIs.css"
 import Visualizador from "../../Modal/API_Visualizador/Visualizador";
 import API from "../API/API";
@@ -19,10 +19,10 @@ export default function ListaAPIs({ apis }) {
       <API
        api={api}
        key={api.id}
+       classe={"lista_apis_hover"}
        click={() => {
         defApiSelec(api)
        }}
-       classe="lista_apis_api"
       />
      ))}
    </div>

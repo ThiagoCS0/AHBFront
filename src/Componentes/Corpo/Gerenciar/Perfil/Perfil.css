@@ -78,20 +78,11 @@
  width: 100%;
 }
 
-#conteudo_perfil .dados_titulos {
- font-weight: bold;
- margin-top: 10px;
-}
-
 #div_filho_nova_senha_perfil {
  margin: 4px !important;
 }
 
-#nome_usuario .dados_usuario {
- margin-bottom: 10px;
-}
-
-.ver_senha {
+.dados_usuario_ver_senha {
  bottom: 10px;
 }
 
@@ -100,12 +91,6 @@
  .formularios {
   height: 100%;
   padding: 0;
- }
-
- .dados_usuario input {
-  border-radius: 4px;
-  padding: 8px;
-  width: 100%;
  }
 
  .campos_laterais {
@@ -153,15 +138,6 @@
   padding: 2px 4px;
  }
 
- .formularios .dados_usuario {
-  gap: 0;
- }
-
- .formularios .dados_titulos {
-  padding: 2px 0;
-  margin: 0 !important;
- }
-
  .menu_perfil {
   height: fit-content;
  }
@@ -194,13 +170,13 @@
   font-size: xx-small;
  }
 
- .ver_senha {
+ .dados_usuario_ver_senha {
   right: 3%;
   height: 15px;
   width: auto;
  }
 
- .checkbox_especial .span_checkbox_especial:after {
+ .dados_usuario_checkbox .span_dados_usuario_checkbox:after {
   top: 2px;
   left: 6px;
   width: 4px;
@@ -208,13 +184,13 @@
   border-width: 0 2px 2px 0 !important;
  }
 
- .span_checkbox_especial {
+ .span_dados_usuario_checkbox {
   width: 18px;
   height: 18px;
   border-radius: 2px;
  }
 
- .checkbox_especial {
+ .dados_usuario_checkbox {
   gap: 8px;
  }
 }

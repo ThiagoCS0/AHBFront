@@ -7,8 +7,10 @@ import './Componentes/Principais/Temas/Tema.css';
 import Acesso from './Componentes/Acesso/Acesso';
 import Gerenciar from './Componentes/Corpo/Gerenciar/Gerenciar';
 import PaginaErros from './Componentes/Principais/Erros/PaginaErros';
+import Criar from './Componentes/Acesso/Criar/Criar';
+import Recuperar from './Componentes/Acesso/Recuperar/Recuperar';
 
-const inicio =  import.meta.env.VITE_BACKEND_INICIAL;
+const inicio = import.meta.env.VITE_INICIAL;
 
 const rotas = createBrowserRouter([
   {
@@ -21,9 +23,7 @@ const rotas = createBrowserRouter([
   {
     path: inicio,
     element: <SemCabecalho />,
-    children: [
-      { path: "Acesso", element: <Acesso /> },
-    ],
+    children: [{ path: "Acesso", element: <Acesso /> },],
   },
   {
     path: "*",

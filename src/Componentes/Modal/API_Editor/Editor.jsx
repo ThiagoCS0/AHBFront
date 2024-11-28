@@ -3,11 +3,11 @@ import { remover_token, validar_token } from "../../Principais/Servicos/JWT/JWT"
 import { useNavigate } from "react-router-dom";
 import { meu_post, meu_put } from "../../Principais/Servicos/APIs/Conexao";
 import "./Editor.css"
-import { MeusErros } from "../../Principais/Erros/MeusErros";
+import { meus_erros } from "../../Principais/Erros/MeusErros";
 
-const inicio = import.meta.env.VITE_BACKEND_INICIAL;
+const inicio = import.meta.env.VITE_INICIAL;
 
-export default function Editor({ exibir_modal, fechar, cadastrar_minha_api, atualizar_minha_api, dados_minha_api }) {
+export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_api, dados_minha_api }) {
      const [categoria_api, def_categoria_api] = useState(dados_minha_api ? dados_minha_api.categoria : "");
      const [descricao_api, def_descricao_api] = useState(dados_minha_api ? dados_minha_api.descricao : "");
      const [metodos_api, def_metodos_api] = useState(dados_minha_api ? dados_minha_api.metodos : "");
@@ -62,17 +62,17 @@ export default function Editor({ exibir_modal, fechar, cadastrar_minha_api, atua
                     categoria: categoria_corrigida,
                     icon: imagem_api,
                     user: { id: id_usuario }
-                };
-                
-                let status = "", dados = "";
-                
-                const resultado = dados_minha_api 
+               };
+
+               let status = "", dados = "";
+
+               const resultado = dados_minha_api
                     ? await meu_put(`apis/${dados_minha_api.id}`, corpo, true)
                     : await meu_post("apis", corpo, true);
-                
-                status = resultado.status_put || resultado.status_post;
-                dados = resultado.dados_post || "";
-               
+
+               status = resultado.status_put || resultado.status_post;
+               dados = resultado.dados_post || "";
+
                if (status === 200) {
                     // fdechar estava aqui
                     if (dados_minha_api) {
@@ -106,7 +106,7 @@ export default function Editor({ exibir_modal, fechar, cadastrar_minha_api, atua
                } else { def_resposta_http(dados_minha_api ? "Erro ao atualizar." : "Erro ao criar API."); }
           } catch (erro) {
                def_resposta_http("Erro de conexão. Tente novamente!");
-               MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_CRI_API: ${erro}`));
+               meus_erros(import.meta.url.split('/').pop(), `CAT_CRI_API: ${erro}`);
           }
      };
 
@@ -129,10 +129,6 @@ export default function Editor({ exibir_modal, fechar, cadastrar_minha_api, atua
           def_nome_api('');
           def_link_api('');
      }
-
-     useEffect(() => {
-          redefinir_campos();
-     }, [exibir_modal])
 
      useEffect(() => {
           if (resposta_http) {
@@ -207,15 +203,13 @@ export default function Editor({ exibir_modal, fechar, cadastrar_minha_api, atua
      };
 
      useEffect(() => {
-          const teclas = (e) => { if (e.key === "Escape") { fechar(); } };
+          const teclas = (e) => { if (e.key === "Escape") { fechar() } };
           window.addEventListener("keydown", teclas);
           return () => { window.removeEventListener("keydown", teclas); };
      }, [fechar]);
 
-
-
      return (
-          <div id="gerenciar_modal_apis" style={{ display: exibir_modal ? "flex" : "none" }} onClick={() => { fechar() }}>
+          <div id="gerenciar_modal_apis" onClick={fechar}>
                <div className="modal_nova_api ondulacao-2" onClick={e => { e.stopPropagation(); }}>
                     <form>
                          <div div="modal_div_horizontal">

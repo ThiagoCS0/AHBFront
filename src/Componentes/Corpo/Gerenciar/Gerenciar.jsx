@@ -6,7 +6,7 @@ import { validar_token } from "../../Principais/Servicos/JWT/JWT";
 import "./Gerenciar.css"
 import Termos from "../../AHB/Termos/Termos";
 
-const site = import.meta.env.VITE_BACKEND_SITE;
+const site = import.meta.env.VITE_SITE;
 
 export default function Gerenciar() {
   const navegar = useNavigate();
@@ -49,8 +49,8 @@ export default function Gerenciar() {
     }
   }
 
-  const alterar_componente = (e, c) => {
-    sessionStorage.setItem("Gerenciar", c);
+  const alterar_componente = (e) => {
+    sessionStorage.setItem("Gerenciar", e);
   }
 
   const componente = () => {
@@ -68,9 +68,9 @@ export default function Gerenciar() {
       :
       <div id="gerenciador">
         <div id="menu_gerenciador">
-          <Link id="ger_perfil" onClick={(e) => { opcao_ativa(e.target); alterar_componente(e, "ger_perfil") }}>Perfil</Link>
-          <Link id="ger_apis" onClick={(e) => { opcao_ativa(e.target); alterar_componente(e, "ger_apis") }}>Minhas APIs</Link>
-          <Link id="ger_termos" onClick={(e) => { opcao_ativa(e.target); alterar_componente(e, "ger_termos") }}>Termos</Link>
+          <Link id="ger_perfil" onClick={(e) => { opcao_ativa(e.target); alterar_componente("ger_perfil") }}>Perfil</Link>
+          <Link id="ger_apis" onClick={(e) => { opcao_ativa(e.target); alterar_componente("ger_apis") }}>Minhas APIs</Link>
+          <Link id="ger_termos" onClick={(e) => { opcao_ativa(e.target); alterar_componente("ger_termos") }}>Termos</Link>
         </div>
         <div id="conteudo_gerenciador">
           {pagina != "ger_apis" && <h1 className="titulos_genrenciar ondulacao-1">{pagina == "ger_perfil" ? "Perfil" : "Termos de Uso"}</h1>}

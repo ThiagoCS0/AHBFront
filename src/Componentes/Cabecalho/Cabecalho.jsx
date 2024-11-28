@@ -3,7 +3,7 @@ import Ferramentas from "./Ferramentas/Ferramentas";
 import Conta from "./Conta/Conta";
 import { useEffect, useState } from "react";
 import { remover_token, validar_token } from "../Principais/Servicos/JWT/JWT";
-import { MeusErros } from "../Principais/Erros/MeusErros";
+import { meus_erros } from "../Principais/Erros/MeusErros";
 import { meu_get } from "../Principais/Servicos/APIs/Conexao";
 
 export default function Cabecalho({ buscar, categorizar }) {

@@ -1,16 +1,16 @@
 import React, { useRef, useEffect, useState } from "react";
-import { MeusErros } from "../../Principais/Erros/MeusErros";
+import { meus_erros } from "../../Principais/Erros/MeusErros";
 import { meu_get } from "../../Principais/Servicos/APIs/Conexao";
 import image_padrao from "../../../assets/image_padrao.png";
 import "./Visualizador.css";
 
 export default function Visualizador({ api, fechar }) {
-  const [tamanhoImg, defTamanhoImg] = useState({ lar: 0, alt: 0 });
+  const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [publicador, def_publicador] = useState('');
   const [modal_simples, def_modal_simples] = useState(true);
-  const [imagem, setImagem] = React.useState(image_padrao);
+  const [imagem, set_imagem] = React.useState(image_padrao);
 
-  const verificarEValidarImagem = (url) => {
+  const validar_imagem = (url) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
@@ -21,7 +21,7 @@ export default function Visualizador({ api, fechar }) {
 
   React.useEffect(() => {
     if (api?.imagem) {
-      verificarEValidarImagem(api.imagem).then((img) => setImagem(img));
+      validar_imagem(api.imagem).then((img) => set_imagem(img));
     }
   }, [api?.imagem]);
 
@@ -42,7 +42,7 @@ export default function Visualizador({ api, fechar }) {
   return (
     <div id="modal_apis" onClick={fechar}>
       <div id="modal_apis_conteudo" className="ondulacao-1" onClick={e => { e.stopPropagation(); }}>
-        <a href={modal_simples ? "#" : api.link}><img src={imagem} alt={api.nome} style={{ objectFit: tamanhoImg.lar > tamanhoImg.alt ? "contain" : "cover" }} onLoad={e => { defTamanhoImg({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }} /></a>
+        <a href={modal_simples ? "#" : api.link}><img src={imagem} alt={api.nome} style={{ objectFit: tamanho_img.lar > tamanho_img.alt ? "contain" : "cover" }} onLoad={e => { def_tamanho_img({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }} /></a>
         <p><span>Nome</span>{api.nome}</p>
         <div>
           <p><span>Descrição</span><br />{api.descricao}</p>

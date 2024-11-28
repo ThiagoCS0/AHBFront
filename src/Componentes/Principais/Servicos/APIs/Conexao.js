@@ -1,9 +1,12 @@
-import { MeusErros } from "../../Erros/MeusErros"
+import { meus_erros } from "../../Erros/MeusErros";
 import { ler_token, validar_token } from "../JWT/JWT";
 
-const API_URL = import.meta.env.VITE_BACKEND_URL;
+const API_URL = import.meta.env.VITE_URL;
 
 export async function meu_get(url, usar_token = false, nosso_servidor = true) {
+  let dados_get = null;
+  let status_get = 0;
+
   try {
     const token = usar_token ? validar_token() : "";
     const resposta = await fetch(nosso_servidor ? `${API_URL}/${url}` : url, {
@@ -14,22 +17,36 @@ export async function meu_get(url, usar_token = false, nosso_servidor = true) {
       },
     });
 
-    const status_get = resposta.status;
-    const dados_get = await resposta.json();
-    return { status_get, dados_get };
+    status_get = resposta.status;
+
+    if (!resposta.ok) { return { status_get, dados_get: null }; }
+
+    const tipo_conteudo = resposta.headers.get("Content-Type");
+    if (tipo_conteudo && tipo_conteudo.includes("application/json")) { dados_get = await resposta.json(); }
+    else {
+      // meus_erros(import.meta.url.split('/').pop(), "CNX_GET_JSN: " + tipo_conteudo); // Resposta não é JSON
+      dados_get = null;
+    }
 
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_CNX_GET: ${erro}`));
-    return;
+    meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_GET: ${erro}`);
+    dados_get = null;
+    status_get = 500;
   }
+
+  return { status_get, dados_get };
 }
+
 
 export async function meu_post(url, corpo, usar_token = false) {
   try {
     const token = usar_token ? validar_token() : "";
     const resposta = await fetch(`${API_URL}/${url}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(usar_token ? { "Authorization": `Bearer ${token}` } : {})
+      },
       body: JSON.stringify(corpo)
     });
 
@@ -38,14 +55,14 @@ export async function meu_post(url, corpo, usar_token = false) {
 
     return { status_post, dados_post };
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_CNX_POS: ${erro}`));
+    meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_POS: ${erro}`);
     return;
   }
 }
 
 export async function meu_put(url, corpo, usar_token = false) {
   try {
-    
+
     const token = usar_token ? validar_token() : "";
     const resposta = await fetch(`${API_URL}/${url}`, {
       method: "PUT",
@@ -60,7 +77,7 @@ export async function meu_put(url, corpo, usar_token = false) {
 
     return { status_put };
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_CNX_PUT: ${erro}`));
+    meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_PUT: ${erro}`);
     return;
   }
 }
@@ -80,7 +97,7 @@ export async function meu_delete(url) {
       return (await resposta).status;
     }
   } catch (erro) {
-    MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_CNX_DEL: ${erro}`));
+    meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_DEL: ${erro}`);
     return;
   }
 }

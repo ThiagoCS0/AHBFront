@@ -2,7 +2,7 @@ import React from "react"
 import LogoAHB from "../../../assets/logo.png"
 import "./Logo.css"
 
-const inicio = import.meta.env.VITE_BACKEND_INICIAL;
+const inicio = import.meta.env.VITE_INICIAL;
 
 export default function Logo() {
 

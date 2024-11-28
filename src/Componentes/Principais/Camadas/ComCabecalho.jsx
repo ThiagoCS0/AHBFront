@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { TemasContexto } from "../Temas/TemasContexto";
-import { buscarAPIs } from "../Servicos/APIs/APIs";
+import { buscar_apis } from "../Servicos/APIs/APIs";
 import Cabecalho from "../../Cabecalho/Cabecalho"
 import Corpo from "../../Corpo/Corpo"
 import Populares from "../../Corpo/Populares/Populares";
 import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
 
-const site = import.meta.env.VITE_BACKEND_SITE;
-const nome_desta_pagina = import.meta.env.VITE_BACKEND_INICIAL;
+const site = import.meta.env.VITE_SITE;
+const nome_desta_pagina = import.meta.env.VITE_INICIAL;
 
 export default function ComCabecalho({ token_valido, usuario }) {
   const [apis, def_apis] = useState([]);
@@ -47,8 +47,8 @@ export default function ComCabecalho({ token_valido, usuario }) {
     try {
       const loadApis = async () => {
         if (apis.length === 0 && populares.length === 0) {
-          const apisPopulares = await buscarAPIs(0, 5, "clickCount", "desc");
-          const apisTotais = await buscarAPIs(0, 20, "name", "asc");
+          const apisPopulares = await buscar_apis(0, 5, "clickCount", "desc");
+          const apisTotais = await buscar_apis(0, 20, "name", "asc");
           def_apis(apisTotais);
           def_populares(apisPopulares);
           def_populares_tmp(apisPopulares);
@@ -68,7 +68,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
         return () => clearTimeout(timeoutId);
       }
     } catch (erro) {
-      MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_CAR_APIs: ${erro}`));
+      meus_erros(import.meta.url.split('/').pop(), "CAT_CAR_APIs", erro);
     }
   }, [apis, populares]);
 

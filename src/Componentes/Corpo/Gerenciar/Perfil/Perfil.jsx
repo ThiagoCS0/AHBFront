@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { validar_token } from "../../../Principais/Servicos/JWT/JWT";
 import { meu_get, meu_put } from "../../../Principais/Servicos/APIs/Conexao";
-import { MeusErros } from "../../../Principais/Erros/MeusErros";
+import { usuario_id } from "../../../Principais/Servicos/Usuario/Usuario";
+import { meus_erros } from "../../../Principais/Erros/MeusErros";
 import SenhaInvisivel from "../../../../assets/senha_invisivel.png"
 import SenhaVisivel from "../../../../assets/senha_visivel.png"
 import "./Perfil.css"
 
-const site = import.meta.env.VITE_BACKEND_SITE;
+const site = import.meta.env.VITE_SITE;
 
 export default function Perfil() {
   const [carregando, def_carregando] = useState(true);
@@ -120,8 +121,8 @@ export default function Perfil() {
       try {
         const token = validar_token();
         if (!token) { return false; }
-        const idUser = JSON.parse(atob(token.split('.')[1])).userId;
-        const { status_get, dados_get } = await meu_get(`users/${idUser}`, true);
+        const id_usuario = usuario_id()
+        const { status_get, dados_get } = await meu_get(`users/${id_usuario}`, true);
 
         if (status_get !== 200) { novo_acesso(); }
 
@@ -139,7 +140,7 @@ export default function Perfil() {
         } else {
         }
       } catch (erro) {
-        MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_PRF_: ${erro}`));
+        meus_erros(import.meta.url.split('/').pop(), "CAT_PER_USF_INI", erro);
         return false;
       }
     }
@@ -174,9 +175,10 @@ export default function Perfil() {
     try {
       const token = validar_token();
       if (!token) { novo_acesso(); }
-      const idUser = JSON.parse(atob(token.split('.')[1])).userId;
+      
+      const id_usuario = usuario_id();
 
-      const { status_put, dados_put } = await meu_put(`users/${idUser}`, {
+      const { status_put, dados_put } = await meu_put(`users/${id_usuario}`, {
         username: userData.login,
         publicname: userData.nomePublico,
         cpf: userData.cpf,
@@ -206,7 +208,7 @@ export default function Perfil() {
         <form id="nome_usuario" className="formularios ativo">
           <div className="campos_laterais">
             <label className="dados_usuario">
-              <p className="dados_titulos">Usuário</p>
+              <p className="dados_usuario_titulos">Usuário</p>
               <input
                 className={erros.loginErro ? "aviso_erro_borda" : ""}
                 value={userData.login || ""}
@@ -221,7 +223,7 @@ export default function Perfil() {
             </label>
 
             <label className="dados_usuario">
-              <p className="dados_titulos">CPF</p>
+              <p className="dados_usuario_titulos">CPF</p>
               <input
                 className={erros.cpfErro ? "aviso_erro_borda" : ""}
                 value={userData.cpf || ""}
@@ -238,7 +240,7 @@ export default function Perfil() {
 
           <div className="campos_laterais">
             <label className="dados_usuario">
-              <p className="dados_titulos">Email</p>
+              <p className="dados_usuario_titulos">Email</p>
               <input
                 className={erros.emailErro ? "aviso_erro_borda" : ""}
                 value={userData.email || ""}
@@ -253,8 +255,8 @@ export default function Perfil() {
             </label>
 
             <label className="dados_usuario">
-              <p className="dados_titulos">Telefone</p>
-              <div id="tel_usuario">
+              <p className="dados_usuario_titulos">Telefone</p>
+              <div className="dados_usuario_tel">
                 <input
                   className={erros.dddErro ? "aviso_erro_borda" : ""}
                   value={userData.ddd || ""}
@@ -281,7 +283,7 @@ export default function Perfil() {
           <div className="campos_laterais" id="campos_senha_perfil">
             <div className="div_pai_nova_senha_perfil">
               <label className="dados_usuario">
-                <p className="dados_titulos">Senha Atual</p>
+                <p className="dados_usuario_titulos">Senha Atual</p>
                 <input
                   className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
                   value={userData.senhaAtual || ""}
@@ -291,7 +293,7 @@ export default function Perfil() {
                   placeholder={visibilidade_senha.senhaAtual ? "" : "********"}
                 />
                 <img
-                  className="ver_senha"
+                  className="dados_usuario_ver_senha"
                   src={visibilidade_senha.senhaAtual ? SenhaVisivel : SenhaInvisivel}
                   onClick={() => def_visibilidade_senha({ ...visibilidade_senha, senhaAtual: !visibilidade_senha.senhaAtual })}
                   alt="Visibilidade"
@@ -299,10 +301,10 @@ export default function Perfil() {
               </label>
             </div>
             <div className="div_pai_nova_senha_perfil">
-              <label id="div_filho_nova_senha_perfil" className="checkbox_especial">
-                <input className="input_checkbox_especial" type="checkbox" onChange={(e) => def_visibilidade_nova_senha(e.target.checked)} checked={visibilidade_nova_senha} />
-                <span className="span_checkbox_especial"></span>
-                <p className="dados_titulos">{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}</p>
+              <label id="div_filho_nova_senha_perfil" className="dados_usuario_checkbox">
+                <input className="input_dados_usuario_checkbox" type="checkbox" onChange={(e) => def_visibilidade_nova_senha(e.target.checked)} checked={visibilidade_nova_senha} />
+                <span className="span_dados_usuario_checkbox"></span>
+                <p className="dados_usuario_titulos">{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}</p>
               </label>
               <label className="dados_usuario">
                 <input
@@ -315,7 +317,7 @@ export default function Perfil() {
                   disabled={!visibilidade_nova_senha}
                 />
                 <img
-                  className="ver_senha"
+                  className="dados_usuario_ver_senha"
                   src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? SenhaVisivel : SenhaInvisivel : SenhaInvisivel}
                   onClick={() => def_visibilidade_senha({ ...visibilidade_senha, novaSenha: !visibilidade_senha.novaSenha })}
                   alt="Visibilidade"
@@ -334,7 +336,7 @@ export default function Perfil() {
         <form id="PerfilPublico" className="formularios">
           <label className="dados_usuario">
             <h4 style={{ textAlign: "center" }}>Esse informações ficaram visível a todos!</h4>
-            <p className="dados_titulos">Nome público</p>
+            <p className="dados_usuario_titulos">Nome público</p>
             <input
               className={erros.nomePublicoErro ? "aviso_erro_borda" : ""}
               value={userData.nomePublico || ""}

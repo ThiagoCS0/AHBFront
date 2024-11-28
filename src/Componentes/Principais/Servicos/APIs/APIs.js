@@ -1,13 +1,13 @@
-import { MeusErros } from "../../Erros/MeusErros"
+import { meus_erros } from "../../Erros/MeusErros";
 import { meu_get } from "./Conexao";
 
-export const buscarAPIs = async (pagina, tamanho, organizar, ordem) => {
+export const buscar_apis = async (pagina, tamanho, organizar, ordem) => {
 
  try {
   const { status_get, dados_get } = await meu_get(`apis?page=${pagina}&size=${tamanho}&organizar=${organizar},${ordem}`);
 
   if (status_get !== 200) {
-   MeusErros(import.meta.url.split('/').pop(), new Error(`BSC_APIs: ${status_get}`));
+   meus_erros(import.meta.url.split('/').pop(), `BSC_APIs: ${status_get}`);
   }
 
   if (dados_get && dados_get.content) {
@@ -28,17 +28,17 @@ export const buscarAPIs = async (pagina, tamanho, organizar, ordem) => {
 
  } catch (erro) {
 
-  MeusErros(import.meta.url.split('/').pop(), new Error("CAT_BSC_API"));
+  meus_erros(import.meta.url.split('/').pop(), "CAT_API_BSC_API", erro);
 
   return [];
  }
 };
 
-export const clicarAPI = async (apiId) => {
+export const clicar_apis = async (apiId) => {
  try {
   const resposta = await meu_get(`apis/${apiId}/clicar`);
   if (status_get !== 200) { return; }
- } catch (error) {
-  MeusErros(import.meta.url.split('/').pop(), new Error("CAT_CLK_API"));
+ } catch (erro) {
+  meus_erros(import.meta.url.split('/').pop(), "CAT_API_CLK_API", erro);
  }
 };

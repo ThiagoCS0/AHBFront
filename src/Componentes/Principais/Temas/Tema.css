@@ -221,10 +221,10 @@ p {
 
 .campos_laterais {
   justify-content: space-between;
-  flex-direction: row;
+  flex-direction: row !important;
   display: flex;
   width: 100%;
-  gap: 20px;
+  gap: 10px !important;
 }
 
 .campos_laterais>* {
@@ -237,10 +237,154 @@ p {
   font-weight: 500;
   bottom: -20px;
   color: #F50;
+  right: 0;
 }
 
 .aviso_erro_borda {
   border: 1px solid #F50;
+}
+
+.botao_voltar{
+  background-image: url("./../../../assets/voltar.png");
+  background-position: center center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: var(--inverter);
+  transition: scale 0.4s;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 40px;
+  top: 40px;
+}
+
+.botao_voltar:hover{
+  background-color: transparent;
+  scale: 1.2;
+}
+/* Dados do usuário (Acessar, Criar, Recuperar e Perfil) */
+
+.dados_usuario_fundo {
+  animation: ondular 5s infinite ease-in-out;
+  background: var(--linear-acesso);
+  background-size: 300% 300%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.dados_usuario_principal {
+  justify-content: space-between;
+  background-color: var(--fundo);
+  box-shadow: var(--sombra-1);
+  flex-direction: column;
+  height: fit-content;
+  border-radius: 8px;
+  align-items: ce;
+  padding: 20px;
+  display: flex;
+  width: 300px;
+  gap: 10px;
+}
+
+
+.dados_usuario {
+  flex-direction: column;
+  align-content: center;
+  margin-bottom: 10px;
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.dados_usuario_titulos {
+  margin: 0 !important;
+}
+
+.dados_usuario_tel {
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.dados_usuario_tel input {
+  width: 100%;
+}
+
+.dados_usuario_tel input:first-child {
+  text-align: center;
+  width: fit-content;
+  max-width: 50px;
+}
+
+.dados_usuario_ver_senha {
+  opacity: 0.7;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  cursor: pointer;
+  bottom: 18%;
+  width: 30px;
+  right: 2%;
+}
+
+.dados_usuario_checkbox {
+  justify-content: start;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.span_dados_usuario_checkbox {
+  border: 1px solid var(--destaque);
+  border-radius: 4px;
+  height: 21px;
+  width: 21px;
+}
+
+.span_dados_usuario_checkbox:after {
+  position: absolute;
+  display: none;
+  content: "";
+}
+
+.dados_usuario_checkbox input {
+  opacity: 0;
+}
+
+.dados_usuario_checkbox input:checked~.span_dados_usuario_checkbox {
+  background-color: var(--destaque-escuro);
+}
+
+.dados_usuario_checkbox input:checked~.span_dados_usuario_checkbox:after {
+  display: block;
+}
+
+.dados_usuario_checkbox:hover input~.span_dados_usuario_checkbox {
+  border: 1px solid var(--destaque-claro);
+}
+
+.dados_usuario_checkbox .span_dados_usuario_checkbox:after {
+  border-width: 0 2px 2px 0 !important;
+  border: 1px solid #FFF;
+  transform: rotate(45deg);
+  position: relative;
+  height: 10px;
+  width: 5px;
+  left: 6px;
+  top: 2px;
+}
+
+.input_dados_usuario_checkbox {
+  display: none;
 }
 
 

@@ -3,17 +3,19 @@ import "../Gerenciar.css";
 import "./MinhasAPIs.css";
 import { validar_token } from "../../../Principais/Servicos/JWT/JWT";
 import { meu_delete, meu_get } from "../../../Principais/Servicos/APIs/Conexao";
-import { MeusErros } from "../../../Principais/Erros/MeusErros";
+import { usuario_id } from "../../../Principais/Servicos/Usuario/Usuario";
+import { meus_erros } from "../../../Principais/Erros/MeusErros";
 import Visualizador from "../../../Modal/API_Visualizador/Visualizador"
 import Editor from "../../../Modal/API_Editor/Editor"
 import image_padrao from "../../../../assets/image_padrao.png";
 import API from "../../API/API";
 
-const site = import.meta.env.VITE_BACKEND_SITE;
+const site = import.meta.env.VITE_SITE;
 
 const MinhasApis = () => {
   const [carregando, def_carregando] = useState(true);
-  const [exibir_modal, def_exibir_modal] = useState(false);
+  const [exibir_modal_visualizar, def_exibir_modal_visualizar] = useState(false);
+  const [exibir_modal_editar, def_exibir_modal_editar] = useState(false);
   const [nova_api, def_nova_api] = useState([]);
   const [editar_api, def_editar_api] = useState(null);
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
@@ -29,13 +31,6 @@ const MinhasApis = () => {
     });
   };
 
-
-  useEffect(() => {
-    if (nova_api?.imagem) {
-      verificarEValidarImagem(nova_api.imagem).then((img) => setImagem(img));
-    }
-  }, [nova_api?.imagem]);
-  
   useEffect(() => {
     //-------------------------------------------------------------------------------- isso foi criado por causa do ( React.StrictMode do main.jsx) 
     const ultimaRequisicao = sessionStorage.getItem('ultimaRequisicao');
@@ -52,6 +47,12 @@ const MinhasApis = () => {
   }, []);
 
   useEffect(() => {
+    if (nova_api?.imagem) {
+      verificarEValidarImagem(nova_api.imagem).then((img) => setImagem(img));
+    }
+  }, [nova_api?.imagem]);
+
+  useEffect(() => {
     if (api_excluir.id) {
       const teclas = (e) => { if (e.key === "Escape") { fechar_modal_minhas_apis(); } };
       window.addEventListener("keydown", teclas);
@@ -60,41 +61,45 @@ const MinhasApis = () => {
   }, [api_excluir.id]);
 
   useEffect(() => {
-    if (!exibir_modal) {
+    if (!exibir_modal_visualizar) {
       def_editar_api(null);
     }
-  }, [exibir_modal])
+  }, [exibir_modal_visualizar])
 
   const lista_minhas_apis = async () => {
     try {
       const token = validar_token();
       if (token) {
-        const idUser = JSON.parse(atob(token.split('.')[1])).userId;
-        const { status_get, dados_get } = await meu_get(`apis/user/${idUser}`, true);
-        if (status_get === 204 || status_get !== 200) {
-          MeusErros(import.meta.url.split('/').pop(), new Error("LST_API: status " + status_get + " - dados" + dados_get));
-          return;
-        }
-        if (dados_get) {
-          def_nova_api([])
-          dados_get.forEach(api => {
-            const categoriaCorrigida =
-              api.categoria === "REDE_SOCIAIS" ? "REDE SOCIAIS" :
-                api.categoria === "SAUDE" ? "SAÚDE" :
-                  api.categoria === "FINANCAS" ? "FINANÇAS" :
-                    api.categoria === "ESTATISTICAS" ? "ESTATÍSTICAS" :
-                      api.categoria;
-            cadastrar_minhas_api({
-              id: api.id,
-              nome: api.name,
-              descricao: api.description,
-              metodos: api.methods,
-              link: api.link,
-              categoria: categoriaCorrigida,
-              imagem: api.icon,
-              publicador: api.userId.id
-            });
-          })
+        const id_usuario = usuario_id();
+        if (id_usuario !== "") {
+          const { status_get, dados_get } = await meu_get(`apis/user/${id_usuario}`, true);
+          if (status_get === 204) {
+            return; // não é erro, apenas não há APIs cadastradas
+          } else if (status_get !== 200) {
+            meus_erros(import.meta.url.split('/').pop(), "MNH_LST_!OK");
+            return;
+          }
+          if (dados_get) {
+            def_nova_api([])
+            dados_get.forEach(api => {
+              const categoriaCorrigida =
+                api.categoria === "REDE_SOCIAIS" ? "REDE SOCIAIS" :
+                  api.categoria === "SAUDE" ? "SAÚDE" :
+                    api.categoria === "FINANCAS" ? "FINANÇAS" :
+                      api.categoria === "ESTATISTICAS" ? "ESTATÍSTICAS" :
+                        api.categoria;
+              cadastrar_minhas_api({
+                id: api.id,
+                nome: api.name,
+                descricao: api.description,
+                metodos: api.methods,
+                link: api.link,
+                categoria: categoriaCorrigida,
+                imagem: api.icon,
+                publicador: api.userId.id
+              });
+            })
+          }
         }
       } else {
         sessionStorage.clear();
@@ -103,7 +108,7 @@ const MinhasApis = () => {
         return;
       }
     } catch (erro) {
-      MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_LST_API: ${erro}`));
+      meus_erros(import.meta.url.split('/').pop(), "CAT_LST_API", erro);
       return false;
     } finally {
       def_carregando(false); // Quando o JWT é validado, carrega o componente
@@ -112,18 +117,18 @@ const MinhasApis = () => {
 
   const cadastrar_minhas_api = (dadosApi) => {
     def_nova_api(tmp => [...tmp, dadosApi]);
-    def_exibir_modal(false);
+    def_exibir_modal_visualizar(false);
   };
 
   const atualizar_minhas_api = (apiEditada) => {
     def_nova_api(tmp => tmp.filter((apis) => apis.id !== apiEditada.id).concat({ ...apiEditada }));
-    def_exibir_modal(false);
+    def_exibir_modal_visualizar(false);
   };
 
   const editar_minhas_api = (id) => {
     const api = nova_api.find(api => api.id === id);
     def_editar_api(api);
-    def_exibir_modal(true);
+    def_exibir_modal_editar(true);
   };
 
   const excluir_minhas_api = async (id) => {
@@ -133,18 +138,18 @@ const MinhasApis = () => {
         def_nova_api(tmp => tmp.filter(api => api.id != id));
       }
     } catch (erro) {
-      MeusErros(import.meta.url.split('/').pop(), new Error(`CAT_EXC_API: ${erro}`));
+      meus_erros(import.meta.url.split('/').pop(), "CAT_EXC_API", erro);
       return false;
     }
   }
 
   const exibir_modal_minhas_apis = async (api) => {
     def_api_selec(api);
-    def_exibir_modal(true);
+    def_exibir_modal_visualizar(true);
   };
 
   const fechar_modal_minhas_apis = () => {
-    def_exibir_modal(false);
+    def_exibir_modal_visualizar(false);
     def_api_selec(null);
     def_api_excluir({ id: null, name: "" })
   }
@@ -157,8 +162,7 @@ const MinhasApis = () => {
           : (
             <div id="minhas_apis">
               <h1 className="titulos_genrenciar ondulacao-1">Gerenciar suas APIs</h1>
-              <button id="nova_api" onClick={() => { def_editar_api(null); def_exibir_modal(true); }}></button>
-              <Editor exibir_modal={exibir_modal} fechar={() => def_exibir_modal(false)} nova_api={nova_api} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />
+              <button id="nova_api" onClick={() => { def_editar_api(null); def_exibir_modal_visualizar(true); }}></button>
               {/* ------------------ Lista de APIs ------------------ */}
               <div id="lista_minhas_apis">
                 {
@@ -167,8 +171,6 @@ const MinhasApis = () => {
                       <API api={api} key={api.id} click={() => { exibir_modal_minhas_apis(api); }} simples={false} def_api_excluir={def_api_excluir} editar_minhas_api={editar_minhas_api} />
                     ))}
               </div>
-              {api_selec && exibir_modal && <Visualizador api={api_selec} fechar={fechar_modal_minhas_apis} />}
-              {/* Modal de Confirmação */}
               {api_excluir.id && (
                 <div id="modal_excluir" onClick={() => { fechar_modal_minhas_apis() }}>
                   <div id="modal_excluir_conteudo" onClick={e => { e.stopPropagation(); }}>
@@ -183,6 +185,9 @@ const MinhasApis = () => {
                   </div>
                 </div>
               )}
+              {/* ------------------ Modais Editar e Visualizar ------------------ */}
+              {api_selec && exibir_modal_visualizar && <Visualizador api={api_selec} fechar={fechar_modal_minhas_apis} />}
+              {exibir_modal_editar && <Editor fechar={() => def_exibir_modal_editar(false)} nova_api={nova_api} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
             </div>
           )
       }

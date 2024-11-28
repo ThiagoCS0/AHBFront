@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import "./PaginaErros.css"
 
-const site = import.meta.env.VITE_BACKEND_SITE;
+const site = import.meta.env.VITE_SITE;
 
 export default function PaginaErros() {
 
