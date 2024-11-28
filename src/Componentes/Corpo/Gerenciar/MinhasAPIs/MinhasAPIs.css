@@ -59,8 +59,8 @@
   left: 0;
 }
 
-.apis {
-  border: 2px solid var(--destaque-claro);
+#minhas_apis .apis {
+  border: 2px solid var(--destaque-claro); 
   background-color: var(--tema-fundo-3);
   justify-content: space-between;
   box-shadow: var(--sombra-0);

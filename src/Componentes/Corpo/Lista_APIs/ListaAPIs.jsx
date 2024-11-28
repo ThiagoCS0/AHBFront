@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { clicar_apis } from "../../Principais/Servicos/APIs/APIs";
-import "./ListaAPIs.css"
 import Visualizador from "../../Modal/API_Visualizador/Visualizador";
-import API from "../API/API";
 import Rodape from "../../Rodape/Rodape";
+import API from "../API/API";
+import "./ListaAPIs.css"
 
 export default function ListaAPIs({ apis }) {
   const [apiSelec, defApiSelec] = useState(null);
@@ -28,7 +28,6 @@ export default function ListaAPIs({ apis }) {
             ))}
         </div>
         {apiSelec && <Visualizador api={apiSelec} fechar={fecharModal} />}
-      <Rodape />
       </div>
   );
 }

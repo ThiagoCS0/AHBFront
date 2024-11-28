@@ -1,8 +1,65 @@
-#rodape{
- justify-content: center;
- align-items: center;
- min-height: 200px;
- display: flex;
- border: solid;
- width: 100%;
+#rodape {
+  background: var(--linear-rodape);
+  background-size: 200% 100%;
+  color: var(--tema-texto);
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+  height: 250px;
+}
+
+#rodape a {
+  border-bottom: 1px solid transparent;
+  color: var(--tema-texto);
+  transition: all 0.5s;
+  width: fit-content;
+}
+
+#infor_links_uteis {
+  padding: 30px 10px;
+}
+
+#rodape a:hover:not(.fundadores_social a) {
+  border-bottom: 1px solid var(--destaque);
+}
+
+#infor_links_uteis {
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex;
+}
+
+.infor_links {
+  flex-direction: column;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+#infor_partocinio {
+  align-items: end;
+  display: flex;
+}
+
+#infor_rank a::first-letter {
+  color: var(--destaque);
+}
+
+#infor_abh {
+  justify-content: space-between;
+  background-color: var(--tema-fundo);
+  color: var(--tema-texto);
+  align-items: center;
+  flex-direction: row;
+  padding: 0 20px;
+  display: flex;
+  height: 70px;
+  width: 100vw;
+}
+
+#infor_abh div {
+  display: flex;
+  gap: 25px;
 }

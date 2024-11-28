@@ -6,6 +6,7 @@ import Cabecalho from "../../Cabecalho/Cabecalho"
 import Corpo from "../../Corpo/Corpo"
 import Populares from "../../Corpo/Populares/Populares";
 import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
+import Rodape from "../../Rodape/Rodape";
 
 const site = import.meta.env.VITE_SITE;
 const nome_desta_pagina = import.meta.env.VITE_INICIAL;
@@ -28,9 +29,9 @@ export default function ComCabecalho({ token_valido, usuario }) {
     let tmps = [];
 
     const atualizar_carregamento = () => {
-      tmps.push(setTimeout(() => { def_animacao("animacao-normal"); def_texto_carregamento("📡 Tentando me conectar 📡 "); def_atualizar(true); }, 5000));
-      tmps.push(setTimeout(() => { def_texto_carregamento("🛰️ Vou tentar novamente 🛰️"); }, 10000));
-      tmps.push(setTimeout(() => { def_texto_carregamento("🚧 Em manutenção! 🚧"); def_animacao("animacao-caindo"); }, 20000));
+      tmps.push(setTimeout(() => { def_animacao("animacao-normal"); def_texto_carregamento("📡 Tentando me conectar 📡 "); def_atualizar(true); }, 8000));
+      tmps.push(setTimeout(() => { def_texto_carregamento("🛰️ Vou tentar novamente 🛰️"); }, 15000));
+      tmps.push(setTimeout(() => { def_texto_carregamento("🚧 Em manutenção! 🚧"); def_animacao("animacao-caindo"); }, 30000));
     };
 
     if (carregando) {
@@ -46,27 +47,27 @@ export default function ComCabecalho({ token_valido, usuario }) {
 
   useEffect(() => {
     try {
-      const loadApis = async () => {
+      const carregar_apis = async () => {
         if (apis.length === 0 && populares.length === 0) {
-          const apisPopulares = await buscar_apis(0, 5, "clickCount", "desc");
-          const apisTotais = await buscar_apis(0, 20, "name", "asc");
-          def_apis(apisTotais);
-          def_populares(apisPopulares);
-          def_populares_tmp(apisPopulares);
-          def_filtrados(apisTotais);
-          def_carregando(apisPopulares.length === 0 && apisTotais.length === 0);
+          const apis_populares = await buscar_apis(0, 5, "clickCount", "desc");
+          const apis_totais = await buscar_apis(0, 20, "name", "asc");
+          def_apis(apis_totais);
+          def_populares(apis_populares);
+          def_populares_tmp(apis_populares);
+          def_filtrados(apis_totais);
+          def_carregando(apis_populares.length === 0 && apis_totais.length === 0);
           def_pri_tentativa(false);
         }
       };
       if (primeira_tentativa) {
-        loadApis();
+        carregar_apis();
       } else {
-        const timeoutId = setTimeout(() => {
+        const tmp = setTimeout(() => {
           if (apis.length === 0 && populares.length === 0) {
-            loadApis();
+            carregar_apis();
           }
         }, 2000);
-        return () => clearTimeout(timeoutId);
+        return () => clearTimeout(tmp);
       }
     } catch (erro) {
       meus_erros(import.meta.url.split('/').pop(), "CAT_CAR_APIs", erro);
@@ -83,12 +84,12 @@ export default function ComCabecalho({ token_valido, usuario }) {
     if (value.length > 0) {
       def_filtrando(true);
       def_filtrados([]);
-      const filteredApisBusca = apis.filter(
+      const filtragem_busca = apis.filter(
         (api) =>
           api.nome.toLowerCase().includes(value.toLowerCase()) ||
           api.descricao.toLowerCase().includes(value.toLowerCase())
       );
-      def_filtrados(filteredApisBusca);
+      def_filtrados(filtragem_busca);
     } else {
       def_filtrados(apis)
       def_filtrando(false);
@@ -102,10 +103,10 @@ export default function ComCabecalho({ token_valido, usuario }) {
     } else {
       def_filtrando(true);
       def_filtrados([]);
-      const filtrarApisCategoria = apis.filter(
+      const filtragem_categorias = apis.filter(
         (api) => api.categoria.toLowerCase().includes(value.toLowerCase())
       );
-      def_filtrados(filtrarApisCategoria);
+      def_filtrados(filtragem_categorias);
     }
   };
 
@@ -133,6 +134,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
                 <>
                   {!filtrando && <Populares populares={populares} />}
                   <ListaAPIs apis={filtrado} />
+                  <Rodape />
                 </>
                 :
                 <Outlet />

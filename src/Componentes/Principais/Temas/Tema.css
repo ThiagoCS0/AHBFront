@@ -31,6 +31,7 @@
   --linear-acesso: linear-gradient(45deg, #FFF 0%, #777 100%);
   --linear-acesso-2: linear-gradient(45deg, #EEE 0%, #AAA 100%);
   --linear-erro: linear-gradient(to right, #000 0%, #555 100%);
+  --linear-rodape: linear-gradient(to right, #A40 0%, #520 20%, #830 100%);
   /* Efeitos */
   --fundo-selecionado: #D52;
   --inverter: invert(1);
@@ -74,6 +75,7 @@
   --linear-efeito: #222 0%, #2225 50%, #0000 100%;
   --linear-acesso: linear-gradient(45deg, #222 0%, #777 100%);
   --linear-acesso-2: linear-gradient(45deg, #666 0%, #333 100%);
+  --linear-rodape: linear-gradient(to right, #555 0%, #222 40%, #444 100%);
   /* Efeitos */
   --texto-selecionado: #FFF;
   --inverter: invert(0);
@@ -96,7 +98,7 @@
   display: none;
 }
 
-html{
+html {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
@@ -119,7 +121,6 @@ body {
   width: 100%;
 }
 
-
 #cabecalho {
   background: var(--linear-cabecalho);
   justify-content: space-between;
@@ -132,12 +133,11 @@ body {
 }
 
 #corpo {
-  display: flex;
   flex-direction: column;
-  overflow: hidden;
-   flex: 1 1 100%;
- }
- 
+  overflow-y: scroll;
+  flex: 1 1 100%;
+  display: flex;
+}
 
 a {
   text-decoration: none;
@@ -150,7 +150,8 @@ a:hover {
   text-decoration: none;
 }
 
-button, .botoes {
+button,
+.botoes {
   background-color: var(--tema-fundo);
   color: var(--tema-texto);
   justify-content: center;
@@ -164,7 +165,8 @@ button, .botoes {
   border: 0;
 }
 
-button:hover , .botoes:hover {
+button:hover,
+.botoes:hover {
   background-color: var(--tema-hover-fundo);
   color: var(--tema-hover-texto);
   border: 0;
@@ -271,7 +273,7 @@ p {
   border: 1px solid #F50;
 }
 
-.botao_voltar{
+.botao_voltar {
   background-image: url("./../../../assets/voltar.png");
   background-position: center center;
   background-color: transparent;
@@ -286,10 +288,11 @@ p {
   top: 40px;
 }
 
-.botao_voltar:hover{
+.botao_voltar:hover {
   background-color: transparent;
   scale: 1.2;
 }
+
 /* Dados do usuário (Acessar, Criar, Recuperar e Perfil) */
 
 .dados_usuario_fundo {
@@ -317,7 +320,6 @@ p {
   width: 300px;
   gap: 10px;
 }
-
 
 .dados_usuario {
   flex-direction: column;
@@ -414,7 +416,6 @@ p {
   display: none;
 }
 
-
 /* Efeitos */
 
 .ondulacao-1 {
@@ -425,6 +426,11 @@ p {
 .ondulacao-2 {
   animation: ondular 10s infinite ease-in-out;
   background: var(--linear-acesso-2);
+}
+
+.ondulacao-3 {
+  animation: ondular 7s infinite ease-in-out;
+  background: var(--linear-rodape);
 }
 
 @keyframes ondular {

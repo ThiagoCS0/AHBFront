@@ -78,6 +78,7 @@ export default function Populares({ populares }) {
           <API api={api}
             key={api.id}
             classe={`populares_itens ${itensVisiveis(i)}`}
+            popular={true} //------------------------------------ APAGUE
             click={() => {
               ir_para(i);
               visualizarItem(api);
