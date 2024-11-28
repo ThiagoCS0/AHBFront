@@ -39,7 +39,7 @@ export default function Recuperar() {
 
  return (
   <div className="dados_usuario_fundo">
-   <button onClick={() => { sessionStorage.setItem("Acesso", "Acessar"); window.location.reload(); }} className="botao_voltar"></button>
+   <button onClick={() => { sessionStorage.setItem("Acesso", "Acessar"); window.location.href="Acessar"; }} className="botao_voltar"></button>
    <form onSubmit={Enviar} className="dados_usuario_principal">
     <div>
      <label className="dados_usuario">
