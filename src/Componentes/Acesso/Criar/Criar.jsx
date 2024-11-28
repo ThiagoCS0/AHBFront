@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SenhaVisivel from "../../../assets/senha_visivel.png"
 import SenhaTnvisivel from "../../../assets/senha_invisivel.png"
 import { meu_post } from "../../Principais/Servicos/APIs/Conexao";
@@ -134,12 +134,6 @@ export default function Criar() {
   };
 
   useEffect(() => {
-    sessionStorage.clear();
-    localStorage.removeItem("autenticado");
-    document.getElementById("login").focus();
-  }, []);
-
-  useEffect(() => {
     validar_campos();
   }, [login, nome_publico, cpf, email, ddd, telefone, senha]);
 
@@ -163,12 +157,12 @@ export default function Criar() {
     if (!valido) {
       def_resposta_http(mensagem);
       return;
-    }else{
+    } else {
       redefinirCampos();
       window.location.href = inicio;
     }
   }
-    const enviar = (e) => {
+  const enviar = (e) => {
     e.preventDefault();
     def_resposta_http('');
     remover_token();
@@ -196,7 +190,7 @@ export default function Criar() {
 
   return (
     <div className="dados_usuario_fundo">
-      <button onClick={() => { sessionStorage.setItem("Acesso", "Acessar"); window.location.reload(); }} className="botao_voltar"></button>
+      <Link to="/Acesso" onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
       <form onSubmit={enviar} className="dados_usuario_principal">
         <label className="dados_usuario">
           <p className="dados_usuario_titulos">Usuário (Para acessar conta)</p>

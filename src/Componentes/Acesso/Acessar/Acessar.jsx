@@ -22,7 +22,6 @@ export default function Acessar() {
 
   useEffect(() => {
     remover_token();
-    sessionStorage.clear();
     usuario_input_ref.current.focus();
   }, []);
 
@@ -65,7 +64,7 @@ export default function Acessar() {
 
   const enviar = (e) => {
     e.preventDefault();
-    
+
     if (usuario_valido && senha.length >= 8) {
       localStorage.setItem("lembrar_senha", lembrar_senha);
       acessando();
@@ -79,7 +78,7 @@ export default function Acessar() {
 
   return (
     <div className="dados_usuario_fundo">
-      <button onClick={() => { navegar(inicio) }} className="botao_voltar"></button>
+      <Link to={inicio} className="botao_voltar"></Link>
       <form onSubmit={enviar} className="dados_usuario_principal">
         <label className="dados_usuario">
           <p className="dados_usuario_titulos">Usuário</p>
@@ -123,10 +122,16 @@ export default function Acessar() {
           <span className="span_dados_usuario_checkbox"></span>Lembrar-me
         </label>
         <div className="campos_laterais">
-          <button className="botoes_expansiveis" type="button" onClick={() => { sessionStorage.setItem("Acesso", "Criar"); window.location.reload(); }}>Cadastro</button>
+          <Link to="/Acesso" onClick={
+            () => sessionStorage.setItem("Acesso", "Criar")}
+            className="botoes"
+          > Cadastro </Link>
           <button className="botoes_expansiveis" type="submit">Entrar</button>
         </div>
-        <Link onClick={() => { sessionStorage.setItem("Acesso", "Recuperar"); window.location.reload(); }} to="" style={{ textAlign: "center", color: "var(--cor-principal-destaques)", fontWeight: "bold" }}> Esqueceu sua senha? </Link>
+        <Link to="/Acesso"
+         onClick={() => sessionStorage.setItem("Acesso", "Recuperar")} 
+         style={{ textAlign: "center", color: "var(--cor-principal-destaques)",
+          fontWeight: "bold" }}> Esqueceu sua senha? </Link>
         {resposta_http && (<p className="texto_erro"> {resposta_http} </p>)}
       </form>
     </div>

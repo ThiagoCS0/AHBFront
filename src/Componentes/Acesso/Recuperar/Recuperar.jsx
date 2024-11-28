@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { remover_token } from "../../Principais/Servicos/JWT/JWT";
+
+const inicio = import.meta.env.VITE_INICIAL;
 
 export default function Recuperar() {
 
@@ -24,8 +27,7 @@ export default function Recuperar() {
  };
 
  useEffect(() => {
-  sessionStorage.clear();
-  localStorage.removeItem("autenticado");
+  remover_token();
   document.getElementById("email").focus();
  }, []);
 
@@ -33,13 +35,13 @@ export default function Recuperar() {
   e.preventDefault();
   if (emailValido) {
    alert("Email de recuperação enviado!");
-   window.location.href = "/";
+   window.location.href = inicio;
   }
  };
 
  return (
   <div className="dados_usuario_fundo">
-   <button onClick={() => { sessionStorage.setItem("Acesso", "Acessar"); window.location.href="Acessar"; }} className="botao_voltar"></button>
+   <Link to="/Acesso" onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
    <form onSubmit={Enviar} className="dados_usuario_principal">
     <div>
      <label className="dados_usuario">

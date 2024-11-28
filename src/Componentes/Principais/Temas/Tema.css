@@ -123,7 +123,7 @@ a:hover {
   text-decoration: none;
 }
 
-button {
+button, .botoes {
   background-color: var(--tema-fundo);
   color: var(--tema-texto);
   justify-content: center;
@@ -137,7 +137,7 @@ button {
   border: 0;
 }
 
-button:hover {
+button:hover , .botoes:hover {
   background-color: var(--tema-hover-fundo);
   color: var(--tema-hover-texto);
   border: 0;
