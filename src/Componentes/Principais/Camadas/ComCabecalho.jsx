@@ -15,7 +15,8 @@ export default function ComCabecalho({ token_valido, usuario }) {
   const [populares, def_populares] = useState([]);
   const [populares_tmp, def_populares_tmp] = useState([]);
   const local = useLocation();
-  const [filtros, def_filtros] = useState([]);
+  const [filtrado, def_filtrados] = useState([]);
+  const [filtrando, def_filtrando] = useState(false);
   const navegar = useNavigate();
   const [carregando, def_carregando] = useState(true);
   const [primeira_tentativa, def_pri_tentativa] = useState(true);
@@ -52,7 +53,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
           def_apis(apisTotais);
           def_populares(apisPopulares);
           def_populares_tmp(apisPopulares);
-          def_filtros(apisTotais);
+          def_filtrados(apisTotais);
           def_carregando(apisPopulares.length === 0 && apisTotais.length === 0);
           def_pri_tentativa(false);
         }
@@ -80,28 +81,31 @@ export default function ComCabecalho({ token_valido, usuario }) {
 
   const filtragem_busca = (value) => {
     if (value.length > 0) {
-      def_populares([]);
+      def_filtrando(true);
+      def_filtrados([]);
+      const filteredApisBusca = apis.filter(
+        (api) =>
+          api.nome.toLowerCase().includes(value.toLowerCase()) ||
+          api.descricao.toLowerCase().includes(value.toLowerCase())
+      );
+      def_filtrados(filteredApisBusca);
     } else {
-      def_populares(populares_tmp);
+      def_filtrados(apis)
+      def_filtrando(false);
     }
-    const filteredApisBusca = apis.filter(
-      (api) =>
-        api.nome.toLowerCase().includes(value.toLowerCase()) ||
-        api.descricao.toLowerCase().includes(value.toLowerCase())
-    );
-    def_filtros(filteredApisBusca);
   };
 
   const filtragem_categoria = (value) => {
     if (value === "NENHUMA") {
-      def_populares(populares_tmp);
-      def_filtros(apis);
+      def_filtrados(apis);
+      def_filtrando(false);
     } else {
-      def_populares([]);
+      def_filtrando(true);
+      def_filtrados([]);
       const filtrarApisCategoria = apis.filter(
         (api) => api.categoria.toLowerCase().includes(value.toLowerCase())
       );
-      def_filtros(filtrarApisCategoria);
+      def_filtrados(filtrarApisCategoria);
     }
   };
 
@@ -122,13 +126,13 @@ export default function ComCabecalho({ token_valido, usuario }) {
         </div>
       ) : (
         <>
-          <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} token_valido={token_valido} usuario={usuario} />
+          <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} />
           <Corpo>
             {
               window.location.pathname === nome_desta_pagina ?
                 <>
-                  <Populares populares={populares} />
-                  <ListaAPIs apis={apis} />
+                  {!filtrando && <Populares populares={populares} />}
+                  <ListaAPIs apis={filtrado} />
                 </>
                 :
                 <Outlet />

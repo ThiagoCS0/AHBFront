@@ -96,21 +96,48 @@
   display: none;
 }
 
+html{
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
 body {
   font-family: 'Montserrat', Verdana, sans-serif;
   background: var(--fundo);
   color: var(--texto);
   user-select: none;
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 #root {
   flex-direction: column;
   display: flex;
   height: 100%;
+  width: 100%;
 }
+
+
+#cabecalho {
+  background: var(--linear-cabecalho);
+  justify-content: space-between;
+  color: var(--texto);
+  padding: 5px 20px;
+  max-height: 70px;
+  flex: 0 0 70px;
+  display: flex;
+  width: 100vw;
+}
+
+#corpo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+   flex: 1 1 100%;
+ }
+ 
 
 a {
   text-decoration: none;
@@ -412,16 +439,6 @@ p {
   100% {
     background-position: 0% 50%;
   }
-}
-
-#cabecalho {
-  background: var(--linear-cabecalho);
-  justify-content: space-between;
-  color: var(--texto);
-  padding: 5px 20px;
-  display: flex;
-  height: 70px;
-  width: 100vw;
 }
 
 /* carregamento */

@@ -13,7 +13,7 @@ export default function Cabecalho({ buscar, categorizar }) {
  return (
   <div id="cabecalho">
    {tela_grande ? <Logo /> : expandir === "" ? <Logo /> : <></>}
-   <Ferramentas expandir={def_expandir} />
+   <Ferramentas expandir={def_expandir} buscar={buscar} categorizar={categorizar}/>
    {tela_grande ? <Conta /> : expandir === "" ? <Conta /> : <></>}
   </div>
  )

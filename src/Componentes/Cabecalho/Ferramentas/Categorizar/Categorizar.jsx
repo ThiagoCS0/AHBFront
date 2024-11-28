@@ -1,12 +1,12 @@
 import { useState } from "react"
 import Filtro from "../../../../assets/filtro.png"
 
-export default function Categorizar({ expandir, filtragem }) {
+export default function Categorizar({ expandir, categorizar }) {
  const [expandi_local, def_expandir] = useState("");
 
  return (
   <div className="alinhado">
-   {expandi_local && <select onChange={(e) => { filtragem({ tipo: "categorizar", conteudo: e.target.value }) }} className="expandir">
+   {expandi_local && <select onChange={(e) => { categorizar(e.target.value) }} className="expandir">
     <option value="NENHUMA">NENHUMA</option>
     <option value="ARMAZENAMENTO">ARMAZENAMENTO</option>
     <option value="CEP">CEP</option>
@@ -21,7 +21,7 @@ export default function Categorizar({ expandir, filtragem }) {
     <option value="SAUDE">SAÚDE</option>
    </select>
    }
-   <img className="icones" src={Filtro} alt="Filtrar" onClick={() => { def_expandir(!expandi_local); expandir(!expandi_local ? "filtrar" : ""); filtragem({ tipo: "categorizar", conteudo: "NENHUMA" }) }} />
+   <img className="icones" src={Filtro} alt="Filtrar" onClick={() => { def_expandir(!expandi_local); expandir(!expandi_local ? "filtrar" : ""); categorizar("NENHUMA") }} />
   </div>
  )
 }

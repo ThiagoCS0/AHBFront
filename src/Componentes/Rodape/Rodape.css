@@ -1,3 +1,8 @@
 #rodape{
- 
+ justify-content: center;
+ align-items: center;
+ min-height: 200px;
+ display: flex;
+ border: solid;
+ width: 100%;
 }
