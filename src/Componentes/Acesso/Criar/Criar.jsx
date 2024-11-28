@@ -190,7 +190,7 @@ export default function Criar() {
 
   return (
     <div className="dados_usuario_fundo">
-      <Link to="/Acesso" onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
+      <Link to="/AHBFront/Acesso" onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
       <form onSubmit={enviar} className="dados_usuario_principal">
         <label className="dados_usuario">
           <p className="dados_usuario_titulos">Usuário (Para acessar conta)</p>

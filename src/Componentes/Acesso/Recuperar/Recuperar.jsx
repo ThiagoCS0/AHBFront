@@ -41,7 +41,7 @@ export default function Recuperar() {
 
  return (
   <div className="dados_usuario_fundo">
-   <Link to="/Acesso" onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
+   <Link to="/AHBFront/Acesso" onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
    <form onSubmit={Enviar} className="dados_usuario_principal">
     <div>
      <label className="dados_usuario">

@@ -122,13 +122,13 @@ export default function Acessar() {
           <span className="span_dados_usuario_checkbox"></span>Lembrar-me
         </label>
         <div className="campos_laterais">
-          <Link to="/Acesso" onClick={
+          <Link to="/AHBFront/Acesso" onClick={
             () => sessionStorage.setItem("Acesso", "Criar")}
             className="botoes"
           > Cadastro </Link>
           <button className="botoes_expansiveis" type="submit">Entrar</button>
         </div>
-        <Link to="/Acesso"
+        <Link to="/AHBFront/Acesso"
          onClick={() => sessionStorage.setItem("Acesso", "Recuperar")} 
          style={{ textAlign: "center", color: "var(--cor-principal-destaques)",
           fontWeight: "bold" }}> Esqueceu sua senha? </Link>

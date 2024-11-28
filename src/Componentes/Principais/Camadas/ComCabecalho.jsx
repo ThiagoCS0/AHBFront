@@ -27,9 +27,9 @@ export default function ComCabecalho({ token_valido, usuario }) {
     let tmps = [];
 
     const atualizar_carregamento = () => {
-      tmps.push(setTimeout(() => { def_animacao("animacao-normal"); def_texto_carregamento("📡 Tentando me conectar 📡 "); def_atualizar(true); }, 4000));
-      tmps.push(setTimeout(() => { def_texto_carregamento("🛰️ Vou tentar novamente 🛰️"); }, 8000));
-      tmps.push(setTimeout(() => { def_texto_carregamento("🚧 Em manutenção! 🚧"); def_animacao("animacao-caindo"); }, 12000));
+      tmps.push(setTimeout(() => { def_animacao("animacao-normal"); def_texto_carregamento("📡 Tentando me conectar 📡 "); def_atualizar(true); }, 5000));
+      tmps.push(setTimeout(() => { def_texto_carregamento("🛰️ Vou tentar novamente 🛰️"); }, 10000));
+      tmps.push(setTimeout(() => { def_texto_carregamento("🚧 Em manutenção! 🚧"); def_animacao("animacao-caindo"); }, 20000));
     };
 
     if (carregando) {
