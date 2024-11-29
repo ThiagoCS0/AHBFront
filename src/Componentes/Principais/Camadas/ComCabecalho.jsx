@@ -134,7 +134,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
                 <>
                   {!filtrando && <Populares populares={populares} />}
                   <ListaAPIs apis={filtrado} />
-                  <Rodape />
+                  <Rodape fixar_abaixo={filtrando}/>
                 </>
                 :
                 <Outlet />

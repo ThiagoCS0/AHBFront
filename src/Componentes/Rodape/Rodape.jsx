@@ -1,10 +1,10 @@
 import Fundadores from "../AHB/Fundadores/Fundadores"
 import "./Rodape.css"
 
-export default function Rodape() {
+export default function Rodape({ fixar_abaixo }) {
   const ano = new Date().getFullYear();
   return (
-    <div id="rodape" className="ondulacao-3">
+    <div id="rodape" className={"ondulacao-3 " + (fixar_abaixo ? "rodape_fixar_abaixo" : "")}>
 
       <div id="infor_links_uteis">
         <div id="infor_rank" className="infor_links">
@@ -13,8 +13,8 @@ export default function Rodape() {
           <a href="">+ Recentes</a>
           <a href="">+ Populares</a>
         </div>
-      <Fundadores />
-      <div id="infor_partocinio" className="infor_links">
+        <Fundadores />
+        <div id="infor_partocinio" className="infor_links">
           <p><b>Nossos Parceiros</b></p>
           <a href="">Instituições</a>
           <a href="">Apoidores</a>

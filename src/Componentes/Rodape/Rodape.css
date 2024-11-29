@@ -31,6 +31,12 @@
   display: flex;
 }
 
+.rodape_fixar_abaixo {
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+}
+
 .infor_links {
   flex-direction: column;
   padding: 10px;
