@@ -46,7 +46,7 @@ export default function Acessar() {
 
       const { valido, mensagem } = await acessar(usuario, senha)
       if (valido) {
-        navegar(site, {replace:true})
+        navegar(inicio, {replace:true})
       } else {
       def_acessando(false);
       if (mensagem) {
