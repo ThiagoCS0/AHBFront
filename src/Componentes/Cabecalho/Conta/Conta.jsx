@@ -43,7 +43,7 @@ export default function Conta() {
       def_menu_visivel(!menu_visivel);
     } else {
       sessionStorage.setItem("Acesso", "Acessar");
-      navegar("Acesso");
+      navegar("/Acesso");
     }
   }
 
@@ -57,42 +57,26 @@ export default function Conta() {
       </button>
       {token_valido && menu_visivel && (
         <div id="conta_menu" ref={menuRef}>
-          <a
-  href="/Gerenciar"
-  onClick={(evento) => {
-    evento.preventDefault();
-    sessionStorage.setItem("Gerenciar", "ger_perfil");
-    window.history.pushState(null, "", "/Gerenciar");
-    window.dispatchEvent(new PopStateEvent("popstate"));
-  }}
->
-  Perfil
-</a>
+          <a href="Gerenciar" onClick={(evento) => {
+            evento.preventDefault();
+            sessionStorage.setItem("Gerenciar", "ger_termos");
+            window.history.pushState(null, "", "Gerenciar");
+            window.dispatchEvent(new PopStateEvent("popstate"));
+          }}>Termos</a>
 
-<a
-  href="/Gerenciar"
-  onClick={(evento) => {
-    evento.preventDefault();
-    sessionStorage.setItem("Gerenciar", "ger_apis");
-    window.history.pushState(null, "", "/Gerenciar");
-    window.dispatchEvent(new PopStateEvent("popstate"));
-  }}
->
-  Minhas Apis
-</a>
+          <a href="Gerenciar" onClick={(evento) => {
+            evento.preventDefault();
+            sessionStorage.setItem("Gerenciar", "ger_perfil");
+            window.history.pushState(null, "", "Gerenciar");
+            window.dispatchEvent(new PopStateEvent("popstate"));
+          }}>Perfil</a>
 
-<a
-  href="/Gerenciar"
-  onClick={(evento) => {
-    evento.preventDefault();
-    sessionStorage.setItem("Gerenciar", "ger_termos");
-    window.history.pushState(null, "", "/Gerenciar");
-    window.dispatchEvent(new PopStateEvent("popstate"));
-  }}
->
-  Termos
-</a>
-
+          <a href="Gerenciar" onClick={(evento) => {
+            evento.preventDefault();
+            sessionStorage.setItem("Gerenciar", "ger_apis");
+            window.history.pushState(null, "", "Gerenciar");
+            window.dispatchEvent(new PopStateEvent("popstate"));
+          }}>Minhas APIs</a>
           <a href={inicio} onClick={() => { remover_token(); def_token_valido(false); }}>Sair</a>
         </div>
       )}

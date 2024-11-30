@@ -10,26 +10,31 @@ import PaginaErros from './Componentes/Principais/Erros/PaginaErros';
 
 const inicio = import.meta.env.VITE_INICIAL;
 
-const rotas = createBrowserRouter([
+const rotas = createBrowserRouter(
+  [
+    {
+      path: inicio,
+      element: <ComCabecalho />,
+      children: [
+        { path: "Gerenciar", element: <Gerenciar /> },
+      ],
+    },
+    {
+      path: inicio,
+      element: <SemCabecalho />,
+      children: [
+        { path: "Acesso", element: <Acesso /> },
+      ],
+    },
+    {
+      path: "*",
+      element: <PaginaErros />,
+    },
+  ],
   {
-    path: inicio,
-    element: <ComCabecalho />,
-    children: [
-      { path: "Gerenciar", element: <Gerenciar /> },
-    ],
-  },
-  {
-    path: inicio,
-    element: <SemCabecalho />,
-    children: [
-      { path: "Acesso", element: <Acesso /> },
-    ],
-  },
-  {
-    path: "*",
-    element: <PaginaErros />,
-  },
-]);
+    basename: inicio
+  }
+);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
