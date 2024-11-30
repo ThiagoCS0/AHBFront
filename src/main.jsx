@@ -30,10 +30,7 @@ const rotas = createBrowserRouter(
       path: "*",
       element: <PaginaErros />,
     },
-  ],
-  {
-    basename: inicio
-  }
+  ]
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
