@@ -57,29 +57,24 @@ export default function Conta() {
       </button>
       {token_valido && menu_visivel && (
         <div id="conta_menu" ref={menuRef}>
-          <a href="Gerenciar" onClick={(evento) => {
+          <a href={`${site}Gerenciar`} onClick={(evento) => {
             evento.preventDefault();
             sessionStorage.setItem("Gerenciar", "ger_termos");
-            window.history.pushState(null, "", "Gerenciar");
-            window.dispatchEvent(new PopStateEvent("popstate"));
           }}>Termos</a>
 
-          <a href="Gerenciar" onClick={(evento) => {
+          <a href={`${site}Gerenciar`} onClick={(evento) => {
             evento.preventDefault();
             sessionStorage.setItem("Gerenciar", "ger_perfil");
-            window.history.pushState(null, "", "Gerenciar");
-            window.dispatchEvent(new PopStateEvent("popstate"));
           }}>Perfil</a>
 
-          <a href="Gerenciar" onClick={(evento) => {
+          <a href={`${site}Gerenciar`} onClick={(evento) => {
             evento.preventDefault();
             sessionStorage.setItem("Gerenciar", "ger_apis");
-            window.history.pushState(null, "", "Gerenciar");
-            window.dispatchEvent(new PopStateEvent("popstate"));
           }}>Minhas APIs</a>
           <a href={inicio} onClick={() => { remover_token(); def_token_valido(false); }}>Sair</a>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   )
 }
