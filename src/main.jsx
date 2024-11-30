@@ -16,7 +16,7 @@ const rotas = createBrowserRouter(
       path: inicio,
       element: <ComCabecalho />,
       children: [
-        { path: "Gerenciar", element: <Gerenciar /> },
+        { path: "/Gerenciar", element: <Gerenciar /> },
       ],
     },
     {
