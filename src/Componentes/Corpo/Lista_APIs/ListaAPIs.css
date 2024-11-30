@@ -10,8 +10,8 @@
   justify-content: center;
   min-height: fit-content;
   flex-wrap: wrap;
-  padding: 40px;
   display: flex;
+  padding: 40px;
   width: 100%;
   gap: 40px;
 }

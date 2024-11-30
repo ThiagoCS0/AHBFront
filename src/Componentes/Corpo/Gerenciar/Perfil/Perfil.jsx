@@ -199,14 +199,14 @@ export default function Perfil() {
     :
     <div id="conteudo_perfil">
       <ul className="menu_perfil">
-        <li className="ativo" onClick={(e) => opcao_ativa(e.target, 'nome_usuario')}>
+        <li className="ativo" onClick={(e) => opcao_ativa(e.target, 'perfil_privado')}>
           {userData.nomePublico ? userData.nomePublico : "Conta"}
         </li>
-        <li onClick={(e) => opcao_ativa(e.target, 'PerfilPublico')}>Perfil público</li>
+        <li onClick={(e) => opcao_ativa(e.target, 'perfil_publico')}>Perfil público</li>
       </ul>
       <div id="conteudo_editavel_perfil">
         {/* ------------------------ Privado ------------------------ */}
-        <form id="nome_usuario" className="formularios ativo">
+        <form id="perfil_privado" className="formularios ativo">
           <div className="campos_laterais">
             <label className="dados_usuario">
               <p className="dados_usuario_titulos">Usuário</p>
@@ -334,7 +334,7 @@ export default function Perfil() {
           </div>
         </form>
         {/* ------------------------ Publico ------------------------ */}
-        <form id="PerfilPublico" className="formularios">
+        <form id="perfil_publico" className="formularios">
           <label className="dados_usuario">
             <h4 style={{ textAlign: "center" }}>Esse informações ficaram visível a todos!</h4>
             <p className="dados_usuario_titulos">Nome público</p>

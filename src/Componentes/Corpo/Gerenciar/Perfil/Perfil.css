@@ -7,8 +7,8 @@
 
 .formularios {
  height: calc(100% - 40px);
- max-height: fit-content;
  justify-content: center;
+ max-height: fit-content;
  flex-direction: column;
  align-items: center;
  overflow-y: scroll;
@@ -16,6 +16,7 @@
  display: none;
  padding: 10px;
  width: 100%;
+ gap: 15px;
 }
 
 #conteudo_editavel_perfil {
@@ -28,7 +29,7 @@
 
 .formularios.ativo {
  overflow-y: scroll;
- display: block;
+ display: flex;
 }
 
 .menu_perfil {
@@ -89,13 +90,7 @@
 /* Smartphone */
 @media (max-width: 600px) {
  .formularios {
-  height: 100%;
-  padding: 0;
- }
-
- .campos_laterais {
-  flex-direction: column;
-  gap: 0;
+  height: fit-content;
  }
 
  #campos_senha_perfil {

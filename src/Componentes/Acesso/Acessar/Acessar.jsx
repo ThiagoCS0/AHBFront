@@ -19,6 +19,7 @@ export default function Acessar() {
   const [usuario, def_usuario] = useState("");
   const [senha, def_senha] = useState("");
   const usuario_input_ref = useRef(null);
+  const navegar = useNavigate()
 
   useEffect(() => {
     remover_token();
@@ -45,7 +46,7 @@ export default function Acessar() {
 
       const { valido, mensagem } = await acessar(usuario, senha)
       if (valido) {
-        window.location.href = site;
+        navegar(site, {replace:true})
       } else {
       def_acessando(false);
       if (mensagem) {
@@ -63,7 +64,6 @@ export default function Acessar() {
   const enviar = (e) => {
     def_acessando(true);
     e.preventDefault();
-
     if (usuario_valido && senha.length >= 8) {
       localStorage.setItem("lembrar_senha", lembrar_senha);
       fazer_acesso();

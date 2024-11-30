@@ -12,6 +12,8 @@
   display: flex;
   width: 100%;
   gap: 5px;
+  left: 0;
+  top: 0;
 }
 
 #populares::after {

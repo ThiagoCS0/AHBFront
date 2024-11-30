@@ -18,6 +18,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      const [select_aberto, def_select_aberto] = useState(false);
      const [resposta_http, def_resposta_http] = useState("");
      const navegar = useNavigate();
+     const tela_pequena = window.screen.width < 600;
 
      const options = [
           "REDE SOCIAIS", "MAPAS", "CEP", "CLIMA", "PAGAMENTO",
@@ -44,74 +45,75 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
           try {
                def_resposta_http('');
                const token = validar_token();
-               const categoria_corrigida =
-                    categoria_api === "REDE SOCIAIS" ? "REDE_SOCIAIS" :
-                         categoria_api === "SAÚDE" ? "SAUDE" :
-                              categoria_api === "FINANÇAS" ? "FINANCAS" :
-                                   categoria_api === "ESTATÍSTICAS" ? "ESTATISTICAS" :
-                                        categoria_api;
-               def_categoria_api(categoria_corrigida)
+               if (token) {
+                    const categoria_corrigida =
+                         categoria_api === "REDE SOCIAIS" ? "REDE_SOCIAIS" :
+                              categoria_api === "SAÚDE" ? "SAUDE" :
+                                   categoria_api === "FINANÇAS" ? "FINANCAS" :
+                                        categoria_api === "ESTATÍSTICAS" ? "ESTATISTICAS" :
+                                             categoria_api;
+                    def_categoria_api(categoria_corrigida)
 
-               const id_usuario = JSON.parse(atob(token.split('.')[1])).userId;
+                    const id_usuario = JSON.parse(atob(token.split('.')[1])).userId;
 
-               const corpo = {
-                    name: nome_api,
-                    description: descricao_api,
-                    methods: metodos_api,
-                    link: link_api,
-                    categoria: categoria_corrigida,
-                    icon: imagem_api,
-                    user: { id: id_usuario }
-               };
+                    const corpo = {
+                         name: nome_api,
+                         description: descricao_api,
+                         methods: metodos_api,
+                         link: link_api,
+                         categoria: categoria_corrigida,
+                         icon: imagem_api,
+                         user: { id: id_usuario }
+                    };
 
-               let status = "", dados = "";
+                    let status = "", dados = "";
 
-               const resultado = dados_minha_api
-                    ? await meu_put(`apis/${dados_minha_api.id}`, corpo, true)
-                    : await meu_post("apis", corpo, true);
+                    const resultado = dados_minha_api
+                         ? await meu_put(`apis/${dados_minha_api.id}`, corpo, true)
+                         : await meu_post("apis", corpo, true);
 
-               status = resultado.status_put || resultado.status_post;
-               dados = resultado.dados_post || "";
+                    status = resultado.status_put || resultado.status_post;
+                    dados = resultado.dados_post || "";
 
-               if (status === 200) {
-                    // fdechar estava aqui
-                    if (dados_minha_api) {
-                         atualizar_minha_api({
-                              id: dados_minha_api.id,
-                              nome: nome_api,
-                              descricao: descricao_api,
-                              metodos: metodos_api,
-                              link: link_api,
-                              categoria: categoria_api,
-                              imagem: imagem_api
-                         });
-                         fechar();
+                    if (status === 200) {
+                         // fdechar estava aqui
+                         if (dados_minha_api) {
+                              atualizar_minha_api({
+                                   id: dados_minha_api.id,
+                                   nome: nome_api,
+                                   descricao: descricao_api,
+                                   metodos: metodos_api,
+                                   link: link_api,
+                                   categoria: categoria_api,
+                                   imagem: imagem_api
+                              });
+                              fechar();
+                              redefinir_campos();
+                              return;
+                         }
+
+                         if (dados) {
+                              const id_api = dados.id;
+                              cadastrar_minha_api({
+                                   id: id_api,
+                                   nome: nome_api,
+                                   descricao: descricao_api,
+                                   metodos: metodos_api,
+                                   link: link_api,
+                                   categoria: categoria_api,
+                                   imagem: imagem_api
+                              });
+                         }
                          redefinir_campos();
-                         return;
-                    }
-
-                    if (dados) {
-                         const id_api = dados.id;
-                         cadastrar_minha_api({
-                              id: id_api,
-                              nome: nome_api,
-                              descricao: descricao_api,
-                              metodos: metodos_api,
-                              link: link_api,
-                              categoria: categoria_api,
-                              imagem: imagem_api
-                         });
-                    }
-                    redefinir_campos();
-               } else { def_resposta_http(dados_minha_api ? "Erro ao atualizar." : "Erro ao criar API."); }
+                    } else { def_resposta_http(dados_minha_api ? "Erro ao atualizar." : "Erro ao criar API."); }
+               } else {
+                    novo_acesso();
+               }
           } catch (erro) {
                def_resposta_http("Erro de conexão. Tente novamente!");
                meus_erros(import.meta.url.split('/').pop(), `CAT_CRI_API: ${erro}`);
           }
      };
-
-
-
 
      const novo_acesso = () => {
           sessionStorage.clear();
@@ -221,7 +223,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                               placeholder="Nome da API"
                               required
                          />
-                         {erros.nomeErros && <span className="aviso_erro">Nome deve ter mais de 3 caracteres</span>}
+                         {erros.nomeErros && <span className="aviso_erro">Deve ter mais de 3 caracteres</span>}
                     </label>
                     {/* Categoria */}
                     <div className="selecionador_categorias dados_api">
@@ -246,18 +248,18 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                     <label className="dados_api">
                          <p>Descrição (Max. <i>300</i> caracteres)</p>
                          <textarea
-                              className={erros.descricaoErros ? "textarea_descricao aviso_erro" : "textarea_descricao"}
+                              className={erros.descricaoErros ? "textarea_descricao aviso_erro_borda" : "textarea_descricao"}
                               value={descricao_api || ""}
                               onChange={alterando_descricao}
                               placeholder="Digite a descrição aqui"
                               maxLength="300"
                               required
                          />
-                         {erros.descricaoErros && <span className="aviso_erro">Descrição deve ter mais de 3 caracteres</span>}
+                         {erros.descricaoErros && <span className="aviso_erro">Deve ter mais de 3 caracteres</span>}
                     </label>
                     {/* Métodos */}
                     <label className="dados_api">
-                         <p>Métodos ( <i>GET</i>, <i>POST</i>, ..; separe com virgula )</p>
+                         <p>Métodos {tela_pequena ? <br /> : ""}(<i>GET</i>, <i>POST</i>, ... separe com virgula)</p>
                          <input
                               className={erros.metodosErros ? "aviso_erro_borda" : ""}
                               value={metodos_api || ""}
@@ -265,7 +267,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                               placeholder="Métodos da API"
                               required
                          />
-                         {erros.metodosErros && <span className="aviso_erro">Inválidos; use: GET, POST, etc ( 1 de cada )</span>}
+                         {erros.metodosErros && <span className="aviso_erro">{tela_pequena?"Use: GET, POST, ... 1 de cada":"Inválidos; use: GET, POST, etc ( 1 de cada )"}</span>}
                     </label>
                     {/* Link */}
                     <label className="dados_api">
@@ -277,11 +279,11 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                               placeholder="https://sua.api/"
                               required
                          />
-                         {erros.linkErros && <span className="aviso_erro">Link inválido ou não encontrado</span>}
+                         {erros.linkErros && <span className="aviso_erro">Link inválido</span>}
                     </label>
                     {/* Logo */}
                     <label className="dados_api">
-                         <p>Logo ( URL/imagem<i> . jpg jpeg png gif</i> )</p>
+                         <p>Logo{tela_pequena ? <br /> : ""} ( URL/imagem<i> . jpg jpeg png gif</i> )</p>
                          <input
                               className={erros.imagemErros ? "aviso_erro_borda" : ""}
                               value={imagem_api || ""}
@@ -289,7 +291,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                               placeholder="https://sua.api.imagem.jpg"
                               required
                          />
-                         {erros.imagemErros && <span className="aviso_erro">Imagem inválido ou URL não é uma imagem</span>}
+                         {erros.imagemErros && <span className="aviso_erro">URL inválida</span>}
                     </label>
                     <br />
                     {/* Preview */}

@@ -45,6 +45,7 @@
   display: flex;
   width: 100%;
   gap: 20px;
+  padding-top: 25px;
 }
 
 #lista_minhas_apis::after {
@@ -74,7 +75,6 @@
   cursor: pointer;
   display: flex;
   height: 200px;
-  padding: 4px;
   width: 100%;
 }
 
@@ -82,6 +82,7 @@
   align-items: center;
   overflow: hidden;
   display: flex;
+  padding: 5px;
   height: 100%;
   width: 100%;
   gap: 10px;
@@ -113,9 +114,9 @@
 }
 
 .api_infor {
+  justify-content: space-between;
   flex-direction: column;
   overflow: hidden;
-  padding-top: 5px;
   display: flex;
   width: 100%;
   flex: 1;
@@ -124,13 +125,13 @@
 .api_infor p:first-child {
   border: 1px solid transparent;
   -webkit-box-orient: vertical;
+  max-height: calc(1.5em * 4);
   text-overflow: ellipsis;
   word-wrap: break-word;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 4;
   display: -webkit-box;
   overflow: hidden;
-  line-clamp: 6;
-  height: 100%;
+  line-clamp: 4;
   margin: 0;
   flex: 1;
 }
@@ -232,18 +233,11 @@
   #lista_minhas_apis {
     height: calc(100% - 40px);
     position: relative;
-    padding: 4px;
+    padding: 5px;
     width: 100%;
     margin: 0;
     gap: 4px;
-  }
-
-  .apis {
-    justify-content: space-between;
-    border-radius: 5px;
-    min-height: 100px;
-    height: 100px;
-    padding: 1px;
+    padding-top: 25px;
   }
 
   .lista_minhas_apis_dados {

@@ -44,7 +44,7 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
     <div id="modal_apis" onClick={fechar}>
       <div className="modal_apis_conteudo ondulacao-1" onClick={e => { e.stopPropagation(); }}>
         {carregando ?
-          <Carregamento />
+          <Carregamento carregando={carregando} />
           :
           <>
             <a id="modal_apis_logo" href={modal_simples ? "#" : api.link}><img src={imagem} alt={api.nome} style={{ objectFit: tamanho_img.lar > tamanho_img.alt ? "contain" : "cover" }} onLoad={e => { def_tamanho_img({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }} /></a>

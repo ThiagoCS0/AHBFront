@@ -247,7 +247,7 @@ export default function Criar() {
               <input
                 className={erros.email_erro ? "aviso_erro_borda" : ""}
                 value={email || ""}
-                onChange={(e) => def_email(e.target.value)}
+                onChange={(e) => def_email(e.target.value.toLowerCase())}
                 autoComplete="email"
                 placeholder="seu@email.com"
                 required

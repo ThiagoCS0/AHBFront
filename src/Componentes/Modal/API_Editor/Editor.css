@@ -7,7 +7,7 @@
  position: fixed;
  display: flex;
  height: 100vh;
- z-index: 100;
+ z-index: 1000;
  width: 100vw;
  left: 0;
  top: 0;
@@ -110,7 +110,6 @@
 }
 
 .dados_api p {
- position: relative;
  padding: 5px;
 }
 
@@ -142,13 +141,26 @@
 }
 
 .modal_nova_api i {
- color: var(--cor-gerenciador-apis-novaApi-botao-texto-destaque);
+ color: var(--destaque);
  font-weight: 500;
 }
 
 textarea {
  height: 100px;
  resize: none;
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+ .modal_nova_api {
+  overflow-y: scroll;
+  font-size: medium;
+  padding: 10px;
+  height: 90%;
+  width: 80%;
+  gap: 0px;
+ }
+
 }
 
 /* Smartwatch */

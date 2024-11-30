@@ -55,7 +55,7 @@ export default function Conta() {
         <span>{usuario ? (usuario || "...") : "Entrar"}</span>
       </button>
       {token_valido && menu_visivel && (
-        <div ref={menuRef}>
+        <div id="conta_menu" ref={menuRef}>
           <Link to={inicio + "Gerenciar"} onClick={
             () => sessionStorage.setItem("Gerenciar", "ger_perfil")}>Perfil</Link>
           <Link to={inicio + "Gerenciar"} onClick={

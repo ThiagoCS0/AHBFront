@@ -75,6 +75,7 @@ const MinhasApis = () => {
         if (id_usuario !== "") {
           const { status_get, dados_get } = await meu_get(`apis/user/${id_usuario}`, true);
           if (status_get === 204) {
+            
             return; // não é erro, apenas não há APIs cadastradas
           } else if (status_get !== 200) {
             meus_erros(import.meta.url.split('/').pop(), "MNH_LST_!OK");
@@ -161,7 +162,7 @@ const MinhasApis = () => {
       :
       <div id="minhas_apis">
         <h1 className="titulos_genrenciar ondulacao-1">Gerenciar suas APIs</h1>
-        <button id="nova_api" onClick={() => { def_editar_api(null); def_exibir_modal_visualizar(true); }}></button>
+        <button id="nova_api" onClick={() => { def_editar_api(null); def_exibir_modal_editar(true); }}></button>
         {/* ------------------ Lista de APIs ------------------ */}
         <div id="lista_minhas_apis">
           {
@@ -186,7 +187,7 @@ const MinhasApis = () => {
         )}
         {/* ------------------ Modais Editar e Visualizar ------------------ */}
         {api_selec && exibir_modal_visualizar && <Visualizador api={api_selec} fechar={fechar_modal_minhas_apis} />}
-        {exibir_modal_editar && <Editor fechar={() => def_exibir_modal_editar(false)} nova_api={nova_api} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
+        {exibir_modal_editar && <Editor fechar={() => def_exibir_modal_editar(false)} cadastrar_minha_api={nova_api} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
       </div>
   );
 };

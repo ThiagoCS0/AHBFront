@@ -14,7 +14,7 @@
  height: 100%;
 }
 
-#conta div {
+#conta_menu {
  border: 5px solid var(--destaque-escuro);
  background-color: var(--tema-fundo);
  color: var(--tema-texto);
@@ -31,22 +31,22 @@
  top: 85%;
 }
 
-#conta div a {
+#conta_menu a {
  color: var(--tema-texto);
  text-decoration: none;
  font-size: large;
  padding: 10px;
 }
 
-#conta div a:first-child {
+#conta_menu a:first-child {
  border-radius: 6px 6px 0 0;
 }
 
-#conta div a:last-child {
+#conta_menu a:last-child {
  border-radius: 0 0 6px 6px;
 }
 
-#conta div a:hover {
+#conta_menu a:hover {
  background-color: var(--tema-hover-fundo);
  font-weight: bold;
 }
@@ -69,15 +69,11 @@
   display: none;
  }
 
- #conta div {
-  border-radius: 0 0 10px 10px;
+ #conta_menu {
+  border-radius: 10px 0 10px 10px;
   width: 150px;
-  left: -40px;
-  top: 98%;
- }
-
- #conta div a:first-child {
-  border-radius: 0;
+  left: -45px;
+  top: 80%;
  }
 
 }
