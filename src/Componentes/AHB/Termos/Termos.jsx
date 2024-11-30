@@ -15,7 +15,7 @@ export default function Termos() {
 
   useEffect(() => {
     if (!validar_token()) {
-      navegar("/Acesso");
+      navegar("Acesso");
       return;
     }
     def_carregando(false);

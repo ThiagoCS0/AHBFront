@@ -43,7 +43,7 @@ export default function Conta() {
       def_menu_visivel(!menu_visivel);
     } else {
       sessionStorage.setItem("Acesso", "Acessar");
-      navegar("/Acesso");
+      navegar("Acesso");
     }
   }
 
