@@ -8,6 +8,7 @@ import { usuario_id, usuario_nome } from "../../Principais/Servicos/Usuario/Usua
 
 
 const inicio = import.meta.env.VITE_INICIAL;
+const site = import.meta.env.VITE_SITE;
 
 export default function Conta() {
   const [menu_visivel, def_menu_visivel] = useState(false);
@@ -56,12 +57,12 @@ export default function Conta() {
       </button>
       {token_valido && menu_visivel && (
         <div id="conta_menu" ref={menuRef}>
-          <Link to={inicio + "Gerenciar"} onClick={
-            () => sessionStorage.setItem("Gerenciar", "ger_perfil")}>Perfil</Link>
-          <Link to={inicio + "Gerenciar"} onClick={
-            () => sessionStorage.setItem("Gerenciar", "ger_apis")}>Minhas Apis</Link>
-          <Link to={inicio + "Gerenciar"} onClick={
-            () => sessionStorage.setItem("Gerenciar", "ger_termos")}>Termos</Link>
+          <a href={site + "/Gerenciar"} onClick={
+            () => sessionStorage.setItem("Gerenciar", "ger_perfil")}>Perfil</a>
+          <a href={site + "/Gerenciar"} onClick={
+            () => sessionStorage.setItem("Gerenciar", "ger_apis")}>Minhas Apis</a>
+          <a href={site + "/Gerenciar"} onClick={
+            () => sessionStorage.setItem("Gerenciar", "ger_termos")}>Termos</a>
           <a href={inicio} onClick={() => { remover_token(); def_token_valido(false); }}>Sair</a>
         </div>
       )}
