@@ -1,9 +1,13 @@
 #fundadores {
+ transform: translateX(-50%);
  text-align: center;
  width: fit-content;
+ position: absolute;
+ left: 50%;
+ top: 40px;
 }
 
-#fundadores a{
+#fundadores a {
  font-weight: 500;
 }
 
@@ -17,7 +21,7 @@
  gap: 15px;
 }
 
-#fundadores > div {
+#fundadores>div {
  text-align: center;
  width: fit-content;
 }
@@ -53,4 +57,25 @@
 
 .fundadores_social img:hover {
  filter: none;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+
+ .nome_completo {
+  width: 100px;
+ }
+
+ .fundadores_sobrenome {
+  display: none;
+ }
+
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+ #fundadores {
+  position: relative;
+  top: 10px;
+ }
 }

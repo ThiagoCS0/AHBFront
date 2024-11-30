@@ -1,6 +1,6 @@
+import { remover_token, salvar_token, validar_token } from "../JWT/JWT";
 import { meus_erros } from "../../Erros/MeusErros";
 import { meu_post } from "../APIs/Conexao";
-import { remover_token, salvar_token, validar_token } from "../JWT/JWT";
 
 export async function acessar(usuario, senha) {
  try {
@@ -30,22 +30,22 @@ export async function cadastrar(dados_usuario) {
   if (status_post != 200) {
    return mensagem_erro(status_post, "CAD");
   }
-
   return await acessar(dados_usuario.username, dados_usuario.password);
-
  } catch (error) {
   return { valido: false, mesagem: "Estamos em manutenção!" };
  }
 }
 
 function mensagem_erro(status, erro) {
- let valido = false, mensagem = "Estamos em manutenção!";
- const tipo_erro = Math.floor(status / 100);
-
- switch (tipo_erro) {
-  case 4: mensagem = `Dados incorretos${erro === "CAD" & " ou já cadastrados"}!`;
-  case 3: meus_erros(import.meta.url.split('/').pop(), "ACE_" + erro + "_3XX"); break;
-  default: meus_erros(import.meta.url.split('/').pop(), "ACE_" + erro + "_?"); break;
+ let mensagem = "Estamos em manutenção!";
+ if (status === 403) { mensagem = (erro === "CAD" ? "Dados já cadastrados!" : "Dados incorretos, já está cadastrado?"); } else {
+  const tipo_erro = Math.floor(status / 100);
+  switch (tipo_erro) {
+   case 4: mensagem = `Dados incorretos${erro === "CAD" ? " ou já cadastrados" : ""}!`; break
+   case 3: meus_erros(import.meta.url.split('/').pop(), "ACE_" + erro + "_3XX"); break;
+   default: meus_erros(import.meta.url.split('/').pop(), "ACE_" + erro + "_?"); break;
+  }
  }
- return { valido, mensagem }
+
+ return { valido: false, mensagem }
 }

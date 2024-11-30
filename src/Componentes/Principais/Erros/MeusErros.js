@@ -5,9 +5,10 @@ export function meus_erros(local, conteudo, erro = null) {
  console.log(`>> Data e Hora: ${new Date().toLocaleString()}`);
  console.log("");
  if (conteudo.startsWith("CAT_")) {
-  console.log(conteudo);
-  console.log(`Mensagem: ${erro.message}`);
-  console.log(`Stack: ${erro.stack}`);
+  console.log(`Mensagem: ${conteudo.message}`);
+  console.log(`Stack: ${conteudo.stack}`);
+ console.log("");
+ console.log(`Completa: ${conteudo}`);
  } else {
   console.log(conteudo);
  }

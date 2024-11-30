@@ -4,6 +4,7 @@
   color: var(--tema-texto);
   justify-content: center;
   flex-direction: column;
+  transition: all 0.3s;
   position: relative;
   margin-top: 20px;
   display: flex;
@@ -18,17 +19,14 @@
 }
 
 #infor_links_uteis {
+  justify-content: space-between;
+  flex-direction: row;
   padding: 30px 10px;
+  display: flex;
 }
 
 #rodape a:hover:not(.fundadores_social a) {
   border-bottom: 1px solid var(--destaque);
-}
-
-#infor_links_uteis {
-  justify-content: space-between;
-  flex-direction: row;
-  display: flex;
 }
 
 .rodape_fixar_abaixo {
@@ -47,7 +45,9 @@
 #infor_partocinio {
   align-items: end;
   display: flex;
+  order: 3;
 }
+
 
 #infor_rank a::first-letter {
   color: var(--destaque);
@@ -59,6 +59,7 @@
   color: var(--tema-texto);
   align-items: center;
   flex-direction: row;
+  overflow: hidden;
   padding: 0 20px;
   display: flex;
   height: 70px;
@@ -68,4 +69,57 @@
 #infor_abh div {
   display: flex;
   gap: 25px;
+}
+
+/* Table */
+@media (max-width: 1000px) {
+
+  #infor_abh p {
+    flex-direction: column;
+    display: flex;
+  }
+
+  #infor_abh>div {
+    flex-direction: column;
+    align-items: end;
+    display: flex;
+    gap: 5px;
+  }
+
+}
+
+/* Smartphone */
+@media (max-width: 600px) {
+  #rodape {
+    height: fit-content;
+  }
+
+  #infor_links_uteis {
+    padding: 10px;
+  }
+
+  #infor_links_uteis>div {
+    padding: 0;
+  }
+
+  #infor_abh {
+    height: fit-content;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  #infor_abh b {
+    width: fit-content;
+  }
+
+  #infor_abh>div {
+    height: 100%;
+    width: 50%;
+  }
+
+  #infor_abh>div>div {
+    flex-direction: column;
+    align-items: end;
+    gap: 5px;
+  }
 }

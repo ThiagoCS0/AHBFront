@@ -3,6 +3,7 @@ import { validar_token } from "../../../Principais/Servicos/JWT/JWT";
 import { meu_get, meu_put } from "../../../Principais/Servicos/APIs/Conexao";
 import { usuario_id } from "../../../Principais/Servicos/Usuario/Usuario";
 import { meus_erros } from "../../../Principais/Erros/MeusErros";
+import Carregamento from "../../../Principais/Carregamento/Carregamento";
 import SenhaInvisivel from "../../../../assets/senha_invisivel.png"
 import SenhaVisivel from "../../../../assets/senha_visivel.png"
 import "./Perfil.css"
@@ -152,10 +153,6 @@ export default function Perfil() {
     validar_campos();
   }, [userData.login, userData.nomePublico, userData.cpf, userData.email, userData.ddd, userData.telefone, userData.senha, userData.novaSenha]);
 
-  if (carregando) {
-    return <h1 style={{ fontSize: "large", padding: "40px" }}>Carregando...</h1>;
-  }
-
   const novo_acesso = () => {
     sessionStorage.clear();
     remover_token();
@@ -196,6 +193,10 @@ export default function Perfil() {
   }
 
   return (
+    carregando
+    ?
+    <Carregamento carregando={carregando} />
+    :
     <div id="conteudo_perfil">
       <ul className="menu_perfil">
         <li className="ativo" onClick={(e) => opcao_ativa(e.target, 'nome_usuario')}>

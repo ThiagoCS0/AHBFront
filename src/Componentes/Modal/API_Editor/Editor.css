@@ -17,11 +17,11 @@
  border: 1px solid var(--destaque);
  justify-content: space-between;
  box-shadow: var(--sombra-0);
- background-size: 300% 300%;
+ background-size: 200% 200%;
  flex-direction: column;
  height: fit-content;
  border-radius: 8px;
- position: absolute;
+ position: relative;
  padding: 20px;
  display: flex;
  width: 500px;
@@ -48,11 +48,11 @@
 }
 
 .categoria_seta {
- padding: 3px;
- display: inline-block;
- transform: rotate(45deg);
  border: solid var(--cor-tema-input-texto);
  border-width: 0 3px 3px 0;
+ transform: rotate(45deg);
+ display: inline-block;
+ padding: 3px;
 }
 
 .categoria_seta.aberta {
@@ -66,17 +66,16 @@
  overflow-y: scroll;
  position: absolute;
  list-style: none;
- margin-top: 0px;
  bottom: -195px;
  height: 190px;
  z-index: 11;
  width: 100%;
- padding: 0;
 }
 
 #gerenciar_modal_apis li {
- padding: 10px;
+ margin: 0px !important;
  cursor: pointer;
+ padding: 10px;
 }
 
 #gerenciar_modal_apis li:hover {
@@ -96,6 +95,7 @@
 .modal_nova_api textarea {
  background-color: var(--cor-modal-input-fundo);
  color: var(--cor-modal-input-texto);
+ position: relative;
 }
 
 .modal_nova_api .aviso_campo_invalido {
@@ -103,11 +103,14 @@
 }
 
 .dados_api {
- display: flex;
+ margin: 5px 0 !important;
  flex-direction: column;
+ position: relative;
+ display: flex;
 }
 
 .dados_api p {
+ position: relative;
  padding: 5px;
 }
 
@@ -141,17 +144,6 @@
 .modal_nova_api i {
  color: var(--cor-gerenciador-apis-novaApi-botao-texto-destaque);
  font-weight: 500;
-}
-
-#modal_div_horizontal {
- flex-direction: row;
- border: 8px solid;
- display: flex;
-}
-
-#modal_div_horizontal .dados_api {
- width: 70% !important;
- border: 8px solid;
 }
 
 textarea {

@@ -7,6 +7,7 @@ export default function Fundadores() {
   <div id="fundadores">
    <p>Fundadores da API Hub Brasil</p>
    <div id="fundadores_dados">
+
     <div>
      <a href="https://www.linkedin.com/in/rafaelaoliveiramarques/"
       target="_blank" rel="noopener noreferrer"

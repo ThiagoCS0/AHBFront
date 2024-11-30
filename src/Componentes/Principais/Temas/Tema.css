@@ -4,7 +4,7 @@
   /* Principal */
   --texto: #000;
   --fundo: #EEE;
-  --borda: #AAA;
+  --borda: #888;
   --entrada-texto: #000;
   --entrada-fundo: #DDD;
   --link: #830;
@@ -18,6 +18,7 @@
   --tema-fundo-1: #B40;
   --tema-fundo-2: #A30;
   --tema-fundo-3: #DDD;
+  --tema-fundo-4: #AAA;
   --tema-texto-disativar: #BBB;
   --tema-fundo-disativar: #AAA;
   --tema-placeholder: #AAA;
@@ -29,7 +30,7 @@
   --linear-cabecalho: linear-gradient(to right, #F74 0%, #B41 30%, #B41 100%);
   --linear-efeito: #EEE 0%, #EEE5 50%, #0000 100%;
   --linear-acesso: linear-gradient(45deg, #FFF 0%, #777 100%);
-  --linear-acesso-2: linear-gradient(45deg, #EEE 0%, #AAA 100%);
+  --linear-acesso-2: linear-gradient(45deg, #FFF 0%, #999 100%);
   --linear-erro: linear-gradient(to right, #000 0%, #555 100%);
   --linear-rodape: linear-gradient(to right, #A40 0%, #520 20%, #830 100%);
   /* Efeitos */
@@ -49,7 +50,7 @@
   /* Principal */
   --texto: #FFF;
   --fundo: #222;
-  --borda: #AAA;
+  --borda: #444;
   --entrada-texto: #FFF;
   --entrada-fundo: #777;
   --link: #BBB;
@@ -63,6 +64,7 @@
   --tema-fundo-1: #999;
   --tema-fundo-2: #888;
   --tema-fundo-3: #444;
+  --tema-fundo-4: #444;
   --tema-texto-disativar: #777;
   --tema-fundo-disativar: #000;
   --tema-placeholder: #BBB;
@@ -74,7 +76,7 @@
   --linear-cabecalho: linear-gradient(to right, #444 0%, #333 30%, #333 100%);
   --linear-efeito: #222 0%, #2225 50%, #0000 100%;
   --linear-acesso: linear-gradient(45deg, #222 0%, #777 100%);
-  --linear-acesso-2: linear-gradient(45deg, #666 0%, #333 100%);
+  --linear-acesso-2: linear-gradient(45deg, #666 0%, #222 100%);
   --linear-rodape: linear-gradient(to right, #555 0%, #222 40%, #444 100%);
   /* Efeitos */
   --texto-selecionado: #FFF;
@@ -219,6 +221,11 @@ p {
   display: flex;
 }
 
+.tela_inteira {
+  height: 100vh;
+  width: 100vw;
+}
+
 .juntos {
   justify-content: center;
 }
@@ -265,12 +272,21 @@ p {
   position: absolute;
   font-weight: 500;
   bottom: -20px;
-  color: #F50;
+  color: #F85;
   right: 0;
 }
 
 .aviso_erro_borda {
-  border: 1px solid #F50;
+  border: 1px solid #F85;
+}
+
+.texto_erro {
+  border-bottom: 1px solid #F85;
+  border-top: 1px solid #F85;
+  text-align: center;
+  font-weight: 600;
+  font-size: large;
+  color: #A50;
 }
 
 .botao_voltar {
@@ -424,7 +440,7 @@ p {
 }
 
 .ondulacao-2 {
-  animation: ondular 10s infinite ease-in-out;
+  animation: ondular 5s infinite ease-in-out;
   background: var(--linear-acesso-2);
 }
 
@@ -455,14 +471,16 @@ p {
   flex-direction: column;
   align-items: center;
   font-size: xx-large;
+  gap: 0 !important;
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  padding: 40px;
+  height: 100%;
+  width: 100%;
+  margin: 0px;
 }
 
 #container_carregando p {
   border-bottom: 2px solid var(--cor-principal-destaques);
-  padding: 20px;
 }
 
 #container_carregando_pontos {

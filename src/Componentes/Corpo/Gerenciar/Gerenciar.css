@@ -120,6 +120,7 @@
 
   .titulos_genrenciar::after {
     background: linear-gradient(to bottom, #0004 0%, #0000 100%);
+    pointer-events: none;
     bottom: 87%;
     top: 40px;
   }

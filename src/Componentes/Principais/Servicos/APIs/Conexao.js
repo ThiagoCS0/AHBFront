@@ -39,6 +39,7 @@ export async function meu_get(url, usar_token = false, nosso_servidor = true) {
 
 
 export async function meu_post(url, corpo, usar_token = false) {
+  let status_post = 0, dados_post = "";
   try {
     const token = usar_token ? validar_token() : "";
     const resposta = await fetch(`${API_URL}/${url}`, {
@@ -50,8 +51,11 @@ export async function meu_post(url, corpo, usar_token = false) {
       body: JSON.stringify(corpo)
     });
 
-    const status_post = resposta.status;
-    const dados_post = await resposta.json();
+    if (resposta.status !== 200) {
+      return { status_post: resposta.status, dados_post }
+    }
+    status_post = resposta.status;
+    dados_post = await resposta.json();
 
     return { status_post, dados_post };
   } catch (erro) {

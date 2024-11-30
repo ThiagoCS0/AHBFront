@@ -2,11 +2,12 @@
   background-color: var(--tema-fundo);
   box-shadow: var(--sombra-0);
   justify-content: center;
+  min-height: fit-content;
   flex-direction: column;
   position: relative;
   padding-top: 25px;
   overflow: hidden;
-  flex: 0 0 320px;
+  flex: 0 1 320px;
   padding: 5px 0;
   display: flex;
   width: 100%;
@@ -119,16 +120,17 @@
 @media (max-width: 600px) {
 
   #populares {
-    padding-top: 25px;
-    padding: 5px 0;
-    height: 220px;
+    height: fit-content;
+    min-height: 180px;
     width: 100vw;
-    gap: 5px;
+    padding: 0;
+    gap: 0;
   }
 
   #carousel {
-    min-height: 180px;
-    height: 180px;
+    min-height: fit-content;
+    height: 150px;
+    margin: 0;
   }
 
   #populares_botoes button {

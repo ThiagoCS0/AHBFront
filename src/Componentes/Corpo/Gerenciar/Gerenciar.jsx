@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { validar_token } from "../../Principais/Servicos/JWT/JWT";
 import "./Gerenciar.css"
 import Termos from "../../AHB/Termos/Termos";
+import Carregamento from "../../Principais/Carregamento/Carregamento.jsx";
 
 const site = import.meta.env.VITE_SITE;
 
@@ -64,7 +65,7 @@ export default function Gerenciar() {
 
   return (
     carregando ?
-      <h1 style={{ fontSize: "large", padding: "40px" }}>Carregando...</h1>
+     <Carregamento carregando={carregando}/>
       :
       <div id="gerenciador">
         <div id="menu_gerenciador">

@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import SenhaVisivel from "../../../assets/senha_visivel.png"
-import SenhaTnvisivel from "../../../assets/senha_invisivel.png"
-import { meu_post } from "../../Principais/Servicos/APIs/Conexao";
-import { cadastrar } from "../../Principais/Servicos/Usuario/Acesso";
-import { meus_erros } from "../../Principais/Erros/MeusErros";
+import { Link } from "react-router-dom";
 import { remover_token, salvar_token, validar_token } from "../../Principais/Servicos/JWT/JWT";
+import { cadastrar } from "../../Principais/Servicos/Usuario/Acesso";
+import { meu_post } from "../../Principais/Servicos/APIs/Conexao";
+import { meus_erros } from "../../Principais/Erros/MeusErros";
+import Carregamento from "../../Principais/Carregamento/Carregamento";
+import SenhaTnvisivel from "../../../assets/senha_invisivel.png"
+import SenhaVisivel from "../../../assets/senha_visivel.png"
 
 const inicio = import.meta.env.VITE_INICIAL;
+const site = import.meta.env.VITE_SITE;
 
 export default function Criar() {
   const [lembrar_senha, def_lembrar_senha] = useState(false);
   const [senha_visivel, def_senha_visivel] = useState(false);
   const [resposta_http, def_resposta_http] = useState("");
+  const [cadastrando, def_cadastrando] = useState(false);
   const [nome_publico, def_nome_publico] = useState("");
   const [telefone, def_telefone] = useState("");
   const [login, def_login] = useState("");
@@ -139,7 +142,7 @@ export default function Criar() {
 
   useEffect(() => {
     if (resposta_http) {
-      const timer = setTimeout(() => { def_resposta_http(''); }, 4000);
+      const timer = setTimeout(() => { def_resposta_http(''); }, 7000);
       return () => clearTimeout(timer);
     }
   }, [resposta_http]);
@@ -156,13 +159,15 @@ export default function Criar() {
 
     if (!valido) {
       def_resposta_http(mensagem);
+      def_cadastrando(false);
       return;
     } else {
-      redefinirCampos();
       window.location.href = inicio;
+      redefinirCampos();
     }
   }
   const enviar = (e) => {
+    def_cadastrando(true);
     e.preventDefault();
     def_resposta_http('');
     remover_token();
@@ -190,119 +195,124 @@ export default function Criar() {
 
   return (
     <div className="dados_usuario_fundo">
-      <Link to="/AHBFront/Acesso" onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
-      <form onSubmit={enviar} className="dados_usuario_principal">
-        <label className="dados_usuario">
-          <p className="dados_usuario_titulos">Usuário (Para acessar conta)</p>
-          <input
-            className={erros.login_erro ? "aviso_erro_borda" : ""}
-            onChange={(e) => def_login(e.target.value)}
-            autoComplete="login"
-            placeholder="Login"
-            value={login || ""}
-            id="login"
-            required
-          />
-          <span className="aviso_erro">{erros.login_erro ? (!/^[a-zA-Z0-9]+$/.test(login) ? "Permitido apenas letras e/ou números" : "Deve ter mais de 5 caracteres") : ""}</span>
-        </label>
+      <Link to={site + "Acesso"} onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
+      {
+        cadastrando ?
+          <Carregamento carregando={cadastrando} texto="Cadastrando..."/>
+          :
+          <form onSubmit={enviar} className="dados_usuario_principal">
+            <label className="dados_usuario">
+              <p className="dados_usuario_titulos">Usuário (Para acessar conta)</p>
+              <input
+                className={erros.login_erro ? "aviso_erro_borda" : ""}
+                onChange={(e) => def_login(e.target.value)}
+                autoComplete="login"
+                placeholder="Login"
+                value={login || ""}
+                id="login"
+                required
+              />
+              <span className="aviso_erro">{erros.login_erro ? (!/^[a-zA-Z0-9]+$/.test(login) ? "Permitido apenas letras e/ou números" : "Deve ter mais de 5 caracteres") : ""}</span>
+            </label>
 
-        <label className="dados_usuario">
-          <p className="dados_usuario_titulos">Nome (visivel a todos)</p>
-          <input
-            className={erros.nome_publico_erro ? "aviso_erro_borda" : ""}
-            onChange={(e) => def_nome_publico(e.target.value)}
-            autoComplete="name"
-            placeholder="Nome público"
-            value={nome_publico || ""}
-            id="nomePublico"
-            required
-          />
-          <span className="aviso_erro">{erros.nome_publico_erro ? "Deve ter mais de 4 caracteres" : ""}</span>
-        </label>
+            <label className="dados_usuario">
+              <p className="dados_usuario_titulos">Nome (visivel a todos)</p>
+              <input
+                className={erros.nome_publico_erro ? "aviso_erro_borda" : ""}
+                onChange={(e) => def_nome_publico(e.target.value)}
+                autoComplete="name"
+                placeholder="Nome público"
+                value={nome_publico || ""}
+                id="nomePublico"
+                required
+              />
+              <span className="aviso_erro">{erros.nome_publico_erro ? "Deve ter mais de 4 caracteres" : ""}</span>
+            </label>
 
-        <label className="dados_usuario">
-          <p className="dados_usuario_titulos">CPF</p>
-          <input
-            className={erros.cpf_erro ? "aviso_erro_borda" : ""}
-            value={cpf || ""}
-            onChange={(e) => def_cpf(e.target.value)}
-            autoComplete="cpf"
-            placeholder="00000000000"
-            required
-          />
-          <span className="aviso_erro">{erros.cpf_erro ? "Digite um CPF válido" : ""}</span>
-        </label>
+            <label className="dados_usuario">
+              <p className="dados_usuario_titulos">CPF</p>
+              <input
+                className={erros.cpf_erro ? "aviso_erro_borda" : ""}
+                value={cpf || ""}
+                onChange={(e) => def_cpf(e.target.value)}
+                autoComplete="cpf"
+                placeholder="00000000000"
+                required
+              />
+              <span className="aviso_erro">{erros.cpf_erro ? "Digite um CPF válido" : ""}</span>
+            </label>
 
-        <label className="dados_usuario">
-          <p className="dados_usuario_titulos">Email</p>
-          <input
-            className={erros.email_erro ? "aviso_erro_borda" : ""}
-            value={email || ""}
-            onChange={(e) => def_email(e.target.value)}
-            autoComplete="email"
-            placeholder="seu@email.com"
-            required
-          />
-          <span className="aviso_erro">{erros.email_erro ? "Digite um email válido" : ""}</span>
-        </label>
+            <label className="dados_usuario">
+              <p className="dados_usuario_titulos">Email</p>
+              <input
+                className={erros.email_erro ? "aviso_erro_borda" : ""}
+                value={email || ""}
+                onChange={(e) => def_email(e.target.value)}
+                autoComplete="email"
+                placeholder="seu@email.com"
+                required
+              />
+              <span className="aviso_erro">{erros.email_erro ? "Digite um email válido" : ""}</span>
+            </label>
 
-        <label className="dados_usuario">
-          <p className="dados_usuario_titulos">Telefone</p>
-          <div className="dados_usuario_tel">
-            <input
-              className={erros.ddd_erro ? "aviso_erro_borda" : ""}
-              value={ddd || ""}
-              onChange={(e) => {
-                def_ddd(e.target.value);
-                if (e.target.value.length >= 2) { document.getElementById("telefone").focus(); }
-              }}
-              autoComplete="DDD"
-              placeholder="00"
-              required
-            />
-            <input
-              id="telefone"
-              className={erros.telefone_erro ? "aviso_erro_borda" : ""}
-              value={telefone || ""}
-              onChange={(e) => def_telefone(e.target.value)}
-              autoComplete="tel"
-              placeholder="000000000"
-              required
-            />
-          </div>
-          <span className="aviso_erro">{erros.telefone_erro ? "Número de telefone inválido" : ""}</span>
-        </label>
+            <label className="dados_usuario">
+              <p className="dados_usuario_titulos">Telefone</p>
+              <div className="dados_usuario_tel">
+                <input
+                  className={erros.ddd_erro ? "aviso_erro_borda" : ""}
+                  value={ddd || ""}
+                  onChange={(e) => {
+                    def_ddd(e.target.value);
+                    if (e.target.value.length >= 2) { document.getElementById("telefone").focus(); }
+                  }}
+                  autoComplete="DDD"
+                  placeholder="00"
+                  required
+                />
+                <input
+                  id="telefone"
+                  className={erros.telefone_erro ? "aviso_erro_borda" : ""}
+                  value={telefone || ""}
+                  onChange={(e) => def_telefone(e.target.value)}
+                  autoComplete="tel"
+                  placeholder="000000000"
+                  required
+                />
+              </div>
+              <span className="aviso_erro">{erros.telefone_erro ? "Número de telefone inválido" : ""}</span>
+            </label>
 
-        <label className="dados_usuario">
-          <p className="dados_usuario_titulos">Senha</p>
-          <input
-            className={erros.senha_erro ? "aviso_erro_borda" : ""}
-            value={senha || ""}
-            onChange={(e) => def_senha(e.target.value)}
-            type={senha_visivel ? "text" : "password"}
-            autoComplete="password"
-            placeholder="8 a 14 caracteres"
-          />
-          <img
-            className="dados_usuario_ver_senha"
-            src={senha_visivel ? SenhaVisivel : SenhaTnvisivel}
-            onClick={() => def_senha_visivel(!senha_visivel)}
-            alt="Visibilidade"
-          />
-          <span className="aviso_erro">{erros.senha_erro ? "Deve ter entre 8 e 14 caracteres" : ""}</span>
-        </label>
-        <label className="dados_usuario_checkbox">
-          <input
-            className="input_dados_usuario_checkbox"
-            type="checkbox"
-            onChange={(e) => def_lembrar_senha(e.target.checked)}
-            checked={lembrar_senha}
-          />
-          <span className="span_dados_usuario_checkbox"></span>Lembrar-me
-        </label>
-        <button className="botoes_expansiveis" type="submit"> Cadastrar </button>
-        {resposta_http && (<p className="texto_erro"> {resposta_http} </p>)}
-      </form>
+            <label className="dados_usuario">
+              <p className="dados_usuario_titulos">Senha</p>
+              <input
+                className={erros.senha_erro ? "aviso_erro_borda" : ""}
+                value={senha || ""}
+                onChange={(e) => def_senha(e.target.value)}
+                type={senha_visivel ? "text" : "password"}
+                autoComplete="password"
+                placeholder="8 a 14 caracteres"
+              />
+              <img
+                className="dados_usuario_ver_senha"
+                src={senha_visivel ? SenhaVisivel : SenhaTnvisivel}
+                onClick={() => def_senha_visivel(!senha_visivel)}
+                alt="Visibilidade"
+              />
+              <span className="aviso_erro">{erros.senha_erro ? "Deve ter entre 8 e 14 caracteres" : ""}</span>
+            </label>
+            <label className="dados_usuario_checkbox">
+              <input
+                className="input_dados_usuario_checkbox"
+                type="checkbox"
+                onChange={(e) => def_lembrar_senha(e.target.checked)}
+                checked={lembrar_senha}
+              />
+              <span className="span_dados_usuario_checkbox"></span>Lembrar-me
+            </label>
+            <button className="botoes_expansiveis" type="submit"> Cadastrar </button>
+            {resposta_http && (<p className="texto_erro"> {resposta_http} </p>)}
+          </form>
+      }
     </div>
   );
 }

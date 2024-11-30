@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Acessar from "./Acessar/Acessar";
 import Criar from "./Criar/Criar";
 import Recuperar from "./Recuperar/Recuperar";
-import { validar_token } from "../Principais/Servicos/JWT/JWT";
+import Carregamento from "../Principais/Carregamento/Carregamento";
 
 const inicio = import.meta.env.VITE_INICIAL;
 const site = import.meta.env.VITE_SITE;
@@ -31,8 +31,8 @@ export default function Acesso() {
 
   const componente = () => {
     switch (pagina) {
-      case "Acessar": return <Acessar />;
       case "Criar": return <Criar />;
+      case "Acessar": return <Acessar />;
       case "Recuperar": return <Recuperar />;
       default: window.location.href = site;
     }
@@ -40,7 +40,7 @@ export default function Acesso() {
 
   return (
     carregando ?
-      <h1 style={{ fontSize: "large", padding: "40px" }}>Carregando...</h1>
+      <Carregamento carregando={carregando}/>
       :
       <div id="acesso">
         {componente()}

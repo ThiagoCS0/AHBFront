@@ -9,6 +9,7 @@ import Visualizador from "../../../Modal/API_Visualizador/Visualizador"
 import Editor from "../../../Modal/API_Editor/Editor"
 import image_padrao from "../../../../assets/image_padrao.png";
 import API from "../../API/API";
+import Carregamento from "../../../Principais/Carregamento/Carregamento";
 
 const site = import.meta.env.VITE_SITE;
 
@@ -155,43 +156,38 @@ const MinhasApis = () => {
   }
 
   return (
-    <>
-      {
-        carregando ?
-          (<h1 style={{ fontSize: "large", padding: "40px" }}>Carregando...</h1>)
-          : (
-            <div id="minhas_apis">
-              <h1 className="titulos_genrenciar ondulacao-1">Gerenciar suas APIs</h1>
-              <button id="nova_api" onClick={() => { def_editar_api(null); def_exibir_modal_visualizar(true); }}></button>
-              {/* ------------------ Lista de APIs ------------------ */}
-              <div id="lista_minhas_apis">
-                {
-                  !nova_api || nova_api.length === 0 ? (<p>Nenhuma API cadastrada</p>) :
-                    Array.isArray(nova_api) && nova_api.map(api => (
-                      <API api={api} key={api.id} click={() => { exibir_modal_minhas_apis(api); }} simples={false} def_api_excluir={def_api_excluir} editar_minhas_api={editar_minhas_api} />
-                    ))}
+    carregando ?
+      <Carregamento carregando={carregando} />
+      :
+      <div id="minhas_apis">
+        <h1 className="titulos_genrenciar ondulacao-1">Gerenciar suas APIs</h1>
+        <button id="nova_api" onClick={() => { def_editar_api(null); def_exibir_modal_visualizar(true); }}></button>
+        {/* ------------------ Lista de APIs ------------------ */}
+        <div id="lista_minhas_apis">
+          {
+            !nova_api || nova_api.length === 0 ? (<p>Nenhuma API cadastrada</p>) :
+              Array.isArray(nova_api) && nova_api.map(api => (
+                <API api={api} key={api.id} click={() => { exibir_modal_minhas_apis(api); }} simples={false} def_api_excluir={def_api_excluir} editar_minhas_api={editar_minhas_api} />
+              ))}
+        </div>
+        {api_excluir.id && (
+          <div id="modal_excluir" onClick={() => { fechar_modal_minhas_apis() }}>
+            <div id="modal_excluir_conteudo" onClick={e => { e.stopPropagation(); }}>
+              <div id="modal_excluir_texto">
+                <p>Deseja realmente excluir a API</p>
+                <b>{api_excluir.name && api_excluir.name.length > 10 ? api_excluir.name.slice(0, 10) + "..." : api_excluir.name}</b> ?
               </div>
-              {api_excluir.id && (
-                <div id="modal_excluir" onClick={() => { fechar_modal_minhas_apis() }}>
-                  <div id="modal_excluir_conteudo" onClick={e => { e.stopPropagation(); }}>
-                    <div id="modal_excluir_texto">
-                      <p>Deseja realmente excluir a API</p>
-                      <b>{api_excluir.name && api_excluir.name.length > 10 ? api_excluir.name.slice(0, 10) + "..." : api_excluir.name}</b> ?
-                    </div>
-                    <div className="dois_botoes">
-                      <button onClick={() => { fechar_modal_minhas_apis() }}>Cancelar</button>
-                      <button onClick={() => { excluir_minhas_api(api_excluir.id); fechar_modal_minhas_apis(); }}>Confirmar</button>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {/* ------------------ Modais Editar e Visualizar ------------------ */}
-              {api_selec && exibir_modal_visualizar && <Visualizador api={api_selec} fechar={fechar_modal_minhas_apis} />}
-              {exibir_modal_editar && <Editor fechar={() => def_exibir_modal_editar(false)} nova_api={nova_api} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
+              <div className="dois_botoes">
+                <button onClick={() => { fechar_modal_minhas_apis() }}>Cancelar</button>
+                <button onClick={() => { excluir_minhas_api(api_excluir.id); fechar_modal_minhas_apis(); }}>Confirmar</button>
+              </div>
             </div>
-          )
-      }
-    </>
+          </div>
+        )}
+        {/* ------------------ Modais Editar e Visualizar ------------------ */}
+        {api_selec && exibir_modal_visualizar && <Visualizador api={api_selec} fechar={fechar_modal_minhas_apis} />}
+        {exibir_modal_editar && <Editor fechar={() => def_exibir_modal_editar(false)} nova_api={nova_api} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
+      </div>
   );
 };
 

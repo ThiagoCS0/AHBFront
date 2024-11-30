@@ -60,10 +60,10 @@
 }
 
 #minhas_apis .apis {
-  border: 2px solid var(--destaque-claro); 
+  border: 2px solid var(--destaque-escuro);
   background-color: var(--tema-fundo-3);
   justify-content: space-between;
-  box-shadow: var(--sombra-0);
+  box-shadow: var(--sombra-2);
   color: var(--entrada-texto);
   box-sizing: border-box;
   transition: all 0.3s;
@@ -88,7 +88,7 @@
 }
 
 .lista_minhas_apis_dados img {
-  border: 1px solid var(--borda);
+  border: 1px solid var(--destaque-escuro);
   border-radius: 4px;
   object-fit: cover;
   height: 188px;
@@ -148,8 +148,19 @@
 }
 
 .lista_minhas_apis_metodos {
+  position: relative;
+  overflow: hidden;
   display: flex;
+  width: 100%;
   gap: 5px;
+}
+
+.lista_minhas_apis_metodos::after {
+  background: linear-gradient(to right, #0000 0%, #0000 90%, var(--tema-fundo-3) 100%);
+  pointer-events: none;
+  position: absolute;
+  content: '';
+  inset: 0;
 }
 
 #lista_minhas_apis_botoes {

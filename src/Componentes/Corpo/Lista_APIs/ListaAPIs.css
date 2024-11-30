@@ -21,14 +21,18 @@
 }
 
 /* Smarphone */
-@media (max-width: 600px) {
-  #lista_apis {
-    height: calc(100% - 220px);
-  }
-
+@media (max-width: 1000px) {
   #colunas_apis {
     padding: 20px;
-    margin: 0;
+    gap: 25px;
+  }
+}
+
+/* Smarphone */
+@media (max-width: 600px) {
+  #colunas_apis {
+    padding: 20px;
+    gap: 25px;
   }
 }
 

@@ -1,5 +1,5 @@
 .api {
- border: 1px solid var(--destaque-escuro) !important;
+ border: 2px solid var(--borda) !important;
  transform-origin: center center;
  background: var(--linear-apis);
  box-shadow: var(--sombra-1);
@@ -44,9 +44,9 @@
 /* Smartphone  */
 @media (max-width: 600px) {
  .api {
-  border-radius: 5px;
-  height: 150px;
-  width: 150px;
+  border-radius: 10px;
+  height: 125px;
+  width: 125px;
  }
 
  .api p {

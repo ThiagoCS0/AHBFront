@@ -56,11 +56,11 @@ export default function Conta() {
       </button>
       {token_valido && menu_visivel && (
         <div ref={menuRef}>
-          <Link to="/AHBFront/Gerenciar" onClick={
+          <Link to={inicio + "Gerenciar"} onClick={
             () => sessionStorage.setItem("Gerenciar", "ger_perfil")}>Perfil</Link>
-          <Link to="/AHBFront/Gerenciar" onClick={
+          <Link to={inicio + "Gerenciar"} onClick={
             () => sessionStorage.setItem("Gerenciar", "ger_apis")}>Minhas Apis</Link>
-          <Link to="/AHBFront/Gerenciar" onClick={
+          <Link to={inicio + "Gerenciar"} onClick={
             () => sessionStorage.setItem("Gerenciar", "ger_termos")}>Termos</Link>
           <a href={inicio} onClick={() => { remover_token(); def_token_valido(false); }}>Sair</a>
         </div>

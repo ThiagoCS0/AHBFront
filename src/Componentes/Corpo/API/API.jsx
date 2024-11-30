@@ -41,7 +41,7 @@ export default function API({ api, classe, click, simples = true, popular = fals
                   <div className="lista_minhas_apis_metodos">
                     {api.metodos && api.metodos.split(',').map((metodo) => {
                       const metodoTrim = metodo.trim().toUpperCase();
-                      const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#444", };
+                      const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
                       return cores[metodoTrim] ? (
                         <button key={metodoTrim} style={{ backgroundColor: cores[metodoTrim] }}>{metodoTrim}</button>
                       ) : null;
