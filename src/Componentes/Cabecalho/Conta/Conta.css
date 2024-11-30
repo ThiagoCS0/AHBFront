@@ -23,6 +23,7 @@
  white-space: nowrap;
  height: fit-content;
  position: absolute;
+ list-style: none;
  display: flex;
  z-index: 1000;
  width: 100%;
@@ -31,22 +32,24 @@
  top: 85%;
 }
 
-#conta_menu a {
+#conta_menu li {
  color: var(--tema-texto);
  text-decoration: none;
+ margin: 0 !important;
  font-size: large;
+ cursor: pointer;
  padding: 10px;
 }
 
-#conta_menu a:first-child {
+#conta_menu li:first-child {
  border-radius: 6px 6px 0 0;
 }
 
-#conta_menu a:last-child {
+#conta_menu li:last-child {
  border-radius: 0 0 6px 6px;
 }
 
-#conta_menu a:hover {
+#conta_menu li:hover {
  background-color: var(--tema-hover-fundo);
  font-weight: bold;
 }

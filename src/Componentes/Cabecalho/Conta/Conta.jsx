@@ -48,30 +48,32 @@ export default function Conta() {
   }
 
 
-  return (
-    <div id="conta" className="alinhado">
-      <button onClick={opcoes_botao_conta}
-        ref={acessarRef}>
-        <img src={Person} alt="Usuário" />
-        <span>{usuario ? (usuario || "...") : "Entrar"}</span>
-      </button>
-      {token_valido && menu_visivel && (
-        <div id="conta_menu" ref={menuRef}>
-          <a href="Gerenciar" onClick={() => {
-            sessionStorage.setItem("Gerenciar", "ger_termos");
-          }}>Termos</a>
+  const navegando = (sub_pagina) => {
+    switch (sub_pagina) {
+      case "perfil": sub_pagina = "ger_perfil"; break;
+      case "apis": sub_pagina = "ger_perfil"; break;
+      case "termos": sub_pagina = "ger_termos"; break;
+    }
+    sessionStorage.setItem("Gerenciar", sub_pagina);
+    window.location.href = "Gerenciar";
+  }
 
-          <a href="Gerenciar" onClick={() => {
-            sessionStorage.setItem("Gerenciar", "ger_perfil");
-          }}>Perfil</a>
-
-          <a href="Gerenciar" onClick={() => {
-            sessionStorage.setItem("Gerenciar", "ger_apis");
-          }}>Minhas APIs</a>
-          <a href={inicio} onClick={() => { remover_token(); def_token_valido(false); }}>Sair</a>
-        </div>
-      )
-      }
-    </div >
-  )
+return (
+  <div id="conta" className="alinhado">
+    <button onClick={opcoes_botao_conta}
+      ref={acessarRef}>
+      <img src={Person} alt="Usuário" />
+      <span>{usuario ? (usuario || "...") : "Entrar"}</span>
+    </button>
+    {token_valido && menu_visivel && (
+      <ul id="conta_menu" ref={menuRef}>
+        <li onClick={() => { navegando("perfil") }}>Perfil</li>
+        <li onClick={() => { navegando("apis") }}>Minhas APIs</li>
+        <li onClick={() => { navegando("termos") }}>Termos</li>
+        <li onClick={() => { remover_token(); def_token_valido(false); }}>Sair</li>
+      </ul>
+    )
+    }
+  </div >
+)
 }
