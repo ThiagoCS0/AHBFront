@@ -100,7 +100,6 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                          ? await meu_put(`apis/${dados_minha_api.id}`, corpo, true)
                          : await meu_post("apis", corpo, true);
 
-                    if (!resultado.status_put || (!resultado.status_post && !resultado.dados_post)) { window.location.href = site; }
                     status = resultado.status_put || resultado.status_post;
                     dados = resultado.dados_post || "";
 
