@@ -58,6 +58,7 @@ export default function Conta() {
     window.location.reload();
   }
 
+  
   return (
     <div id="conta" className="alinhado">
       <button onClick={opcoes_botao_conta}
