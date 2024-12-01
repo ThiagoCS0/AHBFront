@@ -98,8 +98,8 @@
  }
 
  #conteudo_perfil {
-  height: 100%;
   padding-bottom: 10px;
+  height: 100%;
  }
 
  #conteudo_editavel_perfil {
@@ -107,10 +107,6 @@
   overflow-y: scroll;
  }
 
- .botoes_lateria{
-  flex-direction: row;
-  gap: 10px;
- }
 }
 
 /* Smartwatch  */
@@ -138,18 +134,18 @@
  }
 
  .menu_perfil li {
-  margin: 0;
-  padding: 2px;
-  font-size: x-small;
   height: fit-content;
+  font-size: x-small;
+  padding: 2px;
+  margin: 0;
  }
 
  #conteudo_editavel_perfil {
-  margin: 0;
-  padding: 0;
-  min-height: 0;
-  max-height: none;
   height: 150px !important;
+  max-height: none;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
  }
 
  #tel_usuario {
@@ -157,8 +153,8 @@
  }
 
  #tel_usuario input:first-child {
-  width: 40px;
   padding: 2px;
+  width: 40px;
  }
 
  .aviso_erro {
@@ -166,23 +162,23 @@
  }
 
  .dados_usuario_ver_senha {
-  right: 3%;
   height: 15px;
   width: auto;
+  right: 3%;
  }
 
  .dados_usuario_checkbox .span_dados_usuario_checkbox:after {
-  top: 2px;
-  left: 6px;
-  width: 4px;
-  height: 8px;
   border-width: 0 2px 2px 0 !important;
+  height: 8px;
+  width: 4px;
+  left: 6px;
+  top: 2px;
  }
 
  .span_dados_usuario_checkbox {
-  width: 18px;
-  height: 18px;
   border-radius: 2px;
+  height: 18px;
+  width: 18px;
  }
 
  .dados_usuario_checkbox {

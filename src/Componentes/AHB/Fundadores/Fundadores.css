@@ -1,8 +1,8 @@
 #fundadores {
  transform: translateX(-50%);
  text-align: center;
- width: fit-content;
  position: absolute;
+ width: fit-content;
  left: 50%;
  top: 40px;
 }
@@ -50,8 +50,8 @@
  filter: contrast(0) brightness(2);
  background-repeat: no-repeat;
  background-position: center;
- background-size: 35px;
  transition: filter 0.4s;
+ background-size: 35px;
  height: 35px;
 }
 

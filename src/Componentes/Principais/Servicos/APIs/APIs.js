@@ -6,7 +6,7 @@ export const buscar_apis = async (pagina, tamanho, organizar, ordem) => {
  try {
   const { status_get, dados_get } = await meu_get(`apis?page=${pagina}&size=${tamanho}&organizar=${organizar},${ordem}`);
 
-  if (status_get !== 200) {
+  if (Math.floor(status_get / 100) !== 2) {
    meus_erros(import.meta.url.split('/').pop(), `BSC_APIs: ${status_get}`);
   }
 
@@ -36,8 +36,8 @@ export const buscar_apis = async (pagina, tamanho, organizar, ordem) => {
 
 export const clicar_apis = async (apiId) => {
  try {
-  const resposta = await meu_get(`apis/${apiId}/clicar`);
-  if (status_get !== 200) { return; }
+  const { status_get } = await meu_get(`apis/${apiId}/clicar`);
+  if (Math.floor(status_get / 100) !== 2) { return; }
  } catch (erro) {
   meus_erros(import.meta.url.split('/').pop(), "CAT_API_CLK_API", erro);
  }

@@ -51,7 +51,11 @@ export default function Gerenciar() {
   }
 
   const alterar_componente = (e) => {
+    if(validar_token()){
     sessionStorage.setItem("Gerenciar", e);
+    }else{
+      window.location.href = site;
+    }
   }
 
   const componente = () => {

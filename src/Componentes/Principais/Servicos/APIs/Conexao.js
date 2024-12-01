@@ -9,6 +9,8 @@ export async function meu_get(url, usar_token = false, nosso_servidor = true) {
 
   try {
     const token = usar_token ? validar_token() : "";
+    if (usar_token && !token) { return { status_get: null, dados_get: null }; }
+    
     const resposta = await fetch(nosso_servidor ? `${API_URL}/${url}` : url, {
       method: "GET",
       headers: {
@@ -37,11 +39,12 @@ export async function meu_get(url, usar_token = false, nosso_servidor = true) {
   return { status_get, dados_get };
 }
 
-
 export async function meu_post(url, corpo, usar_token = false) {
   let status_post = 0, dados_post = "";
   try {
     const token = usar_token ? validar_token() : "";
+    if (usar_token && !token) { return { status_get: null, dados_get: null }; }
+
     const resposta = await fetch(`${API_URL}/${url}`, {
       method: "POST",
       headers: {
@@ -50,13 +53,12 @@ export async function meu_post(url, corpo, usar_token = false) {
       },
       body: JSON.stringify(corpo)
     });
-
-    if (resposta.status !== 200) {
-      return { status_post: resposta.status, dados_post }
-    }
-    status_post = resposta.status;
     dados_post = await resposta.json();
 
+    if (Math.floor(resposta.status / 100) !== 2) {
+      return { status_post: resposta.status, dados_post: "" }
+    }
+    status_post = resposta.status;
     return { status_post, dados_post };
   } catch (erro) {
     meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_POS: ${erro}`);
@@ -68,6 +70,8 @@ export async function meu_put(url, corpo, usar_token = false) {
   try {
 
     const token = usar_token ? validar_token() : "";
+    if (!token) { return { status_put: null } }
+
     const resposta = await fetch(`${API_URL}/${url}`, {
       method: "PUT",
       headers: {
@@ -99,6 +103,8 @@ export async function meu_delete(url) {
         },
       });
       return (await resposta).status;
+    } else {
+      return null;
     }
   } catch (erro) {
     meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_DEL: ${erro}`);

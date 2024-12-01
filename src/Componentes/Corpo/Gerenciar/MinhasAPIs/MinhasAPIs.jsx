@@ -55,7 +55,7 @@ const MinhasApis = () => {
 
   useEffect(() => {
     if (api_excluir.id) {
-      const teclas = (e) => { if (e.key === "Escape") { fechar_modal_minhas_apis(); } };
+      const teclas = (e) => { if (e.key === "Escape") { fechar_modais_minhas_apis(); } };
       window.addEventListener("keydown", teclas);
       return () => { window.removeEventListener("keydown", teclas); };
     }
@@ -74,11 +74,9 @@ const MinhasApis = () => {
         const id_usuario = usuario_id();
         if (id_usuario !== "") {
           const { status_get, dados_get } = await meu_get(`apis/user/${id_usuario}`, true);
-          if (status_get === 204) {
-            
-            return; // não é erro, apenas não há APIs cadastradas
-          } else if (status_get !== 200) {
-            meus_erros(import.meta.url.split('/').pop(), "MNH_LST_!OK");
+          if (!status_get && !dados_get) { window.location.href = "/"; }
+          if (Math.floor(status_get / 100) !== 2) {
+            meus_erros(import.meta.url.split('/').pop(), "MNH_LST_!OK " + status_get);
             return;
           }
           if (dados_get) {
@@ -90,7 +88,7 @@ const MinhasApis = () => {
                     api.categoria === "FINANCAS" ? "FINANÇAS" :
                       api.categoria === "ESTATISTICAS" ? "ESTATÍSTICAS" :
                         api.categoria;
-              cadastrar_minhas_api({
+              cadastrar_minhas_apis({
                 id: api.id,
                 nome: api.name,
                 descricao: api.description,
@@ -117,13 +115,16 @@ const MinhasApis = () => {
     }
   }
 
-  const cadastrar_minhas_api = (dadosApi) => {
-    def_nova_api(tmp => [...tmp, dadosApi]);
-    def_exibir_modal_visualizar(false);
+  const cadastrar_minhas_apis = (dadosApi) => {
+    try {
+      def_nova_api(tmp => [...tmp, dadosApi]);
+    } catch (erro) {
+      meus_erros(import.meta.url.split('/').pop(), "CAT_MIA_CAD", erro);
+    }
   };
 
   const atualizar_minhas_api = (apiEditada) => {
-    def_nova_api(tmp => tmp.filter((apis) => apis.id !== apiEditada.id).concat({ ...apiEditada }));
+    def_nova_api(tmp => tmp.filter(apis => apis.id !== apiEditada.id).concat({ ...apiEditada }));
     def_exibir_modal_visualizar(false);
   };
 
@@ -138,6 +139,8 @@ const MinhasApis = () => {
       const status = await meu_delete(`apis/${id}`)
       if (status) {
         def_nova_api(tmp => tmp.filter(api => api.id != id));
+      } else {
+        window.location.href = site;
       }
     } catch (erro) {
       meus_erros(import.meta.url.split('/').pop(), "CAT_EXC_API", erro);
@@ -150,9 +153,10 @@ const MinhasApis = () => {
     def_exibir_modal_visualizar(true);
   };
 
-  const fechar_modal_minhas_apis = () => {
-    def_exibir_modal_visualizar(false);
+  const fechar_modais_minhas_apis = () => {
     def_api_selec(null);
+    def_exibir_modal_editar(false);
+    def_exibir_modal_visualizar(false);
     def_api_excluir({ id: null, name: "" })
   }
 
@@ -172,22 +176,22 @@ const MinhasApis = () => {
               ))}
         </div>
         {api_excluir.id && (
-          <div id="modal_excluir" onClick={() => { fechar_modal_minhas_apis() }}>
+          <div id="modal_excluir" onClick={() => { fechar_modais_minhas_apis() }}>
             <div id="modal_excluir_conteudo" onClick={e => { e.stopPropagation(); }}>
               <div id="modal_excluir_texto">
                 <p>Deseja realmente excluir a API</p>
                 <b>{api_excluir.name && api_excluir.name.length > 10 ? api_excluir.name.slice(0, 10) + "..." : api_excluir.name}</b> ?
               </div>
-              <div className="dois_botoes">
-                <button onClick={() => { fechar_modal_minhas_apis() }}>Cancelar</button>
-                <button onClick={() => { excluir_minhas_api(api_excluir.id); fechar_modal_minhas_apis(); }}>Confirmar</button>
+              <div className="campos_laterais">
+                <button onClick={() => { fechar_modais_minhas_apis() }}>Cancelar</button>
+                <button onClick={() => { excluir_minhas_api(api_excluir.id); fechar_modais_minhas_apis(); }}>Confirmar</button>
               </div>
             </div>
           </div>
         )}
         {/* ------------------ Modais Editar e Visualizar ------------------ */}
-        {api_selec && exibir_modal_visualizar && <Visualizador api={api_selec} fechar={fechar_modal_minhas_apis} />}
-        {exibir_modal_editar && <Editor fechar={() => def_exibir_modal_editar(false)} cadastrar_minha_api={nova_api} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
+        {api_selec && exibir_modal_visualizar && <Visualizador api={api_selec} fechar={fechar_modais_minhas_apis} />}
+        {exibir_modal_editar && <Editor fechar={fechar_modais_minhas_apis} cadastrar_minha_api={cadastrar_minhas_apis} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
       </div>
   );
 };

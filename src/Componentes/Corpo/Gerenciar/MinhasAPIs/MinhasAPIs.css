@@ -204,8 +204,8 @@
 }
 
 #modal_excluir_conteudo {
-  border: 1px solid var(--cor-principal-destaques);
-  background: var(--cor-modal-fundo);
+  border: 1px solid var(--destaque);
+  background: var(--fundo);
   color: var(--texto);
   text-align: center;
   border-radius: 5px;

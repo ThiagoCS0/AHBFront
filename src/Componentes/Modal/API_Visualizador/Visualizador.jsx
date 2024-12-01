@@ -27,13 +27,19 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
   }, [api?.imagem]);
 
   useEffect(() => {
-    const Get = async () => {
+    const verificar_dados_api = async () => {
       if (!api) { return null; }
-      const { dados_get } = await meu_get(`users/${api.publicador}/nome-publico`);
-      if (dados_get) { def_publicador(dados_get.publicName); def_carregando(false); }
+
+      def_publicador('')
+      if (api.publicador && api.publicador != "undefined") {
+        const { status_get, dados_get } = await meu_get(`users/${api.publicador}/nome-publico`);
+        if (!status_get && !dados_get) { window.location.href = "/"; }
+        if (dados_get) { def_publicador(dados_get.publicName); }
+      }
+      def_carregando(false);
     }
 
-    Get();
+    verificar_dados_api();
 
     const tecla = (e) => { if (e.key === "Escape") { fechar(); } };
     window.addEventListener("keydown", tecla);
@@ -42,7 +48,7 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
 
   return (
     <div id="modal_apis" onClick={fechar}>
-      <div className="modal_apis_conteudo ondulacao-1" onClick={e => { e.stopPropagation(); }}>
+      <div className="modal_apis_conteudo ondulacao-3" onClick={e => { e.stopPropagation(); }}>
         {carregando ?
           <Carregamento carregando={carregando} />
           :
@@ -57,7 +63,7 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
               {!modal_simples && (
                 <>
                   <p><span>Link</span><a href={api.link}>{api.link}</a></p>
-                  <p><span>Publicador</span>{publicador}</p>
+                  {publicador && <p><span>Publicador</span>{publicador}</p>}
                 </>
               )}
             </div>

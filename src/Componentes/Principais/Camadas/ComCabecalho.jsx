@@ -9,6 +9,7 @@ import Cabecalho from "../../Cabecalho/Cabecalho";
 import Rodape from "../../Rodape/Rodape";
 import Corpo from "../../Corpo/Corpo";
 import { Outlet } from "react-router-dom";
+import { validar_token } from "../Servicos/JWT/JWT";
 
 const nome_desta_pagina = import.meta.env.VITE_INICIAL;
 
@@ -19,6 +20,14 @@ export default function ComCabecalho({ token_valido, usuario }) {
   const [filtrando, def_filtrando] = useState(false);
   const [carregando, def_carregando] = useState(true);
   const [primeira_tentativa, def_pri_tentativa] = useState(true);
+
+  useEffect(() => {
+    const token = validar_token();
+    if (!token && sessionStorage.getItem("Gerenciar")) {
+      sessionStorage.clear();
+      window.location.href = "/";
+    }
+  }, [])
 
   useEffect(() => {
     try {
@@ -83,7 +92,6 @@ export default function ComCabecalho({ token_valido, usuario }) {
       def_filtrados(filtragem_categorias);
     }
   };
-
 
   return (
     <TemasContexto>

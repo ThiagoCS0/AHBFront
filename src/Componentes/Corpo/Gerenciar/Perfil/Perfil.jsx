@@ -120,12 +120,12 @@ export default function Perfil() {
     sessionStorage.setItem("Gerenciar", "ger_perfil")
     const Get = async () => {
       try {
-        const token = validar_token();
-        if (!token) { return false; }
         const id_usuario = usuario_id()
         const { status_get, dados_get } = await meu_get(`users/${id_usuario}`, true);
+        if (!status_get && !dados_get) { window.location.href = "/"; }
+        if (!dados_get) { return false; }
 
-        if (status_get !== 200) { novo_acesso(); }
+        if (Math.floor(status_get / 100) !== 2) { novo_acesso(); }
 
         if (dados_get) {
           if (dados_get.length < 1) { novo_acesso(); }
@@ -172,7 +172,7 @@ export default function Perfil() {
     try {
       const token = validar_token();
       if (!token) { novo_acesso(); }
-      
+
       const id_usuario = usuario_id();
 
       const { status_put, dados_put } = await meu_put(`users/${id_usuario}`, {
@@ -184,7 +184,9 @@ export default function Perfil() {
         password: userData.senhaAtual
       }, true);
 
-      if (status_put !== 200) {
+      if (!status_put && !dados_put) { window.location.href = "/"; }
+      
+      if (Math.floor(status_put / 100) !== 2) {
         defHttpResposta("Dados incorretos ou já cadastrados!"); return;
       }
     } catch (erro) {
@@ -194,165 +196,165 @@ export default function Perfil() {
 
   return (
     carregando
-    ?
-    <Carregamento carregando={carregando} />
-    :
-    <div id="conteudo_perfil">
-      <ul className="menu_perfil">
-        <li className="ativo" onClick={(e) => opcao_ativa(e.target, 'perfil_privado')}>
-          {userData.nomePublico ? userData.nomePublico : "Conta"}
-        </li>
-        <li onClick={(e) => opcao_ativa(e.target, 'perfil_publico')}>Perfil público</li>
-      </ul>
-      <div id="conteudo_editavel_perfil">
-        {/* ------------------------ Privado ------------------------ */}
-        <form id="perfil_privado" className="formularios ativo">
-          <div className="campos_laterais">
-            <label className="dados_usuario">
-              <p className="dados_usuario_titulos">Usuário</p>
-              <input
-                className={erros.loginErro ? "aviso_erro_borda" : ""}
-                value={userData.login || ""}
-                onChange={(e) => setUserData({ ...userData, login: e.target.value })}
-                autoComplete="name"
-                placeholder="Nome"
-                required
-              />
-              <span className="aviso_erro">
-                {erros.loginErro ? "Nome deve ter mais de 4 caracteres" : ""}
-              </span>
-            </label>
-
-            <label className="dados_usuario">
-              <p className="dados_usuario_titulos">CPF</p>
-              <input
-                className={erros.cpfErro ? "aviso_erro_borda" : ""}
-                value={userData.cpf || ""}
-                onChange={(e) => setUserData({ ...userData, cpf: e.target.value })}
-                autoComplete="cpf"
-                placeholder="00000000000"
-                required
-              />
-              <span className="aviso_erro">
-                {erros.cpfErro ? "Digite um CPF válido" : ""}
-              </span>
-            </label>
-          </div>
-
-          <div className="campos_laterais">
-            <label className="dados_usuario">
-              <p className="dados_usuario_titulos">Email</p>
-              <input
-                className={erros.emailErro ? "aviso_erro_borda" : ""}
-                value={userData.email || ""}
-                onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-                autoComplete="email"
-                placeholder="seu@email.com"
-                required
-              />
-              <span className="aviso_erro">
-                {erros.emailErro ? "Digite um email válido" : ""}
-              </span>
-            </label>
-
-            <label className="dados_usuario">
-              <p className="dados_usuario_titulos">Telefone</p>
-              <div className="dados_usuario_tel">
+      ?
+      <Carregamento carregando={carregando} />
+      :
+      <div id="conteudo_perfil">
+        <ul className="menu_perfil">
+          <li className="ativo" onClick={(e) => opcao_ativa(e.target, 'perfil_privado')}>
+            {userData.nomePublico ? userData.nomePublico : "Conta"}
+          </li>
+          <li onClick={(e) => opcao_ativa(e.target, 'perfil_publico')}>Perfil público</li>
+        </ul>
+        <div id="conteudo_editavel_perfil">
+          {/* ------------------------ Privado ------------------------ */}
+          <form id="perfil_privado" className="formularios ativo">
+            <div className="campos_laterais">
+              <label className="dados_usuario">
+                <p className="dados_usuario_titulos">Usuário</p>
                 <input
-                  className={erros.dddErro ? "aviso_erro_borda" : ""}
-                  value={userData.ddd || ""}
-                  onChange={(e) => setUserData({ ...userData, ddd: e.target.value })}
-                  autoComplete="DDD"
-                  placeholder="00"
+                  className={erros.loginErro ? "aviso_erro_borda" : ""}
+                  value={userData.login || ""}
+                  onChange={(e) => setUserData({ ...userData, login: e.target.value })}
+                  autoComplete="name"
+                  placeholder="Nome"
                   required
                 />
+                <span className="aviso_erro">
+                  {erros.loginErro ? "Nome deve ter mais de 4 caracteres" : ""}
+                </span>
+              </label>
+
+              <label className="dados_usuario">
+                <p className="dados_usuario_titulos">CPF</p>
                 <input
-                  className={erros.telefoneErro ? "aviso_erro_borda" : ""}
-                  value={userData.telefone || ""}
-                  onChange={(e) => setUserData({ ...userData, telefone: e.target.value })}
-                  autoComplete="tel"
-                  placeholder="000000000"
+                  className={erros.cpfErro ? "aviso_erro_borda" : ""}
+                  value={userData.cpf || ""}
+                  onChange={(e) => setUserData({ ...userData, cpf: e.target.value })}
+                  autoComplete="cpf"
+                  placeholder="00000000000"
                   required
                 />
+                <span className="aviso_erro">
+                  {erros.cpfErro ? "Digite um CPF válido" : ""}
+                </span>
+              </label>
+            </div>
+
+            <div className="campos_laterais">
+              <label className="dados_usuario">
+                <p className="dados_usuario_titulos">Email</p>
+                <input
+                  className={erros.emailErro ? "aviso_erro_borda" : ""}
+                  value={userData.email || ""}
+                  onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                  autoComplete="email"
+                  placeholder="seu@email.com"
+                  required
+                />
+                <span className="aviso_erro">
+                  {erros.emailErro ? "Digite um email válido" : ""}
+                </span>
+              </label>
+
+              <label className="dados_usuario">
+                <p className="dados_usuario_titulos">Telefone</p>
+                <div className="dados_usuario_tel">
+                  <input
+                    className={erros.dddErro ? "aviso_erro_borda" : ""}
+                    value={userData.ddd || ""}
+                    onChange={(e) => setUserData({ ...userData, ddd: e.target.value })}
+                    autoComplete="DDD"
+                    placeholder="00"
+                    required
+                  />
+                  <input
+                    className={erros.telefoneErro ? "aviso_erro_borda" : ""}
+                    value={userData.telefone || ""}
+                    onChange={(e) => setUserData({ ...userData, telefone: e.target.value })}
+                    autoComplete="tel"
+                    placeholder="000000000"
+                    required
+                  />
+                </div>
+                <span className="aviso_erro">
+                  {erros.telefoneErro ? "Número de telefone inválido" : ""}
+                </span>
+              </label>
+            </div>
+
+            <div className="campos_laterais" id="campos_senha_perfil">
+              <div className="div_pai_nova_senha_perfil">
+                <label className="dados_usuario">
+                  <p className="dados_usuario_titulos">Senha Atual</p>
+                  <input
+                    className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
+                    value={userData.senhaAtual || ""}
+                    onChange={(e) => setUserData({ ...userData, senhaAtual: e.target.value })}
+                    type={visibilidade_senha.senhaAtual ? "text" : "password"}
+                    autoComplete="current-password"
+                    placeholder={visibilidade_senha.senhaAtual ? "" : "********"}
+                  />
+                  <img
+                    className="dados_usuario_ver_senha"
+                    src={visibilidade_senha.senhaAtual ? SenhaVisivel : SenhaInvisivel}
+                    onClick={() => def_visibilidade_senha({ ...visibilidade_senha, senhaAtual: !visibilidade_senha.senhaAtual })}
+                    alt="Visibilidade"
+                  />
+                </label>
               </div>
-              <span className="aviso_erro">
-                {erros.telefoneErro ? "Número de telefone inválido" : ""}
-              </span>
-            </label>
-          </div>
-
-          <div className="campos_laterais" id="campos_senha_perfil">
-            <div className="div_pai_nova_senha_perfil">
-              <label className="dados_usuario">
-                <p className="dados_usuario_titulos">Senha Atual</p>
-                <input
-                  className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
-                  value={userData.senhaAtual || ""}
-                  onChange={(e) => setUserData({ ...userData, senhaAtual: e.target.value })}
-                  type={visibilidade_senha.senhaAtual ? "text" : "password"}
-                  autoComplete="current-password"
-                  placeholder={visibilidade_senha.senhaAtual ? "" : "********"}
-                />
-                <img
-                  className="dados_usuario_ver_senha"
-                  src={visibilidade_senha.senhaAtual ? SenhaVisivel : SenhaInvisivel}
-                  onClick={() => def_visibilidade_senha({ ...visibilidade_senha, senhaAtual: !visibilidade_senha.senhaAtual })}
-                  alt="Visibilidade"
-                />
-              </label>
+              <div className="div_pai_nova_senha_perfil">
+                <label id="div_filho_nova_senha_perfil" className="dados_usuario_checkbox">
+                  <input className="input_dados_usuario_checkbox" type="checkbox" onChange={(e) => def_visibilidade_nova_senha(e.target.checked)} checked={visibilidade_nova_senha} />
+                  <span className="span_dados_usuario_checkbox"></span>
+                  <p className="dados_usuario_titulos">{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}</p>
+                </label>
+                <label className="dados_usuario">
+                  <input
+                    className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
+                    value={userData.novaSenha || ""}
+                    onChange={(e) => setUserData({ ...userData, novaSenha: e.target.value })}
+                    type={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? "text" : "password" : "password"}
+                    autoComplete="new-password"
+                    placeholder="********"
+                    disabled={!visibilidade_nova_senha}
+                  />
+                  <img
+                    className="dados_usuario_ver_senha"
+                    src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? SenhaVisivel : SenhaInvisivel : SenhaInvisivel}
+                    onClick={() => def_visibilidade_senha({ ...visibilidade_senha, novaSenha: !visibilidade_senha.novaSenha })}
+                    alt="Visibilidade"
+                    style={{ pointerEvents: visibilidade_nova_senha ? "auto" : "none" }}
+                  />
+                </label>
+              </div>
             </div>
-            <div className="div_pai_nova_senha_perfil">
-              <label id="div_filho_nova_senha_perfil" className="dados_usuario_checkbox">
-                <input className="input_dados_usuario_checkbox" type="checkbox" onChange={(e) => def_visibilidade_nova_senha(e.target.checked)} checked={visibilidade_nova_senha} />
-                <span className="span_dados_usuario_checkbox"></span>
-                <p className="dados_usuario_titulos">{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}</p>
-              </label>
-              <label className="dados_usuario">
-                <input
-                  className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
-                  value={userData.novaSenha || ""}
-                  onChange={(e) => setUserData({ ...userData, novaSenha: e.target.value })}
-                  type={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? "text" : "password" : "password"}
-                  autoComplete="new-password"
-                  placeholder="********"
-                  disabled={!visibilidade_nova_senha}
-                />
-                <img
-                  className="dados_usuario_ver_senha"
-                  src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? SenhaVisivel : SenhaInvisivel : SenhaInvisivel}
-                  onClick={() => def_visibilidade_senha({ ...visibilidade_senha, novaSenha: !visibilidade_senha.novaSenha })}
-                  alt="Visibilidade"
-                  style={{ pointerEvents: visibilidade_nova_senha ? "auto" : "none" }}
-                />
-              </label>
-            </div>
-          </div>
-          <br />
-          <div className="campos_laterais botoes_lateria">
-            <button className="expandir" type="button" onClick={e => { sessionStorage.setItem("Gerenciar", "ger_perfil"); window.location.href = window.location.href; }}>Desfazer</button>
-            <button className="expandir" type="button" onClick={salvar}>Salvar</button>
-          </div>
-        </form>
-        {/* ------------------------ Publico ------------------------ */}
-        <form id="perfil_publico" className="formularios">
-          <label className="dados_usuario">
-            <h4 style={{ textAlign: "center" }}>Esse informações ficaram visível a todos!</h4>
-            <p className="dados_usuario_titulos">Nome público</p>
-            <input
-              className={erros.nomePublicoErro ? "aviso_erro_borda" : ""}
-              value={userData.nomePublico || ""}
-              onChange={(e) => setUserData({ ...userData, nomePublico: e.target.value })}
-              autoComplete="name"
-              placeholder="Nome público"
-              required
-            />
-            <span className="aviso_erro">
-              {erros.nomePublicoErro ? "Nome deve ter mais de 4 caracteres" : ""}
-            </span>
             <br />
-          </label>
-        </form>
+            <div className="botoes_laterais">
+              <button className="expandir" type="button" onClick={e => { sessionStorage.setItem("Gerenciar", "ger_perfil"); window.location.href = window.location.href; }}>Desfazer</button>
+              <button className="expandir" type="button" onClick={salvar}>Salvar</button>
+            </div>
+          </form>
+          {/* ------------------------ Publico ------------------------ */}
+          <form id="perfil_publico" className="formularios">
+            <label className="dados_usuario">
+              <h4 style={{ textAlign: "center" }}>Esse informações ficaram visível a todos!</h4>
+              <p className="dados_usuario_titulos">Nome público</p>
+              <input
+                className={erros.nomePublicoErro ? "aviso_erro_borda" : ""}
+                value={userData.nomePublico || ""}
+                onChange={(e) => setUserData({ ...userData, nomePublico: e.target.value })}
+                autoComplete="name"
+                placeholder="Nome público"
+                required
+              />
+              <span className="aviso_erro">
+                {erros.nomePublicoErro ? "Nome deve ter mais de 4 caracteres" : ""}
+              </span>
+              <br />
+            </label>
+          </form>
+        </div>
       </div>
-    </div>
   );
 }

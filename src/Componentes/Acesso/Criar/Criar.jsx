@@ -122,7 +122,9 @@ export default function Criar() {
         "password": senha
       });
 
-      if (status_post !== 200) {
+      if (!status_post && !dados_post) { window.location.href = "/"; }
+
+      if (Math.floor(status_post/100) !== 2) {
         meus_erros(import.meta.url.split('/').pop(), "CRI_ACS_INV");
         return;
       }

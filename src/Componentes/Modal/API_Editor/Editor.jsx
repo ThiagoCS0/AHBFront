@@ -50,8 +50,18 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      });
 
      const options = [
-          "REDE SOCIAIS", "MAPAS", "CEP", "CLIMA", "PAGAMENTO",
-          "ARMAZENAMENTO", "FINANÇAS", "SAÚDE", "ESTATÍSTICAS", "OUTROS", "EMPRESAS"
+          { NENHUMA: "NENHUMA" },
+          { ARMAZENAMENTO: "ARMAZENAMENTO" },
+          { CEP: "CEP" },
+          { CLIMA: "CLIMA" },
+          { EMPRESAS: "EMPRESAS" },
+          { ESTATISTICAS: "ESTATÍSTICAS" },
+          { FINANCAS: "FINANÇAS" },
+          { PAGAMENTO: "PAGAMENTO" },
+          { MAPAS: "MAPAS" },
+          { OUTROS: "OUTROS" },
+          { REDE_SOCIAIS: "REDE SOCIAIS" },
+          { SAUDE: "SAÚDE" }
      ];
 
      const validar_nome_api = (valor) => valor.length > 2 && /\S+/.test(valor);
@@ -84,18 +94,18 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                          icon: imagem_api,
                          user: { id: id_usuario }
                     };
-                    console.log(corpo)
+
                     let status = "", dados = "";
 
                     const resultado = dados_minha_api
                          ? await meu_put(`apis/${dados_minha_api.id}`, corpo, true)
                          : await meu_post("apis", corpo, true);
 
+                    if (!resultado.status_put || (!resultado.status_post && !resultado.dados_post)) { window.location.href = "/"; }
                     status = resultado.status_put || resultado.status_post;
                     dados = resultado.dados_post || "";
 
-                    if (status === 200) {
-                         // fdechar estava aqui
+                    if (Math.floor(status / 100) === 2) {
                          if (dados_minha_api) {
                               atualizar_minha_api({
                                    id: dados_minha_api.id,
@@ -104,11 +114,9 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                                    metodos: metodos_api,
                                    link: link_api,
                                    categoria: categoria_api,
-                                   imagem: imagem_api
+                                   imagem: imagem_api,
+                                   publicador: id_usuario
                               });
-                              fechar();
-                              redefinir_campos();
-                              return;
                          }
 
                          if (dados) {
@@ -120,10 +128,13 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                                    metodos: metodos_api,
                                    link: link_api,
                                    categoria: categoria_api,
-                                   imagem: imagem_api
+                                   imagem: imagem_api,
+                                   publicador: id_usuario
                               });
                          }
+                         fechar();
                          redefinir_campos();
+                         return;
                     } else { def_resposta_http(dados_minha_api ? "Erro ao atualizar." : "Erro ao criar API."); }
                } else {
                     novo_acesso();
@@ -150,6 +161,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
           def_nome_api('');
           def_link_api('');
      }
+
      const alterando_nome = (e) => {
           const valor = e.target.value;
           def_erros((tmp) => ({ ...tmp, nomeErros: !validar_nome_api(valor) }));
@@ -211,104 +223,97 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
 
      return (
           <div id="gerenciar_modal_apis" onClick={fechar}>
-               <form className="modal_nova_api ondulacao-2" onClick={e => { e.stopPropagation(); }}>
-                    {/* Nome da sua API */}
-                    <label className="dados_api">
-                         <p>Nome da sua API</p>
-                         <input
-                              className={erros.nomeErros ? "aviso_erro_borda" : ""}
-                              value={nome_api || ""}
-                              onChange={alterando_nome}
-                              placeholder="Nome da API"
-                              required
-                         />
-                         {erros.nomeErros && <span className="aviso_erro">Deve ter mais de 3 caracteres</span>}
-                    </label>
-                    {/* Categoria */}
-                    <div className="selecionador_categorias dados_api">
-                         <p>Categoria da API</p>
-                         <div className="selecionador_customizado" onClick={() => def_select_aberto(!select_aberto)}>
-                              <span className={erros.categoriaErros ? "aviso_erro_borda" : ""}>{opcao_selecionada || "Escolha uma categoria"}</span>
-                              <div className={`categoria_seta ${select_aberto ? "aberta" : ""}`}></div>
-                         </div>
-                         {select_aberto && (
-                              <ul lcas>
-                                   {options.map((option, index) => (
-                                        <li key={index}
-                                             onClick={() => alterando_categoria(option)}
-                                             className="categoria_opcao">
-                                             {option}
-                                        </li>
-                                   ))}
-                              </ul>
-                         )}
-                    </div>
-                    {/* Descrição */}
-                    <label className="dados_api">
-                         <p>Descrição (Max. <i>300</i> caracteres)</p>
-                         <textarea
-                              className={erros.descricaoErros ? "textarea_descricao aviso_erro_borda" : "textarea_descricao"}
-                              value={descricao_api || ""}
-                              onChange={alterando_descricao}
-                              placeholder="Digite a descrição aqui"
-                              maxLength="300"
-                              required
-                         />
-                         {erros.descricaoErros && <span className="aviso_erro">Deve ter mais de 3 caracteres</span>}
-                    </label>
-                    {/* Métodos */}
-                    <label className="dados_api">
-                         <p>Métodos {tela_pequena ? <br /> : ""}(<i>GET</i>, <i>POST</i>, ... separe com virgula)</p>
-                         <input
-                              className={erros.metodosErros ? "aviso_erro_borda" : ""}
-                              value={metodos_api || ""}
-                              onChange={alterando_metodos}
-                              placeholder="Métodos da API"
-                              required
-                         />
-                         {erros.metodosErros && <span className="aviso_erro">{tela_pequena ? "Use: GET, POST, ... 1 de cada" : "Inválidos; use: GET, POST, etc ( 1 de cada )"}</span>}
-                    </label>
-                    {/* Link */}
-                    <label className="dados_api">
-                         <p>Link ( Use / :  https:<i>//</i> )</p>
-                         <input
-                              className={erros.linkErros ? "aviso_erro_borda" : ""}
-                              value={link_api || ""}
-                              onChange={alterando_link}
-                              placeholder="https://sua.api/"
-                              required
-                         />
-                         {erros.linkErros && <span className="aviso_erro">Link inválido</span>}
-                    </label>
-                    {/* Logo */}
-                    <label className="dados_api">
-                         <p>Logo{tela_pequena ? <br /> : ""} ( URL/imagem<i> . jpg jpeg png gif</i> )</p>
-                         <input
-                              className={erros.imagemErros ? "aviso_erro_borda" : ""}
-                              value={imagem_api || ""}
-                              onChange={alterando_imagem}
-                              placeholder="https://sua.api.imagem.jpg"
-                              required
-                         />
-                         {erros.imagemErros && <span className="aviso_erro">URL inválida</span>}
-                    </label>
-                    <br />
-                    {/* Preview */}
-                    {imagem_api && (
-                         <div id="img_prever">
-                              <img
-                                   src={imagem_api || ""}
-                                   alt="Imagem da API"
+               <div className="modal_nova_api ondulacao-2">
+                    <form onClick={e => { e.stopPropagation(); }}>
+                         {/* Nome da sua API */}
+                         <label className="dados_api">
+                              <p>Nome da sua API</p>
+                              <input
+                                   className={erros.nomeErros ? "aviso_erro_borda" : ""}
+                                   value={nome_api || ""}
+                                   onChange={alterando_nome}
+                                   placeholder="Nome da API"
+                                   required
                               />
+                              {erros.nomeErros && <span className="aviso_erro">Deve ter mais de 3 caracteres</span>}
+                         </label>
+                         {/* Categoria */}
+                         <div className="dados_api">
+                              <p>Categoria da API</p>
+                              <select onChange={(e) => { categorizar(e.target.value) }} className="expandir">
+                                   {options.map((option, index) => {
+                                        const chave = Object.keys(option)[0];
+                                        return (<option value={chave} key={index}> {option[chave]} </option>);
+                                   })}
+                              </select>
                          </div>
-                    )}
-                    {/* Botões */}
-                    <div className="campos_laterais" style={{ marginTop: "10px" }}>
-                         <button type="button" onClick={() => { redefinir_campos(); fechar() }}>Cancelar</button>
-                         <button type="button" onClick={enviar}> {dados_minha_api ? "Atualizar" : "Salvar"} </button>
-                    </div>
-                    {resposta_http && (<p className="texto_erro"> {resposta_http} </p>)}
-               </form>
+                         {/* Descrição */}
+                         <label className="dados_api">
+                              <p>Descrição (Max. <i>300</i> caracteres)</p>
+                              <textarea
+                                   className={erros.descricaoErros ? "textarea_descricao aviso_erro_borda" : "textarea_descricao"}
+                                   value={descricao_api || ""}
+                                   onChange={alterando_descricao}
+                                   placeholder="Digite a descrição aqui"
+                                   maxLength="300"
+                                   required
+                              />
+                              {erros.descricaoErros && <span className="aviso_erro">Deve ter mais de 3 caracteres</span>}
+                         </label>
+                         {/* Métodos */}
+                         <label className="dados_api">
+                              <p>Métodos {tela_pequena ? <br /> : ""}(<i>GET</i>, <i>POST</i>, ... separe com virgula)</p>
+                              <input
+                                   className={erros.metodosErros ? "aviso_erro_borda" : ""}
+                                   value={metodos_api || ""}
+                                   onChange={alterando_metodos}
+                                   placeholder="Métodos da API"
+                                   required
+                              />
+                              {erros.metodosErros && <span className="aviso_erro">{tela_pequena ? "Use: GET, POST, ... 1 de cada" : "Inválidos; use: GET, POST, etc ( 1 de cada )"}</span>}
+                         </label>
+                         {/* Link */}
+                         <label className="dados_api">
+                              <p>Link ( Use / :  https:<i>//</i> )</p>
+                              <input
+                                   className={erros.linkErros ? "aviso_erro_borda" : ""}
+                                   value={link_api || ""}
+                                   onChange={alterando_link}
+                                   placeholder="https://sua.api/"
+                                   required
+                              />
+                              {erros.linkErros && <span className="aviso_erro">Link inválido</span>}
+                         </label>
+                         {/* Logo */}
+                         <label className="dados_api">
+                              <p>Logo{tela_pequena ? <br /> : ""} ( URL/imagem<i> . jpg jpeg png gif</i> )</p>
+                              <input
+                                   className={erros.imagemErros ? "aviso_erro_borda" : ""}
+                                   value={imagem_api || ""}
+                                   onChange={alterando_imagem}
+                                   placeholder="https://sua.api.imagem.jpg"
+                                   required
+                              />
+                              {erros.imagemErros && <span className="aviso_erro">URL inválida</span>}
+                         </label>
+                         <br />
+                         {/* Preview */}
+                         {imagem_api && (
+                              <div id="img_prever">
+                                   <img
+                                        src={imagem_api || ""}
+                                        alt="Imagem da API"
+                                   />
+                              </div>
+                         )}
+                         {/* Botões */}
+                         <div className="botoes_laterais" style={{ marginTop: "10px" }}>
+                              <button type="button" onClick={() => { redefinir_campos(); fechar() }}>Cancelar</button>
+                              <button type="button" onClick={enviar}> {dados_minha_api ? "Atualizar" : "Salvar"} </button>
+                         </div>
+                         {resposta_http && (<p className="texto_erro"> {resposta_http} </p>)}
+                    </form>
+               </div>
           </div>
      );
 }

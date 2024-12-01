@@ -88,21 +88,21 @@ export async function atualizar_token() {
 export function validar_token(token_passado = null) {
   try {
     const token = token_passado ? token_passado : ler_token();
-    if (!token) { return false; }
+    if (!token) { return null; }
 
     const partes = token.split('.');
-    if (partes.length !== 3) { return false; }
+    if (partes.length !== 3) { return null; }
 
     const data_expiracao_token = JSON.parse(atob(partes[1]));
     const agora = Math.floor(Date.now() / 1000);
 
-    if (data_expiracao_token.exp < agora) { return false; } // Expirado
+    if (data_expiracao_token.exp < agora) { return null; } // Expirado
 
     return token; // Valido
 
   } catch (erro) {
     meus_erros(import.meta.url.split('/').pop(), "CAT_JWT_VAL", erro);
-    return false;
+    return null;
   }
 }
 

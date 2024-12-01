@@ -22,7 +22,7 @@ export default function Conta() {
 
     const iniciando = async () => {
       const nome = await usuario_nome();
-      def_token_valido(nome !== "");
+      def_token_valido(nome !== null);
       def_usuario(nome)
     }
 
@@ -61,6 +61,12 @@ export default function Conta() {
 
   }
 
+  const sair = () => {
+    remover_token();
+    sessionStorage.clear();
+    def_token_valido(false);
+    window.location.href = site;
+  }
   return (
     <div id="conta" className="alinhado">
       <button onClick={opcoes_botao_conta}
@@ -73,7 +79,7 @@ export default function Conta() {
           <Link onClick={() => { navegando("perfil") }}>Perfil</Link>
           <Link onClick={() => { navegando("apis") }}>Minhas APIs</Link>
           <Link onClick={() => { navegando("termos") }}>Termos</Link>
-          <a href="\" onClick={() => { remover_token(); sessionStorage.removeItem("Gerenciar"); def_token_valido(false); }}>Sair</a>
+          <Link onClick={() => { sair(); }}>Sair</Link>
         </div>
       )
       }
