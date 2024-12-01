@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 import { TemasContexto } from "../Temas/TemasContexto";
 import { buscar_apis } from "../Servicos/APIs/APIs";
 import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
 import Carregamento from "../Carregamento/Carregamento";
 import Populares from "../../Corpo/Populares/Populares";
+import Gerenciar from "../../Corpo/Gerenciar/Gerenciar"
 import Cabecalho from "../../Cabecalho/Cabecalho";
 import Rodape from "../../Rodape/Rodape";
 import Corpo from "../../Corpo/Corpo";
+import { Outlet } from "react-router-dom";
 
 const nome_desta_pagina = import.meta.env.VITE_INICIAL;
 
@@ -88,21 +89,24 @@ export default function ComCabecalho({ token_valido, usuario }) {
     <TemasContexto>
       {carregando ? (
         <div className="tela_inteira alinhado">
-          <Carregamento carregando={carregando} inicial={true}/>
+          <Carregamento carregando={carregando} inicial={true} />
         </div>
       ) : (
         <>
           <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} />
           <Corpo>
             {
-              window.location.pathname === nome_desta_pagina ?
+              !sessionStorage.getItem("Gerenciar") ?
                 <>
                   {!filtrando && <Populares populares={populares} />}
                   <ListaAPIs apis={filtrado} />
                   <Rodape fixar_abaixo={filtrando} />
                 </>
                 :
-                <Outlet />
+                window.location.pathname === "Gerenciar" ?
+                  <Gerenciar />
+                  :
+                  <Outlet />
             }
           </Corpo>
         </>

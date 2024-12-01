@@ -49,16 +49,15 @@ export default function Conta() {
 
   const navegando = (sub_pagina) => {
     switch (sub_pagina) {
+      case "apis": sub_pagina = "ger_apis"; break;
       case "perfil": sub_pagina = "ger_perfil"; break;
-      case "apis": sub_pagina = "ger_perfil"; break;
       case "termos": sub_pagina = "ger_termos"; break;
     }
+
+    if (!sessionStorage.getItem("Gerenciar")) { window.location.href = "Gerenciar"; } else { navegar("Gerenciar"); }
     sessionStorage.setItem("Gerenciar", sub_pagina);
-    navegar("Gerenciar");
-    window.location.reload();
   }
 
-  
   return (
     <div id="conta" className="alinhado">
       <button onClick={opcoes_botao_conta}
@@ -71,7 +70,7 @@ export default function Conta() {
           <li onClick={() => { navegando("perfil") }}>Perfil</li>
           <li onClick={() => { navegando("apis") }}>Minhas APIs</li>
           <li onClick={() => { navegando("termos") }}>Termos</li>
-          <li onClick={() => { remover_token(); def_token_valido(false); }}>Sair</li>
+          <li onClick={() => { remover_token(); sessionStorage.removeItem("Gerenciar"); def_token_valido(false); }}>Sair</li>
         </ul>
       )
       }
