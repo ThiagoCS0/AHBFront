@@ -47,7 +47,6 @@ export default function Conta() {
     }
   }
 
-
   const navegando = (sub_pagina) => {
     switch (sub_pagina) {
       case "perfil": sub_pagina = "ger_perfil"; break;
@@ -59,22 +58,22 @@ export default function Conta() {
     window.location.reload();
   }
 
-return (
-  <div id="conta" className="alinhado">
-    <button onClick={opcoes_botao_conta}
-      ref={acessarRef}>
-      <img src={Person} alt="Usuário" />
-      <span>{usuario ? (usuario || "...") : "Entrar"}</span>
-    </button>
-    {token_valido && menu_visivel && (
-      <ul id="conta_menu" ref={menuRef}>
-        <li onClick={() => { navegando("perfil") }}>Perfil</li>
-        <li onClick={() => { navegando("apis") }}>Minhas APIs</li>
-        <li onClick={() => { navegando("termos") }}>Termos</li>
-        <li onClick={() => { remover_token(); def_token_valido(false); }}>Sair</li>
-      </ul>
-    )
-    }
-  </div >
-)
+  return (
+    <div id="conta" className="alinhado">
+      <button onClick={opcoes_botao_conta}
+        ref={acessarRef}>
+        <img src={Person} alt="Usuário" />
+        <span>{usuario ? (usuario || "...") : "Entrar"}</span>
+      </button>
+      {token_valido && menu_visivel && (
+        <ul id="conta_menu" ref={menuRef}>
+          <li onClick={() => { navegando("perfil") }}>Perfil</li>
+          <li onClick={() => { navegando("apis") }}>Minhas APIs</li>
+          <li onClick={() => { navegando("termos") }}>Termos</li>
+          <li onClick={() => { remover_token(); def_token_valido(false); }}>Sair</li>
+        </ul>
+      )
+      }
+    </div >
+  )
 }
