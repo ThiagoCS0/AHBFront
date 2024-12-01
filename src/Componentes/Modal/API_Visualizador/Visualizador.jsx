@@ -50,7 +50,7 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
 
   return (
     <div id="modal_apis" onClick={fechar}>
-      <div className="modal_apis_conteudo ondulacao-3" onClick={e => { e.stopPropagation(); }}>
+      <div className="modal_apis_conteudo ondulacao-1" onClick={e => { e.stopPropagation(); }}>
         {carregando ?
           <Carregamento carregando={carregando} />
           :
