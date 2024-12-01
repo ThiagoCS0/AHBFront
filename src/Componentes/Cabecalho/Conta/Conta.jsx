@@ -54,6 +54,42 @@ export default function Conta() {
       case "termos": sub_pagina = "ger_termos"; break;
     }
 
+    let primeiro_acesso = sessionStorage.getItem("Gerenciar") == null;
+
+    sessionStorage.setItem("Gerenciar", sub_pagina);
+    if (primeiro_acesso) { window.location.reload(); }
+
+  }
+
+  return (
+    <div id="conta" className="alinhado">
+      <button onClick={opcoes_botao_conta}
+        ref={acessarRef}>
+        <img src={Person} alt="Usuário" />
+        <span>{usuario ? (usuario || "...") : "Entrar"}</span>
+      </button>
+      {token_valido && menu_visivel && (
+        <div id="conta_menu" ref={menuRef}>
+          <Link onClick={() => { navegando("perfil") }}>Perfil</Link>
+          <Link onClick={() => { navegando("apis") }}>Minhas APIs</Link>
+          <Link onClick={() => { navegando("termos") }}>Termos</Link>
+          <a href="\" onClick={() => { remover_token(); sessionStorage.removeItem("Gerenciar"); def_token_valido(false); }}>Sair</a>
+        </div>
+      )
+      }
+    </div >
+  )
+}
+
+/*
+
+  const navegando = (sub_pagina) => {
+    switch (sub_pagina) {
+      case "apis": sub_pagina = "ger_apis"; break;
+      case "perfil": sub_pagina = "ger_perfil"; break;
+      case "termos": sub_pagina = "ger_termos"; break;
+    }
+
     sessionStorage.setItem("Gerenciar", sub_pagina);
     
     window.location.reload();
@@ -79,3 +115,4 @@ export default function Conta() {
     </div >
   )
 }
+*/

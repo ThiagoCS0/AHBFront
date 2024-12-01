@@ -32,7 +32,7 @@
  top: 85%;
 }
 
-#conta_menu li {
+#conta_menu a {
  color: var(--tema-texto);
  text-decoration: none;
  margin: 0 !important;
@@ -41,15 +41,15 @@
  padding: 10px;
 }
 
-#conta_menu li:first-child {
+#conta_menu a:first-child {
  border-radius: 6px 6px 0 0;
 }
 
-#conta_menu li:last-child {
+#conta_menu a:last-child {
  border-radius: 0 0 6px 6px;
 }
 
-#conta_menu li:hover {
+#conta_menu a:hover {
  background-color: var(--tema-hover-fundo);
  font-weight: bold;
 }
