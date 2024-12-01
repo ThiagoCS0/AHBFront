@@ -55,6 +55,7 @@ export default function Conta() {
     }
 
     if (!sessionStorage.getItem("Gerenciar")) { window.location.href = "Gerenciar"; } else { navegar("Gerenciar"); }
+
     sessionStorage.setItem("Gerenciar", sub_pagina);
   }
 
