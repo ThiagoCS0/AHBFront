@@ -5,6 +5,8 @@ import image_padrao from "../../../assets/image_padrao.png";
 import "./Visualizador.css";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
 
+const site = import.meta.env.VITE_SITE;
+
 export default function Visualizador({ api, fechar, modal_simples = false }) {
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [publicador, def_publicador] = useState('');
@@ -33,7 +35,7 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
       def_publicador('')
       if (api.publicador && api.publicador != "undefined") {
         const { status_get, dados_get } = await meu_get(`users/${api.publicador}/nome-publico`);
-        if (!status_get && !dados_get) { window.location.href = "/"; }
+        if (!status_get && !dados_get) { window.location.href = site; }
         if (dados_get) { def_publicador(dados_get.publicName); }
       }
       def_carregando(false);

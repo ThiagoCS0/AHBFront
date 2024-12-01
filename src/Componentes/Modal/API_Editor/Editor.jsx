@@ -6,6 +6,7 @@ import "./Editor.css"
 import { meus_erros } from "../../Principais/Erros/MeusErros";
 
 const inicio = import.meta.env.VITE_INICIAL;
+const site = import.meta.env.VITE_SITE;
 
 export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_api, dados_minha_api }) {
      const [categoria_api, def_categoria_api] = useState(dados_minha_api ? dados_minha_api.categoria : "");
@@ -14,7 +15,6 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      const [imagem_api, def_imagem_api] = useState(dados_minha_api ? dados_minha_api.imagem : "");
      const [link_api, def_link_api] = useState(dados_minha_api ? dados_minha_api.link : "");
      const [nome_api, def_nome_api] = useState(dados_minha_api ? dados_minha_api.nome : "");
-     const [opcao_selecionada, def_opcao_selecionada] = useState("");
      const [select_aberto, def_select_aberto] = useState(false);
      const [resposta_http, def_resposta_http] = useState("");
      const navegar = useNavigate();
@@ -30,7 +30,6 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
 
      useEffect(() => {
           if (dados_minha_api) {
-               def_opcao_selecionada(dados_minha_api.categoria)
                def_descricao_api(dados_minha_api.descricao);
                def_categoria_api(dados_minha_api.categoria);
                def_imagem_api(dados_minha_api.imagem);
@@ -101,7 +100,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                          ? await meu_put(`apis/${dados_minha_api.id}`, corpo, true)
                          : await meu_post("apis", corpo, true);
 
-                    if (!resultado.status_put || (!resultado.status_post && !resultado.dados_post)) { window.location.href = "/"; }
+                    if (!resultado.status_put || (!resultado.status_post && !resultado.dados_post)) { window.location.href = site; }
                     status = resultado.status_put || resultado.status_post;
                     dados = resultado.dados_post || "";
 
@@ -153,7 +152,6 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      }
 
      const redefinir_campos = (e) => {
-          def_opcao_selecionada('Escolha uma categoria');
           def_descricao_api('');
           def_resposta_http('');
           def_metodos_api('');
@@ -170,7 +168,6 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
 
      const alterando_categoria = (option) => {
           def_erros((tmp) => ({ ...tmp, categoriaErros: !validar_categoria_api(option) }));
-          def_opcao_selecionada(option.toUpperCase());
           def_categoria_api(option.toUpperCase())
           def_select_aberto(false);
      };

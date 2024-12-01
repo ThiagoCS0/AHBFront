@@ -25,7 +25,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
     const token = validar_token();
     if (!token && sessionStorage.getItem("Gerenciar")) {
       sessionStorage.clear();
-      window.location.href = "/";
+      window.location.href = site;
     }
   }, [])
 

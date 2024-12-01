@@ -122,7 +122,7 @@ export default function Criar() {
         "password": senha
       });
 
-      if (!status_post && !dados_post) { window.location.href = "/"; }
+      if (status_post == null && dados_post == null) { window.location.href = site; }
 
       if (Math.floor(status_post/100) !== 2) {
         meus_erros(import.meta.url.split('/').pop(), "CRI_ACS_INV");
@@ -132,7 +132,6 @@ export default function Criar() {
       salvar_token(dados_post.token)
 
     } catch (erro) {
-      window.location.href = "/";
       meus_erros(import.meta.url.split('/').pop(), "CAT_CRI_ACS", erro);
       return;
     }

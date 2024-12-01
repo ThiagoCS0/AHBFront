@@ -74,7 +74,7 @@ const MinhasApis = () => {
         const id_usuario = usuario_id();
         if (id_usuario !== "") {
           const { status_get, dados_get } = await meu_get(`apis/user/${id_usuario}`, true);
-          if (!status_get && !dados_get) { window.location.href = "/"; }
+          if (!status_get && !dados_get) { window.location.href = site; }
           if (Math.floor(status_get / 100) !== 2) {
             meus_erros(import.meta.url.split('/').pop(), "MNH_LST_!OK " + status_get);
             return;

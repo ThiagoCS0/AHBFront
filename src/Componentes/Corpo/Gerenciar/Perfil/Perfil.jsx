@@ -122,7 +122,7 @@ export default function Perfil() {
       try {
         const id_usuario = usuario_id()
         const { status_get, dados_get } = await meu_get(`users/${id_usuario}`, true);
-        if (!status_get && !dados_get) { window.location.href = "/"; }
+        if (!status_get && !dados_get) { window.location.href = site; }
         if (!dados_get) { return false; }
 
         if (Math.floor(status_get / 100) !== 2) { novo_acesso(); }
@@ -184,7 +184,7 @@ export default function Perfil() {
         password: userData.senhaAtual
       }, true);
 
-      if (!status_put && !dados_put) { window.location.href = "/"; }
+      if (!status_put && !dados_put) { window.location.href = site; }
       
       if (Math.floor(status_put / 100) !== 2) {
         defHttpResposta("Dados incorretos ou já cadastrados!"); return;
