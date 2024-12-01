@@ -56,6 +56,7 @@ export default function Conta() {
     }
     sessionStorage.setItem("Gerenciar", sub_pagina);
     navegar("Gerenciar");
+    window.location.reload();
   }
 
 return (
