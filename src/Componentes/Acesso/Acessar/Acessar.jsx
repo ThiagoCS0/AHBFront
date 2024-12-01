@@ -46,10 +46,11 @@ export default function Acessar() {
 
       const { valido, mensagem } = await acessar(usuario, senha)
       if (valido) {
-        navegar(inicio, {replace:true})
+          sessionStorage.setItem("Acessando", true);
+        navegar(inicio, { replace: true })
       } else {
-      def_acessando(false);
-      if (mensagem) {
+        def_acessando(false);
+        if (mensagem) {
           def_resposta_http(mensagem); return;
         } else {
           window.location.href = site;
@@ -67,13 +68,13 @@ export default function Acessar() {
     if (usuario_valido && senha.length >= 8) {
       localStorage.setItem("lembrar_senha", lembrar_senha);
       fazer_acesso();
-  } else {
+    } else {
       remover_token();
       def_resposta_http("Dados incorretos")
       def_usuario("");
       def_senha("");
-    def_acessando(false);
-  }
+      def_acessando(false);
+    }
   };
 
   return (
@@ -81,7 +82,7 @@ export default function Acessar() {
       <Link to={inicio} className="botao_voltar"></Link>
       {
         acessando ?
-          <Carregamento carregando={acessando}  texto="Acessando..."/>
+          <Carregamento carregando={acessando} texto="Acessando..." />
           :
           <form onSubmit={enviar} className="dados_usuario_principal">
             <label className="dados_usuario">

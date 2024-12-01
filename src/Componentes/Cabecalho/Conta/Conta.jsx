@@ -13,17 +13,21 @@ const site = import.meta.env.VITE_SITE;
 export default function Conta() {
   const [menu_visivel, def_menu_visivel] = useState(false);
   const [token_valido, def_token_valido] = useState(false);
+  const [acessando, def_acessando] = useState(true);
   const [usuario, def_usuario] = useState(null);
   const acessarRef = useRef(null);
   const navegar = useNavigate();
   const menuRef = useRef(null);
 
   useEffect(() => {
-
+    if (!sessionStorage.getItem("Acessando")) {
+      def_acessando(false);
+    }
     const iniciando = async () => {
       const nome = await usuario_nome();
       def_token_valido(nome !== null);
       def_usuario(nome)
+      if (nome) { def_acessando(false); }
     }
 
     iniciando()
@@ -39,11 +43,13 @@ export default function Conta() {
   }, []);
 
   const opcoes_botao_conta = () => {
-    if (token_valido) {
-      def_menu_visivel(!menu_visivel);
-    } else {
-      sessionStorage.setItem("Acesso", "Acessar");
-      navegar("Acesso");
+    if (!acessando) {
+      if (token_valido) {
+        def_menu_visivel(!menu_visivel);
+      } else {
+        sessionStorage.setItem("Acesso", "Acessar");
+        navegar("Acesso");
+      }
     }
   }
 
@@ -72,7 +78,7 @@ export default function Conta() {
       <button onClick={opcoes_botao_conta}
         ref={acessarRef}>
         <img src={Person} alt="Usuário" />
-        <span>{usuario ? (usuario || "...") : "Entrar"}</span>
+        <span>{acessando ? "..." : usuario ? (usuario || "...") : "Entrar"}</span>
       </button>
       {token_valido && menu_visivel && (
         <div id="conta_menu" ref={menuRef}>

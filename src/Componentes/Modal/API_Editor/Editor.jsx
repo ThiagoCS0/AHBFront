@@ -240,7 +240,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                          {/* Categoria */}
                          <div className="dados_api">
                               <p>Categoria da API</p>
-                              <select onChange={(e) => { categorizar(e.target.value) }} className="expandir">
+                              <select onChange={(e) => { alterando_categoria(e.target.value) }} className="expandir">
                                    {options.map((option, index) => {
                                         const chave = Object.keys(option)[0];
                                         return (<option value={chave} key={index}> {option[chave]} </option>);
