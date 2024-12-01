@@ -103,10 +103,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
                   <Rodape fixar_abaixo={filtrando} />
                 </>
                 :
-                window.location.pathname === "Gerenciar" ?
-                  <Gerenciar />
-                  :
-                  <Outlet />
+                <Gerenciar />
             }
           </Corpo>
         </>

@@ -54,9 +54,10 @@ export default function Conta() {
       case "termos": sub_pagina = "ger_termos"; break;
     }
 
-    if (!sessionStorage.getItem("Gerenciar")) { window.location.href = "Gerenciar"; } else { navegar("Gerenciar"); }
-
     sessionStorage.setItem("Gerenciar", sub_pagina);
+    
+    window.location.reload();
+
   }
 
   return (
