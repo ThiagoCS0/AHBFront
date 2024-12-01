@@ -20,10 +20,25 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      const navegar = useNavigate();
      const tela_pequena = window.screen.width < 600;
 
-     const options = [
-          "REDE SOCIAIS", "MAPAS", "CEP", "CLIMA", "PAGAMENTO",
-          "ARMAZENAMENTO", "FINANÇAS", "SAÚDE", "ESTATÍSTICAS", "OUTROS", "EMPRESAS"
-     ];
+
+     useEffect(() => {
+          if (resposta_http) {
+               const timer = setTimeout(() => { def_resposta_http(''); }, 7000);
+               return () => clearTimeout(timer);
+          }
+     }, [resposta_http]);
+
+     useEffect(() => {
+          if (dados_minha_api) {
+               def_opcao_selecionada(dados_minha_api.categoria)
+               def_descricao_api(dados_minha_api.descricao);
+               def_categoria_api(dados_minha_api.categoria);
+               def_imagem_api(dados_minha_api.imagem);
+               def_metodos_api(dados_minha_api.metodos);
+               def_link_api(dados_minha_api.link);
+               def_nome_api(dados_minha_api.nome);
+          }
+     }, [dados_minha_api]);
 
      const [erros, def_erros] = useState({
           nomeErros: false,
@@ -34,11 +49,15 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
           imagemErros: false,
      });
 
+     const options = [
+          "REDE SOCIAIS", "MAPAS", "CEP", "CLIMA", "PAGAMENTO",
+          "ARMAZENAMENTO", "FINANÇAS", "SAÚDE", "ESTATÍSTICAS", "OUTROS", "EMPRESAS"
+     ];
+
      const validar_nome_api = (valor) => valor.length > 2 && /\S+/.test(valor);
      const validar_categoria_api = (valor) => valor && valor.length > 0 && valor !== "Escolha uma categoria";
      const validar_descricao_api = (valor) => valor.length > 3 && valor.length <= 300;
      const validar_link_api = (valor) => /^https?:\/\/([^\/\s]+?\..+|localhost)(:\d+)?(\/.*)?$/i.test(valor);
-
      const validar_imagem_api = (valor) => valor.length > 0 && /^https?:\/\/([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d+)?\/.*\.(jpg|jpeg|png|gif)$/i.test(valor);
 
      const criar_api = async () => {
@@ -65,7 +84,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                          icon: imagem_api,
                          user: { id: id_usuario }
                     };
-
+                    console.log(corpo)
                     let status = "", dados = "";
 
                     const resultado = dados_minha_api
@@ -131,26 +150,6 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
           def_nome_api('');
           def_link_api('');
      }
-
-     useEffect(() => {
-          if (resposta_http) {
-               const timer = setTimeout(() => { def_resposta_http(''); }, 7000);
-               return () => clearTimeout(timer);
-          }
-     }, [resposta_http]);
-
-     useEffect(() => {
-          if (dados_minha_api) {
-               def_opcao_selecionada(dados_minha_api.categoria)
-               def_descricao_api(dados_minha_api.descricao);
-               def_categoria_api(dados_minha_api.categoria);
-               def_imagem_api(dados_minha_api.imagem);
-               def_metodos_api(dados_minha_api.metodos);
-               def_link_api(dados_minha_api.link);
-               def_nome_api(dados_minha_api.nome);
-          }
-     }, [dados_minha_api]);
-
      const alterando_nome = (e) => {
           const valor = e.target.value;
           def_erros((tmp) => ({ ...tmp, nomeErros: !validar_nome_api(valor) }));
@@ -267,7 +266,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
                               placeholder="Métodos da API"
                               required
                          />
-                         {erros.metodosErros && <span className="aviso_erro">{tela_pequena?"Use: GET, POST, ... 1 de cada":"Inválidos; use: GET, POST, etc ( 1 de cada )"}</span>}
+                         {erros.metodosErros && <span className="aviso_erro">{tela_pequena ? "Use: GET, POST, ... 1 de cada" : "Inválidos; use: GET, POST, etc ( 1 de cada )"}</span>}
                     </label>
                     {/* Link */}
                     <label className="dados_api">
