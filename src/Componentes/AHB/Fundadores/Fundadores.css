@@ -60,7 +60,7 @@
 }
 
 /* Tablet */
-@media (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
 
  .nome_completo {
   width: 100px;
@@ -73,7 +73,7 @@
 }
 
 /* Smartphone */
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
  #fundadores {
   position: relative;
   top: 10px;

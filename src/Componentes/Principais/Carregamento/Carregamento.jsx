@@ -36,7 +36,7 @@ export default function Carregamento({ carregando, inicial = false, texto = "Car
         </div>
       </div>
       <br />
-      <p id="texto_carregando">{texto_carregamento}</p>
+      <p>{texto_carregamento}</p>
     </div>
   )
 }

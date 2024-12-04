@@ -151,9 +151,10 @@ body {
 }
 
 #corpo {
+  justify-content: space-between;
+  min-height: calc(100% - 70px);
   flex-direction: column;
   overflow-y: scroll;
-  flex: 1 1 100%;
   display: flex;
 }
 
@@ -191,7 +192,7 @@ a:hover {
 
 button,
 .botoes {
-  background-color: var(--tema-fundo);
+  background-color: var(--tema-fundo-1);
   color: var(--tema-texto);
   justify-content: center;
   align-items: center;
@@ -512,6 +513,7 @@ p {
 
 #container_carregando p {
   border-bottom: 2px solid var(--destaques);
+  text-align: center;
 }
 
 #container_carregando_pontos {
@@ -586,7 +588,7 @@ p {
 }
 
 /* Smartphone  */
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
 
   .campos_laterais {
     flex-direction: column;

@@ -21,14 +21,6 @@ export default function ComCabecalho({ token_valido, usuario }) {
   const [primeira_tentativa, def_pri_tentativa] = useState(true);
 
   useEffect(() => {
-    const token = validar_token();
-    if (!token && sessionStorage.getItem("Paginas")) {
-      sessionStorage.clear();
-      window.location.href = site;
-    }
-  }, [])
-
-  useEffect(() => {
     try {
       const carregar_apis = async () => {
         if (apis.length === 0 && populares.length === 0) {

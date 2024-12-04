@@ -161,9 +161,9 @@ export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar
     carregando ?
       <Carregamento carregando={carregando} />
       :
-      <div id="minhas_apis">
-        {/* ------------------ Lista de APIs ------------------ */}
-        <div id="lista_minhas_apis">
+      <>
+        <div id="minhas_apis">
+          {/* ------------------ Lista de APIs ------------------ */}
           {
             !nova_api || nova_api.length === 0 ? (<p>Nenhuma API cadastrada</p>) :
               Array.isArray(nova_api) && nova_api.map(api => (
@@ -189,8 +189,10 @@ export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar
           </div>
         )}
         {/* ------------------ Modais Editar e Visualizar ------------------ */}
-        {api_selec && exibir_modal_visualizar && <Visualizador api={api_selec} fechar={fechar_modais_minhas_apis} />}
-        {exibir_modal_editar && <Editor fechar={fechar_modais_minhas_apis} cadastrar_minha_api={cadastrar_minhas_apis} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
-      </div>
+        {api_selec && exibir_modal_visualizar &&
+          <Visualizador api={api_selec} fechar={fechar_modais_minhas_apis} />}
+        {exibir_modal_editar
+          && <Editor fechar={fechar_modais_minhas_apis} cadastrar_minha_api={cadastrar_minhas_apis} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
+      </>
   );
 };

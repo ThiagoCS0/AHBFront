@@ -51,9 +51,6 @@ Execute no terminal o comando:
 
 ### Time Responsável pelo Projeto
 O projeto foi idealizado e desenvolvido por estes desenvolvedores fantásticos:<br>
-![GitHub](https://img.icons8.com/ios-glyphs/30/000000/github.png) [Eduardo Pimenta](https://github.com/)<br>
-![GitHub](https://img.icons8.com/ios-glyphs/30/000000/github.png) [João Paiva](https://github.com/paivaa)<br>
 ![GitHub](https://img.icons8.com/ios-glyphs/30/000000/github.png) [Rafaela Marques](https://github.com/RafaelaOMarques)<br>
-![GitHub](https://img.icons8.com/ios-glyphs/30/000000/github.png) [Roberdan Santos](https://github.com/LeeYooBin)<br>
 ![GitHub](https://img.icons8.com/ios-glyphs/30/000000/github.png) [Rodrigo Vieira](https://github.com/rodrigosv91)<br>
 ![GitHub](https://img.icons8.com/ios-glyphs/30/000000/github.png) [Thiago C. Silva](https://github.com/ThiagoCS0)<br>

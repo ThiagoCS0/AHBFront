@@ -42,7 +42,8 @@
 }
 
 /* Smartphone  */
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
+
  .api {
   border-radius: 10px;
   height: 125px;
@@ -53,4 +54,5 @@
   background: linear-gradient(to top, #888E 0%, #AAAD 70%, #0000 100%);
   height: fit-content;
  }
+ 
 }

@@ -1,6 +1,8 @@
 .abas_titulos {
  color: var(--cor-principal-texto);
+ justify-content: space-around;
  text-overflow: ellipsis;
+ height: fit-content;
  white-space: nowrap;
  text-align: center;
  font-weight: bold;
@@ -8,14 +10,12 @@
  overflow: hidden;
  cursor: pointer;
  display: flex;
- height: 50px;
  width: 100%;
- padding: 0;
- justify-content: space-around;
 }
 
 .abas_titulos a {
  justify-content: center;
+ padding-bottom: 15px;
  align-items: center;
  display: flex;
  height: 100%;

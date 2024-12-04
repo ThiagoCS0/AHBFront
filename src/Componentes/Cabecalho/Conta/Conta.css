@@ -5,6 +5,7 @@
 }
 
 #conta button {
+ background-color: var(--tema-fundo);
  width: 100%;
 }
 
@@ -55,7 +56,7 @@
 }
 
 /* Smartphone  */
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
  #conta {
   width: fit-content;
  }
@@ -75,8 +76,7 @@
  #conta_menu {
   border-radius: 10px 0 10px 10px;
   width: 150px;
-  left: -45px;
-  top: 80%;
+  left: -30px;
  }
 
 }

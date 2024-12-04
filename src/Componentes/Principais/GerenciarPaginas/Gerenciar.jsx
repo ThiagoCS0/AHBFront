@@ -156,31 +156,28 @@ export default function Gerenciar() {
   ) : (
     <div id="gerenciar">
       <div id="gerenciar_menu">
-          {validar_token() && (
-            <>
-              <Link id="Perfil" onClick={(e) => alterar_componente(e.target.id)}>Perfil</Link>
-              <Link id="MinhasAPIs" onClick={(e) => alterar_componente(e.target.id)}>Minhas APIs</Link>
-            </>
-          )}
-          <Link id="Parceiros" onClick={(e) => alterar_componente(null, JSON.stringify({ pag: "Parceiros", aba: "parceiros_instituicoes" }))}>Parceiros</Link>
-          <Link id="Doacao" onClick={(e) => alterar_componente(e.target.id)}>Doação</Link>
-          <Link id="Ranks" onClick={(e) => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_votadas" }))}>Ranks</Link>
-          <Link id="Sobre" onClick={(e) => alterar_componente(e.target.id)}>Sobre</Link>
-          <Link id="Termos" onClick={(e) => alterar_componente(e.target.id)}>Termos</Link>
+        {validar_token() && (
+          <>
+            <Link id="Perfil" onClick={(e) => alterar_componente(e.target.id)}>Perfil</Link>
+            <Link id="MinhasAPIs" onClick={(e) => alterar_componente(e.target.id)}>Minhas APIs</Link>
+          </>
+        )}
+        <Link id="Parceiros" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Parceiros", aba: "parceiros_instituicoes" }))}>Parceiros</Link>
+        <Link id="Doacao" onClick={(e) => alterar_componente(e.target.id)}>Doação</Link>
+        <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_votadas" }))}>Ranks</Link>
+        <Link id="Sobre" onClick={(e) => alterar_componente(e.target.id)}>Sobre</Link>
+        <Link id="Termos" onClick={(e) => alterar_componente(e.target.id)}>Termos</Link>
       </div>
       <div id="gerenciar_conteudo">
         <h1 className="gerenciar_titulos ondulacao-1">{nome_pagina}</h1>
+        {pagina === "MinhasAPIs" && <button id="nova_api" onClick={chamar_modal_nova_api}></button>}
         <div className="gerenciar_pagina">
           {pagina === "MinhasAPIs" ?
-            <>
-              <button id="nova_api" onClick={chamar_modal_nova_api}></button>
-              <MinhasAPIs
-                editar_api={editar_api}
-                exibir_modal_editar={exibir_modal_editar}
-                def_editar_api={def_editar_api}
-                def_exibir_modal_editar={def_exibir_modal_editar}
-              />
-            </>
+            <MinhasAPIs
+              editar_api={editar_api}
+              exibir_modal_editar={exibir_modal_editar}
+              def_editar_api={def_editar_api}
+              def_exibir_modal_editar={def_exibir_modal_editar} />
             :
             componentes()
           }

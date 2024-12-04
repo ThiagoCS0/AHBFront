@@ -31,7 +31,7 @@ export default function API({ api, classe, click, simples = true, popular = fals
             <p> {api.nome.length > 15 ? api.nome.slice(0, 15) + "..." : api.nome}</p>
           </div>
           :
-          <div className="apis " onClick={click}>
+          <div className="apis" onClick={click}>
             <div className="lista_minhas_apis_dados">
               <img src={imagem} alt={api.nome || ""} style={{ objectFit: tamanhoImg.lar > tamanhoImg.alt ? "contain" : "cover" }} onLoad={e => { defTamanhoImg({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }} />
               <div className="lista_api_conteudo">

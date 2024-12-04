@@ -1,10 +1,14 @@
 #minhas_apis {
   -ms-overflow-style: none;
+  flex-direction: column;
   scrollbar-width: none;
+  height: fit-content;
+  overflow-y: scroll;
   position: relative;
-  overflow: hidden;
-  height: 100%;
+  padding: 10px;
+  display: flex;
   width: 100%;
+  gap: 20px;
 }
 
 #minhas_apis button {
@@ -16,7 +20,7 @@
 }
 
 #nova_api {
-  background-color: var(--destaque-claro);
+  background-color: var(--tema-fundo-1);
   box-shadow: var(--sombra-2);
   justify-content: center;
   align-items: center;
@@ -31,28 +35,17 @@
   z-index: 100;
   height: 30px;
   right: 10px;
-  top: 73px;
+  top: 80px;
+}
+
+#nova_api:hover {
+  filter: contrast(1.1) brightness(1.1);
 }
 
 #nova_api::before {
   content: "Nova API";
 }
 
-#lista_minhas_apis::-webkit-scrollbar {
-  display: none;
-}
-
-#lista_minhas_apis {
-  height: calc(100% - 100px);
-  flex-direction: column;
-  overflow-y: scroll;
-  padding: 20px;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  gap: 20px;
-  padding-top: 25px;
-}
 
 #minhas_apis .apis {
   border: 2px solid var(--destaque-escuro);
@@ -74,6 +67,7 @@
 
 .lista_minhas_apis_dados {
   align-items: center;
+  position: relative;
   overflow: hidden;
   display: flex;
   padding: 5px;
@@ -101,7 +95,7 @@
 }
 
 .lista_api_conteudo h3 {
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid var(--destaque-escuro);
   font-size: 18px;
   padding: 5px;
   margin: 0;
@@ -212,4 +206,36 @@
 #modal_excluir_texto {
   overflow: hidden;
   margin: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+
+  #nova_api {
+    top: 50px !important;
+  }
+
+}
+
+
+@media screen and (max-width: 600px) {
+
+  .lista_minhas_apis_dados img {
+    border-radius: 6px 0 0 6px;
+    object-fit: contain;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .lista_minhas_apis_dados img::after {
+    background: linear-gradient(to bottom, #0000 0%, #000 100%);
+    position: absolute;
+    content: '';
+    inset: 0;
+  }
+
+  .lista_api_conteudo {
+    display: none;
+  }
+
 }
