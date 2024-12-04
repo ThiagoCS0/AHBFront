@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LinksUteis() {
+ const navegar = useNavigate();
 
  const pagina = (pag, aba) => {
   sessionStorage.setItem("Paginas", JSON.stringify({ pag: pag, aba: aba }));
-  window.location.href = "Gerenciar"
+  navegar("Gerenciar")
+  // window.location.href = "Gerenciar"
  }
 
  return (
