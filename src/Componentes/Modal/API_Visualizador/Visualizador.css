@@ -5,10 +5,11 @@
  font-size: large;
  font-weight: 500;
  position: fixed;
- height: 100vh;
+ cursor: pointer;
+ height: 100%;
  display: flex;
  z-index: 100;
- width: 100vw;
+ width: 100%;
  left: 0;
  top: 0;
 }
@@ -29,6 +30,7 @@
  height: fit-content;
  border-radius: 8px;
  position: absolute;
+ cursor: default;
  display: flex;
  width: 500px;
  gap: 10px;

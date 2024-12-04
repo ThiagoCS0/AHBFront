@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { TemasContexto } from "../Temas/TemasContexto";
 import { buscar_apis } from "../Servicos/APIs/APIs";
+import { validar_token } from "../Servicos/JWT/JWT";
 import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
 import Carregamento from "../Carregamento/Carregamento";
 import Populares from "../../Corpo/Populares/Populares";
-import Gerenciar from "../../Corpo/Gerenciar/Gerenciar"
+import Gerenciar from "../GerenciarPaginas/Gerenciar"
 import Cabecalho from "../../Cabecalho/Cabecalho";
 import Rodape from "../../Rodape/Rodape";
 import Corpo from "../../Corpo/Corpo";
-import { Outlet } from "react-router-dom";
-import { validar_token } from "../Servicos/JWT/JWT";
 
-const nome_desta_pagina = import.meta.env.VITE_INICIAL;
+const site = import.meta.env.VITE_INICIAL;
 
 export default function ComCabecalho({ token_valido, usuario }) {
   const [apis, def_apis] = useState([]);
@@ -23,7 +22,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
 
   useEffect(() => {
     const token = validar_token();
-    if (!token && sessionStorage.getItem("Gerenciar")) {
+    if (!token && sessionStorage.getItem("Paginas")) {
       sessionStorage.clear();
       window.location.href = site;
     }
@@ -104,7 +103,7 @@ export default function ComCabecalho({ token_valido, usuario }) {
           <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} />
           <Corpo>
             {
-              !sessionStorage.getItem("Gerenciar") ?
+              !sessionStorage.getItem("Paginas") ?
                 <>
                   {!filtrando && <Populares populares={populares} />}
                   <ListaAPIs apis={filtrado} />

@@ -9,6 +9,7 @@ export default function Populares({ populares }) {
   const [foco, def_foco] = useState(0);
   const total_itens = populares.length;
   const intervaloRef = useRef(null);
+  const duracao = 400; // seg
 
   useEffect(() => {
     const carousel = document.getElementById("carousel");
@@ -35,7 +36,7 @@ export default function Populares({ populares }) {
     if (!intervaloRef.current) {
       intervaloRef.current = setInterval(() => {
         avancar();
-      }, 2000);
+      }, 1000 * duracao);
     }
   };
 

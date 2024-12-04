@@ -31,6 +31,7 @@
   --linear-efeito: #EEE 0%, #EEE5 50%, #0000 100%;
   --linear-acesso: linear-gradient(45deg, #FFF 0%, #777 100%);
   --linear-acesso-2: linear-gradient(45deg, #FFF 0%, #BBB 100%);
+  --linear-acesso-3: linear-gradient(45deg, #FFF 0%, #888 100%);
   --linear-erro: linear-gradient(to right, #000 0%, #555 100%);
   --linear-rodape: linear-gradient(to right, #A40 0%, #520 20%, #830 100%);
   /* Efeitos */
@@ -45,8 +46,8 @@
   --sombra-3: inset 0px 0px 8px #0004;
   --sombra-4: 0px 0px 8px #000;
   /* Erro */
-    --erro-texto: #D40;
-    --erro-borda: #E40;
+  --erro-texto: #D40;
+  --erro-borda: #E40;
 }
 
 [data-tema="escuro"] {
@@ -80,16 +81,21 @@
   --linear-efeito: #222 0%, #2225 50%, #0000 100%;
   --linear-acesso: linear-gradient(45deg, #222 0%, #777 100%);
   --linear-acesso-2: linear-gradient(45deg, #666 0%, #222 100%);
+  --linear-acesso-3: linear-gradient(45deg, #555 0%, #000 100%);
   --linear-rodape: linear-gradient(to right, #555 0%, #222 40%, #444 100%);
   /* Efeitos */
   --texto-selecionado: #FFF;
   --inverter: invert(0);
-    /* Erro */
-    --erro-texto: #F60;
-    --erro-borda: #D50;
+  /* Erro */
+  --erro-texto: #F60;
+  --erro-borda: #D50;
 }
 
 * {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
   box-sizing: border-box;
   text-decoration: none;
   outline: none;
@@ -108,8 +114,8 @@
 
 html {
   overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 body {
@@ -141,7 +147,7 @@ body {
   max-height: 70px;
   flex: 0 0 70px;
   display: flex;
-  width: 100vw;
+  width: 100%;
 }
 
 #corpo {
@@ -149,6 +155,27 @@ body {
   overflow-y: scroll;
   flex: 1 1 100%;
   display: flex;
+}
+
+.dados_usuario_titulos:not(#perfil_nova_senha .dados_usuario_titulos) {
+  margin-bottom: 2px !important;
+}
+
+.dados_usuario_titulos {
+  padding-left: 2px !important;
+}
+
+#conteudo_perfil .campos_laterais {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+div#perfil_publico {
+  justify-content: center;
+}
+
+div#perfil_privado {
+  justify-content: center;
 }
 
 a {
@@ -195,6 +222,7 @@ textarea {
   font-size: large;
   height: 40px;
   border: 0;
+  border: 1px solid transparent;
 }
 
 textarea::placeholder,
@@ -232,8 +260,8 @@ p {
 }
 
 .tela_inteira {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 .juntos {
@@ -265,24 +293,25 @@ p {
   margin: 0 !important;
 }
 
-.botoes_laterais, .campos_laterais {
+.botoes_laterais,
+.campos_laterais {
   justify-content: space-between;
   flex-direction: row;
   display: flex;
   width: 100%;
-  gap: 15px !important;
+  gap: 15px;
 }
 
-.botoes_laterais>*, .campos_laterais>* {
-  min-width: fit-content;
+.botoes_laterais>*,
+.campos_laterais>* {
   width: 100%;
 }
 
 .aviso_erro {
+  color: var(--erro-texto);
   position: absolute;
   font-weight: 500;
-  bottom: -22px;
-  color: var(--erro-texto);
+  bottom: -20px;
   right: 0;
 }
 
@@ -321,15 +350,17 @@ p {
 }
 
 /* Dados do usuário (Acessar, Criar, Recuperar e Perfil) */
-.dados_usuario_fundo {
+
+#acesso {
   animation: ondular 5s infinite ease-in-out;
-  background: var(--linear-acesso);
+  background-size: 300% 300% !important;
+  background: var(--linear-acesso-3);
   justify-content: center;
   flex-direction: column;
   align-items: center;
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 .dados_usuario_principal {
@@ -339,7 +370,6 @@ p {
   flex-direction: column;
   height: fit-content;
   border-radius: 8px;
-  align-items: ce;
   padding: 20px;
   display: flex;
   width: 300px;
@@ -355,25 +385,20 @@ p {
   width: 100%;
 }
 
-.dados_usuario_titulos {
-  margin: 0 !important;
-}
-
 .dados_usuario_tel {
   flex-direction: row;
   display: flex;
-  width: 100%;
   gap: 10px;
-}
-
-.dados_usuario_tel input {
   width: 100%;
 }
 
 .dados_usuario_tel input:first-child {
   text-align: center;
-  width: fit-content;
   max-width: 50px;
+}
+
+.dados_usuario_tel input:last-child {
+  width: 100%;
 }
 
 .dados_usuario_ver_senha {
@@ -389,12 +414,11 @@ p {
 }
 
 .dados_usuario_checkbox {
+  margin-left: 2px !important;
   justify-content: start;
-  align-items: center;
   cursor: pointer;
-  margin: 10px 0;
   display: flex;
-  gap: 10px;
+  gap: 2px;
 }
 
 .span_dados_usuario_checkbox {
@@ -581,7 +605,7 @@ p {
     width: 100%;
   }
 
-  .aviso_erro{
+  .aviso_erro {
     color: var(--erro-texto);
     bottom: -18px;
     right: 5px;

@@ -10,13 +10,15 @@ export default function Termos() {
 
 
   useEffect(() => {
-    sessionStorage.setItem("Gerenciar", "ger_termos")
+    if (!sessionStorage.getItem("Paginas")) { sessionStorage.setItem("Paginas", "Termos") }
   }, []);
 
   useEffect(() => {
-    if (!validar_token()) {
-      navegar("Acesso");
-      return;
+    if (!sessionStorage.getItem("Paginas")) {
+      if (!validar_token()) {
+        navegar("Acesso");
+        return;
+      }
     }
     def_carregando(false);
   }, [navegar]);
@@ -56,7 +58,7 @@ export default function Termos() {
         <br />
         <h2 style={{ textAlign: "center" }}>Regras para Tipos de Conta</h2>
 
-        <h2>1. Contas Grátis</h2>
+        <h2>1. Sem Conta</h2>
         <ul>
           <li>Acesso quase completo ao site, com funcionalidades limitadas;</li>
           <li>Contribuição para o ranqueamento das APIs, com controle de cliques;</li>
@@ -69,7 +71,7 @@ export default function Termos() {
           <li>Capacidade de votar em APIs e eventos, ajudando na avaliação da qualidade;</li>
           <li>Capacidade de denunciar conteúdo.</li>
         </ul>
-
+{/* 
         <h2>3. Contas Pagas</h2>
         <ul>
           <li>Permissão para comentar nas APIs;</li>
@@ -77,26 +79,26 @@ export default function Termos() {
           <li>Denúncias com maior relevância (prioridade);</li>
           <li>Acesso ao perfil de publicadores de APIs (com informações autorizadas);</li>
           <li>Possibilidade de cadastrar novas APIs (mediante custo de processamento por verificação de conteúdo).</li>
-        </ul>
+        </ul> */}
 
-        <h2>4. Contas Acadêmicas</h2>
+        <h2>3. Contas Acadêmicas</h2>
         <ul>
           <li>Professores e alunos podem registrar uma API "temporária" (mais informações abaixo);</li>
-          <li>Professores possuem uma conta especial com código para agrupar alunos e ícone de instituição;</li>
+          <li>Professores possuem uma conta especial com código para agrupar alunos;</li>
           <li>Verificação do cadastro de professores por link institucional (local de trabalho);</li>
-          <li>APIs "temporárias" permanecem ativas por até 1 semana e podem ser reativadas até 3 vezes;</li>
+          <li>APIs "temporárias" permanecem ativas por até 1 mês;</li>
           <li>APIs removidas ficam armazenadas em uma área específica.</li>
         </ul>
 
-        <h2>5. APIs Removidas e Desativadas</h2>
+        <h2>4. APIs Removidas e Desativadas</h2>
         <p>APIs removidas por violação dos Termos de Uso, ou por outros motivos, são retiradas do catálogo geral e exibidas como "removidas" (em cinza) na seção de <b>APIs Desativadas</b>.</p>
         <p>Ao clicar nas APIs removidas, será exibido o motivo da remoção, nome da API, categoria e descrição, enquanto informações como links, logo e dados sobre quem publicou ficam ocultos para preservar a privacidade.</p>
 
-        <h2>6. Denúncias</h2>
+        <h2>5. Denúncias</h2>
         <p>As denúncias podem ser feitas em relação a: API criminosa, erros de requisição e outros. Ao enviar uma denúncia, seus dados poderão ser armazenados para possível (muito improvável) coleta de mais informações.</p>
         <p>O tempo entre as denúncias aumenta progressivamente para evitar sobrecarga no sistema, como por exemplo: a 2ª denúncia só pode ser feita após 2 minutos, a 3ª após 4 minutos, e assim por diante.</p>
 
-        <h2>7. Comentários</h2>
+        <h2>6. Comentários</h2>
         <p>Comentários publicados ficam como rascunho por 2 minutos, após isso se tornam permanentes;</p>
         <ul>
           <li>São aceitos letras, números e símbolos simples nos comentários;</li>

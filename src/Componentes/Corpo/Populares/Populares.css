@@ -2,18 +2,15 @@
   background-color: var(--tema-fundo);
   box-shadow: var(--sombra-0);
   justify-content: center;
-  min-height: fit-content;
   flex-direction: column;
   position: relative;
-  padding-top: 25px;
+  min-height: 320px;
   overflow: hidden;
   flex: 0 1 320px;
   padding: 5px 0;
   display: flex;
   width: 100%;
   gap: 5px;
-  left: 0;
-  top: 0;
 }
 
 #populares::after {

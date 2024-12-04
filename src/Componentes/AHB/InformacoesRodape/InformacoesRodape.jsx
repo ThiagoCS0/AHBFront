@@ -1,18 +1,23 @@
+import { Link, useNavigate } from "react-router-dom";
+
 export default function InformacoesRodape() {
+ const navegar = useNavigate();
  const tela_grande = window.screen.width > 1000;
  const ano = new Date().getFullYear();
- 
+
+ const pagina = (e) => {
+  sessionStorage.setItem("Paginas", e)
+  window.location.href="Gerenciar"
+ }
+
  return (
   <div id="infor_abh">
    <p><b>© {ano} {tela_grande ? "API Hub Brasil" : "AHB"}</b> Todos os direitos reservados</p>
    <div>
-    {tela_grande ?
-     <a href="">Ajude o projeto <b>Doando</b></a>
-     :
-     <a href="">Fazer <b>Doação</b></a>}
+    <Link onClick={e => { pagina("Doacao"); }}>{tela_grande ? <>Ajude o projeto <b>Doando</b></> : <>Fazer <b>Doação</b></>}</Link>
     <div>
-     <a href="">Sobre <b>AHB</b></a>
-     <a href="">Termos de Uso</a>
+     <Link onClick={e => { pagina("Sobre"); }}>Sobre <b>AHB</b></Link>
+     <Link onClick={e => { pagina("Termos"); }}>Termos de Uso</Link>
     </div>
    </div>
   </div>

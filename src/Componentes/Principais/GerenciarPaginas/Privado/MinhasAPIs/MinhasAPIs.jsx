@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from "react";
-import "../Gerenciar.css";
 import "./MinhasAPIs.css";
-import { validar_token } from "../../../Principais/Servicos/JWT/JWT";
-import { meu_delete, meu_get } from "../../../Principais/Servicos/APIs/Conexao";
-import { usuario_id } from "../../../Principais/Servicos/Usuario/Usuario";
-import { meus_erros } from "../../../Principais/Erros/MeusErros";
-import Visualizador from "../../../Modal/API_Visualizador/Visualizador"
-import Editor from "../../../Modal/API_Editor/Editor"
-import image_padrao from "../../../../assets/image_padrao.png";
-import API from "../../API/API";
-import Carregamento from "../../../Principais/Carregamento/Carregamento";
+import { validar_token } from "../../../Servicos/JWT/JWT";
+import { meu_delete, meu_get } from "../../../Servicos/APIs/Conexao";
+import { usuario_id } from "../../../Servicos/Usuario/Usuario";
+import { meus_erros } from "../../../Erros/MeusErros";
+import Visualizador from "../../../../Modal/API_Visualizador/Visualizador"
+import Editor from "../../../../Modal/API_Editor/Editor"
+import image_padrao from "../../../../../assets/image_padrao.png";
+import API from "../../../../Corpo/API/API";
+import Carregamento from "../../../Carregamento/Carregamento";
 
 const site = import.meta.env.VITE_SITE;
 
-const MinhasApis = () => {
-  const [carregando, def_carregando] = useState(true);
+export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar_api, def_exibir_modal_editar }) {
+
   const [exibir_modal_visualizar, def_exibir_modal_visualizar] = useState(false);
-  const [exibir_modal_editar, def_exibir_modal_editar] = useState(false);
+  const [carregando, def_carregando] = useState(true);
   const [nova_api, def_nova_api] = useState([]);
-  const [editar_api, def_editar_api] = useState(null);
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
   const [api_selec, def_api_selec] = useState(null);
   const [imagem, setImagem] = useState(image_padrao);
-
   const verificarEValidarImagem = (url) => {
     return new Promise((resolve) => {
       const img = new Image();
@@ -39,7 +36,7 @@ const MinhasApis = () => {
 
     if (!ultimaRequisicao || tempoAtual - parseInt(ultimaRequisicao) > 10) {
       sessionStorage.setItem('ultimaRequisicao', tempoAtual);
-      sessionStorage.setItem("Gerenciar", "ger_apis")
+      sessionStorage.setItem("Paginas", "MinhasAPIs")
       lista_minhas_apis();
     } else {
       def_carregando(false);
@@ -165,14 +162,16 @@ const MinhasApis = () => {
       <Carregamento carregando={carregando} />
       :
       <div id="minhas_apis">
-        <h1 className="titulos_genrenciar ondulacao-1">Gerenciar suas APIs</h1>
-        <button id="nova_api" onClick={() => { def_editar_api(null); def_exibir_modal_editar(true); }}></button>
         {/* ------------------ Lista de APIs ------------------ */}
         <div id="lista_minhas_apis">
           {
             !nova_api || nova_api.length === 0 ? (<p>Nenhuma API cadastrada</p>) :
               Array.isArray(nova_api) && nova_api.map(api => (
-                <API api={api} key={api.id} click={() => { exibir_modal_minhas_apis(api); }} simples={false} def_api_excluir={def_api_excluir} editar_minhas_api={editar_minhas_api} />
+                <API api={api} key={api.id}
+                  click={() => { exibir_modal_minhas_apis(api); }}
+                  simples={false}
+                  def_api_excluir={def_api_excluir}
+                  editar_minhas_api={editar_minhas_api} />
               ))}
         </div>
         {api_excluir.id && (
@@ -195,5 +194,3 @@ const MinhasApis = () => {
       </div>
   );
 };
-
-export default MinhasApis;

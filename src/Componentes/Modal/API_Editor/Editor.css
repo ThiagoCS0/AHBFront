@@ -5,10 +5,11 @@
  font-size: large;
  font-weight: 500;
  position: fixed;
+ cursor: pointer;
  display: flex;
  z-index: 1000;
- height: 100vh;
- width: 100vw;
+ height: 100%;
+ width: 100%;
  left: 0;
  top: 0;
 }
@@ -20,6 +21,7 @@
  padding: 0 !important;
  border-radius: 8px;
  overflow: hidden;
+ cursor: default;
  height: 80vh;
  width: 500px;
  overflow-y: scroll;

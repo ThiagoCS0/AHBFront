@@ -195,7 +195,7 @@ export default function Criar() {
   };
 
   return (
-    <div className="dados_usuario_fundo">
+    <div>
       <Link to={site + "Acesso"} onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
       {
         cadastrando ?

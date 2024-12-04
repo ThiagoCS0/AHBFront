@@ -42,7 +42,7 @@ export default function Acesso() {
     carregando ?
       <Carregamento carregando={carregando}/>
       :
-      <div id="acesso">
+      <div id="acesso" className="ondulacao-1">
         {componente()}
       </div>
   )

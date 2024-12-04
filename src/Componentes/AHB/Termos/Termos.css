@@ -1,10 +1,7 @@
 .conteudo_termos {
-  height: calc(100% - 100px);
-  padding: 20px 40px;
-  overflow-y: scroll;
+  height: fit-content;
   user-select: text;
   font-size: large;
-  padding-bottom: 40px;
 }
 
 .conteudo_termos div {
@@ -23,7 +20,6 @@ li {
 @media (max-width: 600px) {
 
   .conteudo_termos {
-    height: calc(100% - 40px);
     padding: 8px;
   }
 

@@ -78,7 +78,7 @@ export default function Acessar() {
   };
 
   return (
-    <div className="dados_usuario_fundo">
+    <div>
       <Link to={inicio} className="botao_voltar"></Link>
       {
         acessando ?

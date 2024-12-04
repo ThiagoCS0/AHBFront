@@ -16,6 +16,7 @@
 }
 
 #nova_api {
+  background-color: var(--destaque-claro);
   box-shadow: var(--sombra-2);
   justify-content: center;
   align-items: center;
@@ -27,37 +28,30 @@
   display: flex;
   padding: 20px;
   bottom: -10px;
+  z-index: 100;
   height: 30px;
   right: 10px;
-  z-index: 10;
-  top: 80px;
+  top: 73px;
 }
 
 #nova_api::before {
   content: "Nova API";
 }
 
+#lista_minhas_apis::-webkit-scrollbar {
+  display: none;
+}
+
 #lista_minhas_apis {
   height: calc(100% - 100px);
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: scroll;
   padding: 20px;
   display: flex;
+  height: 100%;
   width: 100%;
   gap: 20px;
   padding-top: 25px;
-}
-
-#lista_minhas_apis::after {
-  background: linear-gradient(to bottom, #0002 0%, #0000 100%);
-  pointer-events: none;
-  position: absolute;
-  bottom: 88%;
-  content: '';
-  top: 100px;
-  z-index: 9;
-  right: 0;
-  left: 0;
 }
 
 #minhas_apis .apis {
@@ -216,73 +210,6 @@
 }
 
 #modal_excluir_texto {
-  margin: 10px;
   overflow: hidden;
-}
-
-/* Smartphone */
-@media (max-width: 600px) {
-  #nova_api {
-    top: 20px;
-  }
-
-  #nova_api::before {
-    content: "+";
-  }
-
-  #lista_minhas_apis {
-    height: calc(100% - 40px);
-    position: relative;
-    padding: 5px;
-    width: 100%;
-    margin: 0;
-    gap: 4px;
-    padding-top: 25px;
-  }
-
-  .lista_minhas_apis_dados {
-    width: 100%;
-  }
-
-  .lista_minhas_apis_dados img {
-    object-fit: contain;
-    height: 100px;
-    width: 100%;
-  }
-
-  .lista_api_conteudo {
-    display: none;
-  }
-
-  #lista_minhas_apis_botoes {
-    flex: 0 1 100px;
-  }
-
-  #lista_minhas_apis_botoes button {
-    font-size: small;
-    padding: 0;
-    margin: 0;
-  }
-}
-
-/* Smartwatch */
-@media (max-width: 300px) {
-  #lista_minhas_apis {
-    width: calc(100% - 27px);
-    height: 100%;
-  }
-
-  #nova_api {
-    font-weight: 500;
-    font-size: large;
-    position: fixed;
-    display: flex;
-    padding: 4px;
-    height: 25px;
-    width: 25px;
-    right: 2px;
-    top: 25px;
-    top: auto;
-  }
-
+  margin: 10px;
 }

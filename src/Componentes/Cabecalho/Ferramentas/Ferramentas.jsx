@@ -14,7 +14,7 @@ export default function Ferramentas({ expandir, buscar, categorizar }) {
  return (
   <div className="alinhado juntos" style={{ flex: "1 1 100%", padding: "0 15px" }}>
    {
-    !sessionStorage.getItem("Gerenciar") &&
+    !sessionStorage.getItem("Paginas") &&
     <>
      {expandi_local !== "filtrar" && <Buscar expandir={def_expandir} buscar={buscar} />}
      {expandi_local !== "buscar" && <Categorizar expandir={def_expandir} categorizar={categorizar} />}
