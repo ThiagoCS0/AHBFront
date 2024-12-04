@@ -6,6 +6,7 @@ export default function LinksUteis() {
  const pagina = (pag, aba) => {
   sessionStorage.setItem("Paginas", JSON.stringify({ pag: pag, aba: aba }));
   navegar("Gerenciar")
+  window.location.reload();
   // window.location.href = "Gerenciar"
  }
 
