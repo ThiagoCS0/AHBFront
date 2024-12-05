@@ -158,6 +158,12 @@ body {
   display: flex;
 }
 
+#perfil_nova_senha {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .dados_usuario_titulos:not(#perfil_nova_senha .dados_usuario_titulos) {
   margin-bottom: 2px !important;
 }
@@ -380,8 +386,9 @@ p {
 .dados_usuario {
   flex-direction: column;
   align-content: center;
-  margin-bottom: 10px;
   position: relative;
+  font-weight: 500;
+  font-size: large;
   display: flex;
   width: 100%;
 }
@@ -417,9 +424,10 @@ p {
 .dados_usuario_checkbox {
   margin-left: 2px !important;
   justify-content: start;
+  align-items: end;
   cursor: pointer;
   display: flex;
-  gap: 2px;
+  gap: 5px;
 }
 
 .span_dados_usuario_checkbox {
@@ -464,6 +472,43 @@ p {
 
 .input_dados_usuario_checkbox {
   display: none;
+}
+
+.texto_simples {
+  padding-bottom: 20px;
+  height: fit-content;
+  font-size: x-large;
+  word-spacing: 5px;
+  user-select: text;
+}
+
+.texto_simples p {
+  margin: 30px 0 !important;
+
+}
+
+.texto_simples div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+
+.texto_simples h2 {
+  padding: 20px;
+}
+
+.texto_simples li {
+  margin-left: 25px !important;
+}
+
+.texto_simples a:not(.botoes) {
+  color: var(--destaque);
+  border-bottom: 2px solid var(--destaque-claro);
+}
+
+.texto_simples .botoes {
+  width: fit-content;
 }
 
 /* Efeitos */

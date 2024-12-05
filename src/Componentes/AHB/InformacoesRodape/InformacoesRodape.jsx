@@ -12,7 +12,7 @@ export default function InformacoesRodape() {
 
  return (
   <div id="infor_abh">
-   <p><b>© {ano} {tela_grande ? "API Hub Brasil" : "AHB"}</b> Todos os direitos reservados</p>
+   <p><b>© {ano} {tela_grande ? "API HUB BRASIL" : "AHB"}</b> Todos os direitos reservados</p>
    <div>
     <Link onClick={e => { pagina("Doacao"); }}>{tela_grande ? <>Ajude o projeto <b>Doando</b></> : <>Fazer <b>Doação</b></>}</Link>
     <div>

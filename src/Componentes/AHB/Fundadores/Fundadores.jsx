@@ -5,7 +5,7 @@ import Linkedin from "../../../assets/linkedin.png";
 export default function Fundadores() {
  return (
   <div id="fundadores">
-   <p>Fundadores da API Hub Brasil</p>
+   <p>Fundadores da API HUB BRASIL</p>
    <div id="fundadores_dados">
 
     <div>

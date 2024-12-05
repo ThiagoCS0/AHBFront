@@ -93,7 +93,7 @@ export default function Gerenciar() {
         def_nome_pagina("Ranks");
         break;
       case "Sobre":
-        def_nome_pagina("Sobre a API HUB BRASIL");
+        def_nome_pagina("AHB - API HUB BRASIL");
         break;
       case "Termos":
         def_nome_pagina("Termos de Uso");

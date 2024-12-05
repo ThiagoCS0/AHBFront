@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validar_token } from "../../Principais/Servicos/JWT/JWT";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
-import "./Termos.css"
 
 export default function Termos() {
   const navegar = useNavigate();
@@ -28,19 +27,18 @@ export default function Termos() {
       ?
       <Carregamento carregando={carregando} />
       :
-      <div className="conteudo_termos">
+      <div className="texto_simples">
         <div>
           <h2>Termos de Uso para cadastro de APIs</h2>
         </div>
         <h2>1. Concordância com os Termos</h2>
-        <p>Ao se cadastrar, o <b>usuário aceita e concorda com todas as condições aqui descritas</b>.</p>
+        <p>Ao se cadastrar na API HUB BRASIL, o <b>usuário aceita e concorda com todas as condições aqui descritas</b>.</p>
 
         <h2>2. Alterações nos Termos de Uso</h2>
         <p>Podemos revisar e atualizar estes Termos de Uso de tempos em tempos, a <b>nosso exclusivo critério</b>. Todas as alterações entram em vigor <b>imediatamente quando publicadas</b> e se aplicam a <b>todo acesso e uso do Site</b> a partir de então.</p>
 
         <h2>3. Responsabilidade do Usuário</h2>
         <p>O conteúdo, funcionalidade e qualquer operação realizada pela API cadastrada <b>são de total responsabilidade do usuário que a desenvolveu e publicou</b>.</p>
-        <br />
         <p><b>A plataforma não se responsabiliza</b> por danos, prejuízos ou qualquer tipo de problema causado pela API disponibilizada.</p>
 
         <h2>4. Proibições</h2>
@@ -55,7 +53,7 @@ export default function Termos() {
         <h2>5. Remoção de APIs Irregulares</h2>
         <p>A plataforma se reserva o direito de <b>remover imediatamente, sem aviso prévio, qualquer API que seja considerada em violação a estes Termos de Uso</b>, especialmente em casos de denúncia ou comprovação de conteúdo irregular ou danoso.</p>
 
-        <br />
+        {/* 
         <h2 style={{ textAlign: "center" }}>Regras para Tipos de Conta</h2>
 
         <h2>1. Sem Conta</h2>
@@ -71,7 +69,6 @@ export default function Termos() {
           <li>Capacidade de votar em APIs e eventos, ajudando na avaliação da qualidade;</li>
           <li>Capacidade de denunciar conteúdo.</li>
         </ul>
-{/* 
         <h2>3. Contas Pagas</h2>
         <ul>
           <li>Permissão para comentar nas APIs;</li>
@@ -79,7 +76,7 @@ export default function Termos() {
           <li>Denúncias com maior relevância (prioridade);</li>
           <li>Acesso ao perfil de publicadores de APIs (com informações autorizadas);</li>
           <li>Possibilidade de cadastrar novas APIs (mediante custo de processamento por verificação de conteúdo).</li>
-        </ul> */}
+        </ul> 
 
         <h2>3. Contas Acadêmicas</h2>
         <ul>
@@ -104,6 +101,7 @@ export default function Termos() {
           <li>São aceitos letras, números e símbolos simples nos comentários;</li>
           <li>Dados enviados incluem o id do usuário, o comentário e o id da API.</li>
         </ul>
+        */}
       </div>
   );
 };

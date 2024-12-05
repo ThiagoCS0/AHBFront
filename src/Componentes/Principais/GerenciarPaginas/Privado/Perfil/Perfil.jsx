@@ -296,11 +296,16 @@ export default function Perfil() {
                     />
                   </label>
 
-                  <div id="perfil_nova_senha">
-                    <label id="div_filho_nova_senha_perfil" className="dados_usuario_checkbox">
-                      <input className="input_dados_usuario_checkbox" type="checkbox" onChange={(e) => def_visibilidade_nova_senha(e.target.checked)} checked={visibilidade_nova_senha} />
-                      <span className="span_dados_usuario_checkbox"></span>
-                      <p className="dados_usuario_titulos">{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}</p>
+                  <div id="perfil_nova_senha"  className="dados_usuario">
+
+                    <label className="dados_usuario_checkbox">
+                      <input
+                        className="input_dados_usuario_checkbox"
+                        type="checkbox"
+                        onChange={(e) => def_visibilidade_nova_senha(e.target.checked)}
+                        checked={visibilidade_nova_senha}
+                      />
+                      <span className="span_dados_usuario_checkbox"></span>{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}
                     </label>
 
                     <label className="dados_usuario">
