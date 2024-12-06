@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { meus_erros } from "../../Principais/Erros/MeusErros";
-import { meu_get } from "../../Principais/Servicos/APIs/Conexao";
+import { meu_get } from "../../Principais/Servicos/Backend/Conexao";
 import image_padrao from "../../../assets/image_padrao.png";
 import "./Visualizador.css";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
@@ -11,7 +11,7 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [publicador, def_publicador] = useState('');
   const [carregando, def_carregando] = useState(true);
-  const [imagem, set_imagem] = React.useState(image_padrao);
+  const [imagem, def_imagem] = useState(image_padrao);
 
   const validar_imagem = (url) => {
     return new Promise((resolve) => {
@@ -22,9 +22,9 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
     });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (api?.imagem) {
-      validar_imagem(api.imagem).then((img) => set_imagem(img));
+      validar_imagem(api.imagem).then((img) => def_imagem(img));
     }
   }, [api?.imagem]);
 
@@ -55,30 +55,40 @@ export default function Visualizador({ api, fechar, modal_simples = false }) {
           <Carregamento carregando={carregando} />
           :
           <>
-            <a id="modal_apis_logo" href={modal_simples ? "#" : api.link}><img src={imagem} alt={api.nome} style={{ objectFit: tamanho_img.lar > tamanho_img.alt ? "contain" : "cover" }} onLoad={e => { def_tamanho_img({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }} /></a>
+            <a href={modal_simples ? "#" : api.link}
+              target="_blank" id="modal_apis_logo"
+              rel="noopener noreferrer" aria-hidden="true">
+              <img src={imagem} alt={api.nome} style={{ objectFit: tamanho_img.lar > tamanho_img.alt ? "contain" : "cover" }} onLoad={e => { def_tamanho_img({ lar: e.target.naturalWidth, alt: e.target.naturalHeight }) }} /></a>
             <div id="modal_apis_conteudo_basico">
-              <p><span>Nome</span>{api.nome}</p>
+              <p><span className="span_destaque">Nome</span>{api.nome}</p>
               <div>
-                <p><span>Descrição</span><br />{api.descricao}</p>
-                <p><span>Categoria</span><br />{api.categoria}</p>
+                <p><span className="span_destaque">Descrição</span><br />{api.descricao}</p>
+                <p><span className="span_destaque">Categoria</span><br />{api.categoria}</p>
               </div>
               {!modal_simples && (
                 <>
-                  <p><span>Link</span><a href={api.link}>{api.link}</a></p>
-                  {publicador && <p><span>Publicador</span>{publicador}</p>}
+                  <p><span className="span_destaque">Link</span>
+                    <a href={api.link} target="_blank"
+                      rel="noopener noreferrer" aria-hidden="true">
+                      {api.link}</a></p>
+                  {publicador && <p><span className="span_destaque">Publicador</span>{publicador}</p>}
                 </>
               )}
             </div>
             <div id="modal_lista_metodos">
-              <span>Metodos</span>
+              <span className="span_destaque">Metodos</span>
               <div>
-                {api.metodos && api.metodos.split(',').map((metodo) => {
-                  const metodoTrim = metodo.trim().toUpperCase();
-                  const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
-                  return cores[metodoTrim] ? (
-                    <button key={metodoTrim} style={{ backgroundColor: cores[metodoTrim] }}>{metodoTrim}</button>
-                  ) : null;
-                })}
+                {
+                  api.metodos && Object.keys(JSON.parse(api.metodos)).map(metodo => {
+                    const metodoTrim = metodo.trim().toUpperCase();
+                    const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
+                    return cores[metodoTrim] ? (
+                      <button key={metodoTrim} style={{ backgroundColor: cores[metodoTrim] }}
+                        onClick={() => { sessionStorage.setItem("API", JSON.stringify([api.id, metodoTrim])); window.location.reload(); }}>
+                        {metodoTrim}</button>
+                    ) : null;
+                  })
+                }
               </div>
             </div>
           </>

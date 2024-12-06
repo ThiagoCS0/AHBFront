@@ -1,5 +1,5 @@
 import { meus_erros } from "../../Erros/MeusErros";
-import { meu_get } from "./Conexao";
+import { meu_get } from "../Backend/Conexao";
 
 export const buscar_apis = async (pagina, tamanho, organizar, ordem) => {
 

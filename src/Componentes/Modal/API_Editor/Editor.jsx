@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { remover_token, validar_token } from "../../Principais/Servicos/JWT/JWT";
 import { useNavigate } from "react-router-dom";
-import { meu_post, meu_put } from "../../Principais/Servicos/APIs/Conexao";
+import { meu_post, meu_put } from "../../Principais/Servicos//Backend/Conexao";
 import "./Editor.css"
 import { meus_erros } from "../../Principais/Erros/MeusErros";
 
 const inicio = import.meta.env.VITE_INICIAL;
-const site = import.meta.env.VITE_SITE;
 
 export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_api, dados_minha_api }) {
      const [categoria_api, def_categoria_api] = useState(dados_minha_api ? dados_minha_api.categoria : "");
@@ -15,7 +14,6 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      const [imagem_api, def_imagem_api] = useState(dados_minha_api ? dados_minha_api.imagem : "");
      const [link_api, def_link_api] = useState(dados_minha_api ? dados_minha_api.link : "");
      const [nome_api, def_nome_api] = useState(dados_minha_api ? dados_minha_api.nome : "");
-     const [select_aberto, def_select_aberto] = useState(false);
      const [resposta_http, def_resposta_http] = useState("");
      const navegar = useNavigate();
      const tela_pequena = window.screen.width < 600;
@@ -168,7 +166,6 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      const alterando_categoria = (option) => {
           def_erros((tmp) => ({ ...tmp, categoriaErros: !validar_categoria_api(option) }));
           def_categoria_api(option.toUpperCase())
-          def_select_aberto(false);
      };
 
      const alterando_descricao = (e) => {

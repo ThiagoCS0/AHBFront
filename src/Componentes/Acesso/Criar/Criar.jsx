@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { remover_token, salvar_token, validar_token } from "../../Principais/Servicos/JWT/JWT";
 import { cadastrar } from "../../Principais/Servicos/Usuario/Acesso";
-import { meu_post } from "../../Principais/Servicos/APIs/Conexao";
+import { meu_post } from "../../Principais/Servicos//Backend/Conexao";
 import { meus_erros } from "../../Principais/Erros/MeusErros";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
 import SenhaTnvisivel from "../../../assets/senha_invisivel.png"
@@ -14,7 +14,7 @@ const site = import.meta.env.VITE_SITE;
 export default function Criar() {
   const [lembrar_senha, def_lembrar_senha] = useState(false);
   const [senha_visivel, def_senha_visivel] = useState(false);
-  const [resposta_http, def_resposta_http] = useState("");
+  const [resposta_cadastro, def_resposta_cadastro] = useState("");
   const [cadastrando, def_cadastrando] = useState(false);
   const [nome_publico, def_nome_publico] = useState("");
   const [telefone, def_telefone] = useState("");
@@ -115,40 +115,20 @@ export default function Criar() {
     def_validacoes(novas_validacoes);
   };
 
-  const acessar = async () => {
-    try {
-      const { status_post, dados_post } = await meu_post("auth/login", {
-        "username": login,
-        "password": senha
-      });
-
-      if (status_post == null && dados_post == null) { window.location.href = site; }
-
-      if (Math.floor(status_post/100) !== 2) {
-        meus_erros(import.meta.url.split('/').pop(), "CRI_ACS_INV");
-        return;
-      }
-
-      salvar_token(dados_post.token)
-
-    } catch (erro) {
-      meus_erros(import.meta.url.split('/').pop(), "CAT_CRI_ACS", erro);
-      return;
-    }
-  };
-
   useEffect(() => {
     validar_campos();
   }, [login, nome_publico, cpf, email, ddd, telefone, senha]);
 
   useEffect(() => {
-    if (resposta_http) {
-      const timer = setTimeout(() => { def_resposta_http(''); }, 7000);
+    if (resposta_cadastro) {
+      const timer = setTimeout(() => { def_resposta_cadastro(''); }, 7000);
       return () => clearTimeout(timer);
     }
-  }, [resposta_http]);
+  }, [resposta_cadastro]);
 
   const cadastro = async () => {
+    console.log("---------- Cadastrando");
+    
     const { valido, mensagem } = await cadastrar({
       "username": login,
       "publicname": nome_publico,
@@ -157,9 +137,11 @@ export default function Criar() {
       "phone": `${ddd}${telefone}`,
       "password": senha
     })
+    console.log(valido);
+    console.log(mensagem);
 
     if (!valido) {
-      def_resposta_http(mensagem);
+      def_resposta_cadastro(mensagem);
       def_cadastrando(false);
       return;
     } else {
@@ -168,12 +150,14 @@ export default function Criar() {
     }
   }
   const enviar = (e) => {
-    def_cadastrando(true);
     e.preventDefault();
-    def_resposta_http('');
+    def_resposta_cadastro('');
     remover_token();
     if (Object.values(validacoes).every(Boolean)) {
-      cadastro();
+    def_cadastrando(true);
+    cadastro();
+    }else{
+      def_resposta_cadastro("Dados incorretos!");
     }
   };
 
@@ -199,7 +183,7 @@ export default function Criar() {
       <Link to={site + "Acesso"} onClick={() => sessionStorage.setItem("Acesso", "Acessar")} className="botao_voltar"></Link>
       {
         cadastrando ?
-          <Carregamento carregando={cadastrando} texto="Cadastrando..."/>
+          <Carregamento carregando={cadastrando} texto="Cadastrando..." />
           :
           <form onSubmit={enviar} className="dados_usuario_principal">
             <label className="dados_usuario">
@@ -213,7 +197,7 @@ export default function Criar() {
                 id="login"
                 required
               />
-              <span className="aviso_erro">{erros.login_erro ? (!/^[a-zA-Z0-9]+$/.test(login) ? "Permitido apenas letras e/ou números" : "Deve ter mais de 5 caracteres") : ""}</span>
+              <span className="aviso_erro">{erros.login_erro ? (!/^[a-zA-Z0-9]+$/.test(login) ? "Apenas letras e/ou números" : "Deve ter mais de 5 caracteres") : ""}</span>
             </label>
 
             <label className="dados_usuario">
@@ -301,7 +285,8 @@ export default function Criar() {
               />
               <span className="aviso_erro">{erros.senha_erro ? "Deve ter entre 8 e 14 caracteres" : ""}</span>
             </label>
-            <label className="dados_usuario_checkbox">
+            <hr />
+            {/* <label className="dados_usuario_checkbox">
               <input
                 className="input_dados_usuario_checkbox"
                 type="checkbox"
@@ -309,9 +294,9 @@ export default function Criar() {
                 checked={lembrar_senha}
               />
               <span className="span_dados_usuario_checkbox"></span>Lembrar-me
-            </label>
+            </label> */}
             <button className="botoes_expansiveis" type="submit"> Cadastrar </button>
-            {resposta_http && (<p className="texto_erro"> {resposta_http} </p>)}
+            {resposta_cadastro && (<p className="texto_erro"> {resposta_cadastro} </p>)}
           </form>
       }
     </div>

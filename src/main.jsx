@@ -6,7 +6,8 @@ import SemCabecalho from './Componentes/Principais/Camadas/SemCabecalho';
 import './Componentes/Principais/Temas/Tema.css';
 import Acesso from './Componentes/Acesso/Acesso';
 import PaginaErros from './Componentes/Principais/Erros/PaginaErros';
-import Gerenciar from './Componentes/Principais/GerenciarPaginas/Gerenciar';
+import Gerenciar from './Componentes/Principais/Gerenciar/Gerenciar';
+import PaginaAPI from './Componentes/Corpo/API/Pagina/PaginaAPI';
 
 const inicio = import.meta.env.VITE_INICIAL;
 
@@ -16,7 +17,8 @@ const rotas = createBrowserRouter(
       path: inicio,
       element: <ComCabecalho />,
       children: [
-        { path: "Gerenciar", element: <Gerenciar /> }
+        { path: "Gerenciar", element: <Gerenciar /> },
+        { path: "API", element: <PaginaAPI /> }
       ]
     },
     {

@@ -11,8 +11,9 @@ export default function Buscar({ expandir, buscar }) {
   def_expandir(!expandi_local);
   buscar("")
   if (!expandi_local) {
-   setTimeout(() => { document.getElementById("campo_buscar")?.focus(); }, 300);
+   const aguardando_campo_buscar = setTimeout(() => { document.getElementById("campo_buscar")?.focus(); }, 300);
    def_busca("");
+   return () => clearTimeout(aguardando_campo_buscar);
   }
  }
 

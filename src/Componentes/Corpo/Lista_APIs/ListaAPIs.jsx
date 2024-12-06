@@ -13,21 +13,19 @@ export default function ListaAPIs({ apis }) {
   };
 
   return (
-      <div id="lista_apis">
-        <div id="colunas_apis">
-          {Array.isArray(apis) && apis.map
-            ((api) => (
-              <API
-                api={api}
-                key={api.id}
-                classe={"lista_apis_hover"}
-                click={() => {
-                  defApiSelec(api)
-                }}
-              />
-            ))}
-        </div>
-        {apiSelec && <Visualizador api={apiSelec} fechar={fecharModal} />}
+    <div id="lista_apis">
+      <div id="colunas_apis">
+        {Array.isArray(apis) && apis.map
+          ((api) => (
+            <API
+              api={api}
+              key={api.id}
+              classe={"lista_apis_hover"}
+              click={() => defApiSelec(api)}
+            />
+          ))}
       </div>
+      {apiSelec && <Visualizador api={apiSelec} fechar={fecharModal} />}
+    </div>
   );
 }

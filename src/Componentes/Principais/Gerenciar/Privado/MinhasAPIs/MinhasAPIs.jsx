@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MinhasAPIs.css";
 import { validar_token } from "../../../Servicos/JWT/JWT";
-import { meu_delete, meu_get } from "../../../Servicos/APIs/Conexao";
+import { meu_delete, meu_get } from "../../../Servicos//Backend/Conexao";
 import { usuario_id } from "../../../Servicos/Usuario/Usuario";
 import { meus_erros } from "../../../Erros/MeusErros";
 import Visualizador from "../../../../Modal/API_Visualizador/Visualizador"
@@ -165,24 +165,28 @@ export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar
         <div id="minhas_apis">
           {/* ------------------ Lista de APIs ------------------ */}
           {
-            !nova_api || nova_api.length === 0 ? (<p>Nenhuma API cadastrada</p>) :
+            !nova_api || nova_api.length === 0 ? (
+              <div className="sem_dados">
+                <h3>Nenhuma API cadastrada</h3>
+              </div>
+            ) :
               Array.isArray(nova_api) && nova_api.map(api => (
                 <API api={api} key={api.id}
-                  click={() => { exibir_modal_minhas_apis(api); }}
+                  click={() => exibir_modal_minhas_apis(api) }
                   simples={false}
                   def_api_excluir={def_api_excluir}
                   editar_minhas_api={editar_minhas_api} />
               ))}
         </div>
         {api_excluir.id && (
-          <div id="modal_excluir" onClick={() => { fechar_modais_minhas_apis() }}>
+          <div id="modal_excluir" onClick={() => fechar_modais_minhas_apis()}>
             <div id="modal_excluir_conteudo" onClick={e => { e.stopPropagation(); }}>
               <div id="modal_excluir_texto">
                 <p>Deseja realmente excluir a API</p>
                 <b>{api_excluir.name && api_excluir.name.length > 10 ? api_excluir.name.slice(0, 10) + "..." : api_excluir.name}</b> ?
               </div>
               <div className="campos_laterais">
-                <button onClick={() => { fechar_modais_minhas_apis() }}>Cancelar</button>
+                <button onClick={() => fechar_modais_minhas_apis() }>Cancelar</button>
                 <button onClick={() => { excluir_minhas_api(api_excluir.id); fechar_modais_minhas_apis(); }}>Confirmar</button>
               </div>
             </div>

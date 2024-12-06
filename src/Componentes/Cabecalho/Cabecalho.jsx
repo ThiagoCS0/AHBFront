@@ -1,10 +1,7 @@
 import Logo from "./Logo/Logo";
 import Ferramentas from "./Ferramentas/Ferramentas";
 import Conta from "./Conta/Conta";
-import { useEffect, useState } from "react";
-import { remover_token, validar_token } from "../Principais/Servicos/JWT/JWT";
-import { meus_erros } from "../Principais/Erros/MeusErros";
-import { meu_get } from "../Principais/Servicos/APIs/Conexao";
+import { useState } from "react";
 
 export default function Cabecalho({ buscar, categorizar }) {
  const tela_grande = window.screen.width > 1000;

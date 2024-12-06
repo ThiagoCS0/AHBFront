@@ -1,5 +1,5 @@
 import { meus_erros } from "../../Erros/MeusErros";
-import { ler_token, validar_token } from "../JWT/JWT";
+import { validar_token } from "../JWT/JWT";
 
 const API_URL = import.meta.env.VITE_URL;
 

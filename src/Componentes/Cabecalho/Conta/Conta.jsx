@@ -22,7 +22,7 @@ export default function Conta() {
     }
 
     const iniciando = async () => {
-      const nome = await usuario_nome();
+      const nome = await usuario_nome(false);
       const token = validar_token();
       def_token_valido(token !== null);
       def_usuario(nome);

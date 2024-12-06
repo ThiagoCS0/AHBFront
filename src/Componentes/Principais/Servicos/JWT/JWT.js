@@ -1,4 +1,4 @@
-import { meu_post } from "../../Servicos/APIs/Conexao";
+import { meu_post } from "../Backend/Conexao";
 import { meus_erros } from "../../Erros/MeusErros";
 
 export function salvar_token(token) {

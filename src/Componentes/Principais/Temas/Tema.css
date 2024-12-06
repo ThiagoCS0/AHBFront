@@ -12,7 +12,7 @@
   --destaque: #C40;
   --destaque-claro: #F74;
   --destaque-escuro: #B40;
-  /* Botões, Imput's, Select's */
+  /* Botões, Input's, Select's */
   --tema-texto: #FFF;
   --tema-fundo: #730;
   --tema-fundo-1: #B40;
@@ -37,6 +37,7 @@
   /* Efeitos */
   --fundo-selecionado: #D52;
   --inverter: invert(1);
+  --setas: brightness(1);
   /* Não precisa repetir */
   --texto-especial: #F74;
   --texto-selecionado: #FFF;
@@ -62,7 +63,7 @@
   --destaque: #F74;
   --destaque-claro: #888;
   --destaque-escuro: #333;
-  /* Botões, Imput's, Select's */
+  /* Botões, Input's, Select's */
   --tema-texto: #FFF;
   --tema-fundo: #444;
   --tema-fundo-1: #999;
@@ -86,6 +87,7 @@
   /* Efeitos */
   --texto-selecionado: #FFF;
   --inverter: invert(0);
+  --setas: brightness(4);
   /* Erro */
   --erro-texto: #F60;
   --erro-borda: #D50;
@@ -218,7 +220,7 @@ button:hover,
   border: 0;
 }
 
-input,
+input:not(.sem_estilizacao),
 select,
 textarea {
   background-color: var(--entrada-fundo);
@@ -257,6 +259,10 @@ b:hover {
 
 p {
   line-height: 1.5;
+}
+
+hr {
+  color: transparent;
 }
 
 .alinhado {
@@ -317,6 +323,7 @@ p {
 .aviso_erro {
   color: var(--erro-texto);
   position: absolute;
+  font-size: medium;
   font-weight: 500;
   bottom: -20px;
   right: 0;
@@ -336,14 +343,15 @@ p {
 }
 
 .botao_voltar {
-  background-image: url("./../../../assets/voltar.png");
+  background-image: url("./../../../assets/seta.png");
   background-position: center center;
   background-color: transparent;
   background-repeat: no-repeat;
-  background-size: contain;
-  filter: var(--inverter);
   transition: scale 0.4s;
+  background-size: 70% 90%;
+  filter: var(--setas);
   position: absolute;
+  padding: 10px;
   z-index: 100;
   height: 40px;
   width: 40px;
@@ -377,15 +385,16 @@ p {
   flex-direction: column;
   height: fit-content;
   border-radius: 8px;
-  padding: 20px;
+  padding: 25px;
   display: flex;
-  width: 300px;
+  width: 320px;
   gap: 10px;
 }
 
 .dados_usuario {
   flex-direction: column;
   align-content: center;
+  margin-bottom: 10px;
   position: relative;
   font-weight: 500;
   font-size: large;
@@ -456,7 +465,7 @@ p {
 }
 
 .dados_usuario_checkbox:hover input~.span_dados_usuario_checkbox {
-  border: 1px solid var(--destaque-claro);
+  border: 1px solid var(--destaque-escuro);
 }
 
 .dados_usuario_checkbox .span_dados_usuario_checkbox:after {
@@ -509,6 +518,27 @@ p {
 
 .texto_simples .botoes {
   width: fit-content;
+}
+
+.sem_dados {
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  display: flex;
+  padding: 20px;
+  width: 100%;
+  gap: 10px;
+}
+
+.sem_dados div {
+  padding: 0 20px;
+}
+
+.span_destaque {
+  color: var(--destaque);
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: large;
 }
 
 /* Efeitos */
@@ -656,6 +686,10 @@ p {
     color: var(--erro-texto);
     bottom: -18px;
     right: 5px;
+  }
+
+  .dados_usuario_checkbox .span_dados_usuario_checkbox:after {
+    left: 6.5px;
   }
 
 }

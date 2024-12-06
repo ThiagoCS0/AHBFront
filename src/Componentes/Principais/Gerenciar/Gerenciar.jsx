@@ -1,4 +1,4 @@
-import { Link, useNavigation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Carregamento from "../Carregamento/Carregamento";
 import Parceiros from "../../AHB/Parceiros/Parceiros";

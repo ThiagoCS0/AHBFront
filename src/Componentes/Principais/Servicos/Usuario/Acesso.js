@@ -1,6 +1,6 @@
 import { remover_token, salvar_token, validar_token } from "../JWT/JWT";
 import { meus_erros } from "../../Erros/MeusErros";
-import { meu_post } from "../APIs/Conexao";
+import { meu_post } from "..//Backend/Conexao";
 
 export async function acessar(usuario, senha) {
  try {
@@ -26,7 +26,7 @@ export async function acessar(usuario, senha) {
 
 export async function cadastrar(dados_usuario) {
  try {
-  const { status_post, dados_post } = await meu_post("auth/signup", dados_usuario);
+  const { status_post } = await meu_post("auth/signup", dados_usuario);
   if (status_post != 200) {
    return mensagem_erro(status_post, "CAD");
   }

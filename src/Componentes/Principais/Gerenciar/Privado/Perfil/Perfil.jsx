@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { validar_token } from "../../../Servicos/JWT/JWT";
-import { meu_get, meu_put } from "../../../Servicos/APIs/Conexao";
+import { meu_get, meu_put } from "../../../Servicos//Backend/Conexao";
 import { usuario_id } from "../../../Servicos/Usuario/Usuario";
 import { meus_erros } from "../../../Erros/MeusErros";
 import Carregamento from "../../../Carregamento/Carregamento";

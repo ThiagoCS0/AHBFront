@@ -5,10 +5,11 @@ import { validar_token } from "../Servicos/JWT/JWT";
 import ListaAPIs from "../../Corpo/Lista_APIs/ListaAPIs";
 import Carregamento from "../Carregamento/Carregamento";
 import Populares from "../../Corpo/Populares/Populares";
-import Gerenciar from "../GerenciarPaginas/Gerenciar"
+import Gerenciar from "../Gerenciar/Gerenciar"
 import Cabecalho from "../../Cabecalho/Cabecalho";
 import Rodape from "../../Rodape/Rodape";
 import Corpo from "../../Corpo/Corpo";
+import PaginaAPI from "../../Corpo/API/Pagina/PaginaAPI";
 
 const site = import.meta.env.VITE_INICIAL;
 
@@ -95,14 +96,17 @@ export default function ComCabecalho({ token_valido, usuario }) {
           <Cabecalho buscar={filtragem_busca} categorizar={filtragem_categoria} />
           <Corpo>
             {
-              !sessionStorage.getItem("Paginas") ?
-                <>
-                  {!filtrando && <Populares populares={populares} />}
-                  <ListaAPIs apis={filtrado} />
-                  <Rodape fixar_abaixo={filtrando} />
-                </>
-                :
+              sessionStorage.getItem("Paginas") ?
                 <Gerenciar />
+                :
+                sessionStorage.getItem("API") ?
+                  <PaginaAPI />
+                  :
+                  <>
+                    {!filtrando && <Populares populares={populares} />}
+                    <ListaAPIs apis={filtrado} />
+                    <Rodape fixar_abaixo={filtrando} />
+                  </>
             }
           </Corpo>
         </>

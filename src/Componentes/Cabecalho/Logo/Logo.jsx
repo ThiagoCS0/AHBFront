@@ -7,11 +7,11 @@ const inicio = import.meta.env.VITE_INICIAL;
 export default function Logo() {
 
  const pagina_inicial = () => {
-  sessionStorage.removeItem("Paginas");
+  sessionStorage.clear();
  }
 
  return (
-  <a id="logo_AHB" href={inicio} onClick={() => { pagina_inicial(); }}>
+  <a id="logo_AHB" href={inicio} onClick={() => pagina_inicial()}>
    <img src={LogoAHB} alt="Logo" />
    <div>
     <span>AHB</span>

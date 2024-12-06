@@ -11,6 +11,6 @@ export default function Tema() {
       className="icones"
       src={temas ? Sol : Lua}
       alt="Tema"
-      onClick={() => { alterar_tema(!temas) }} />
+      onClick={() => alterar_tema(!temas) } />
   )
 }

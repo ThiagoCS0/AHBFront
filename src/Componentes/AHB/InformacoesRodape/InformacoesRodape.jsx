@@ -7,7 +7,7 @@ export default function InformacoesRodape() {
 
  const pagina = (e) => {
   sessionStorage.setItem("Paginas", e)
-  window.location.href="Gerenciar"
+  window.location.href="Gerenciar";
  }
 
  return (

@@ -1,0 +1,39 @@
+#pagina_api {
+ flex-direction: column;
+ justify-self: center;
+ align-self: center;
+ max-height: 1000px;
+ max-width: 1000px;
+ font-size: large;
+ display: flex;
+ padding: 10px;
+ height: 100%;
+ width: 100%;
+}
+
+#pagina_api h2 {
+ margin-bottom: 20px;
+ text-align: center;
+}
+
+#pagina_api p {
+ font-weight: 500;
+}
+
+#pagina_api p {
+ overflow-wrap: break-word;
+ word-break: break-word;
+ white-space: normal;
+}
+
+#pagina_api a {
+ overflow-wrap: anywhere;
+ word-wrap: break-word;
+ display: inline-block;
+ white-space: normal;
+}
+#pagina_api_metodos{
+ border-radius: 10px;
+ overflow: hidden;
+ height: 100%;
+}
