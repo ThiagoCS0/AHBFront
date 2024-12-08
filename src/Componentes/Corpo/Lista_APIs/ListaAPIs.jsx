@@ -5,9 +5,8 @@ import Rodape from "../../Rodape/Rodape";
 import API from "../API/API";
 import "./ListaAPIs.css"
 
-export default function ListaAPIs({ apis }) {
+export default function ListaAPIs({ dados_offline, apis }) {
   const [apiSelec, defApiSelec] = useState(null);
-
   const fecharModal = () => {
     defApiSelec(null);
   };
@@ -16,16 +15,16 @@ export default function ListaAPIs({ apis }) {
     <div id="lista_apis">
       <div id="colunas_apis">
         {Array.isArray(apis) && apis.map
-          ((api) => (
+          (api => (
             <API
               api={api}
               key={api.id}
               classe={"lista_apis_hover"}
-              click={() => defApiSelec(api)}
+              click={() => { defApiSelec(api); }}
             />
           ))}
       </div>
-      {apiSelec && <Visualizador api={apiSelec} fechar={fecharModal} />}
+      {apiSelec && <Visualizador dados_offline={dados_offline} api={apiSelec} fechar={fecharModal} />}
     </div>
   );
 }

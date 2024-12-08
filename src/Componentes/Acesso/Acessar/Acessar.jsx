@@ -46,7 +46,7 @@ export default function Acessar() {
 
       const { valido, mensagem } = await acessar(usuario, senha)
       if (valido) {
-          sessionStorage.setItem("Acessando", true);
+        sessionStorage.setItem("Acessando", true);
         navegar(inicio, { replace: true })
       } else {
         def_acessando(false);
@@ -117,7 +117,7 @@ export default function Acessar() {
                 alt="Visibilidade"
               />
             </label>
-            <label className="dados_usuario_checkbox">
+            {/* <label className="dados_usuario_checkbox">
               <input
                 className="input_dados_usuario_checkbox"
                 type="checkbox"
@@ -125,8 +125,8 @@ export default function Acessar() {
                 checked={lembrar_senha}
               />
               <span className="span_dados_usuario_checkbox"></span>Lembrar-me
-            </label>
-            <hr/>
+            </label> */}
+            <p className="texto_erro" style={{marginBottom:"10px"}}>{resposta_http ? resposta_http : ""}</p>
             <div className="campos_laterais">
               <Link to={site + "Acesso"} onClick={
                 () => sessionStorage.setItem("Acesso", "Criar")}
@@ -140,7 +140,6 @@ export default function Acessar() {
                 textAlign: "center", color: "var(--cor-principal-destaques)",
                 fontWeight: "bold"
               }}> Esqueceu sua senha? </Link> */}
-            {resposta_http && (<p className="texto_erro"> {resposta_http} </p>)}
           </form>
       }
     </div>

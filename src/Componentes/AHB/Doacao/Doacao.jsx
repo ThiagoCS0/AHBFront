@@ -14,7 +14,7 @@ export default function Doacao() {
         Se você acredita na nossa missão e deseja contribuir com o crescimento da <b>API HUB BRASIL</b>, considere fazer uma doação. Toda contribuição, independente do valor, faz uma grande diferença e nos ajuda a continuar promovendo a tecnologia e a educação no Brasil.
       </p>
       <div>
-        <a href="#" class="botoes">Clique aqui para doar</a>
+        <a href="#" className="botoes">Clique aqui para doar</a>
       </div>
       <p>
         Agradecemos imensamente seu apoio e confiança. Juntos, podemos transformar o futuro da tecnologia brasileira!

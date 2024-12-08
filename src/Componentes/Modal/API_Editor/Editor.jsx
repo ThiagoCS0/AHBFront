@@ -16,7 +16,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      const [nome_api, def_nome_api] = useState(dados_minha_api ? dados_minha_api.nome : "");
      const [resposta_http, def_resposta_http] = useState("");
      const navegar = useNavigate();
-     const tela_pequena = window.screen.width < 600;
+     const tela_pequena = window.innerWidth < 600;
 
 
      useEffect(() => {

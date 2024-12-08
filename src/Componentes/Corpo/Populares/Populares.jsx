@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import "./Populares.css";
 import Visualizador from "../../Modal/API_Visualizador/Visualizador";
 import API from "../API/API";
+import "./Populares.css";
 
-export default function Populares({ populares }) {
+export default function Populares({ dados_offline, populares }) {
   const [api_selecionada, def_api_selecionada] = useState(null);
   const [visualizar, def_visualizar] = useState(false);
   const [foco, def_foco] = useState(0);
@@ -75,17 +75,18 @@ export default function Populares({ populares }) {
   return (
     <div id="populares">
       <div id="carousel">
-        {populares.map((api, i) => (
-          <API api={api}
-            key={api.id}
-            classe={`populares_itens ${itensVisiveis(i)}`}
-            popular={true} //------------------------------------ APAGUE
-            click={() => {
-              ir_para(i);
-              visualizarItem(api);
-              def_visualizar(true);
-            }} />
-        ))}
+        {
+          populares.map((api, i) => (
+            <API api={api}
+              key={api.id}
+              classe={`populares_itens ${itensVisiveis(i)}`}
+              click={() => {
+                ir_para(i);
+                visualizarItem(api);
+                def_visualizar(true);
+              }} />
+          ))
+        }
       </div>
       <div id="populares_botoes">
         {populares.map((_, i) => (
@@ -96,7 +97,7 @@ export default function Populares({ populares }) {
           ></button>
         ))}
       </div>
-      {visualizar && api_selecionada && <Visualizador api={api_selecionada} fechar={fechar} />}
+      {visualizar && api_selecionada && <Visualizador dados_offline={dados_offline} api={api_selecionada} fechar={fechar} />}
     </div>
   );
 }

@@ -27,7 +27,8 @@ export async function acessar(usuario, senha) {
 export async function cadastrar(dados_usuario) {
  try {
   const { status_post } = await meu_post("auth/signup", dados_usuario);
-  if (status_post != 200) {
+
+  if (Math.floor(status_post / 100) !== 2) {
    return mensagem_erro(status_post, "CAD");
   }
   return await acessar(dados_usuario.username, dados_usuario.password);

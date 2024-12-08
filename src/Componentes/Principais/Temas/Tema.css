@@ -34,6 +34,7 @@
   --linear-acesso-3: linear-gradient(45deg, #FFF 0%, #888 100%);
   --linear-erro: linear-gradient(to right, #000 0%, #555 100%);
   --linear-rodape: linear-gradient(to right, #A40 0%, #520 20%, #830 100%);
+  --linear-apis: linear-gradient(45deg, #DDD 0%, #888 100%);
   /* Efeitos */
   --fundo-selecionado: #D52;
   --inverter: invert(1);
@@ -84,6 +85,7 @@
   --linear-acesso-2: linear-gradient(45deg, #666 0%, #222 100%);
   --linear-acesso-3: linear-gradient(45deg, #555 0%, #000 100%);
   --linear-rodape: linear-gradient(to right, #555 0%, #222 40%, #444 100%);
+  --linear-apis: linear-gradient(45deg, #444 0%, #000 100%);
   /* Efeitos */
   --texto-selecionado: #FFF;
   --inverter: invert(0);
@@ -152,6 +154,17 @@ body {
   width: 100%;
 }
 
+#cabecalho>*:first-child,
+#cabecalho>*:last-child {
+  max-width: 180px;
+  width: 180px;
+}
+
+#ferramentas {
+  padding: 0 15px;
+  display: flex;
+}
+
 #corpo {
   justify-content: space-between;
   min-height: calc(100% - 70px);
@@ -213,6 +226,12 @@ button,
   border: 0;
 }
 
+button:disabled,
+.botoes:disabled {
+  background-color: #444 !important;
+  cursor: wait;
+}
+
 button:hover,
 .botoes:hover {
   background-color: var(--tema-hover-fundo);
@@ -253,7 +272,11 @@ b {
   transition: border-bottom 0.4s;
 }
 
-b:hover {
+b[class="normal"] {
+  border: 0;
+}
+
+b:hover:not(b[class="normal"]) {
   border-bottom: 1px solid var(--destaque-claro);
 }
 
@@ -555,6 +578,11 @@ hr {
 .ondulacao-3 {
   animation: ondular 7s infinite ease-in-out;
   background: var(--linear-rodape);
+}
+
+.ondulacao-4 {
+  animation: ondular 6s infinite ease-in-out;
+  background: var(--linear-apis);
 }
 
 @keyframes ondular {

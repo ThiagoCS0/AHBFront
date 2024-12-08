@@ -3,14 +3,14 @@ import { validar_token } from "../JWT/JWT";
 
 const API_URL = import.meta.env.VITE_URL;
 
-export async function meu_get(url, usar_token = false, nosso_servidor = true) {
+export async function meu_get(url, usar_token = false, nosso_servidor = true, relatar_erros = true) {
   let dados_get = null;
   let status_get = 0;
 
   try {
     const token = usar_token ? validar_token() : "";
     if (usar_token && !token) { return { status_get: null, dados_get: null }; }
-    
+
     const resposta = await fetch(nosso_servidor ? `${API_URL}/${url}` : url, {
       method: "GET",
       headers: {
@@ -31,7 +31,9 @@ export async function meu_get(url, usar_token = false, nosso_servidor = true) {
     }
 
   } catch (erro) {
-    meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_GET: ${erro}`);
+    if (relatar_erros) {
+      meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_GET: ${erro}`);
+    }
     dados_get = null;
     status_get = 500;
   }
@@ -44,7 +46,6 @@ export async function meu_post(url, corpo, usar_token = false) {
   try {
     const token = usar_token ? validar_token() : "";
     if (usar_token && !token) { return { status_get: null, dados_get: null }; }
-
     const resposta = await fetch(`${API_URL}/${url}`, {
       method: "POST",
       headers: {
@@ -53,12 +54,14 @@ export async function meu_post(url, corpo, usar_token = false) {
       },
       body: JSON.stringify(corpo)
     });
-    dados_post = await resposta.json();
 
-    if (Math.floor(resposta.status / 100) !== 2) {
-      return { status_post: resposta.status, dados_post: "" }
-    }
     status_post = resposta.status;
+    if (Math.floor(status_post / 100) === 2) {
+      dados_post = await resposta.json();
+    } else {
+      return { status_post, dados_post: "" }
+    }
+    
     return { status_post, dados_post };
   } catch (erro) {
     meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_POS: ${erro}`);

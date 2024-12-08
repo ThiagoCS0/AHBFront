@@ -136,8 +136,7 @@ export default function Gerenciar() {
     }
 
     switch (pagina) {
-      case "Parceiros":
-        return <Parceiros aba={aba || "parceiros_instituicoes"} />;
+      case "Parceiros": return <Parceiros aba={aba || "parceiros_instituicoes"} />;
       case "Doacao":
         return <Doacao />;
       case "Ranks":
@@ -162,9 +161,9 @@ export default function Gerenciar() {
             <Link id="MinhasAPIs" onClick={(e) => alterar_componente(e.target.id)}>Minhas APIs</Link>
           </>
         )}
-        <Link id="Parceiros" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Parceiros", aba: "parceiros_instituicoes" }))}>Parceiros</Link>
+        {/* <Link id="Parceiros" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Parceiros", aba: "parceiros_instituicoes" }))}>Parceiros</Link> */}
         <Link id="Doacao" onClick={(e) => alterar_componente(e.target.id)}>Doação</Link>
-        <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_votadas" }))}>Ranks</Link>
+        <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_populares" }))}>Ranks</Link>
         <Link id="Sobre" onClick={(e) => alterar_componente(e.target.id)}>Sobre</Link>
         <Link id="Termos" onClick={(e) => alterar_componente(e.target.id)}>Termos</Link>
       </div>

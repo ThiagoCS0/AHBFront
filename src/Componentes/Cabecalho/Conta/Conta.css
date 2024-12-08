@@ -62,7 +62,8 @@
  }
 
  #conta button {
-  width: fit-content;
+  min-width: 100%;
+  width: 100% !important;
  }
 
  #conta img {

@@ -127,7 +127,6 @@ export default function Criar() {
   }, [resposta_cadastro]);
 
   const cadastro = async () => {
-    console.log("---------- Cadastrando");
     
     const { valido, mensagem } = await cadastrar({
       "username": login,
@@ -137,8 +136,6 @@ export default function Criar() {
       "phone": `${ddd}${telefone}`,
       "password": senha
     })
-    console.log(valido);
-    console.log(mensagem);
 
     if (!valido) {
       def_resposta_cadastro(mensagem);
@@ -285,7 +282,8 @@ export default function Criar() {
               />
               <span className="aviso_erro">{erros.senha_erro ? "Deve ter entre 8 e 14 caracteres" : ""}</span>
             </label>
-            <hr />
+            <p className="texto_erro" style={{marginBottom:"10px"}}>{resposta_cadastro ? resposta_cadastro : ""}</p>
+
             {/* <label className="dados_usuario_checkbox">
               <input
                 className="input_dados_usuario_checkbox"
@@ -296,7 +294,6 @@ export default function Criar() {
               <span className="span_dados_usuario_checkbox"></span>Lembrar-me
             </label> */}
             <button className="botoes_expansiveis" type="submit"> Cadastrar </button>
-            {resposta_cadastro && (<p className="texto_erro"> {resposta_cadastro} </p>)}
           </form>
       }
     </div>

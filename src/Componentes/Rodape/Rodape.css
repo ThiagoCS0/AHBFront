@@ -43,11 +43,13 @@
 }
 
 #infor_partocinio {
-  align-items: end;
   display: flex;
   order: 3;
 }
 
+#infor_ahb{
+  align-items: end;
+}
 
 #infor_rank a::first-letter {
   color: var(--destaque);

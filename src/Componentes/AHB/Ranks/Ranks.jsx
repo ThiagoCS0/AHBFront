@@ -8,7 +8,7 @@ export default function Ranks({ aba }) {
     titulos={[
      { nome: "+ Populares", conteudo: "ranks_populares" },
      { nome: "+ Recentes", conteudo: "ranks_recentes" },
-     { nome: "+ Votadas", conteudo: "ranks_votadas" },
+     // { nome: "+ Votadas", conteudo: "ranks_votadas" },
     ]}
     conteudos={[
      <div id="ranks_populares" className="texto_simples">
@@ -27,14 +27,14 @@ export default function Ranks({ aba }) {
        Confira as APIs mais novas cadastradas na plataforma. Explore as novidades fresquinhas e encontre soluções inovadoras para seus projetos.
       </p>
      </div>,
-     <div id="ranks_votadas" className="texto_simples">
-      <div>
-       <h1>APIs + Votadas</h1>
-      </div>
-      <p>
-       Descubra as APIs com as melhores avaliações da comunidade. Essas são as ferramentas mais recomendadas pelos usuários, ideais para quem busca qualidade e aprovação coletiva.
-      </p>
-     </div>
+     // <div id="ranks_votadas" className="texto_simples">
+     //  <div>
+     //   <h1>APIs + Votadas</h1>
+     //  </div>
+     //  <p>
+     //   Descubra as APIs com as melhores avaliações da comunidade. Essas são as ferramentas mais recomendadas pelos usuários, ideais para quem busca qualidade e aprovação coletiva.
+     //  </p>
+     // </div>
     ]}
     aba={aba}
    />

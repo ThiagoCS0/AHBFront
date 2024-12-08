@@ -5,14 +5,14 @@ import image_padrao from "../../../../assets/image_padrao.png";
 import Carregamento from "../../../Principais/Carregamento/Carregamento";
 import { meu_get } from "../../../Principais/Servicos/Backend/Conexao";
 
-export default function Metodos({ api }) {
-  const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
-  const [publicador, def_publicador] = useState("");
-  const [carregando, def_carregando] = useState(true);
-  const [aba_ativa, def_aba_ativa] = useState("basico");
-  const [imagem, def_imagem] = useState(image_padrao);
-  const abasRef = useRef(null);
+export default function Metodos({ dados_offline, api }) {
   const [dados_metodo, def_dados_metodo] = useState({ url: '', header: '', body: '', token: false, });
+  const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
+  const [aba_ativa, def_aba_ativa] = useState("basico");
+  const [carregando, def_carregando] = useState(true);
+  const [imagem, def_imagem] = useState(image_padrao);
+  const [publicador, def_publicador] = useState("");
+  const abasRef = useRef(null);
 
   useEffect(() => {
     const dados_api = sessionStorage.getItem("API");
@@ -27,15 +27,17 @@ export default function Metodos({ api }) {
       }
     }
 
-    buscar_nome();
+    if (dados_offline) {
+      def_publicador(api.publicador)
+    } else { buscar_nome(); }
     def_carregando(false);
   }, [])
 
   useEffect(() => {
-    if (api?.icon) {
-      validar_imagem(api.icon).then((img) => def_imagem(img));
+    if (api?.imagem) {
+      validar_imagem(api.imagem).then(img => def_imagem(img));
     }
-  }, [api?.icon]);
+  }, [api?.imagem]);
 
   const validar_imagem = (url) => {
     return new Promise((resolve) => {
@@ -57,7 +59,7 @@ export default function Metodos({ api }) {
       });
     }
 
-    const metodo_atual = api?.methods[nome_aba];
+    const metodo_atual = api?.metodos[nome_aba];
     if (metodo_atual) {
       def_dados_metodo({
         url: metodo_atual.url,
@@ -80,9 +82,10 @@ export default function Metodos({ api }) {
   const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
 
   const copiar = (e) => {
-    if (e) {
-      navigator.clipboard.writeText(e);
-      alert("Copiado!")
+    if (e.value) {
+      e.closest("label").classList.add("copiado");
+      navigator.clipboard.writeText(e.value);
+      setTimeout(() => { e.closest("label").classList.remove("copiado") }, 3000)
     }
   }
 
@@ -118,7 +121,7 @@ export default function Metodos({ api }) {
               <div id="pagina_api_basico_metodos">
                 <span className="span_destaque">Metodos</span>
                 <div>
-                  {Object.keys(api?.methods).map(metodo => {
+                  {Object.keys(api.metodos).map(metodo => {
                     const metodo_formatado = metodo.trim().toUpperCase();
                     const cor = cores[metodo_formatado] || "var(--destaque-escuro)";
                     return (
@@ -143,43 +146,46 @@ export default function Metodos({ api }) {
 
     return (
       <>
-        <div id="metodos_abas_conteudo" className="metodos_conteudo ondulacao-1">
+        <div id="metodos_abas_conteudo" className="metodos_conteudo">
           <div>
-            <label>URL</label>
-            <input
-              type="text"
-              value={dados_metodo.url}
-              onClick={e => { copiar(e.target.value) }}
-              readOnly
-            />
+            <label>URL
+              <input
+                type="text"
+                value={dados_metodo.url}
+                onClick={e => { copiar(e.target) }}
+                readOnly
+              />
+            </label>
           </div>
           <div>
-            <label>Headers</label>
-            <textarea
-              value={dados_metodo.header === "\"\"" ? "" : dados_metodo.header}
-              onClick={e => { copiar(e.target.value) }}
-              readOnly
-            />
+            <label>Headers
+              <textarea
+                value={dados_metodo.header === "\"\"" ? "" : dados_metodo.header}
+                onClick={e => { copiar(e.target) }}
+                readOnly
+              />
+            </label>
           </div>
           <div>
-            <label>Body</label>
-            <textarea
-              value={dados_metodo.body === "\"\"" ? "" : dados_metodo.body}
-              onClick={e => { copiar(e.target.value) }}
-              readOnly
-            />
+            <label>Body
+              <textarea
+                value={dados_metodo.body === "\"\"" ? "" : dados_metodo.body}
+                onClick={e => { copiar(e.target) }}
+                readOnly
+              />
+            </label>
           </div>
           <div id="metodos_token">
             {
               dados_metodo.token ?
                 <>
-                  <p>Essa requisição <b>precisa de Token</b>!</p>
-                  <p>Você deve acessar o <b>site oficial</b> e se informar por lá, link abaixo:</p>
+                  <p>Essa requisição <b className="normal">precisa de Token!</b></p>
+                  <p>Você deve acessar o <b className="normal">site oficial</b> e se informar por lá, link abaixo:</p>
                   <a href={api.link}
                     target="_blank" rel="noopener noreferrer" aria-hidden="true">{api.link}</a>
                 </>
                 :
-                <p><b>Não precisa de token.</b></p>
+                <p><b className="normal">Não precisa de token</b></p>
             }
           </div>
         </div>
@@ -204,7 +210,7 @@ export default function Metodos({ api }) {
             <div id="metodos_abas_metodos_efeito">
               <div className="metodos_abas_metodos" ref={abasRef}>
                 {
-                  Object.keys(api.methods).map(metodo => (
+                  Object.keys(api.metodos).map(metodo => (
                     <button
                       key={metodo}
                       id={`aba_${metodo}`}
