@@ -87,25 +87,21 @@ export default function Conta({ dados_offline }) {
     def_token_valido(false);
     window.location.href = site;
   };
-  
+
   return (
     <div id="conta" className="alinhado">
-      {!dados_offline &&
-        <>
-          <button onClick={opcoes_botao_conta} ref={acessarRef} disabled={dados_offline}>
-            <img src={Person} alt="Usuário" />
-            <span>{acessando ? "..." : usuario ? usuario : "Entrar"}</span>
-          </button>
-          {token_valido && menu_visivel && (
-            <div id="conta_menu" ref={menuRef}>
-              <Link onClick={() => navegando("Perfil")}>Perfil</Link>
-              <Link onClick={() => navegando("MinhasAPIs")}>Minhas APIs</Link>
-              <Link onClick={() => navegando("Termos")}>Termos</Link>
-              <Link onClick={sair}>Sair</Link>
-            </div>
-          )}
-        </>
-      }
+      <button onClick={() => { !dados_offline && opcoes_botao_conta() }} ref={acessarRef} disabled={dados_offline}>
+        {!dados_offline && <img src={Person} alt="Usuário" />}
+        <span>{acessando || dados_offline ? "..." : usuario ? usuario : "Entrar"}</span>
+      </button>
+      {token_valido && menu_visivel && (
+        <div id="conta_menu" ref={menuRef}>
+          <Link onClick={() => navegando("Perfil")}>Perfil</Link>
+          <Link onClick={() => navegando("MinhasAPIs")}>Minhas APIs</Link>
+          <Link onClick={() => navegando("Termos")}>Termos</Link>
+          <Link onClick={sair}>Sair</Link>
+        </div>
+      )}
     </div>
   );
 }

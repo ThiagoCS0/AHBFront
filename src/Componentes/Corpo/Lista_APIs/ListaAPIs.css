@@ -20,7 +20,7 @@
   scale: 1.1;
 }
 
-/* Smarphone */
+/* Tablet */
 @media screen and (max-width: 1000px) {
   #colunas_apis {
     padding: 20px;

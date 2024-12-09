@@ -32,7 +32,7 @@ export default function Fundadores() {
             target="_blank" rel="noopener noreferrer"
             aria-hidden="true">
             <b className="nome_completo"><p>Rafaela</p>
-              <p className="fundadores_sobrenome">O. Marques</p></b>
+              <p className="fundadores_sobrenome">Marques</p></b>
           </a>
           <div className="fundadores_social">
             <a href="https://github.com/RafaelaOMarques">
@@ -50,7 +50,7 @@ export default function Fundadores() {
             aria-hidden="true">
             <b className="nome_completo">
               <p>Thiago</p>
-              <p className="fundadores_sobrenome">C. Silva</p>
+              <p className="fundadores_sobrenome">Silva</p>
             </b>
           </a>
           <div className="fundadores_social">

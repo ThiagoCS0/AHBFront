@@ -35,6 +35,7 @@
   --linear-erro: linear-gradient(to right, #000 0%, #555 100%);
   --linear-rodape: linear-gradient(to right, #A40 0%, #520 20%, #830 100%);
   --linear-apis: linear-gradient(45deg, #DDD 0%, #888 100%);
+  --linear-brasil: linear-gradient(to right, #05F, #0F3);
   /* Efeitos */
   --fundo-selecionado: #D52;
   --inverter: invert(1);
@@ -86,6 +87,7 @@
   --linear-acesso-3: linear-gradient(45deg, #555 0%, #000 100%);
   --linear-rodape: linear-gradient(to right, #555 0%, #222 40%, #444 100%);
   --linear-apis: linear-gradient(45deg, #444 0%, #000 100%);
+  --linear-brasil: linear-gradient(to right, #0F3, #FF0, #FF5);
   /* Efeitos */
   --texto-selecionado: #FFF;
   --inverter: invert(0);
@@ -136,6 +138,15 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
+span[class="brasil"] {
+  background: var(--linear-brasil);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-clip: text;
+  /* Para Firefox */
+  color: transparent;
+}
+
 #root {
   flex-direction: column;
   display: flex;
@@ -177,6 +188,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+#sobre p:last-child {
+  text-align: center;
 }
 
 .dados_usuario_titulos:not(#perfil_nova_senha .dados_usuario_titulos) {
@@ -228,7 +243,8 @@ button,
 
 button:disabled,
 .botoes:disabled {
-  background-color: #444 !important;
+  border: 1px solid var(--destaque-claro);
+  background-color: transparent !important;
   cursor: wait;
 }
 
@@ -516,7 +532,6 @@ hr {
 
 .texto_simples p {
   margin: 30px 0 !important;
-
 }
 
 .texto_simples div {
@@ -689,6 +704,82 @@ hr {
     opacity: 0;
   }
 }
+
+
+/* 4K  */
+@media screen and (min-height: 2100px) {
+
+  #corpo{
+    min-height: 100% !important;
+    height: 100% !important;
+  }
+
+  input:not(.sem_estilizacao),
+  select,
+  textarea {
+    border-radius: 15px;
+    font-size: xx-large;
+    padding: 20px;
+    height: 80px;
+  }
+
+  #cabecalho {
+    padding: 5px 20px;
+    max-height: 128px;
+    flex: 0 0 128px;
+  }
+
+  .api {
+    border-radius: 15px;
+    min-height: 512px;
+    height: 512px;
+    width: 512px;
+  }
+
+  .api p {
+    font-weight: 600;
+    font-size: xx-large;
+  }
+
+  .icones {
+    height: 76px;
+    width: 76px;
+  }
+
+  #populares {
+    min-height: 656px;
+    flex: 0 1 656px;
+  }
+
+  #populares #carousel {
+    min-height: 537px;
+    height: 537px;
+  }
+
+  #populares_botoes {
+    padding: 20px;
+  }
+
+  #populares_botoes * {
+    margin: 0 20px;
+    height: 30px;
+    width: 30px;
+    padding: 0;
+  }
+
+  #rodape {
+    height: 400px;
+    font-size: xx-large;
+  }
+
+  #fundadores_dados {
+    gap: 48px;
+  }
+
+}
+
+
+
 
 /* Smartphone  */
 @media screen and (max-width: 600px) {

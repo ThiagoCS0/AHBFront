@@ -46,7 +46,7 @@ export default function ComCabecalho() {
       },
       "link": "https://docs.awesomeapi.com.br",
       "categoria": "OUTROS",
-      "imagem": "https://i.imgur.com/fUDtrN6.png",
+      "imagem": "https://docs.awesomeapi.com.br/~gitbook/image?url=https%3A%2F%2F343035455-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F-LDDJfbHDy3v965nUzNO%252Flogo%252FjUplFdH5HnFk16oswjMH%252Fhigh-logo-white-transparent-background.png%3Falt%3Dmedia%26token%3D1569db0a-bc8b-49dc-abca-122974a51bc5&width=192&dpr=1&quality=100&sign=d2d37de6&sv=2",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
@@ -64,7 +64,7 @@ export default function ComCabecalho() {
       },
       "link": "https://viacep.com.br",
       "categoria": "CEP",
-      "imagem": "https://blog.artneo.com.br/wp-content/uploads/2019/01/viacep-webservice.jpg",
+      "imagem": "https://viacep.com.br/estatico/images/viacep.png.pagespeed.ce.I80LiA6qpr.png",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
@@ -172,7 +172,7 @@ export default function ComCabecalho() {
       },
       "link": "https://www.mercadopago.com.br/developers/pt/reference",
       "categoria": "PAGAMENTO",
-      "imagem": "svg",
+      "imagem": "https://http2.mlstatic.com/frontend-assets/mp-web-navigation/ui-navigation/6.7.44/mercadopago/logo__large.png",
       "cliques": 0,
       "publicador": "Adiministrador"
     }
@@ -230,8 +230,6 @@ export default function ComCabecalho() {
         carregar_dados_offline();
       }
     } catch (erro) {
-      console.log(erro);
-
       carregar_dados_offline();
     }
   };

@@ -30,7 +30,6 @@
 }
 
 .rodape_fixar_abaixo {
-  /* position: absolute !important; */
   bottom: 0;
   left: 0;
 }
@@ -47,7 +46,7 @@
   order: 3;
 }
 
-#infor_ahb{
+#infor_ahb {
   align-items: end;
 }
 
@@ -56,11 +55,11 @@
 }
 
 #infor_abh {
-  justify-content: space-between;
   background-color: var(--tema-fundo);
+  justify-content: space-between;
   color: var(--tema-texto);
-  align-items: center;
   flex-direction: row;
+  align-items: center;
   overflow: hidden;
   padding: 0 20px;
   display: flex;

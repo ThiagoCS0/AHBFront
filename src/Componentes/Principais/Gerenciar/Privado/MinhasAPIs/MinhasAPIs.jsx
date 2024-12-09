@@ -19,8 +19,9 @@ export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar
   const [nova_api, def_nova_api] = useState([]);
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
   const [api_selec, def_api_selec] = useState(null);
-  const [imagem, setImagem] = useState(image_padrao);
-  const verificarEValidarImagem = (url) => {
+  const [imagem, def_imagem] = useState(image_padrao);
+
+  const validar_imagem = (url) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
@@ -46,7 +47,7 @@ export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar
 
   useEffect(() => {
     if (nova_api?.imagem) {
-      verificarEValidarImagem(nova_api.imagem).then((img) => setImagem(img));
+      validar_imagem(nova_api.imagem).then((img) => def_imagem(img));
     }
   }, [nova_api?.imagem]);
 

@@ -34,7 +34,7 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
 
       def_publicador('')
       if (api.publicador && api.publicador != "undefined") {
-        
+
         if (dados_offline) {
           def_publicador(api.publicador);
         } else {
@@ -84,7 +84,7 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
               <span className="span_destaque">Metodos</span>
               <div>
                 {
-                  api.metodos && Object.keys(JSON.parse(api.metodos)).map(metodo => {
+                  api.metodos && Object.keys(dados_offline ? api.metodos : JSON.parse(api.metodos)).map(metodo => {
                     const metodoTrim = metodo.trim().toUpperCase();
                     const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
                     return cores[metodoTrim] ? (
