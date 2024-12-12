@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { remover_token, validar_token } from "../../Principais/Servicos/JWT/JWT";
 import { usuario_nome } from "../../Principais/Servicos/Usuario/Usuario";
-import Person from "../../../assets/person.png";
 import "./Conta.css";
 
 const site = import.meta.env.VITE_SITE;
@@ -91,7 +90,7 @@ export default function Conta({ dados_offline }) {
   return (
     <div id="conta" className="alinhado">
       <button onClick={() => { !dados_offline && opcoes_botao_conta() }} ref={acessarRef} disabled={dados_offline}>
-        {!dados_offline && <img src={Person} alt="Usuário" />}
+        {!dados_offline && <img src="/icones/person.png" alt="Usuário" />}
         <span>{acessando || dados_offline ? "..." : usuario ? usuario : "Entrar"}</span>
       </button>
       {token_valido && menu_visivel && (

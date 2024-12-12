@@ -5,8 +5,6 @@ import { cadastrar } from "../../Principais/Servicos/Usuario/Acesso";
 import { meu_post } from "../../Principais/Servicos//Backend/Conexao";
 import { meus_erros } from "../../Principais/Erros/MeusErros";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
-import SenhaTnvisivel from "../../../assets/senha_invisivel.png"
-import SenhaVisivel from "../../../assets/senha_visivel.png"
 
 const inicio = import.meta.env.VITE_INICIAL;
 const site = import.meta.env.VITE_SITE;
@@ -127,7 +125,7 @@ export default function Criar() {
   }, [resposta_cadastro]);
 
   const cadastro = async () => {
-    
+
     const { valido, mensagem } = await cadastrar({
       "username": login,
       "publicname": nome_publico,
@@ -151,9 +149,9 @@ export default function Criar() {
     def_resposta_cadastro('');
     remover_token();
     if (Object.values(validacoes).every(Boolean)) {
-    def_cadastrando(true);
-    cadastro();
-    }else{
+      def_cadastrando(true);
+      cadastro();
+    } else {
       def_resposta_cadastro("Dados incorretos!");
     }
   };
@@ -276,13 +274,13 @@ export default function Criar() {
               />
               <img
                 className="dados_usuario_ver_senha"
-                src={senha_visivel ? SenhaVisivel : SenhaTnvisivel}
+                src={senha_visivel ? "/icones/senha_visivel.png" : "/icones/senha_invisivel.png"}
+                alt={senha_visivel ? "Senha Visível" : "Senha Invisível"}
                 onClick={() => def_senha_visivel(!senha_visivel)}
-                alt="Visibilidade"
               />
               <span className="aviso_erro">{erros.senha_erro ? "Deve ter entre 8 e 14 caracteres" : ""}</span>
             </label>
-            <p className="texto_erro" style={{marginBottom:"10px"}}>{resposta_cadastro ? resposta_cadastro : ""}</p>
+            <p className="texto_erro" style={{ marginBottom: "10px" }}>{resposta_cadastro ? resposta_cadastro : ""}</p>
 
             {/* <label className="dados_usuario_checkbox">
               <input

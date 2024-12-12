@@ -4,8 +4,6 @@ import { remover_token, salvar_token, validar_token } from "../../Principais/Ser
 import { acessar } from "../../Principais/Servicos/Usuario/Acesso";
 import { meus_erros } from "../../Principais/Erros/MeusErros";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
-import SenhaInvisivel from "../../../assets/senha_invisivel.png"
-import SenhaVisivel from "../../../assets/senha_visivel.png"
 
 const inicio = import.meta.env.VITE_INICIAL;
 const site = import.meta.env.VITE_SITE;
@@ -112,10 +110,10 @@ export default function Acessar() {
               />
               <img
                 className="dados_usuario_ver_senha"
-                src={senha_visivel ? SenhaVisivel : SenhaInvisivel}
+                src={senha_visivel ? "/icones/senha_visivel.png" : "/icones/senha_invisivel.png"}
+                alt={senha_visivel ? "Senha Visível" : "Senha Invisível"}
                 onClick={() => def_senha_visivel(!senha_visivel)}
-                alt="Visibilidade"
-              />
+             />
             </label>
             {/* <label className="dados_usuario_checkbox">
               <input
@@ -126,7 +124,7 @@ export default function Acessar() {
               />
               <span className="span_dados_usuario_checkbox"></span>Lembrar-me
             </label> */}
-            <p className="texto_erro" style={{marginBottom:"10px"}}>{resposta_http ? resposta_http : ""}</p>
+            <p className="texto_erro" style={{ marginBottom: "10px" }}>{resposta_http ? resposta_http : ""}</p>
             <div className="campos_laterais">
               <Link to={site + "Acesso"} onClick={
                 () => sessionStorage.setItem("Acesso", "Criar")}

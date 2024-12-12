@@ -1,21 +1,29 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./Metodos.css";
-import { usuario_nome } from "../../../Principais/Servicos/Usuario/Usuario";
-import image_padrao from "../../../../assets/image_padrao.png";
-import Carregamento from "../../../Principais/Carregamento/Carregamento";
 import { meu_get } from "../../../Principais/Servicos/Backend/Conexao";
+import Carregamento from "../../../Principais/Carregamento/Carregamento";
+import "./Metodos.css";
 
 export default function Metodos({ dados_offline, api }) {
   const [dados_metodo, def_dados_metodo] = useState({ url: '', header: '', body: '', token: false, });
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [aba_ativa, def_aba_ativa] = useState("basico");
   const [carregando, def_carregando] = useState(true);
-  const [imagem, def_imagem] = useState(image_padrao);
+  const [imagem, def_imagem] = useState("/icones/image_padrao.png");
   const [publicador, def_publicador] = useState("");
   const abasRef = useRef(null);
+  const [item_expandido, def_item_expandido] = useState({});
+  const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
+  const categorias = api.categoria === "REDE_SOCIAIS" ? "REDE SOCIAIS" :
+    api.categoria === "SAUDE" ? "SAÚDE" :
+      api.categoria === "FINANCAS" ? "FINANÇAS" :
+        api.categoria === "ESTATISTICAS" ? "ESTATÍSTICAS" :
+          api.categoria;
+  const [exibir_aviso_clicar_metodos, def_exibir_aviso_clicar_metodos] = useState(true);
 
   useEffect(() => {
+    const tmp = setTimeout(() => { def_exibir_aviso_clicar_metodos(false); }, 7000);
     const dados_api = sessionStorage.getItem("API");
+
     if (dados_api) {
       selecionar_aba(JSON.parse(dados_api)[1].toLowerCase())
     }
@@ -30,12 +38,19 @@ export default function Metodos({ dados_offline, api }) {
     if (dados_offline) {
       def_publicador(api.publicador)
     } else { buscar_nome(); }
+
     def_carregando(false);
+
+    return () => clearTimeout(tmp);
   }, [])
 
   useEffect(() => {
     if (api?.imagem) {
-      validar_imagem(api.imagem).then(img => def_imagem(img));
+      if (dados_offline) {
+        def_imagem(`/apis/${api.imagem}.png`)
+      } else {
+        validar_imagem(api.imagem).then((img) => def_imagem(img));
+      }
     }
   }, [api?.imagem]);
 
@@ -43,7 +58,7 @@ export default function Metodos({ dados_offline, api }) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
-      img.onerror = () => resolve(image_padrao);
+      img.onerror = () => resolve("/icones/image_padrao.png");
       img.src = url;
     });
   };
@@ -79,8 +94,6 @@ export default function Metodos({ dados_offline, api }) {
     }
   };
 
-  const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
-
   const copiar = (e) => {
     if (e.value) {
       e.closest("label").classList.add("copiado");
@@ -90,6 +103,7 @@ export default function Metodos({ dados_offline, api }) {
   }
 
   const renderizar_conteudo = () => {
+
     if (aba_ativa === "basico") {
       return (
         <div id="pagina_api_basico" className="metodos_conteudo ondulacao-1">
@@ -97,14 +111,14 @@ export default function Metodos({ dados_offline, api }) {
             <>
               <div id="pagina_api_basico_conteudo">
                 <div>
-                  <p><span className="span_destaque">Nome</span>{api.name}</p>
-                  <p><span className="span_destaque">Descrição</span>{api.description}</p>
+                  <p><span className="span_destaque">Nome</span>{api.nome}</p>
+                  <p><span className="span_destaque">Descrição</span>{api.descricao}</p>
                   <p><span className="span_destaque">Link</span>
                     <a href={api.link} target="_blank"
                       rel="noopener noreferrer" aria-hidden="true">
                       {api.link}</a></p>
                   <div className="campos_laterais">
-                    <p><span className="span_destaque">Categoria</span><br />{api.categoria}</p>
+                    <p><span className="span_destaque">Categoria</span><br />{categorias}</p>
                     {publicador && <p><span className="span_destaque">Publicador</span><br />{publicador}</p>}
                   </div>
                 </div>
@@ -121,76 +135,115 @@ export default function Metodos({ dados_offline, api }) {
               <div id="pagina_api_basico_metodos">
                 <span className="span_destaque">Metodos</span>
                 <div>
-                  {Object.keys(api.metodos).map(metodo => {
-                    const metodo_formatado = metodo.trim().toUpperCase();
-                    const cor = cores[metodo_formatado] || "var(--destaque-escuro)";
-                    return (
-                      <button
-                        key={metodo}
-                        id={`aba_${metodo}`}
-                        onClick={() => selecionar_aba(metodo)}
-                        className={aba_ativa === metodo ? "metodos_aba_ativa" : ""}
-                        style={{ backgroundColor: cor }}
-                      >
-                        {metodo_formatado}
-                      </button>
-                    );
-                  })}
+                  {
+                    Object.keys(api.metodos).map(metodo => {
+                      const metodo_formatado = metodo.trim().toUpperCase();
+                      const cor = cores[metodo_formatado] || "var(--destaque-escuro)";
+                      return (
+                        <button
+                          key={metodo}
+                          id={`aba_${metodo}`}
+                          onClick={() => selecionar_aba(metodo)}
+                          className={aba_ativa === metodo ? "metodos_aba_ativa" : ""}
+                          style={{ backgroundColor: cor }}
+                        >
+                          {metodo_formatado === "VER_SITE" ? "CONSULTE" : metodo_formatado}
+                        </button>
+                      );
+                    })
+                  }
                 </div>
               </div>
             </>
           }
         </div>
       );
-    }
+    } else {
+      let metodos = api.metodos[aba_ativa];
 
-    return (
-      <>
+      if (!Array.isArray(metodos)) { metodos = [metodos]; }
+
+      const alternar_expandido = (index) => {
+        def_item_expandido((estado_atual) => (estado_atual === index ? null : index));
+      };
+
+      const ir_para = (link) => {
+        const nova_aba = window.open(link, '_blank');
+        if (nova_aba) {
+          nova_aba.document.body.setAttribute('aria-hidden', 'true');
+          nova_aba.opener = null;
+        }
+      }
+
+      return (
         <div id="metodos_abas_conteudo" className="metodos_conteudo">
-          <div>
-            <label>URL
-              <input
-                type="text"
-                value={dados_metodo.url}
-                onClick={e => { copiar(e.target) }}
-                readOnly
-              />
-            </label>
-          </div>
-          <div>
-            <label>Headers
-              <textarea
-                value={dados_metodo.header === "\"\"" ? "" : dados_metodo.header}
-                onClick={e => { copiar(e.target) }}
-                readOnly
-              />
-            </label>
-          </div>
-          <div>
-            <label>Body
-              <textarea
-                value={dados_metodo.body === "\"\"" ? "" : dados_metodo.body}
-                onClick={e => { copiar(e.target) }}
-                readOnly
-              />
-            </label>
-          </div>
-          <div id="metodos_token">
+          <>
+            {aba_ativa !== "ver_site" && exibir_aviso_clicar_metodos && <p id="metodos_aviso_metodos" className="efeito_iluminacao">Click nos metodos abaixo para mais informações!</p>}
+            {metodos.map((metodo, index) => {
+              const expandido = item_expandido === index;
+
+              const cores = { VER_SITE: "var(--destaque)", GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
+              return (
+                <div key={index} className="metodo_item" style={{ justifyItems: (aba_ativa === "ver_site" && "center") }}>
+                  <button
+                    onClick={() => { aba_ativa === "ver_site" ? ir_para(metodo.url) : alternar_expandido(index); }}
+                    className="metodos_expandir_metodos"
+                  >
+                    <p style={{ background: `${cores[aba_ativa.toUpperCase()]}` }}>{aba_ativa === "ver_site" ? metodo.titulo : aba_ativa.toUpperCase()}</p><p>{aba_ativa === "ver_site" ? metodo.url : metodo.titulo}</p>
+                  </button>
+                  {expandido && (
+                    <div className="metodo_detalhes">
+                      <label>URL
+                        <input
+                          type="text"
+                          value={metodo.url}
+                          onClick={(e) => copiar(e.target)}
+                          readOnly
+                        />
+                      </label>
+                      <label>Headers
+                        <textarea
+                          value={metodo.header || ""}
+                          onClick={(e) => copiar(e.target)}
+                          readOnly
+                        />
+                      </label>
+                      <label>Body
+                        <textarea
+                          value={metodo.body || ""}
+                          onClick={(e) => copiar(e.target)}
+                          readOnly
+                        />
+                      </label>
+                      <p>
+                        <div className="alinhado" style={{ flexDirection: "column" }}>
+                          {metodo.token ? (
+                            <>
+                              <p>Essa requisição <b className="normal">precisa de Token!</b></p>
+                              <p>Você deve acessar o <b className="normal">site oficial</b> e se informar por lá, link abaixo:</p>
+                              <a href={api.link} target="_blank" rel="noopener noreferrer" aria-hidden="true">{api.link}</a>
+                            </>
+                          ) : (
+                            <b>Não precisa de token</b>
+                          )}
+                        </div>
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             {
-              dados_metodo.token ?
-                <>
-                  <p>Essa requisição <b className="normal">precisa de Token!</b></p>
-                  <p>Você deve acessar o <b className="normal">site oficial</b> e se informar por lá, link abaixo:</p>
-                  <a href={api.link}
-                    target="_blank" rel="noopener noreferrer" aria-hidden="true">{api.link}</a>
-                </>
-                :
-                <p><b className="normal">Não precisa de token</b></p>
+              aba_ativa !== "ver_site" &&
+              <div className="alinhado" style={{ flexDirection: "column" }}>
+                <p>Não deixe de visitar o site oficial e conhecer outros metodos</p>
+                <a href={api.link} target="_blank" rel="noopener noreferrer" aria-hidden="true">{api.link}</a>
+              </div>
             }
-          </div>
+          </>
         </div>
-      </>
-    );
+      );
+    }
   };
 
   return (
@@ -214,10 +267,10 @@ export default function Metodos({ dados_offline, api }) {
                     <button
                       key={metodo}
                       id={`aba_${metodo}`}
-                      onClick={() => selecionar_aba(metodo)}
+                      onClick={() => { selecionar_aba(metodo); def_item_expandido(null); }}
                       className={aba_ativa === metodo ? "metodos_aba_ativa" : ""}
                     >
-                      {metodo.trim().toUpperCase()}
+                      {(metodo === "ver_site" ? "Consulte" : metodo).trim().toUpperCase()}
                     </button>
                   ))
                 }

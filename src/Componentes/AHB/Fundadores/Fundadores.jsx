@@ -1,6 +1,4 @@
 import "./Fundadores.css";
-import Github from "../../../assets/github.png";
-import Linkedin from "../../../assets/linkedin.png";
 
 export default function Fundadores() {
   return (
@@ -19,11 +17,11 @@ export default function Fundadores() {
           </a>
           <div className="fundadores_social">
             <a href="https://github.com/rodrigosv91">
-              <img src={Github} alt="" /></a>
+              <img src="/icones/github.png" alt="" /></a>
             <a href="https://www.linkedin.com/in/rodrigo7791/"
               target="_blank" rel="noopener noreferrer"
               aria-hidden="true">
-              <img src={Linkedin} alt="" /></a>
+              <img src="/icones/linkedin.png" alt="" /></a>
           </div>
         </div>
 
@@ -36,11 +34,11 @@ export default function Fundadores() {
           </a>
           <div className="fundadores_social">
             <a href="https://github.com/RafaelaOMarques">
-              <img src={Github} alt="" /></a>
+              <img src="/icones/github.png" alt="" /></a>
             <a href="https://www.linkedin.com/in/rafaelaoliveiramarques/"
               target="_blank" rel="noopener noreferrer"
               aria-hidden="true">
-              <img src={Linkedin} alt="" /></a>
+              <img src="/icones/linkedin.png" alt="" /></a>
           </div>
         </div>
         
@@ -57,11 +55,11 @@ export default function Fundadores() {
             <a href="https://github.com/ThiagoCS0"
               target="_blank" rel="noopener noreferrer"
               aria-hidden="true">
-              <img src={Github} alt="" /></a>
+              <img src="/icones/github.png" alt="" /></a>
             <a href="https://www.linkedin.com/in/thiago-cs/"
               target="_blank" rel="noopener noreferrer"
               aria-hidden="true">
-              <img src={Linkedin} alt="" /></a>
+              <img src="/icones/linkedin.png" alt="" /></a>
           </div>
         </div>
 

@@ -15,38 +15,30 @@ export default function ComCabecalho() {
 
   const BKEND_TEMP = [
     {
-      "id": 9,
-      "nome": "APIBrasil",
-      "descricao": "Fornece diversas informações sobre o Brasil, como estados, municípios, CEPs, feriados, CNPJ e mais.",
-      "metodos": {
-        "get": {
-          "url": "https://brasilapi.com.br/api/banks/v1",
-          "header": "",
-          "body": "",
-          "token": false
-        }
-      },
-      "link": "https://brasilapi.com.br",
-      "categoria": "CEP",
-      "imagem": "https://brasilapi.com.br/_next/image?url=%2Fimages%2Fapi-schema.svg&w=384&q=75",
-      "cliques": 0,
-      "publicador": "Adiministrador"
-    },
-    {
       "id": 1,
       "nome": "AwesomeAPI (Consulta de CNPJ, CEP e IP)",
       "descricao": "API para consultar informações como CNPJ, CEP, e IP de maneira gratuita.",
       "metodos": {
-        "get": {
-          "url": " https://cep.awesomeapi.com.br/json/{CEP}",
-          "header": "",
-          "body": "",
-          "token": false
-        }
+        "get": [
+          {
+            "titulo": "Buscar um CEP",
+            "url": "https://cep.awesomeapi.com.br/json/{CEP}",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Retorna moedas selecionadas",
+            "url": "https://economia.awesomeapi.com.br/json/last/{MOEDA-MOEDA}",
+            "header": "",
+            "body": "",
+            "token": false
+          }
+        ]
       },
       "link": "https://docs.awesomeapi.com.br",
       "categoria": "OUTROS",
-      "imagem": "https://docs.awesomeapi.com.br/~gitbook/image?url=https%3A%2F%2F343035455-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F-LDDJfbHDy3v965nUzNO%252Flogo%252FjUplFdH5HnFk16oswjMH%252Fhigh-logo-white-transparent-background.png%3Falt%3Dmedia%26token%3D1569db0a-bc8b-49dc-abca-122974a51bc5&width=192&dpr=1&quality=100&sign=d2d37de6&sv=2",
+      // "imagem": "https://docs.awesomeapi.com.br/~gitbook/image?url=https%3A%2F%2F343035455-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F-LDDJfbHDy3v965nUzNO%252Flogo%252FjUplFdH5HnFk16oswjMH%252Fhigh-logo-white-transparent-background.png%3Falt%3Dmedia%26token%3D1569db0a-bc8b-49dc-abca-122974a51bc5&width=192&dpr=1&quality=100&sign=d2d37de6&sv=2",
+      "imagem": "awesomeapi",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
@@ -55,16 +47,26 @@ export default function ComCabecalho() {
       "nome": "VIACEP",
       "descricao": "API gratuita para consulta de CEPs no Brasil.",
       "metodos": {
-        "get": {
-          "url": "viacep.com.br/ws/{CEP/json/",
-          "header": "",
-          "body": "",
-          "token": false
-        }
+        "get": [
+          {
+            "titulo": "Consulta de CEP, com resposta em JSON",
+            "url": "viacep.com.br/ws/{CEP}/json/",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Consulta de CEP, com resposta em XML",
+            "url": "viacep.com.br/ws/{CEP}/xml/",
+            "header": "",
+            "body": "",
+            "token": false
+          }
+        ]
       },
       "link": "https://viacep.com.br",
       "categoria": "CEP",
-      "imagem": "https://viacep.com.br/estatico/images/viacep.png.pagespeed.ce.I80LiA6qpr.png",
+      "imagem": "viacep",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
@@ -73,16 +75,40 @@ export default function ComCabecalho() {
       "nome": "HG Brasil",
       "descricao": "Oferece APIs para consultas sobre clima, dólar, notícias, e mais.",
       "metodos": {
-        "get": {
-          "url": "https://api.hgbrasil.com/weather?key={SUA_CHAVE}",
-          "header": "",
-          "body": "",
-          "token": true
-        }
+        "get": [
+          {
+            "titulo": "Dados da bolsa de valores brasileira B3",
+            "url": "https://api.hgbrasil.com/finance",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Dados do pregão atual ou do último pregão",
+            "url": "https://api.hgbrasil.com/finance/ibovespa?key={SUA_CHAVE}",
+            "header": "",
+            "body": "",
+            "token": true
+          },
+          {
+            "titulo": "Dados de previsão do tempo e condições climáticas atuais",
+            "url": "https://api.hgbrasil.com/weather",
+            "header": "",
+            "body": "",
+            "token": true
+          },
+          {
+            "titulo": "Dados de geolocalização através do IP de seu usuário",
+            "url": "https://api.hgbrasil.com/geoip?key={SUA_CHAVE}",
+            "header": "",
+            "body": "",
+            "token": true
+          }
+        ]
       },
       "link": "https://hgbrasil.com",
       "categoria": "CLIMA",
-      "imagem": "https://hgbrasil.eng.br/wp-content/uploads/2023/12/hgbrasil-logo.png",
+      "imagem": "hgbrasil",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
@@ -91,16 +117,131 @@ export default function ComCabecalho() {
       "nome": "IBGE APIs",
       "descricao": "Dados estatísticos e informações do Instituto Brasileiro de Geografia e Estatística (IBGE) em vários temas.",
       "metodos": {
-        "get": {
-          "url": "https://servicodados.ibge.gov.br/api/v2/censos/nomes/{SEU_NOME}",
-          "header": "",
-          "body": "",
-          "token": false
-        }
+        "get": [
+          {
+            "titulo": "Ranking dos nomes segundo a frequência",
+            "url": "https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Frequência de nascimentos por década para o nome",
+            "url": "https://servicodados.ibge.gov.br/api/v2/censos/nomes/{SEU_NOME [ex.: Maria]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Distritos do Brasil",
+            "url": "https://servicodados.ibge.gov.br/api/v1/localidades/distritos",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Unidades da Federação do Brasil",
+            "url": "https://servicodados.ibge.gov.br/api/v1/localidades/estados/{UF [ex.: AL]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Distritos do Brasil a partir da UF",
+            "url": "https://servicodados.ibge.gov.br/api/v1/localidades/estados/{UF [ex.: AL]}/distritos",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Indicadores por pesquisa",
+            "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Pesquisa por identificador",
+            "url": "https://servicodados.ibge.gov.br/api/v1/pesquisas/{ID [ex.: 1]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Mapa : Brasil e as respectivas UF",
+            "url": "https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?intrarregiao=UF",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Mapa : Brasil e seus respectivos municípios",
+            "url": "https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?intrarregiao=municipio",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Lista dos marégrafos pertencentes a RMPG",
+            "url": "https://servicodados.ibge.gov.br/api/v1/rmpg/maregrafos",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Previsão de maré",
+            "url": "https://servicodados.ibge.gov.br/api/v1/rmpg/previsao/{SIGLA_MAREGRAFO [ex.: EMARC]}?momentoInicial={DATA_AAAA-MM-DD-HH-MI [ex.: 2023-12-01-00-00]}&momentoFinal={DATA_AAAA-MM-DD-HH-MI [ex.: 2023-12-02-00-00]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Leituras de meteorologia",
+            "url": "https://servicodados.ibge.gov.br/api/v1/rmpg/meteorologia/{SIGLA_MAREGRAFO [ex.: EMARC]}?momentoInicial={DATA_AAAA-MM-DD-HH-MI [ex.: 2023-12-01-00-00]}&momentoFinal={DATA_AAAA-MM-DD-HH-MI [ex.: 2023-12-02-00-00]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Lista dos produtos de estatística do IBGE",
+            "url": "https://servicodados.ibge.gov.br/api/v1/produtos",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Conjunto de países",
+            "url": "https://servicodados.ibge.gov.br/api/v1/localidades/paises",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Listagem dos países e os respectivos perfis",
+            "url": "https://servicodados.ibge.gov.br/api/v1/paises/{PAIS [ex.: BR]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Pesquisas com metadados associados",
+            "url": "https://servicodados.ibge.gov.br/api/v2/metadados/pesquisas",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Calendário das divulgações",
+            "url": "https://servicodados.ibge.gov.br/api/v3/calendario",
+            "header": "",
+            "body": "",
+            "token": false
+          }
+        ]
       },
       "link": "https://servicodados.ibge.gov.br/api/docs",
       "categoria": "ESTATISTICAS",
-      "imagem": "https://www.ibge.gov.br/templates/novo_portal_base/imagens/logo_mobile.png",
+      "imagem": "ibge",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
@@ -109,16 +250,47 @@ export default function ComCabecalho() {
       "nome": "COVID19-Brasil API",
       "descricao": "API de dados sobre a pandemia de COVID-19 no Brasil.",
       "metodos": {
-        "get": {
-          "url": "https://covid19-brazil-api.now.sh/api/report/v1",
-          "header": "",
-          "body": "",
-          "token": false
-        }
+        "get": [
+          {
+            "titulo": "Lista casos por todos estados brasileiros",
+            "url": "https://covid19-brazil-api.now.sh/api/report/v1",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Lista casos por estado brasileiro",
+            "url": "https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/{UF [ex.: AL]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Lista casos no brasil em data específica",
+            "url": "https://covid19-brazil-api.now.sh/api/report/v1/brazil/{DATA_AAAAMMDD [ex.: 20200318]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Lista casos por países",
+            "url": "https://covid19-brazil-api.vercel.app/api/report/v1/countries",
+            "header": "",
+            "body": "",
+            "token": false
+          },
+          {
+            "titulo": "Lista casos por país",
+            "url": "https://covid19-brazil-api.now.sh/api/report/v1/{PAIS [ex.: Brazil]}",
+            "header": "",
+            "body": "",
+            "token": false
+          }
+        ]
       },
       "link": "https://covid19-brazil-api-docs.vercel.app",
       "categoria": "SAUDE",
-      "imagem": "https://i.imgur.com/5FCacIp.jpeg",
+      "imagem": "covid19",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
@@ -127,34 +299,68 @@ export default function ComCabecalho() {
       "nome": "Climatempo API",
       "descricao": "Fornece previsões do tempo e informações meteorológicas detalhadas para o Brasil.",
       "metodos": {
-        "get": {
-          "url": "http://apiadvisor.climatempo.com.br/api/v1/weather/locale/3477/current?token={SEU_TOKEN}",
-          "header": "",
-          "body": "",
-          "token": true
-        }
+        "get": [
+          {
+            "titulo": "Localidade - Pesquise país por nome",
+            "url": "https://apiadvisor.climatempo.com.br/api/v1/locale/city?country=BR&token={SEU_TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
+            "header": "",
+            "body": "",
+            "token": true
+          },
+          {
+            "titulo": "Localidade - Pesquise estado por nome",
+            "url": "hhttps://apiadvisor.climatempo.com.br/api/v1/locale/city?state={UF [ex.: AL]}&token={SEU_TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
+            "header": "",
+            "body": "",
+            "token": true
+          },
+          {
+            "titulo": "Clima atual",
+            "url": "https://apiadvisor.climatempo.com.br/api/v1/weather/locale/{ID_CIDADE [ex.: 3477 (São Paulo)]}/current?token={SEU_TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
+            "header": "",
+            "body": "",
+            "token": true
+          },
+          {
+            "titulo": "Monitoramento - Monitoramento de Alerta",
+            "url": "http://apiadvisor.climatempo.com.br/api/v1/monitoring/alerts?token={SEU_TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
+            "header": "",
+            "body": "",
+            "token": true
+          }
+        ]
       },
       "link": "https://advisor.climatempo.com.br/",
       "categoria": "CLIMA",
-      "imagem": "https://advisor.climatempo.com.br/landing/img/logo.png",
+      "imagem": "climatempo",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
     {
       "id": 7,
-      "nome": "Consulta CEP",
-      "descricao": "Localiza informações completas de endereço a partir do CEP informado.",
+      "nome": "Buscar CEP",
+      "descricao": "Web Service de buscas de Endereços e SMS. Com plano gratuito limitado a 2 buscas por minuto",
       "metodos": {
-        "get": {
-          "url": "https://h-apigateway.conectagov.estaleiro.serpro.gov.br/api-cep/v1/consulta/cep/{CEP}",
-          "header": "",
-          "body": "",
-          "token": true
-        }
+        "get": [
+          {
+            "titulo":"Buscar CEP",
+            "url": "https://buscarcep.com.br/?cep={CEP [ex.: 57020440 (Maceió)]}&chave=Chave_Gratuita_BuscarCep",
+            "header": "",
+            "body": "",
+            "token": true
+          },
+          {
+            "titulo":"Enviar SMS",
+            "url": "https://buscarcep.com.br/ws2/?telefone={TEL [ex. 5500987654321 (Pais+DDD+Numero)]}&texto={SEU_TEXTO}&chave={CHAVE [ex.: Chave_Gratuita_BuscarCep]}",
+            "header": "",
+            "body": "",
+            "token": true
+          }
+        ]
       },
       "link": "https://site.buscarcep.com.br/",
       "categoria": "CEP",
-      "imagem": "https://site.buscarcep.com.br/img/logo.png",
+      "imagem": "buscarcep",
       "cliques": 0,
       "publicador": "Adiministrador"
     },
@@ -163,19 +369,133 @@ export default function ComCabecalho() {
       "nome": "Mercado Pago",
       "descricao": "Permite pagamentos e transações financeiras para e-commerces e aplicativos no Brasil.",
       "metodos": {
-        "get": {
-          "url": "https://api.mercadopago.com/V1/payments",
-          "header": "Authorization: Bearer {SEU_TOKEN}",
+        "ver_site": {
+          "titulo":"Consulte o site",
+          "url": "https://www.mercadopago.com.br/developers/pt/reference",
+          "header": "",
           "body": "",
           "token": true
         }
       },
       "link": "https://www.mercadopago.com.br/developers/pt/reference",
       "categoria": "PAGAMENTO",
-      "imagem": "https://http2.mlstatic.com/frontend-assets/mp-web-navigation/ui-navigation/6.7.44/mercadopago/logo__large.png",
+      "imagem": "mercadopago",
       "cliques": 0,
       "publicador": "Adiministrador"
-    }
+    },
+    {
+      "id": 9,
+      "nome": "APIBrasil",
+      "descricao": "Fornece diversas informações sobre o Brasil, como estados, municípios, CEPs, feriados, CNPJ e mais.",
+      "metodos": {
+        "get": [
+          {
+            "titulo": "Busca por CEP",
+            "url": "https://brasilapi.com.br/api/cep/v1/{CEP [ex. 57020440]}",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Informações relacionadas a DDDs",
+            "url": "https://brasilapi.com.br/api/cnpj/v1/{CNPJ [ex. 06990590000123]}",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Informações relacionadas a DDDs",
+            "url": "https://brasilapi.com.br/api/ddd/v1/{DDD [ex. 82]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },{
+            "titulo": "Feriados nacionais",
+            "url": "https://brasilapi.com.br/api/feriados/v1/{ANO [ex. 2025]}",
+            "header": "",
+            "body": "",
+            "token": false
+          },{
+            "titulo": "Preço médio de Carros fornecido pela FIPE",
+            "url": "https://brasilapi.com.br/api/fipe/marcas/v1/carros",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Preço médio de Motos fornecido pela FIPE",
+            "url": "https://brasilapi.com.br/api/fipe/marcas/v1/motos",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Todos os bancos do Brasil",
+            "url": "https://brasilapi.com.br/api/banks/v1",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Avalia um dominio no registro.br",
+            "url": "https://brasilapi.com.br/api/registrobr/v1/{SEU_DOMINIO}",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Informações referentes ao PIX",
+            "url": "https://brasilapi.com.br/api/pix/v1/participants",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Corretoras ativas listadas na CVM",
+            "url": "https://brasilapi.com.br/api/cvm/corretoras/v1",
+            "header": "",
+            "body": "",
+            "token": false
+          }
+        ]
+      },
+      "link": "https://brasilapi.com.br",
+      "categoria": "CEP",
+      "imagem": "apibrasil",
+      "cliques": 0,
+      "publicador": "Adiministrador"
+    },
+    {
+      "id": 10,
+      "nome": "PagSeguro",
+      "descricao": "Ferramenta de pagamentos online e de transações financeiras.",
+      "metodos": {
+        "ver_site": {
+          "titulo":"Consulte o site",
+          "url": "https://developer.pagbank.com.br/reference/",
+          "header": "",
+          "body": "",
+          "token": true
+        }
+      },
+      "link": "https://developer.pagbank.com.br/",
+      "categoria": "PAGAMENTO",
+      "imagem": "pagseguro",
+      "cliques": 0,
+      "publicador": "Adiministrador"
+    },
+    /* ,
+     {
+       "id": 10,
+       "nome": "",
+       "descricao": "",
+       "metodos": {
+         "get": {
+           "url": "",
+           "header": "",
+           "body": "",
+           "token": true
+         }
+       },
+       "link": "",
+       "categoria": "",
+       "imagem": "",
+       "cliques": 0,
+       "publicador": ""
+     }*/
   ];
 
   const [apis, def_apis] = useState(BKEND_TEMP);
@@ -183,7 +503,7 @@ export default function ComCabecalho() {
   const [filtrado, def_filtrados] = useState(BKEND_TEMP);
   const [filtrando, def_filtrando] = useState(false);
   const [dados_offline, def_dados_offline] = useState(true);
-  const [tmp_verificar_servidor, def_tmp_verificar_servidor] = useState(10);
+  const [tmp_verificar_servidor, def_tmp_verificar_servidor] = useState(600);
   let atualizar = false;
 
   useEffect(() => {
@@ -217,7 +537,7 @@ export default function ComCabecalho() {
         def_apis(traduzir_dados(lista_apis.dados_get));
         def_populares(traduzir_dados(lista_populares.dados_get));
         def_filtrados(traduzir_dados(lista_apis.dados_get));
-        def_tmp_verificar_servidor(30);
+        def_tmp_verificar_servidor(600);
 
         if (atualizar) {
           atualizar = false;
@@ -239,33 +559,31 @@ export default function ComCabecalho() {
       <>
         <Cabecalho
           dados_offline={dados_offline}
-          buscar={(valor) => {
+          buscar={valor => {
             const resultado = valor
               ? apis.filter(
-                (api) =>
+                api =>
                   api.nome.toLowerCase().includes(valor.toLowerCase()) ||
                   api.descricao.toLowerCase().includes(valor.toLowerCase())
               )
               : apis;
-
             def_filtrando(!!valor);
             def_filtrados(resultado);
           }}
-          categorizar={(categoria) => {
+          categorizar={categoria => {
             const resultado =
               categoria === "NENHUMA"
                 ? apis
-                : apis.filter((api) =>
+                : apis.filter(api =>
                   api.categoria.toLowerCase().includes(categoria.toLowerCase())
                 );
-
             def_filtrando(categoria !== "NENHUMA");
             def_filtrados(resultado);
           }}
         />
         <Corpo>
           {sessionStorage.getItem("Paginas") ? (
-            <Gerenciar />
+            <Gerenciar dados_offline={dados_offline} />
           ) : sessionStorage.getItem("API") ? (
             <PaginaAPI dados_offline={dados_offline} dados_apis={apis} />
           ) : (

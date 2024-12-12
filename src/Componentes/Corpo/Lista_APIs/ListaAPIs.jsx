@@ -17,6 +17,7 @@ export default function ListaAPIs({ dados_offline, apis }) {
         {Array.isArray(apis) && apis.map
           (api => (
             <API
+              dados_offline={dados_offline}
               api={api}
               key={api.id}
               classe={"lista_apis_hover"}

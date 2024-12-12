@@ -61,7 +61,7 @@
  min-width: 100px;
  color: #DDD;
  height: 100%;
- width: 100px;
+ width: 150px;
 }
 
 #metodos_abas_metodos_efeito {
@@ -187,6 +187,10 @@
  height: 100%;
 }
 
+#pagina_api_basico_conteudo p {
+ user-select: text;
+}
+
 #pagina_api_basico_metodos {
  background-color: var(--tema-fundo-4);
  position: relative;
@@ -198,10 +202,10 @@
  pointer-events: none;
  position: absolute;
  content: '';
+ bottom: 95%;
+ top: -40%;
  right: 0;
  left: 0;
- top: -40%;
- bottom: 95%;
 }
 
 #pagina_api_basico_metodos>div {
@@ -255,8 +259,21 @@
  margin-bottom: 10px;
 }
 
+.metodos_conteudo .alinhado {
+ margin: 10px;
+}
+
+#metodos_aviso_metodos {
+ border-bottom: 2px solid var(--destaque);
+ margin-bottom: 20px;
+ align-self: center;
+ text-align: center;
+ font-size: x-large;
+ width: fit-content;
+}
+
 .metodos_setas {
- background-image: url("./../../../../assets/seta.png");
+ background-image: url("/icones/seta.png");
  filter: contrast(0) brightness(2);
  background-color: transparent;
  background-repeat: no-repeat;
@@ -273,6 +290,79 @@
 .metodos_setas:hover {
  background-color: transparent;
  scale: 1.2;
+}
+
+.metodos_expandir_metodos {
+ background-color: var(--tema-fundo);
+ text-overflow: ellipsis;
+ justify-content: start;
+ white-space: nowrap;
+ align-items: center;
+ overflow: hidden;
+ max-width: 100%;
+ color: #FFF;
+ display: flex;
+ padding: 0;
+}
+
+.metodos_expandir_metodos p {
+ padding: 0 10px;
+}
+
+.metodos_expandir_metodos p:first-child {
+ justify-content: center;
+ min-width: fit-content;
+ align-items: center;
+ display: flex;
+ height: 100%;
+}
+
+.metodos_expandir_metodos p:last-child {
+ justify-content: start;
+ -webkit-box-orient: vertical;
+ text-overflow: ellipsis;
+ -webkit-line-clamp: 1;
+ display: -webkit-box;
+ white-space: normal;
+ text-align: start;
+ overflow: hidden;
+ padding: 0 10px;
+ line-clamp: 1;
+}
+
+.metodo_detalhes {
+ flex-direction: column;
+ margin-top: 10px;
+ display: flex;
+ gap: 10px;
+}
+
+.metodo_detalhes a {
+ color: var(--destaque);
+}
+
+
+.efeito_iluminacao {
+ animation: efeito_iluminacao_aviso 7s;
+ background: linear-gradient(90deg, var(--destaque), var(--texto));
+ -webkit-text-fill-color: transparent;
+ -webkit-background-clip: text;
+ background-size: 200% 100%;
+ background-clip: text;
+}
+
+@keyframes efeito_iluminacao_aviso {
+ 0% {
+  background-position: 0% 0%;
+ }
+
+ 50% {
+  background-position: 100% 0%;
+ }
+
+ 100% {
+  background-position: 0% 0%;
+ }
 }
 
 @media only screen and (max-width: 600px) {

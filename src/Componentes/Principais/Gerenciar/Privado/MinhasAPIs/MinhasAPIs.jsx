@@ -6,26 +6,25 @@ import { usuario_id } from "../../../Servicos/Usuario/Usuario";
 import { meus_erros } from "../../../Erros/MeusErros";
 import Visualizador from "../../../../Modal/API_Visualizador/Visualizador"
 import Editor from "../../../../Modal/API_Editor/Editor"
-import image_padrao from "../../../../../assets/image_padrao.png";
 import API from "../../../../Corpo/API/API";
 import Carregamento from "../../../Carregamento/Carregamento";
 
 const site = import.meta.env.VITE_SITE;
 
-export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar_api, def_exibir_modal_editar }) {
+export default function MinhasApis({ dados_offline, editar_api, exibir_modal_editar, def_editar_api, def_exibir_modal_editar }) {
 
   const [exibir_modal_visualizar, def_exibir_modal_visualizar] = useState(false);
   const [carregando, def_carregando] = useState(true);
   const [nova_api, def_nova_api] = useState([]);
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
   const [api_selec, def_api_selec] = useState(null);
-  const [imagem, def_imagem] = useState(image_padrao);
+  const [imagem, def_imagem] = useState("/icones/image_padrao.png");
 
   const validar_imagem = (url) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
-      img.onerror = () => resolve(image_padrao);
+      img.onerror = () => resolve("/icones/image_padrao.png");
       img.src = url;
     });
   };
@@ -172,8 +171,10 @@ export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar
               </div>
             ) :
               Array.isArray(nova_api) && nova_api.map(api => (
-                <API api={api} key={api.id}
-                  click={() => exibir_modal_minhas_apis(api) }
+                <API
+                  dados_offline={dados_offline}
+                  api={api} key={api.id}
+                  click={() => exibir_modal_minhas_apis(api)}
                   simples={false}
                   def_api_excluir={def_api_excluir}
                   editar_minhas_api={editar_minhas_api} />
@@ -187,7 +188,7 @@ export default function MinhasApis({ editar_api, exibir_modal_editar, def_editar
                 <b>{api_excluir.name && api_excluir.name.length > 10 ? api_excluir.name.slice(0, 10) + "..." : api_excluir.name}</b> ?
               </div>
               <div className="campos_laterais">
-                <button onClick={() => fechar_modais_minhas_apis() }>Cancelar</button>
+                <button onClick={() => fechar_modais_minhas_apis()}>Cancelar</button>
                 <button onClick={() => { excluir_minhas_api(api_excluir.id); fechar_modais_minhas_apis(); }}>Confirmar</button>
               </div>
             </div>

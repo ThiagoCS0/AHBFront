@@ -14,7 +14,7 @@ export default function InformacoesRodape() {
   <div id="infor_abh">
    <p><b>© {ano} {tela_grande ? "API HUB BRASIL" : "AHB"}</b> Todos os direitos reservados</p>
    <div>
-    <Link onClick={() => pagina("Doacao")}>{tela_grande ? <>Ajude o projeto <b>Doando</b></> : <>Fazer <b>Doação</b></>}</Link>
+    <Link onClick={() => pagina("Doacao")} className="desativado" style={{ pointerEvents: 'none' }}>{tela_grande ? <>Ajude o projeto <b>Doando</b></> : <>Fazer <b>Doação</b></>}</Link>
     <div>
      <Link onClick={() => pagina("Sobre")}>Sobre <b>AHB</b></Link>
      <Link onClick={() => pagina("Termos")}>Termos de Uso</Link>

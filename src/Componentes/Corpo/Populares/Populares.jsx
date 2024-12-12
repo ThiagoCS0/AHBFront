@@ -77,7 +77,9 @@ export default function Populares({ dados_offline, populares }) {
       <div id="carousel">
         {
           populares.map((api, i) => (
-            <API api={api}
+            <API
+              dados_offline={dados_offline}
+              api={api}
               key={api.id}
               classe={`populares_itens ${itensVisiveis(i)}`}
               click={() => {

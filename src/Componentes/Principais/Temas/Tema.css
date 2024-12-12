@@ -304,11 +304,19 @@ hr {
   color: transparent;
 }
 
+.desativado,
+.desativado * {
+  pointer-events: 'none' !important;
+  color: var(--tema-texto-disativar) !important;
+}
+
 .alinhado {
   justify-content: center;
   align-items: center;
   position: relative;
+  text-align: center;
   display: flex;
+  width: 100%;
 }
 
 .tela_inteira {
@@ -382,7 +390,7 @@ hr {
 }
 
 .botao_voltar {
-  background-image: url("./../../../assets/seta.png");
+  background-image: url("/icones/seta.png");
   background-position: center center;
   background-color: transparent;
   background-repeat: no-repeat;
@@ -709,7 +717,7 @@ hr {
 /* 4K  */
 @media screen and (min-height: 2100px) {
 
-  #corpo{
+  #corpo {
     min-height: 100% !important;
     height: 100% !important;
   }

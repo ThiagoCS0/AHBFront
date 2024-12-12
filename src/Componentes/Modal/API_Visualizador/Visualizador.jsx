@@ -1,7 +1,5 @@
-import React, { useRef, useEffect, useState } from "react";
-import { meus_erros } from "../../Principais/Erros/MeusErros";
+import React, { useEffect, useState } from "react";
 import { meu_get } from "../../Principais/Servicos/Backend/Conexao";
-import image_padrao from "../../../assets/image_padrao.png";
 import "./Visualizador.css";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
 
@@ -11,20 +9,24 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [publicador, def_publicador] = useState('');
   const [carregando, def_carregando] = useState(true);
-  const [imagem, def_imagem] = useState(image_padrao);
+  const [imagem, def_imagem] = useState("/icones/image_padrao.png");
 
   const validar_imagem = (url) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
-      img.onerror = () => resolve(image_padrao);
+      img.onerror = () => resolve("/icones/image_padrao.png");
       img.src = url;
     });
   };
 
   useEffect(() => {
     if (api?.imagem) {
+      if(dados_offline){
+        def_imagem(`/apis/${api.imagem}.png`)
+      }else{
       validar_imagem(api.imagem).then((img) => def_imagem(img));
+      }
     }
   }, [api?.imagem]);
 
@@ -85,12 +87,12 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
               <div>
                 {
                   api.metodos && Object.keys(dados_offline ? api.metodos : JSON.parse(api.metodos)).map(metodo => {
-                    const metodoTrim = metodo.trim().toUpperCase();
-                    const cores = { GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
-                    return cores[metodoTrim] ? (
-                      <button key={metodoTrim} style={{ backgroundColor: cores[metodoTrim] }}
-                        onClick={() => { sessionStorage.setItem("API", JSON.stringify([api.id, metodoTrim])); window.location.reload(); }}>
-                        {metodoTrim}</button>
+                    const metodo_formatado = metodo.trim().toUpperCase();
+                    const cores = { VER_SITE: "var(--destaque)", GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
+                    return cores[metodo_formatado] ? (
+                      <button key={metodo_formatado} style={{ backgroundColor: cores[metodo_formatado] }}
+                        onClick={() => { sessionStorage.setItem("API", JSON.stringify([api.id, metodo_formatado])); window.location.reload(); }}>
+                        {metodo_formatado === "VER_SITE" ? "CONSULTE" : metodo_formatado}</button>
                     ) : null;
                   })
                 }
