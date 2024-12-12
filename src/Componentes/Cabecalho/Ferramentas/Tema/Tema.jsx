@@ -7,7 +7,7 @@ export default function Tema() {
   return (
     <img
       className="icones"
-      src={temas ? "/icones/sol.png" : "/icones/lua.png"}
+      src={temas ? "./icones/sol.png" : "./icones/lua.png"}
       alt="Tema"
       onClick={() => alterar_tema(!temas) } />
   )

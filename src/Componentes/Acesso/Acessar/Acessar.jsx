@@ -110,7 +110,7 @@ export default function Acessar() {
               />
               <img
                 className="dados_usuario_ver_senha"
-                src={senha_visivel ? "/icones/senha_visivel.png" : "/icones/senha_invisivel.png"}
+                src={senha_visivel ? "./icones/senha_visivel.png" : "./icones/senha_invisivel.png"}
                 alt={senha_visivel ? "Senha Visível" : "Senha Invisível"}
                 onClick={() => def_senha_visivel(!senha_visivel)}
              />

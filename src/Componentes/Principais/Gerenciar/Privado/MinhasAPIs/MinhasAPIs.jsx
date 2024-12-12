@@ -18,13 +18,13 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
   const [nova_api, def_nova_api] = useState([]);
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
   const [api_selec, def_api_selec] = useState(null);
-  const [imagem, def_imagem] = useState("/icones/image_padrao.png");
+  const [imagem, def_imagem] = useState("./icones/image_padrao.png");
 
   const validar_imagem = (url) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
-      img.onerror = () => resolve("/icones/image_padrao.png");
+      img.onerror = () => resolve("./icones/image_padrao.png");
       img.src = url;
     });
   };

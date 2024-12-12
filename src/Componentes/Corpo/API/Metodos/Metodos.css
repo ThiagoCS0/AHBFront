@@ -273,7 +273,7 @@
 }
 
 .metodos_setas {
- background-image: url("/icones/seta.png");
+ background-image: url("./icones/seta.png");
  filter: contrast(0) brightness(2);
  background-color: transparent;
  background-repeat: no-repeat;

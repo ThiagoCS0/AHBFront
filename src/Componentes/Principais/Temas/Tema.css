@@ -390,7 +390,7 @@ hr {
 }
 
 .botao_voltar {
-  background-image: url("/icones/seta.png");
+  background-image: url("./icones/seta.png");
   background-position: center center;
   background-color: transparent;
   background-repeat: no-repeat;

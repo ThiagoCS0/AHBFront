@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 
 export default function API({ dados_offline, api, classe, click, simples = true, def_api_excluir, editar_minhas_api }) {
   const [tamanhoImg, defTamanhoImg] = useState({ lar: 0, alt: 0 });
-  const [imagem, def_imagem] = useState("/icones/image_padrao.png");
+  const [imagem, def_imagem] = useState("./icones/image_padrao.png");
 
   const validar_imagem = (url) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
-      img.onerror = () => resolve("/icones/image_padrao.png");
+      img.onerror = () => resolve("./icones/image_padrao.png");
       img.src = url;
     });
   };
@@ -17,7 +17,7 @@ export default function API({ dados_offline, api, classe, click, simples = true,
   useEffect(() => {
     if (api?.imagem) {
       if(dados_offline){
-        def_imagem(`/apis/${api.imagem}.png`)
+        def_imagem(`./apis/${api.imagem}.png`)
       }else{
       validar_imagem(api.imagem).then((img) => def_imagem(img));
       }

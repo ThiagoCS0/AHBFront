@@ -9,13 +9,13 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [publicador, def_publicador] = useState('');
   const [carregando, def_carregando] = useState(true);
-  const [imagem, def_imagem] = useState("/icones/image_padrao.png");
+  const [imagem, def_imagem] = useState("./icones/image_padrao.png");
 
   const validar_imagem = (url) => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
-      img.onerror = () => resolve("/icones/image_padrao.png");
+      img.onerror = () => resolve("./icones/image_padrao.png");
       img.src = url;
     });
   };
@@ -23,7 +23,7 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
   useEffect(() => {
     if (api?.imagem) {
       if(dados_offline){
-        def_imagem(`/apis/${api.imagem}.png`)
+        def_imagem(`./apis/${api.imagem}.png`)
       }else{
       validar_imagem(api.imagem).then((img) => def_imagem(img));
       }

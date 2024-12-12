@@ -32,7 +32,7 @@ export default function Buscar({ expandir, buscar }) {
    <img
     onClick={alterar_buscar}
     alt={expandi_local ? "Buscar" : "Fechar pesquisa"}
-    src={expandi_local ? "/icones/fechar.png" : "/icones/busca.png"}
+    src={expandi_local ? "./icones/fechar.png" : "./icones/busca.png"}
     className="icones"
    />
   </div>

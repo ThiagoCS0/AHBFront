@@ -8,7 +8,7 @@ export default function Metodos({ dados_offline, api }) {
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [aba_ativa, def_aba_ativa] = useState("basico");
   const [carregando, def_carregando] = useState(true);
-  const [imagem, def_imagem] = useState("/icones/image_padrao.png");
+  const [imagem, def_imagem] = useState("./icones/image_padrao.png");
   const [publicador, def_publicador] = useState("");
   const abasRef = useRef(null);
   const [item_expandido, def_item_expandido] = useState({});
@@ -47,7 +47,7 @@ export default function Metodos({ dados_offline, api }) {
   useEffect(() => {
     if (api?.imagem) {
       if (dados_offline) {
-        def_imagem(`/apis/${api.imagem}.png`)
+        def_imagem(`./apis/${api.imagem}.png`)
       } else {
         validar_imagem(api.imagem).then((img) => def_imagem(img));
       }
@@ -58,7 +58,7 @@ export default function Metodos({ dados_offline, api }) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve(url);
-      img.onerror = () => resolve("/icones/image_padrao.png");
+      img.onerror = () => resolve("./icones/image_padrao.png");
       img.src = url;
     });
   };

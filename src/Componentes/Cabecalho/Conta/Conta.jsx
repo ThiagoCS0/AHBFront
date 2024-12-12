@@ -90,7 +90,7 @@ export default function Conta({ dados_offline }) {
   return (
     <div id="conta" className="alinhado">
       <button onClick={() => { !dados_offline && opcoes_botao_conta() }} ref={acessarRef} disabled={dados_offline}>
-        {!dados_offline && <img src="/icones/person.png" alt="Usuário" />}
+        {!dados_offline && <img src="./icones/person.png" alt="Usuário" />}
         <span>{acessando || dados_offline ? "..." : usuario ? usuario : "Entrar"}</span>
       </button>
       {token_valido && menu_visivel && (
