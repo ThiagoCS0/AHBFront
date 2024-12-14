@@ -1,13 +1,12 @@
 .api {
- border: 2px solid var(--borda) !important;
  transform-origin: center center;
  background: var(--linear-apis);
- box-shadow: var(--sombra-1);
+ box-shadow: var(--sombra-2);
  transition: all 0.5s ease;
  justify-content: center;
  flex-direction: column;
  align-items: center;
- border-radius: 8px;
+ border-radius: 7px;
  position: relative;
  max-height: 250px;
  overflow: hidden;
@@ -24,18 +23,19 @@
 }
 
 .api p {
- background: linear-gradient(to top, #888E 0%, #AAAD 30%, #0000 100%);
+ background: var(--tema-api-fundo);
  justify-content: center;
  text-overflow: ellipsis;
  display: inline-block;
  white-space: nowrap;
- height: fit-content;
+ color: var(--fundo);
  text-align: center;
  position: absolute;
- padding: 4px 10px;
+ padding: 7px 10px;
  font-weight: 500;
  font-size: large;
- overflow: hidden;
+ min-height: 40px;
+ height: 40px;
  width: 100%;
  bottom: 0;
  left: 0;
@@ -51,8 +51,7 @@
  }
 
  .api p {
-  background: linear-gradient(to top, #888E 0%, #AAAD 70%, #0000 100%);
-  height: fit-content;
+ background: var(--tema-api-fundo);
  }
 
 }

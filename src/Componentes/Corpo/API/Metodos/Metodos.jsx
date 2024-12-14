@@ -106,7 +106,7 @@ export default function Metodos({ dados_offline, api }) {
 
     if (aba_ativa === "basico") {
       return (
-        <div id="pagina_api_basico" className="metodos_conteudo ondulacao-1">
+        <div id="pagina_api_basico" className="metodos_conteudo">
           {
             <>
               <div id="pagina_api_basico_conteudo">
@@ -114,9 +114,7 @@ export default function Metodos({ dados_offline, api }) {
                   <p><span className="span_destaque">Nome</span>{api.nome}</p>
                   <p><span className="span_destaque">Descrição</span>{api.descricao}</p>
                   <p><span className="span_destaque">Link</span>
-                    <a href={api.link} target="_blank"
-                      rel="noopener noreferrer" aria-hidden="true">
-                      {api.link}</a></p>
+                    <a href={api.link} target="_blank" rel="noopener noreferrer" aria-hidden="true">{api.link}</a></p>
                   <div className="campos_laterais">
                     <p><span className="span_destaque">Categoria</span><br />{categorias}</p>
                     {publicador && <p><span className="span_destaque">Publicador</span><br />{publicador}</p>}

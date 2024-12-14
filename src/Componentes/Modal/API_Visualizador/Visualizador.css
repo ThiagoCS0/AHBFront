@@ -29,7 +29,7 @@
  justify-content: space-between;
  flex-direction: column;
  height: fit-content;
- border-radius: 8px;
+ border-radius: 7px;
  position: absolute;
  cursor: default;
  display: flex;
@@ -40,7 +40,7 @@
 #modal_apis_logo {
  background: var(--linear-apis);
  box-shadow: var(--sombra-0);
- border-radius: 7px;
+ border-radius: 5px;
  position: absolute;
  overflow: hidden;
  height: 80px;
@@ -52,7 +52,7 @@
 #modal_apis_logo img {
  border: 1px solid var(--destaque);
  object-fit: contain;
- border-radius: 8px;
+ border-radius: 5px;
  height: 100%;
  width: 100%;
 }

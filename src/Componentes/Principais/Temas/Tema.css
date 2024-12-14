@@ -24,6 +24,8 @@
   --tema-placeholder: #AAA;
   --tema-hover-texto: #FFF;
   --tema-hover-fundo: #420;
+  --tema-api-fundo: #000A;
+  --tema-api-borda: #444;
   --icones-laranjas: contrast(0) brightness(2);
   /* Lineares */
   --linear-apis: linear-gradient(-45deg, #AAA, #FFF);
@@ -77,6 +79,8 @@
   --tema-placeholder: #BBB;
   --tema-hover-texto: #FFF;
   --tema-hover-fundo: #555;
+  --tema-api-fundo: #DDDD;
+  --tema-api-borda: #FFF;
   --icones-laranjas: contrast(0) brightness(2);
   /* Lineares */
   --linear-apis: linear-gradient(-45deg, #000, #AAA);

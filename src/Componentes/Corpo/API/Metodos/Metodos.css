@@ -136,6 +136,7 @@
 }
 
 #pagina_api_basico {
+ background-size: 300% 300% !important;
  justify-content: space-between;
 }
 
@@ -296,8 +297,9 @@
  background-color: var(--tema-fundo);
  text-overflow: ellipsis;
  justify-content: start;
- white-space: nowrap;
+ border-radius: 10px;
  align-items: center;
+ white-space: nowrap;
  overflow: hidden;
  max-width: 100%;
  color: #FFF;
@@ -344,7 +346,7 @@
 
 .efeito_iluminacao {
  animation: efeito_iluminacao_aviso 7s;
- background: linear-gradient(90deg, var(--destaque), var(--texto));
+ background: linear-gradient(90deg, #F74, var(--texto));
  -webkit-text-fill-color: transparent;
  -webkit-background-clip: text;
  background-size: 200% 100%;

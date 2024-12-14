@@ -127,7 +127,7 @@ export default function ComCabecalho() {
           },
           {
             "titulo": "Frequência de nascimentos por década para o nome",
-            "url": "https://servicodados.ibge.gov.br/api/v2/censos/nomes/{SEU_NOME [ex.: Maria]}",
+            "url": "https://servicodados.ibge.gov.br/api/v2/censos/nomes/{NOME [ex.: Maria]}",
             "header": "",
             "body": "",
             "token": false
@@ -247,7 +247,7 @@ export default function ComCabecalho() {
     },
     {
       "id": 5,
-      "nome": "COVID19-Brasil API",
+      "nome": "COVID19 Brasil API",
       "descricao": "API de dados sobre a pandemia de COVID-19 no Brasil.",
       "metodos": {
         "get": [
@@ -302,28 +302,28 @@ export default function ComCabecalho() {
         "get": [
           {
             "titulo": "Localidade - Pesquise país por nome",
-            "url": "https://apiadvisor.climatempo.com.br/api/v1/locale/city?country=BR&token={SEU_TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
+            "url": "https://apiadvisor.climatempo.com.br/api/v1/locale/city?country=BR&token={TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
             "header": "",
             "body": "",
             "token": true
           },
           {
             "titulo": "Localidade - Pesquise estado por nome",
-            "url": "hhttps://apiadvisor.climatempo.com.br/api/v1/locale/city?state={UF [ex.: AL]}&token={SEU_TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
+            "url": "hhttps://apiadvisor.climatempo.com.br/api/v1/locale/city?state={UF [ex.: AL]}&token={TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
             "header": "",
             "body": "",
             "token": true
           },
           {
             "titulo": "Clima atual",
-            "url": "https://apiadvisor.climatempo.com.br/api/v1/weather/locale/{ID_CIDADE [ex.: 3477 (São Paulo)]}/current?token={SEU_TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
+            "url": "https://apiadvisor.climatempo.com.br/api/v1/weather/locale/{ID_CIDADE [ex.: 3477 (São Paulo)]}/current?token={TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
             "header": "",
             "body": "",
             "token": true
           },
           {
             "titulo": "Monitoramento - Monitoramento de Alerta",
-            "url": "http://apiadvisor.climatempo.com.br/api/v1/monitoring/alerts?token={SEU_TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
+            "url": "http://apiadvisor.climatempo.com.br/api/v1/monitoring/alerts?token={TOKEN [ex.: 0000000fc0c00b0f0000db0d0f00000de]}",
             "header": "",
             "body": "",
             "token": true
@@ -343,15 +343,15 @@ export default function ComCabecalho() {
       "metodos": {
         "get": [
           {
-            "titulo":"Buscar CEP",
+            "titulo": "Buscar CEP",
             "url": "https://buscarcep.com.br/?cep={CEP [ex.: 57020440 (Maceió)]}&chave=Chave_Gratuita_BuscarCep",
             "header": "",
             "body": "",
             "token": true
           },
           {
-            "titulo":"Enviar SMS",
-            "url": "https://buscarcep.com.br/ws2/?telefone={TEL [ex. 5500987654321 (Pais+DDD+Numero)]}&texto={SEU_TEXTO}&chave={CHAVE [ex.: Chave_Gratuita_BuscarCep]}",
+            "titulo": "Enviar SMS",
+            "url": "https://buscarcep.com.br/ws2/?telefone={TEL [ex. 5500987654321 (Pais+DDD+Numero)]}&texto={TEXTO}&chave={CHAVE [ex.: Chave_Gratuita_BuscarCep]}",
             "header": "",
             "body": "",
             "token": true
@@ -370,7 +370,7 @@ export default function ComCabecalho() {
       "descricao": "Permite pagamentos e transações financeiras para e-commerces e aplicativos no Brasil.",
       "metodos": {
         "ver_site": {
-          "titulo":"Consulte o site",
+          "titulo": "Consulte o site",
           "url": "https://www.mercadopago.com.br/developers/pt/reference",
           "header": "",
           "body": "",
@@ -407,13 +407,13 @@ export default function ComCabecalho() {
             "header": "",
             "body": "",
             "token": false
-          },{
+          }, {
             "titulo": "Feriados nacionais",
             "url": "https://brasilapi.com.br/api/feriados/v1/{ANO [ex. 2025]}",
             "header": "",
             "body": "",
             "token": false
-          },{
+          }, {
             "titulo": "Preço médio de Carros fornecido pela FIPE",
             "url": "https://brasilapi.com.br/api/fipe/marcas/v1/carros",
             "header": "",
@@ -433,7 +433,7 @@ export default function ComCabecalho() {
             "token": false
           }, {
             "titulo": "Avalia um dominio no registro.br",
-            "url": "https://brasilapi.com.br/api/registrobr/v1/{SEU_DOMINIO}",
+            "url": "https://brasilapi.com.br/api/registrobr/v1/{DOMINIO}",
             "header": "",
             "body": "",
             "token": false
@@ -464,7 +464,7 @@ export default function ComCabecalho() {
       "descricao": "Ferramenta de pagamentos online e de transações financeiras.",
       "metodos": {
         "ver_site": {
-          "titulo":"Consulte o site",
+          "titulo": "Consulte o site",
           "url": "https://developer.pagbank.com.br/reference/",
           "header": "",
           "body": "",
@@ -477,25 +477,119 @@ export default function ComCabecalho() {
       "cliques": 0,
       "publicador": "Adiministrador"
     },
-    /* ,
-     {
-       "id": 10,
-       "nome": "",
-       "descricao": "",
-       "metodos": {
-         "get": {
-           "url": "",
-           "header": "",
-           "body": "",
-           "token": true
-         }
-       },
-       "link": "",
-       "categoria": "",
-       "imagem": "",
-       "cliques": 0,
-       "publicador": ""
-     }*/
+    {
+      "id": 11,
+      "nome": "Invertexto.com | API",
+      "descricao": "",
+      "metodos": {
+        "get": [
+          {
+            "titulo": "Codigo de Barra",
+            "url": "https://api.invertexto.com/v1/barcode?token=SEUTOKEN&text=exemplo&type=code39&font=arial",
+            "header": "",
+            "body": "",
+            "token": true
+          }, {
+            "titulo": "Gerador de Pessoas",
+            "url": "https://api.invertexto.com/v1/faker?token=SEUTOKEN&fields=name,cpf&locale=pt_BR",
+            "header": "",
+            "body": "",
+            "token": true
+          }, {
+            "titulo": "Localizador de IP",
+            "url": "https://api.invertexto.com/v1/geoip/200.33.152.248?token=SEUTOKEN",
+            "header": "",
+            "body": "",
+            "token": true
+          }, {
+            "titulo": "Validador de CPF e CNPJ",
+            "url": "https://api.invertexto.com/v1/validator?token=SEUTOKEN&value=11111111111",
+            "header": "",
+            "body": "",
+            "token": true
+          }, {
+            "titulo": "Conversor de Moedas",
+            "url": "https://api.invertexto.com/v1/currency/USD_BRL?token=SEUTOKEN",
+            "header": "",
+            "body": "",
+            "token": true
+          }, {
+            "titulo": "Validador de Email",
+            "url": "https://api.invertexto.com/v1/email-validator/email@example.com?token=SEUTOKEN",
+            "header": "",
+            "body": "",
+            "token": true
+          }
+        ]
+      },
+      "link": "https://api.invertexto.com/",
+      "categoria": "OUTROS",
+      "imagem": "invertexto",
+      "cliques": 0,
+      "publicador": "Adiministrador"
+    },
+    {
+      "id": 12,
+      "nome": "API do Vagalume",
+      "descricao": "",
+      "metodos": {
+        "get": [
+          {
+            "titulo": "Informações do artistas",
+            "url": "https://www.vagalume.com.br/{ARTISTA [ex. sergio-lopes]}/index.js",
+            "header": "",
+            "body": "",
+            "token": false
+          }, {
+            "titulo": "Informações da musica",
+            "url": "https://api.vagalume.com.br/search.php?art={ARTISTA [ex. sergio-lopes]}&mus={NOME_MUSICA [ex. o-amigo]}&apikey={CHAVE_API}",
+            "header": "",
+            "body": "",
+            "token": true
+          },
+          {
+            "titulo": "Imagem do artista",
+            "url": "https://api.vagalume.com.br/search.php?art={ARTISTA [ex. sergio-lopes]}&extra=artpic&nolyrics=1&apikey={CHAVE_API}",
+            "header": "",
+            "body": "",
+            "token": true
+          }
+        ]
+      },
+      "link": "https://api.vagalume.com.br/docs/",
+      "categoria": "",
+      "imagem": "vagalume",
+      "cliques": 0,
+      "publicador": "Adiministrador"
+    }
+    // ,
+    // {
+    //   "id": 13,
+    //   "nome": "",
+    //   "descricao": "",
+    //   "metodos": {
+    //     "get": [
+    //       {
+    //         "titulo": "",
+    //         "url": "",
+    //         "header": "",
+    //         "body": "",
+    //         "token": false
+    //       }, {
+    //         "titulo": "",
+    //         "url": "",
+    //         "header": "",
+    //         "body": "",
+    //         "token": false
+    //       }
+    //     ]
+    //   },
+    //   "link": "",
+    //   "categoria": "",
+    //   "imagem": "",
+    //   "cliques": 0,
+    //   "publicador": "Adiministrador"
+    // }
   ];
 
   const [apis, def_apis] = useState(BKEND_TEMP);

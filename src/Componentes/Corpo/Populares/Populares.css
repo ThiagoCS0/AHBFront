@@ -115,6 +115,18 @@
   scale: 1.2;
 }
 
+#populares .api {
+  border-radius: 7px;
+}
+
+#populares .api img {
+  border-radius: 0 0 8px 8px;
+}
+
+#populares .api p {
+  border-radius: 0px;
+}
+
 /* Smartphone  */
 @media screen and (max-width: 600px) {
 
