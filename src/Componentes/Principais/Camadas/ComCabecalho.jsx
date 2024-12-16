@@ -13,6 +13,9 @@ const site = import.meta.env.VITE_INICIAL;
 
 export default function ComCabecalho() {
 
+  /*
+  Data deve ter DD/MM/AAAA HH:MM:SS
+  */
   const BKEND_TEMP = [
     {
       "id": 1,
@@ -22,13 +25,13 @@ export default function ComCabecalho() {
         "get": [
           {
             "titulo": "Buscar um CEP",
-            "url": "https://cep.awesomeapi.com.br/json/{CEP}",
+            "url": "https://cep.awesomeapi.com.br/json/{CEP [ex.: 57020440 (Maceió)]}",
             "header": "",
             "body": "",
             "token": false
           }, {
             "titulo": "Retorna moedas selecionadas",
-            "url": "https://economia.awesomeapi.com.br/json/last/{MOEDA-MOEDA}",
+            "url": "https://economia.awesomeapi.com.br/json/last/{MOEDA-MOEDA [ex.: USD-BRL]}",
             "header": "",
             "body": "",
             "token": false
@@ -37,10 +40,10 @@ export default function ComCabecalho() {
       },
       "link": "https://docs.awesomeapi.com.br",
       "categoria": "OUTROS",
-      // "imagem": "https://docs.awesomeapi.com.br/~gitbook/image?url=https%3A%2F%2F343035455-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F-LDDJfbHDy3v965nUzNO%252Flogo%252FjUplFdH5HnFk16oswjMH%252Fhigh-logo-white-transparent-background.png%3Falt%3Dmedia%26token%3D1569db0a-bc8b-49dc-abca-122974a51bc5&width=192&dpr=1&quality=100&sign=d2d37de6&sv=2",
       "imagem": "awesomeapi",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 2,
@@ -68,7 +71,8 @@ export default function ComCabecalho() {
       "categoria": "CEP",
       "imagem": "viacep",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 3,
@@ -110,7 +114,8 @@ export default function ComCabecalho() {
       "categoria": "CLIMA",
       "imagem": "hgbrasil",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 4,
@@ -243,7 +248,8 @@ export default function ComCabecalho() {
       "categoria": "ESTATISTICAS",
       "imagem": "ibge",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 5,
@@ -292,7 +298,8 @@ export default function ComCabecalho() {
       "categoria": "SAUDE",
       "imagem": "covid19",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 6,
@@ -334,7 +341,8 @@ export default function ComCabecalho() {
       "categoria": "CLIMA",
       "imagem": "climatempo",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 7,
@@ -362,7 +370,8 @@ export default function ComCabecalho() {
       "categoria": "CEP",
       "imagem": "buscarcep",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 8,
@@ -381,7 +390,8 @@ export default function ComCabecalho() {
       "categoria": "PAGAMENTO",
       "imagem": "mercadopago",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 9,
@@ -391,7 +401,7 @@ export default function ComCabecalho() {
         "get": [
           {
             "titulo": "Busca por CEP",
-            "url": "https://brasilapi.com.br/api/cep/v1/{CEP [ex. 57020440]}",
+            "url": "https://brasilapi.com.br/api/cep/v1/{CEP [ex. 57020440 (Maceió)]}",
             "header": "",
             "body": "",
             "token": false
@@ -456,7 +466,8 @@ export default function ComCabecalho() {
       "categoria": "CEP",
       "imagem": "apibrasil",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 10,
@@ -475,12 +486,13 @@ export default function ComCabecalho() {
       "categoria": "PAGAMENTO",
       "imagem": "pagseguro",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 11,
       "nome": "Invertexto.com | API",
-      "descricao": "",
+      "descricao": "API para desenvolvedores. Agilize o desenvolvimento de sites, aplicativos e sistemas utilizando nossas APIs.",
       "metodos": {
         "get": [
           {
@@ -526,12 +538,13 @@ export default function ComCabecalho() {
       "categoria": "OUTROS",
       "imagem": "invertexto",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     },
     {
       "id": 12,
       "nome": "API do Vagalume",
-      "descricao": "",
+      "descricao": "Com a Vagalume API você pode consultar grande acervo de artistas, discografias, fotos, etc.",
       "metodos": {
         "get": [
           {
@@ -560,11 +573,12 @@ export default function ComCabecalho() {
       "categoria": "",
       "imagem": "vagalume",
       "cliques": 0,
-      "publicador": "Adiministrador"
+      "publicador": "Adiministrador",
+      "data": "16/12/2024 01:00:00"
     }
     // ,
     // {
-    //   "id": 13,
+    //   "id": 00,
     //   "nome": "",
     //   "descricao": "",
     //   "metodos": {
@@ -588,7 +602,8 @@ export default function ComCabecalho() {
     //   "categoria": "",
     //   "imagem": "",
     //   "cliques": 0,
-    //   "publicador": "Adiministrador"
+    //   "publicador": "Adiministrador", 
+    //   "data":"16/12/2024 01:00:00"
     // }
   ];
 
@@ -597,7 +612,7 @@ export default function ComCabecalho() {
   const [filtrado, def_filtrados] = useState(BKEND_TEMP);
   const [filtrando, def_filtrando] = useState(false);
   const [dados_offline, def_dados_offline] = useState(true);
-  const [tmp_verificar_servidor, def_tmp_verificar_servidor] = useState(600);
+  const [tmp_verificar_servidor, def_tmp_verificar_servidor] = useState(15);
   let atualizar = false;
 
   useEffect(() => {
@@ -631,7 +646,7 @@ export default function ComCabecalho() {
         def_apis(traduzir_dados(lista_apis.dados_get));
         def_populares(traduzir_dados(lista_populares.dados_get));
         def_filtrados(traduzir_dados(lista_apis.dados_get));
-        def_tmp_verificar_servidor(600);
+        def_tmp_verificar_servidor(30);
 
         if (atualizar) {
           atualizar = false;
@@ -677,7 +692,7 @@ export default function ComCabecalho() {
         />
         <Corpo>
           {sessionStorage.getItem("Paginas") ? (
-            <Gerenciar dados_offline={dados_offline} />
+            <Gerenciar dados_offline={dados_offline} apis={apis} />
           ) : sessionStorage.getItem("API") ? (
             <PaginaAPI dados_offline={dados_offline} dados_apis={apis} />
           ) : (

@@ -9,11 +9,12 @@ export default function LinksUteis() {
 
  return (
   <div id="infor_links_uteis">
-   <div id="infor_rank" className="desativado infor_links" style={{pointerEvents:"none"}}>
+   {/* <div id="infor_rank" className="desativado infor_links" style={{pointerEvents:"none"}}> */}
+   <div id="infor_rank" className="infor_links">
     <p><b>Rank APIs</b></p>
     <Link onClick={() => pagina("Ranks", "ranks_recentes")}>+ Recentes</Link>
-    <Link onClick={() => pagina("Ranks", "ranks_populares")}>+ Populares</Link>
-    <Link onClick={() => pagina("Ranks", "ranks_votadas")}>+ Votadas</Link>
+    {/* <Link onClick={() => pagina("Ranks", "ranks_populares")}>+ Populares</Link> */}
+    {/* <Link onClick={() => pagina("Ranks", "ranks_votadas")}>+ Votadas</Link> */}
    </div>
    <div id="infor_ahb" className="infor_links">
     <p><b>API Hub Brasil</b></p>

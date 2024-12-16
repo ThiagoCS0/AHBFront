@@ -189,7 +189,6 @@ export default function Perfil() {
       ?
       <Carregamento carregando={carregando} />
       :
-      <div id="conteudo_perfil">
         <Abas
           pai="conteudo_perfil"
           titulos={[
@@ -198,166 +197,163 @@ export default function Perfil() {
           ]}
           conteudos={[
             /* ------------------------ Privado ------------------------ */
-            <div id="perfil_privado">
-              <form>
-                <div className="campos_laterais">
-                  <label className="dados_usuario">
-                    <p className="dados_usuario_titulos">Usuário</p>
-                    <input
-                      className={erros.loginErro ? "aviso_erro_borda" : ""}
-                      value={dados_usuario.login || ""}
-                      onChange={(e) => def_dados_usuario({ ...dados_usuario, login: e.target.value })}
-                      autoComplete="name"
-                      placeholder="Nome"
-                      required
-                    />
-                    <span className="aviso_erro">
-                      {erros.loginErro ? "Deve ter mais de 4 caracteres" : ""}
-                    </span>
-                  </label>
-
-                  <label className="dados_usuario">
-                    <p className="dados_usuario_titulos">CPF</p>
-                    <input
-                      className={erros.cpfErro ? "aviso_erro_borda" : ""}
-                      value={dados_usuario.cpf || ""}
-                      onChange={(e) => def_dados_usuario({ ...dados_usuario, cpf: e.target.value })}
-                      autoComplete="cpf"
-                      placeholder="00000000000"
-                      required
-                    />
-                    <span className="aviso_erro">
-                      {erros.cpfErro ? "Digite um CPF válido" : ""}
-                    </span>
-                  </label>
-                </div>
-
-                <div className="campos_laterais">
-                  <label className="dados_usuario">
-                    <p className="dados_usuario_titulos">Email</p>
-                    <input
-                      className={erros.emailErro ? "aviso_erro_borda" : ""}
-                      value={dados_usuario.email || ""}
-                      onChange={(e) => def_dados_usuario({ ...dados_usuario, email: e.target.value })}
-                      autoComplete="email"
-                      placeholder="seu@email.com"
-                      required
-                    />
-                    <span className="aviso_erro">
-                      {erros.emailErro ? "Email inválido" : ""}
-                    </span>
-                  </label>
-
-                  <label className="dados_usuario ">
-                    <p className="dados_usuario_titulos">Telefone</p>
-                    <div className="dados_usuario_tel">
-                      <input
-                        className={erros.dddErro ? "aviso_erro_borda" : ""}
-                        value={dados_usuario.ddd || ""}
-                        onChange={(e) => def_dados_usuario({ ...dados_usuario, ddd: e.target.value })}
-                        autoComplete="DDD"
-                        placeholder="00"
-                        required
-                      />
-                      <input
-                        className={erros.telefoneErro ? "aviso_erro_borda" : ""}
-                        value={dados_usuario.telefone || ""}
-                        onChange={(e) => def_dados_usuario({ ...dados_usuario, telefone: e.target.value })}
-                        autoComplete="tel"
-                        placeholder="000000000"
-                        required
-                      />
-                    </div>
-                    <span className="aviso_erro">
-                      {erros.telefoneErro ? "Número de telefone inválido" : ""}
-                    </span>
-                  </label>
-                </div>
-
-                <div className="campos_laterais" id="campos_senha_perfil">
-
-                  <label className="dados_usuario">
-                    <p className="dados_usuario_titulos">Senha Atual</p>
-                    <input
-                      className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
-                      value={dados_usuario.senhaAtual || ""}
-                      onChange={(e) => def_dados_usuario({ ...dados_usuario, senhaAtual: e.target.value })}
-                      type={visibilidade_senha.senhaAtual ? "text" : "password"}
-                      autoComplete="current-password"
-                      placeholder={visibilidade_senha.senhaAtual ? "" : "********"}
-                    />
-                    <img
-                      className="dados_usuario_ver_senha"
-                      src={visibilidade_senha.senhaAtual ? "./icones/senha_visivel.png" : "./icones/senha_invisivel.png"}
-                      onClick={() => def_visibilidade_senha({ ...visibilidade_senha, senhaAtual: !visibilidade_senha.senhaAtual })}
-                      alt="Visibilidade"
-                    />
-                  </label>
-
-                  <div id="perfil_nova_senha"  className="dados_usuario">
-
-                    <label className="dados_usuario_checkbox">
-                      <input
-                        className="input_dados_usuario_checkbox"
-                        type="checkbox"
-                        onChange={(e) => def_visibilidade_nova_senha(e.target.checked)}
-                        checked={visibilidade_nova_senha}
-                      />
-                      <span className="span_dados_usuario_checkbox"></span>{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}
-                    </label>
-
-                    <label className="dados_usuario">
-                      <input
-                        className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
-                        value={dados_usuario.novaSenha || ""}
-                        onChange={(e) => def_dados_usuario({ ...dados_usuario, novaSenha: e.target.value })}
-                        type={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? "text" : "password" : "password"}
-                        autoComplete="new-password"
-                        placeholder="********"
-                        disabled={!visibilidade_nova_senha}
-                      />
-                      <img
-                        className="dados_usuario_ver_senha"
-                        src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ?  "./icones/senha_visivel.png" : "./icones/senha_invisivel.png" : "./icones/senha_invisivel.png"}
-                        onClick={() => def_visibilidade_senha({ ...visibilidade_senha, novaSenha: !visibilidade_senha.novaSenha })}
-                        alt="Visibilidade"
-                        style={{ pointerEvents: visibilidade_nova_senha ? "auto" : "none" }}
-                      />
-                    </label>
-                  </div>
-
-                </div>
-                <br />
-                <div className="botoes_laterais">
-                  <button className="expandir" type="button" onClick={e => { sessionStorage.setItem("Paginas", "Perfil"); window.location.href = window.location.href; }}>Desfazer</button>
-                  <button className="expandir" type="button" onClick={salvar}>Salvar</button>
-                </div>
-              </form>
-            </div>,
-            /* ------------------------ Publico ------------------------ */
-            <div id="perfil_publico">
-              <form>
+            <form>
+              <div className="campos_laterais">
                 <label className="dados_usuario">
-                  <h4 style={{ textAlign: "center" }}>Esse informações ficaram visível a todos!</h4>
-                  <p className="dados_usuario_titulos">Nome público</p>
+                  <p className="dados_usuario_titulos">Usuário</p>
                   <input
-                    className={erros.nomePublicoErro ? "aviso_erro_borda" : ""}
-                    value={dados_usuario.nomePublico || ""}
-                    onChange={(e) => def_dados_usuario({ ...dados_usuario, nomePublico: e.target.value })}
+                    className={erros.loginErro ? "aviso_erro_borda" : ""}
+                    value={dados_usuario.login || ""}
+                    onChange={(e) => def_dados_usuario({ ...dados_usuario, login: e.target.value })}
                     autoComplete="name"
-                    placeholder="Nome público"
+                    placeholder="Nome"
                     required
                   />
                   <span className="aviso_erro">
-                    {erros.nomePublicoErro ? "Deve ter mais de 4 caracteres" : ""}
+                    {erros.loginErro ? "Deve ter mais de 4 caracteres" : ""}
                   </span>
-                  <br />
                 </label>
-              </form>
-            </div>,
+
+                <label className="dados_usuario">
+                  <p className="dados_usuario_titulos">CPF</p>
+                  <input
+                    className={erros.cpfErro ? "aviso_erro_borda" : ""}
+                    value={dados_usuario.cpf || ""}
+                    onChange={(e) => def_dados_usuario({ ...dados_usuario, cpf: e.target.value })}
+                    autoComplete="cpf"
+                    placeholder="00000000000"
+                    required
+                  />
+                  <span className="aviso_erro">
+                    {erros.cpfErro ? "Digite um CPF válido" : ""}
+                  </span>
+                </label>
+              </div>
+
+              <div className="campos_laterais">
+                <label className="dados_usuario">
+                  <p className="dados_usuario_titulos">Email</p>
+                  <input
+                    className={erros.emailErro ? "aviso_erro_borda" : ""}
+                    value={dados_usuario.email || ""}
+                    onChange={(e) => def_dados_usuario({ ...dados_usuario, email: e.target.value })}
+                    autoComplete="email"
+                    placeholder="seu@email.com"
+                    required
+                  />
+                  <span className="aviso_erro">
+                    {erros.emailErro ? "Email inválido" : ""}
+                  </span>
+                </label>
+
+                <label className="dados_usuario ">
+                  <p className="dados_usuario_titulos">Telefone</p>
+                  <div className="dados_usuario_tel">
+                    <input
+                      className={erros.dddErro ? "aviso_erro_borda" : ""}
+                      value={dados_usuario.ddd || ""}
+                      onChange={(e) => def_dados_usuario({ ...dados_usuario, ddd: e.target.value })}
+                      autoComplete="DDD"
+                      placeholder="00"
+                      required
+                    />
+                    <input
+                      className={erros.telefoneErro ? "aviso_erro_borda" : ""}
+                      value={dados_usuario.telefone || ""}
+                      onChange={(e) => def_dados_usuario({ ...dados_usuario, telefone: e.target.value })}
+                      autoComplete="tel"
+                      placeholder="000000000"
+                      required
+                    />
+                  </div>
+                  <span className="aviso_erro">
+                    {erros.telefoneErro ? "Número de telefone inválido" : ""}
+                  </span>
+                </label>
+              </div>
+
+              <div className="campos_laterais" id="campos_senha_perfil">
+
+                <label className="dados_usuario">
+                  <p className="dados_usuario_titulos">Senha Atual</p>
+                  <input
+                    className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
+                    value={dados_usuario.senhaAtual || ""}
+                    onChange={(e) => def_dados_usuario({ ...dados_usuario, senhaAtual: e.target.value })}
+                    type={visibilidade_senha.senhaAtual ? "text" : "password"}
+                    autoComplete="current-password"
+                    placeholder={visibilidade_senha.senhaAtual ? "" : "********"}
+                  />
+                  <img
+                    className="dados_usuario_ver_senha"
+                    src={visibilidade_senha.senhaAtual ? "./icones/senha_visivel.png" : "./icones/senha_invisivel.png"}
+                    onClick={() => def_visibilidade_senha({ ...visibilidade_senha, senhaAtual: !visibilidade_senha.senhaAtual })}
+                    alt="Visibilidade"
+                  />
+                </label>
+
+                <div id="perfil_nova_senha" className="dados_usuario">
+
+                  <label className="dados_usuario_checkbox">
+                    <input
+                      className="input_dados_usuario_checkbox"
+                      type="checkbox"
+                      onChange={(e) => def_visibilidade_nova_senha(e.target.checked)}
+                      checked={visibilidade_nova_senha}
+                    />
+                    <span className="span_dados_usuario_checkbox"></span>{visibilidade_nova_senha ? "Digite a Nova Senha" : "Alterar senha"}
+                  </label>
+
+                  <label className="dados_usuario">
+                    <input
+                      className={erros.senhaErro ? "campo_senha aviso_erro" : "campo_senha"}
+                      value={dados_usuario.novaSenha || ""}
+                      onChange={(e) => def_dados_usuario({ ...dados_usuario, novaSenha: e.target.value })}
+                      type={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? "text" : "password" : "password"}
+                      autoComplete="new-password"
+                      placeholder="********"
+                      disabled={!visibilidade_nova_senha}
+                    />
+                    <img
+                      className="dados_usuario_ver_senha"
+                      src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? "./icones/senha_visivel.png" : "./icones/senha_invisivel.png" : "./icones/senha_invisivel.png"}
+                      onClick={() => def_visibilidade_senha({ ...visibilidade_senha, novaSenha: !visibilidade_senha.novaSenha })}
+                      alt="Visibilidade"
+                      style={{ pointerEvents: visibilidade_nova_senha ? "auto" : "none" }}
+                    />
+                  </label>
+                </div>
+
+              </div>
+              <br />
+              <div className="botoes_laterais">
+                <button className="expandir" type="button" onClick={e => { sessionStorage.setItem("Paginas", "Perfil"); window.location.href = window.location.href; }}>Desfazer</button>
+                <button className="expandir" type="button" onClick={salvar}>Salvar</button>
+              </div>
+            </form>
+            ,
+            /* ------------------------ Publico ------------------------ */
+            <form>
+              <label className="dados_usuario">
+                <h4 style={{ textAlign: "center" }}>Esse informações ficaram visível a todos!</h4>
+                <p className="dados_usuario_titulos">Nome público</p>
+                <input
+                  className={erros.nomePublicoErro ? "aviso_erro_borda" : ""}
+                  value={dados_usuario.nomePublico || ""}
+                  onChange={(e) => def_dados_usuario({ ...dados_usuario, nomePublico: e.target.value })}
+                  autoComplete="name"
+                  placeholder="Nome público"
+                  required
+                />
+                <span className="aviso_erro">
+                  {erros.nomePublicoErro ? "Deve ter mais de 4 caracteres" : ""}
+                </span>
+                <br />
+              </label>
+            </form>
           ]}
+          ids_conteudos={["perfil_privado", "perfil_publico"]}
           aba={"perfil_privado"}
         />
-      </div>
   );
 }

@@ -2,40 +2,40 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Abas.css";
 
-export default function Abas({ pai, titulos, conteudos, aba }) {
- 
- useEffect(() => {
-  if (aba) {
-   const linkAtivo = document.querySelector(`#${pai} .abas_titulos a#${aba}`);
-   if (linkAtivo) { opcao_ativa(linkAtivo, aba); }
-  }
- }, [aba, pai]);
+export default function Abas({ pai, titulos, conteudos, ids_conteudos, aba }) {
 
- const opcao_ativa = (elemento, id_conteudo) => {
-  document.querySelectorAll(`#${pai} .abas_titulos a`)
-   .forEach(a => a.classList.remove("aba_ativa"));
+  useEffect(() => {
+    if (aba) {
+      const linkAtivo = document.querySelector(`#${pai} .abas_titulos a#${aba}`);
+      if (linkAtivo) { opcao_ativa(linkAtivo, aba); }
+    }
+  }, [aba, pai]);
 
-  document.querySelectorAll(`#${pai} .aba_conteudo`)
-   .forEach(conteudo => conteudo.classList.remove("aba_conteudo_ativo"));
-  elemento.classList.add("aba_ativa");
+  const opcao_ativa = (elemento, id_conteudo) => {
+    document.querySelectorAll(`#${pai} .abas_titulos a`)
+      .forEach(a => a.classList.remove("aba_ativa"));
 
-  const conteudo = document.querySelector(`div[id="${id_conteudo}"]`);
-  if (conteudo) { conteudo.classList.add("aba_conteudo_ativo"); }
- };
+    document.querySelectorAll(`#${pai} .aba_conteudo`)
+      .forEach(conteudo => conteudo.classList.remove("aba_conteudo_ativo"));
+    elemento.classList.add("aba_ativa");
 
- const abas_titulos = () => (
-  <div className="abas_titulos">{titulos.map((aba, index) => (
-   <Link id={aba.conteudo} key={index} onClick={e => {
-    e.preventDefault(); opcao_ativa(e.target, aba.conteudo);
-   }} > {aba.nome} </Link>
-  ))}
-  </div>
- );
+    const conteudo = document.querySelector(`div[id="${id_conteudo}"]`);
+    if (conteudo) { conteudo.classList.add("aba_conteudo_ativo"); }
+  };
 
- const abas_conteudos = () => (<div className="abas_conteudos">
-  {conteudos.map((conteudo, index) => (
-   <div key={index} id={conteudo.props.id} className="aba_conteudo"> {conteudo} </div>))} </div>
- );
+  const abas_titulos = () => (
+    <div className="abas_titulos">{titulos.map((aba, index) => (
+      <Link id={aba.conteudo} key={index} onClick={e => {
+        e.preventDefault(); opcao_ativa(e.target, aba.conteudo);
+      }} > {aba.nome} </Link>
+    ))}
+    </div>
+  );
 
- return (<div id={pai}> {abas_titulos()} {abas_conteudos()} </div>);
+  const abas_conteudos = () => (
+    conteudos.map((conteudo, index) => (
+      <div key={index} id={ids_conteudos[index]} className="aba_conteudo">{conteudo}</div>))
+  );
+
+  return (<div id={pai}> {abas_titulos()} {abas_conteudos()} </div>);
 }

@@ -11,7 +11,7 @@ import MinhasAPIs from "./Privado/MinhasAPIs/MinhasAPIs";
 import "./Gerenciar.css";
 import { validar_token } from "../Servicos/JWT/JWT";
 
-export default function Gerenciar({ dados_offline }) {
+export default function Gerenciar({ dados_offline, apis }) {
   const [nome_pagina, def_nome_pagina] = useState("");
   const [carregando, def_carregando] = useState(true);
   const [pagina, def_pagina] = useState("");
@@ -140,7 +140,7 @@ export default function Gerenciar({ dados_offline }) {
       case "Doacao":
         return <Doacao />;
       case "Ranks":
-        return <Ranks aba={aba || "ranks_votadas"} />;
+        return <Ranks dados_offiline={dados_offline} aba={aba || "ranks_recentes"} apis={apis} />;
       case "Sobre":
         return <Sobre />;
       case "Termos":
@@ -155,7 +155,7 @@ export default function Gerenciar({ dados_offline }) {
   ) : (
     <div id="gerenciar">
       <div id="gerenciar_menu">
-        {validar_token() && (
+        {!dados_offline && validar_token() && (
           <>
             <Link id="Perfil" onClick={(e) => alterar_componente(e.target.id)}>Perfil</Link>
             <Link id="MinhasAPIs" onClick={(e) => alterar_componente(e.target.id)}>Minhas APIs</Link>
@@ -163,7 +163,8 @@ export default function Gerenciar({ dados_offline }) {
         )}
         <Link id="Parceiros" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Parceiros", aba: "parceiros_instituicoes" }))} className="desativado" style={{ pointerEvents: 'none' }}>Parceiros</Link>
         <Link id="Doacao" onClick={(e) => alterar_componente(e.target.id)} className="desativado" style={{ pointerEvents: 'none' }}>Doação</Link>
-        <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_populares" }))} className="desativado" style={{ pointerEvents: 'none' }}>Ranks</Link>
+        <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_recentes" }))}>Ranks</Link>
+        {/* <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_populares" }))} className="desativado" style={{ pointerEvents: 'none' }}>Ranks</Link> */}
         <Link id="Sobre" onClick={(e) => alterar_componente(e.target.id)}>Sobre</Link>
         <Link id="Termos" onClick={(e) => alterar_componente(e.target.id)}>Termos</Link>
       </div>

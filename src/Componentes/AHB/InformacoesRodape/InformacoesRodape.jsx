@@ -16,7 +16,7 @@ export default function InformacoesRodape() {
    <div>
     <Link onClick={() => pagina("Doacao")} className="desativado" style={{ pointerEvents: 'none' }}>{tela_grande ? <>Ajude o projeto <b>Doando</b></> : <>Fazer <b>Doação</b></>}</Link>
     <div>
-     <Link onClick={() => pagina("Sobre")}>Sobre <b>AHB</b></Link>
+     <Link onClick={() => pagina("Sobre")}>Sobre  AHB</Link>
      <Link onClick={() => pagina("Termos")}>Termos de Uso</Link>
     </div>
    </div>

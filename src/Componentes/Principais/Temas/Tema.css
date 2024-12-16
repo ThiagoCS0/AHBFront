@@ -38,6 +38,7 @@
   --linear-rodape: linear-gradient(to right, #A40 0%, #520 20%, #830 100%);
   --linear-apis: linear-gradient(45deg, #DDD 0%, #888 100%);
   --linear-brasil: linear-gradient(to right, #05F, #0F3);
+  --linear-rank: linear-gradient(45deg, #A30 0%, #210 100%);
   /* Efeitos */
   --fundo-selecionado: #D52;
   --inverter: invert(1);
@@ -92,6 +93,7 @@
   --linear-rodape: linear-gradient(to right, #555 0%, #222 40%, #444 100%);
   --linear-apis: linear-gradient(45deg, #444 0%, #000 100%);
   --linear-brasil: linear-gradient(to right, #0F3, #FF0, #FF5);
+  --linear-rank: linear-gradient(45deg, #444 0%, #DDD 100%);
   /* Efeitos */
   --texto-selecionado: #FFF;
   --inverter: invert(0);
@@ -105,6 +107,7 @@
   -ms-overflow-style: none;
   /* IE and Edge */
   scrollbar-width: none;
+  scroll-behavior: smooth;
   /* Firefox */
   box-sizing: border-box;
   text-decoration: none;
@@ -205,6 +208,17 @@ span[class="brasil"] {
 .dados_usuario_titulos {
   padding-left: 2px !important;
 }
+
+#conteudo_perfil {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+#conteudo_perfil .aba_conteudo {
+  max-width: 1000px;
+}
+
 
 #conteudo_perfil .campos_laterais {
   margin-bottom: 20px;
@@ -610,6 +624,11 @@ hr {
 .ondulacao-4 {
   animation: ondular 6s infinite ease-in-out;
   background: var(--linear-apis);
+}
+
+.ondulacao-5 {
+  animation: ondular 4s infinite ease-in-out;
+  background: var(--linear-rank);
 }
 
 @keyframes ondular {
