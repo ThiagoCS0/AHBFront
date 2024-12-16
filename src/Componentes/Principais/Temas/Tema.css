@@ -260,10 +260,12 @@ button,
 }
 
 button:disabled,
-.botoes:disabled {
-  border: 1px solid var(--destaque-claro);
+.botoes:disabled,
+button:disabled:hover,
+.botoes:disabled:hover {
   background-color: transparent !important;
-  cursor: wait;
+  border: 1px solid var(--destaque-claro);
+  cursor: default;
 }
 
 button:hover,
