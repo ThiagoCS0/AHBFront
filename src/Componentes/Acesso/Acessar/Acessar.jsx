@@ -26,8 +26,8 @@ export default function Acessar() {
 
   useEffect(() => {
     if (resposta_http.length > 1) {
-      const timer = setTimeout(() => { def_resposta_http(""); }, 5000);
-      return () => clearTimeout(timer);
+      const espera = setTimeout(() => { def_resposta_http(""); }, 5000);
+      return () => clearTimeout(espera);
     }
   }, [resposta_http]);
 

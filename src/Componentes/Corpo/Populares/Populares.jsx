@@ -73,6 +73,7 @@ export default function Populares({ dados_offline, populares }) {
   };
 
   return (
+    populares && populares.length > 0 &&
     <div id="populares">
       <div id="carousel">
         {

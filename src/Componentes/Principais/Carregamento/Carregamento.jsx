@@ -15,11 +15,11 @@ export default function Carregamento({ carregando, inicial = false, texto = "Car
   }, []);
 
   useEffect(() => {
-    let tmps = [];
+    let esperas = [];
 
     const atualizar_carregamento = () => {
       if (inicial) {
-        tmps.push(setTimeout(() => {
+        esperas.push(setTimeout(() => {
           def_animacao("animacao-normal");
           def_texto_carregamento(
             tela_pequena
@@ -28,7 +28,7 @@ export default function Carregamento({ carregando, inicial = false, texto = "Car
           );
         }, 8000));
 
-        tmps.push(setTimeout(() => {
+        esperas.push(setTimeout(() => {
           def_texto_carregamento(
             tela_pequena
               ? <p>🛰️<br /> Vou tentar novamente</p>
@@ -36,7 +36,7 @@ export default function Carregamento({ carregando, inicial = false, texto = "Car
           );
         }, 15000));
 
-        tmps.push(setTimeout(() => {
+        esperas.push(setTimeout(() => {
           def_texto_carregamento(
             tela_pequena
               ? <p>🚧<br /> Em manutenção</p>
@@ -45,7 +45,7 @@ export default function Carregamento({ carregando, inicial = false, texto = "Car
           def_animacao("animacao-caindo");
         }, 30000));
       } else {
-        tmps.push(setTimeout(() => { def_animacao("animacao-normal"); }));
+        esperas.push(setTimeout(() => { def_animacao("animacao-normal"); }));
       }
     };
 
@@ -54,7 +54,7 @@ export default function Carregamento({ carregando, inicial = false, texto = "Car
     }
 
     return () => {
-      tmps.forEach(tmp => clearTimeout(tmp));
+      esperas.forEach(espera => clearTimeout(espera));
     };
   }, [carregando, inicial, tela_pequena]);
 

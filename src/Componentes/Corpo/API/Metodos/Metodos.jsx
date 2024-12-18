@@ -21,7 +21,7 @@ export default function Metodos({ dados_offline, api }) {
   const [exibir_aviso_clicar_metodos, def_exibir_aviso_clicar_metodos] = useState(true);
 
   useEffect(() => {
-    const tmp = setTimeout(() => { def_exibir_aviso_clicar_metodos(false); }, 7000);
+    const espera = setTimeout(() => { def_exibir_aviso_clicar_metodos(false); }, 7000);
     const dados_api = sessionStorage.getItem("API");
 
     if (dados_api) {
@@ -29,19 +29,17 @@ export default function Metodos({ dados_offline, api }) {
     }
     const buscar_nome = async () => {
       def_publicador('')
-      if (api.userId.id && api.userId.id != "undefined") {
-        const { status_get, dados_get } = await meu_get(`users/${api.userId.id}/nome-publico`);
+      if (api && api.publicador && api.publicador != "undefined") {
+        const { status_get, dados_get } = await meu_get(`users/${api.publicador}/nome-publico`);
         if (Math.floor(status_get / 100) === 2 && dados_get) { def_publicador(dados_get.publicName); }
       }
     }
 
-    if (dados_offline) {
-      def_publicador(api.publicador)
-    } else { buscar_nome(); }
+    if (dados_offline) { def_publicador(api.publicador); } else { buscar_nome(); }
 
     def_carregando(false);
 
-    return () => clearTimeout(tmp);
+    return () => clearTimeout(espera);
   }, [])
 
   useEffect(() => {
@@ -157,15 +155,12 @@ export default function Metodos({ dados_offline, api }) {
         </div>
       );
     } else {
-      let metodos = api.metodos[aba_ativa];
-
-      if (!Array.isArray(metodos)) { metodos = [metodos]; }
-
-      const alternar_expandido = (index) => {
+      let metodos = JSON.parse(api.metodos)[aba_ativa];
+      const alternar_expandido = index => {
         def_item_expandido((estado_atual) => (estado_atual === index ? null : index));
       };
 
-      const ir_para = (link) => {
+      const ir_para = link => {
         const nova_aba = window.open(link, '_blank');
         if (nova_aba) {
           nova_aba.document.body.setAttribute('aria-hidden', 'true');
@@ -177,9 +172,8 @@ export default function Metodos({ dados_offline, api }) {
         <div id="metodos_abas_conteudo" className="metodos_conteudo">
           <>
             {aba_ativa !== "ver_site" && exibir_aviso_clicar_metodos && <p id="metodos_aviso_metodos" className="efeito_iluminacao">Click nos metodos abaixo para mais informações!</p>}
-            {metodos.map((metodo, index) => {
+            {metodos && metodos.length > 0 && metodos.map((metodo, index) => {
               const expandido = item_expandido === index;
-
               const cores = { VER_SITE: "var(--destaque)", GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
               return (
                 <div key={index} className="metodo_item" style={{ justifyItems: (aba_ativa === "ver_site" && "center") }}>
@@ -187,7 +181,10 @@ export default function Metodos({ dados_offline, api }) {
                     onClick={() => { aba_ativa === "ver_site" ? ir_para(metodo.url) : alternar_expandido(index); }}
                     className="metodos_expandir_metodos"
                   >
-                    <p style={{ background: `${cores[aba_ativa.toUpperCase()]}` }}>{aba_ativa === "ver_site" ? metodo.titulo : aba_ativa.toUpperCase()}</p><p>{aba_ativa === "ver_site" ? metodo.url : metodo.titulo}</p>
+                    <p style={{ background: `${cores[aba_ativa.toUpperCase()]}` }}>
+                      {aba_ativa === "ver_site" ? metodo.titulo : aba_ativa.toUpperCase()}
+                    </p>
+                    <p>{aba_ativa === "ver_site" ? metodo.url : metodo.titulo}</p>
                   </button>
                   {expandido && (
                     <div className="metodo_detalhes">
@@ -213,8 +210,7 @@ export default function Metodos({ dados_offline, api }) {
                           readOnly
                         />
                       </label>
-                      <p>
-                        <div className="alinhado" style={{ flexDirection: "column" }}>
+                      <div className="alinhado" style={{ flexDirection: "column" }}>
                           {metodo.token ? (
                             <>
                               <p>Essa requisição <b className="normal">precisa de Token!</b></p>
@@ -224,8 +220,7 @@ export default function Metodos({ dados_offline, api }) {
                           ) : (
                             <b>Não precisa de token</b>
                           )}
-                        </div>
-                      </p>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -261,7 +256,7 @@ export default function Metodos({ dados_offline, api }) {
             <div id="metodos_abas_metodos_efeito">
               <div className="metodos_abas_metodos" ref={abasRef}>
                 {
-                  Object.keys(api.metodos).map(metodo => (
+                  Object.keys(JSON.parse(api.metodos)).map(metodo => (
                     <button
                       key={metodo}
                       id={`aba_${metodo}`}

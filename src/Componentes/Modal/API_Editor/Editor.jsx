@@ -21,8 +21,8 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
 
      useEffect(() => {
           if (resposta_http) {
-               const timer = setTimeout(() => { def_resposta_http(''); }, 7000);
-               return () => clearTimeout(timer);
+               const espera = setTimeout(() => { def_resposta_http(''); }, 7000);
+               return () => clearTimeout(espera);
           }
      }, [resposta_http]);
 

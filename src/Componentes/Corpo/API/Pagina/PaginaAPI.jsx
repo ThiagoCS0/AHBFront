@@ -12,30 +12,37 @@ export default function PaginaAPI({ dados_offline, dados_apis }) {
   const [carregando, def_carregando] = useState(true);
 
   useEffect(() => {
+    let espera;
+
     const carregar_dados = async () => {
       const dados_salvos = sessionStorage.getItem("API");
 
-      if (dados_salvos) {
+      if (dados_salvos && dados_salvos.length > 0) {
         const [id, aba] = JSON.parse(dados_salvos);
-        if (dados_offline) {
-          const dados = dados_apis.find(e => e.id === id);
-          if (dados) {
-            def_api(dados)
+        if (dados_apis && dados_apis.length > 0) {
+          if (dados_offline) {
+            const dados = dados_apis.find(e => e.id === id);
+            if (dados) {
+              def_api(dados)
+            }
+          } else {
+            const { status_get, dados_get } = await meu_get(`apis/${id}`)
+            if (Math.floor(status_get / 100) === 2) {
+              const dados = traduzir_dados(dados_get);
+              def_api(dados);
+            }
           }
+          def_carregando(false);
         } else {
-          const { status_get, dados_get } = await meu_get(`apis/${id}`)
-          if (Math.floor(status_get / 100) === 2) {
-            const dados = traduzir_dados(dados_get.content);
-            def_api(dados);
-          }
+          return;
         }
-        def_carregando(false);
       } else {
         window.location.href = site;
       }
     };
 
     carregar_dados();
+    return () => { clearTimeout(espera); };
   }, []);
 
   useEffect(() => {
@@ -62,7 +69,6 @@ export default function PaginaAPI({ dados_offline, dados_apis }) {
           </>
         ) : (
           <>
-            {console.log(api)}
             <div className="sem_dados">
               <h1>😑 Probleminha 😕</h1>
               <p>Nenhum dado disponível ou ocorreu algum erro!</p>

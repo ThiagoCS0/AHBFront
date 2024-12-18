@@ -22,10 +22,10 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
 
   useEffect(() => {
     if (api?.imagem) {
-      if(dados_offline){
+      if (dados_offline) {
         def_imagem(`./apis/${api.imagem}.png`)
-      }else{
-      validar_imagem(api.imagem).then((img) => def_imagem(img));
+      } else {
+        validar_imagem(api.imagem).then((img) => def_imagem(img));
       }
     }
   }, [api?.imagem]);
@@ -54,6 +54,9 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
     window.addEventListener("keydown", tecla);
     return () => { window.removeEventListener("keydown", tecla); };
   }, [api])
+
+  let metodos;
+  if (!Array.isArray(metodos)) { metodos = [api.metodos]; }
 
   return (
     <div id="modal_apis" onClick={fechar}>
