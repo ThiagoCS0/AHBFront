@@ -62,7 +62,7 @@ export default function Ranks({ dados_offline, aba, apis }) {
 
 
 function APIsRank({ api, lado, tipo, dados_offline, pagina_api }) {
-  const [imagem, def_imagem] = useState(`./../../../src/Recursos/apis/${api.imagem}.png`);
+  const [imagem, def_imagem] = useState(`./apis/${api.imagem}.png`);
   const [api_selecionada, def_api_selecionada] = useState(null);
 
   useEffect(() => {

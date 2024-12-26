@@ -8,7 +8,7 @@ import Visualizador from "../../../../Modal/API_Visualizador/Visualizador"
 import Carregamento from "../../../Carregamento/Carregamento";
 import Editor from "../../../../Modal/API_Editor/Editor"
 import API from "../../../../Corpo/API/API";
-import imagem_padrao from "./../../../../../../src/Recursos/apis/imagem_padrao.png";
+import imagem_padrao from "./../../../../../../public/apis/imagem_padrao.png";
 import "./MinhasAPIs.css";
 
 const site = import.meta.env.VITE_SITE;

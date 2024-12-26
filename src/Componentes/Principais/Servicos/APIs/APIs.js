@@ -1,6 +1,6 @@
 import { meus_erros } from "../../Erros/MeusErros";
 import { meu_get, meu_post } from "../Backend/Conexao";
-import imagem_padrao from "./../../../../../src/Recursos/apis/imagem_padrao.png";
+import imagem_padrao from "./../../../../../public/apis/imagem_padrao.png";
 
 export async function buscar_apis(pagina, tamanho, organizar, ordem, relatar_erros = true) {
 
@@ -41,7 +41,7 @@ export async function validar_imagem(imagem, dados_offline) {
       return await resposta;
     }
     if (dados_offline) {
-      return `./../../../../../src/Recursos/apis/${imagem}.png`;
+      return `./apis/${imagem}.png`;
     } else {
       return await im();
     }

@@ -3,7 +3,7 @@ import { meu_get } from "../../../Principais/Servicos/Backend/Conexao";
 import Carregamento from "../../../Principais/Carregamento/Carregamento";
 import "./Metodos.css";
 import { validar_imagem } from "../../../Principais/Servicos/APIs/APIs";
-import imagem_padrao from "./../../../../../src/Recursos/apis/imagem_padrao.png";
+import imagem_padrao from "./../../../../../public/apis/imagem_padrao.png";
 
 export default function Metodos({ dados_offline, api }) {
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });

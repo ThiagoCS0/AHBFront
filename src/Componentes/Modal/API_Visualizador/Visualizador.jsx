@@ -3,7 +3,7 @@ import { meu_get } from "../../Principais/Servicos/Backend/Conexao";
 import "./Visualizador.css";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
 import { validar_imagem } from "../../Principais/Servicos/APIs/APIs";
-import imagem_padrao from "./../../../../src/Recursos/apis/imagem_padrao.png";
+import imagem_padrao from "./../../../../public/apis/imagem_padrao.png";
 
 const site = import.meta.env.VITE_SITE;
 
