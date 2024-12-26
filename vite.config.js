@@ -4,10 +4,6 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),
-  viteStaticCopy({ targets: [{ src: '404.html', dest: '.' }] })],
-  server: {
-    port: 5173,
-    open: true,
-  },
+  plugins: [react(), viteStaticCopy({ targets: [{ src: '404.html', dest: '.' }] })],
+  base: "/AHBFront/",
 })

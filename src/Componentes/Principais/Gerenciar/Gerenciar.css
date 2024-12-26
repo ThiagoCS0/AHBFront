@@ -77,7 +77,6 @@
  height: calc(100% - 100px);
  overflow-y: scroll;
  position: relative;
- padding: 0 20px;
  width: 100%;
 }
 
@@ -98,7 +97,16 @@
  margin-bottom: 25px;
 }
 
-@media screen and (max-width: 1020px) {
+.gerenciar_icones {
+ display: none;
+ height: 80%;
+}
+
+.gerenciar_texto {
+ display: flex;
+}
+
+@media screen and (max-width: 1000px) {
  #gerenciar {
   flex-direction: column;
  }
@@ -117,6 +125,10 @@
   order: 1;
  }
 
+ .gerenciar_pagina {
+  height: 100%;
+ }
+
  #gerenciar_menu a {
   justify-content: center;
   align-items: center;
@@ -130,11 +142,20 @@
  }
 
  .gerenciar_pagina {
-  height: 90%;
+  height: calc(100% - 70px);
  }
 
  .gerenciar_titulos {
   height: 70px;
+ }
+
+ .gerenciar_texto {
+  display: none;
+ }
+
+ .gerenciar_icones {
+  display: flex;
+  height: 100%;
  }
 
 }

@@ -10,10 +10,9 @@ export default function Logo() {
  }
 
  return (
-  <a id="logo_AHB" href={inicio} onClick={() => pagina_inicial()}>
-   <img src="./icones/logo.png" alt="Logo" />
+  <a id="logo" href={inicio} onClick={() => pagina_inicial()}>
+   <img src="./../src/Recursos/icones/logo.png" alt="Logo" />
    <div>
-    <span>AHB</span>
     <span>API</span>
     <span>HUB</span>
     <span>BRASIL</span>

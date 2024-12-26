@@ -7,7 +7,7 @@ export default function Cabecalho({ dados_offline, buscar, categorizar }) {
 
  const tela_grande = window.innerWidth > 1000;
  const [expandir, def_expandir] = useState("");
- 
+
  return (
   <div id="cabecalho">
    {tela_grande ? <Logo /> : expandir === "" ? <Logo /> : <></>}

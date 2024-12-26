@@ -2,13 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { meu_get } from "../../../Principais/Servicos/Backend/Conexao";
 import Carregamento from "../../../Principais/Carregamento/Carregamento";
 import "./Metodos.css";
+import { validar_imagem } from "../../../Principais/Servicos/APIs/APIs";
 
 export default function Metodos({ dados_offline, api }) {
-  const [dados_metodo, def_dados_metodo] = useState({ url: '', header: '', body: '', token: false, });
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [aba_ativa, def_aba_ativa] = useState("basico");
   const [carregando, def_carregando] = useState(true);
-  const [imagem, def_imagem] = useState("./icones/image_padrao.png");
+  const [imagem, def_imagem] = useState("./../../../src/Recursos/apis/imagem_padrao.png");
   const [publicador, def_publicador] = useState("");
   const abasRef = useRef(null);
   const [item_expandido, def_item_expandido] = useState({});
@@ -43,23 +43,12 @@ export default function Metodos({ dados_offline, api }) {
   }, [])
 
   useEffect(() => {
-    if (api?.imagem) {
-      if (dados_offline) {
-        def_imagem(`./apis/${api.imagem}.png`)
-      } else {
-        validar_imagem(api.imagem).then((img) => def_imagem(img));
-      }
+    const imgx = async () => {
+      const img = await validar_imagem(api.imagem, dados_offline);
+      def_imagem(img)
     }
+    imgx()
   }, [api?.imagem]);
-
-  const validar_imagem = (url) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve(url);
-      img.onerror = () => resolve("./icones/image_padrao.png");
-      img.src = url;
-    });
-  };
 
   const selecionar_aba = (nome_aba) => {
     def_aba_ativa(nome_aba);
@@ -69,16 +58,6 @@ export default function Metodos({ dados_offline, api }) {
         behavior: "smooth",
         inline: "center",
         block: "center",
-      });
-    }
-
-    const metodo_atual = api?.metodos[nome_aba];
-    if (metodo_atual) {
-      def_dados_metodo({
-        url: metodo_atual.url,
-        header: JSON.stringify(metodo_atual.header, null, 2),
-        body: JSON.stringify(metodo_atual.body, null, 2),
-        token: metodo_atual.token,
       });
     }
   };
@@ -155,9 +134,8 @@ export default function Metodos({ dados_offline, api }) {
         </div>
       );
     } else {
-      let metodos = JSON.parse(api.metodos)[aba_ativa];
       const alternar_expandido = index => {
-        def_item_expandido((estado_atual) => (estado_atual === index ? null : index));
+        def_item_expandido(estado_atual => (estado_atual === index ? null : index));
       };
 
       const ir_para = link => {
@@ -168,13 +146,17 @@ export default function Metodos({ dados_offline, api }) {
         }
       }
 
+      const metodos = api.metodos[aba_ativa];
+
       return (
         <div id="metodos_abas_conteudo" className="metodos_conteudo">
           <>
             {aba_ativa !== "ver_site" && exibir_aviso_clicar_metodos && <p id="metodos_aviso_metodos" className="efeito_iluminacao">Click nos metodos abaixo para mais informações!</p>}
             {metodos && metodos.length > 0 && metodos.map((metodo, index) => {
+
               const expandido = item_expandido === index;
               const cores = { VER_SITE: "var(--destaque)", GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
+
               return (
                 <div key={index} className="metodo_item" style={{ justifyItems: (aba_ativa === "ver_site" && "center") }}>
                   <button
@@ -211,15 +193,15 @@ export default function Metodos({ dados_offline, api }) {
                         />
                       </label>
                       <div className="alinhado" style={{ flexDirection: "column" }}>
-                          {metodo.token ? (
-                            <>
-                              <p>Essa requisição <b className="normal">precisa de Token!</b></p>
-                              <p>Você deve acessar o <b className="normal">site oficial</b> e se informar por lá, link abaixo:</p>
-                              <a href={api.link} target="_blank" rel="noopener noreferrer" aria-hidden="true">{api.link}</a>
-                            </>
-                          ) : (
-                            <b>Não precisa de token</b>
-                          )}
+                        {metodo.token ? (
+                          <>
+                            <p>Essa requisição <b className="normal">precisa de Token!</b></p>
+                            <p>Você deve acessar o <b className="normal">site oficial</b> e se informar por lá, link abaixo:</p>
+                            <a href={api.link} target="_blank" rel="noopener noreferrer" aria-hidden="true">{api.link}</a>
+                          </>
+                        ) : (
+                          <b>Não precisa de token</b>
+                        )}
                       </div>
                     </div>
                   )}
@@ -256,7 +238,7 @@ export default function Metodos({ dados_offline, api }) {
             <div id="metodos_abas_metodos_efeito">
               <div className="metodos_abas_metodos" ref={abasRef}>
                 {
-                  Object.keys(JSON.parse(api.metodos)).map(metodo => (
+                  Object.keys(api.metodos).map(metodo => (
                     <button
                       key={metodo}
                       id={`aba_${metodo}`}

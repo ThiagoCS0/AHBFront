@@ -16,7 +16,7 @@ export default function Buscar({ expandir, buscar }) {
  }
 
  return (
-  <div style={{ display: "flex" }} className={expandi_local ? "expandir " : "" + "alinhado"}>
+  <div style={{ display: "flex", maxWidth: "800px" }} className={expandi_local ? "expandir " : "" + "alinhado"}>
    {
     expandi_local &&
     <input
@@ -28,11 +28,10 @@ export default function Buscar({ expandir, buscar }) {
      type="text"
     />
    }
-
    <img
     onClick={alterar_buscar}
     alt={expandi_local ? "Buscar" : "Fechar pesquisa"}
-    src={expandi_local ? "./icones/fechar.png" : "./icones/busca.png"}
+    src={expandi_local ? "./../src/Recursos/icones/fechar.png" : "./../src/Recursos/icones/busca.png"}
     className="icones"
    />
   </div>

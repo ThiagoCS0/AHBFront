@@ -14,11 +14,12 @@
   --destaque-escuro: #B40;
   /* Botões, Input's, Select's */
   --tema-texto: #FFF;
-  --tema-fundo: #730;
+  --tema-fundo: #620;
   --tema-fundo-1: #B40;
   --tema-fundo-2: #A30;
   --tema-fundo-3: #DDD;
   --tema-fundo-4: #AAA;
+  --tema-fundo-5: #400;
   --tema-texto-disativar: #BBB;
   --tema-fundo-disativar: #AAA;
   --tema-placeholder: #AAA;
@@ -39,6 +40,7 @@
   --linear-apis: linear-gradient(45deg, #DDD 0%, #888 100%);
   --linear-brasil: linear-gradient(to right, #05F, #0F3);
   --linear-rank: linear-gradient(45deg, #A30 0%, #210 100%);
+  --linear-rank-populares: linear-gradient(to right, #D50 0%, var(--tema-fundo-5) 40%, var(--tema-fundo-5) 60%, #D50 100%);
   /* Efeitos */
   --fundo-selecionado: #D52;
   --inverter: invert(1);
@@ -75,6 +77,7 @@
   --tema-fundo-2: #888;
   --tema-fundo-3: #444;
   --tema-fundo-4: #444;
+  --tema-fundo-5: #333;
   --tema-texto-disativar: #777;
   --tema-fundo-disativar: #000;
   --tema-placeholder: #BBB;
@@ -94,10 +97,12 @@
   --linear-apis: linear-gradient(45deg, #444 0%, #000 100%);
   --linear-brasil: linear-gradient(to right, #0F3, #FF0, #FF5);
   --linear-rank: linear-gradient(45deg, #444 0%, #DDD 100%);
+  --linear-rank-populares: linear-gradient(to right, #DDD 0%, #444 40%, #444 60%, #DDD 100%);
+  --linear-rank-populares: linear-gradient(to right, #888 0%, var(--tema-fundo-5) 40%, var(--tema-fundo-5) 60%, #888 100%);
   /* Efeitos */
   --texto-selecionado: #FFF;
   --inverter: invert(0);
-  --setas: brightness(4);
+  --setas: contrast(0) brightness(2);
   /* Erro */
   --erro-texto: #F60;
   --erro-borda: #D50;
@@ -133,23 +138,23 @@ html {
 
 body {
   font-family: 'Montserrat', Verdana, sans-serif;
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-right: env(safe-area-inset-right);
+  padding-left: env(safe-area-inset-left);
+  padding-top: env(safe-area-inset-top);
   background: var(--fundo);
   color: var(--texto);
   user-select: none;
   overflow: hidden;
   height: 100%;
   width: 100%;
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-top: env(safe-area-inset-top);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
 }
 
 span[class="brasil"] {
   background: var(--linear-brasil);
   -webkit-background-clip: text;
-  color: transparent;
   background-clip: text;
+  color: transparent;
   /* Para Firefox */
   color: transparent;
 }
@@ -163,24 +168,10 @@ span[class="brasil"] {
 
 #cabecalho {
   background: var(--linear-cabecalho);
-  justify-content: space-between;
   color: var(--texto);
-  padding: 5px 20px;
   max-height: 70px;
-  flex: 0 0 70px;
   display: flex;
-  width: 100%;
-}
-
-#cabecalho>*:first-child,
-#cabecalho>*:last-child {
-  max-width: 180px;
-  width: 180px;
-}
-
-#ferramentas {
-  padding: 0 15px;
-  display: flex;
+  padding: 5px;
 }
 
 #corpo {
@@ -192,9 +183,9 @@ span[class="brasil"] {
 }
 
 #perfil_nova_senha {
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
+  display: flex;
 }
 
 #sobre p:last-child {
@@ -326,6 +317,8 @@ hr {
 
 .desativado,
 .desativado * {
+  opacity: 0.4;
+  filter: saturate(0);
   pointer-events: 'none' !important;
   color: var(--tema-texto-disativar) !important;
 }
@@ -492,7 +485,7 @@ hr {
   position: absolute;
   cursor: pointer;
   opacity: 0.7;
-  bottom: 18%;
+  bottom: 9px;
   width: 30px;
   right: 2%;
 }
@@ -551,7 +544,7 @@ hr {
 }
 
 .texto_simples {
-  padding-bottom: 20px;
+  padding: 0 40px 20px;
   height: fit-content;
   font-size: x-large;
   word-spacing: 5px;
@@ -633,6 +626,12 @@ hr {
   background: var(--linear-rank);
 }
 
+.ondulacao-6 {
+  animation: ondular-2 4s infinite ease-in-out;
+  background: var(--linear-rank-populares);
+  background-position: center;
+}
+
 @keyframes ondular {
   0% {
     background-position: 0% 50%;
@@ -644,6 +643,20 @@ hr {
 
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes ondular-2 {
+  0% {
+    background-size: 100%;
+  }
+
+  50% {
+    background-size: 150%;
+  }
+
+  100% {
+    background-size: 100%;
   }
 }
 
@@ -811,18 +824,18 @@ hr {
 
 }
 
-
-
+/* Tablet */
+@media screen and (max-width: 1000px) {
+  .icones:hover {
+    filter: contrast(0) brightness(2);
+  }
+}
 
 /* Smartphone  */
 @media screen and (max-width: 600px) {
 
   .campos_laterais {
     flex-direction: column;
-  }
-
-  .icones:hover {
-    filter: contrast(0) brightness(2);
   }
 
   #cabecalho {

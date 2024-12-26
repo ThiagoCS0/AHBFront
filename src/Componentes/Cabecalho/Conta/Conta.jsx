@@ -92,7 +92,7 @@ export default function Conta({ dados_offline }) {
       <button onClick={() => { !dados_offline && opcoes_botao_conta() }} ref={acessarRef} disabled={dados_offline}>
         {!dados_offline &&
           <>
-            <img src="./icones/person.png" alt="Usuário" />
+            <img src="./../src/Recursos/icones/person.png" alt="Usuário" />
             <span>{acessando || dados_offline ? "..." : usuario ? usuario : "Entrar"}</span>
           </>
         }

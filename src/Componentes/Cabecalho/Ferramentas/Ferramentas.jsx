@@ -3,6 +3,7 @@ import Buscar from "../Ferramentas/Buscar/Buscar"
 import Categorizar from "./Categorizar/Categorizar"
 import Tema from "../Ferramentas/Tema/Tema"
 import Inicio from "./Iniciar/Iniciar";
+import "./Ferramentas.css"
 
 const site = import.meta.env.VITE_SITE;
 
@@ -12,7 +13,7 @@ export default function Ferramentas({ expandir, buscar, categorizar }) {
  useEffect(() => { expandir(expandi_local) }, [expandi_local])
 
  return (
-  <div id="ferramentas" className="alinhado juntos" style={{ width: expandi_local ? "100%" : "fit-content", maxWidth: "800px" }}>
+  <div id="ferramentas" className="alinhado juntos">
    {expandi_local === "" && <Inicio />}
    {
     !sessionStorage.getItem("Paginas") && !sessionStorage.getItem("API") &&

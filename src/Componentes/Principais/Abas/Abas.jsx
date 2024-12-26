@@ -21,6 +21,9 @@ export default function Abas({ pai, titulos, conteudos, ids_conteudos, aba }) {
 
     const conteudo = document.querySelector(`div[id="${id_conteudo}"]`);
     if (conteudo) { conteudo.classList.add("aba_conteudo_ativo"); }
+    if (id_conteudo.split("_")[0] == "ranks") {
+      sessionStorage.setItem("Paginas", `{"pag":"Ranks","aba":"${id_conteudo}"}`)
+    }
   };
 
   const abas_titulos = () => (
@@ -34,7 +37,9 @@ export default function Abas({ pai, titulos, conteudos, ids_conteudos, aba }) {
 
   const abas_conteudos = () => (
     conteudos.map((conteudo, index) => (
-      <div key={index} id={ids_conteudos[index]} className="aba_conteudo">{conteudo}</div>))
+      <div key={index} id={ids_conteudos[index]} className="aba_conteudo">
+        <div>{conteudo}</div>
+      </div>))
   );
 
   return (<div id={pai}> {abas_titulos()} {abas_conteudos()} </div>);

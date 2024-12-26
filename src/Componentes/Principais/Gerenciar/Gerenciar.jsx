@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { validar_token } from "../Servicos/JWT/JWT";
+import MinhasAPIs from "./Privado/MinhasAPIs/MinhasAPIs";
 import Carregamento from "../Carregamento/Carregamento";
 import Parceiros from "../../AHB/Parceiros/Parceiros";
 import Doacao from "../../AHB/Doacao/Doacao";
-import Ranks from "../../AHB/Ranks/Ranks";
-import Sobre from "../../AHB/Sobre/Sobre";
 import Termos from "../../AHB/Termos/Termos";
 import Perfil from "./Privado/Perfil/Perfil";
-import MinhasAPIs from "./Privado/MinhasAPIs/MinhasAPIs";
+import Ranks from "../../AHB/Ranks/Ranks";
+import Sobre from "../../AHB/Sobre/Sobre";
 import "./Gerenciar.css";
-import { validar_token } from "../Servicos/JWT/JWT";
 
 export default function Gerenciar({ dados_offline, apis }) {
+  const [exibir_modal_editar, def_exibir_modal_editar] = useState(false);
   const [nome_pagina, def_nome_pagina] = useState("");
   const [carregando, def_carregando] = useState(true);
+  const [editar_api, def_editar_api] = useState(null);
   const [pagina, def_pagina] = useState("");
   const [aba, def_aba] = useState("");
-  const [editar_api, def_editar_api] = useState(null);
-  const [exibir_modal_editar, def_exibir_modal_editar] = useState(false);
 
   useEffect(() => {
     window.addEventListener("mudanca_sessionStorage", mudanca_sessionstorage);
@@ -140,7 +140,7 @@ export default function Gerenciar({ dados_offline, apis }) {
       case "Doacao":
         return <Doacao />;
       case "Ranks":
-        return <Ranks dados_offiline={dados_offline} aba={aba || "ranks_recentes"} apis={apis} />;
+        return <Ranks dados_offline={dados_offline} aba={aba || "ranks_populares"} apis={apis} />;
       case "Sobre":
         return <Sobre />;
       case "Termos":
@@ -157,16 +157,36 @@ export default function Gerenciar({ dados_offline, apis }) {
       <div id="gerenciar_menu">
         {!dados_offline && validar_token() && (
           <>
-            <Link id="Perfil" onClick={(e) => alterar_componente(e.target.id)}>Perfil</Link>
-            <Link id="MinhasAPIs" onClick={(e) => alterar_componente(e.target.id)}>Minhas APIs</Link>
+            <Link id="Perfil" onClick={() => alterar_componente("Perfil")}>
+            <img src="./../../src/Recursos/icones/usuario.png" className="gerenciar_icones" alt="Perfil" />
+            <p className="gerenciar_texto">Perfil</p>
+            </Link>
+            <Link id="MinhasAPIs" onClick={() => alterar_componente("MinhasAPIs")}>
+            <img src="./../../src/Recursos/icones/minhas_apis.png" className="gerenciar_icones" alt="Perfil" />
+            <p className="gerenciar_texto">Minhas APIs</p>
+            </Link>
           </>
         )}
-        <Link id="Parceiros" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Parceiros", aba: "parceiros_instituicoes" }))} className="desativado" style={{ pointerEvents: 'none' }}>Parceiros</Link>
-        <Link id="Doacao" onClick={(e) => alterar_componente(e.target.id)} className="desativado" style={{ pointerEvents: 'none' }}>Doação</Link>
-        <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_recentes" }))}>Ranks</Link>
-        {/* <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_populares" }))} className="desativado" style={{ pointerEvents: 'none' }}>Ranks</Link> */}
-        <Link id="Sobre" onClick={(e) => alterar_componente(e.target.id)}>Sobre</Link>
-        <Link id="Termos" onClick={(e) => alterar_componente(e.target.id)}>Termos</Link>
+        <Link id="Parceiros" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Parceiros", aba: "parceiros_instituicoes" }))} className="desativado" style={{ pointerEvents: 'none' }}>
+          <img src="./../../src/Recursos/icones/parceria.png" className="gerenciar_icones" alt="Parceiros" />
+          <p className="gerenciar_texto">Parceiros</p>
+        </Link>
+        <Link id="Doacao" onClick={() => alterar_componente("Doacao")} className="desativado" style={{ pointerEvents: 'none' }}>
+          <img src="./../../src/Recursos/icones/doacao.png" className="gerenciar_icones" alt="Doação" />
+          <p className="gerenciar_texto">Doação</p>
+        </Link>
+        <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_populares" }))}>
+          <img src="./../../src/Recursos/icones/ranks.png" className="gerenciar_icones" alt="Ranks" />
+          <p className="gerenciar_texto">Ranks</p>
+        </Link>
+        <Link id="Sobre" onClick={() => alterar_componente("Sobre")}>
+          <img src="./../../src/Recursos/icones/sobre.png" className="gerenciar_icones" alt="Sobre" />
+          <p className="gerenciar_texto">Sobre</p>
+        </Link>
+        <Link id="Termos" onClick={() => alterar_componente("Termos")}>
+          <img src="./../../src/Recursos/icones/termos.png" className="gerenciar_icones" alt="Termos" />
+          <p className="gerenciar_texto">Termos</p>
+        </Link>
       </div>
       <div id="gerenciar_conteudo">
         <h1 className="gerenciar_titulos ondulacao-1">{nome_pagina}</h1>

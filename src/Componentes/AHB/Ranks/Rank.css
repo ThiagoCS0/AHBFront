@@ -1,0 +1,156 @@
+#ranks {
+  flex-direction: column;
+  color: #FFF;
+  font-weight: bold;
+  overflow: hidden;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.ranks_apis_populares {
+  border: 2px solid var(--tema-fundo-5);
+  justify-content: space-around;
+  background-size: 200% 200%;
+  border-radius: 10px;
+  align-items: center;
+  position: relative;
+  min-height: 100px;
+  transition: 0.5s;
+  cursor: pointer;
+  padding: 0 10px;
+  height: 100px;
+  display: flex;
+  width: 100%;
+  gap: 120px;
+}
+
+.ranks_apis_populares:hover {
+  scale: 1.1;
+}
+
+.ranks_apis_populares p {
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  white-space: normal;
+  text-align: center;
+  overflow: hidden;
+  padding: 0 10px;
+  line-clamp: 1;
+  width: 35%;
+}
+
+.ranks_apis_populares p:nth-child(2)::after {
+  content: ' visualizações';
+}
+
+.ranks_apis_populares img {
+  background-color: var(--tema-fundo-5);
+  border: 4px solid var(--tema-fundo-5);
+  transform: translateX(-50%);
+  border-radius: 15px;
+  position: absolute;
+  overflow: hidden;
+  height: 130px;
+  width: 130px;
+  left: 50%;
+}
+
+div#ranks_populares>div {
+  padding: 40px;
+  gap: 40px;
+}
+
+.ranks_apis_recentes {
+  background-color: var(--destaque-escuro);
+  justify-content: space-between;
+  box-shadow: var(--sombra-2);
+  transition: scale 0.5s;
+  border-radius: 10px;
+  position: relative;
+  min-height: 150px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  padding: 5px;
+  width: 350px;
+}
+
+.ranks_apis_recentes:hover {
+  scale: 1.03;
+}
+
+.ranks_apis_recentes>div {
+  background-size: 200% 200% !important;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+}
+
+.ranks_apis_recentes>div>div {
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+}
+
+.ranks_apis_recentes p {
+  justify-content: center;
+  text-overflow: ellipsis;
+  line-break: nowrap;
+  align-items: end;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  z-index: 1;
+  left: 0;
+}
+
+.ranks_apis_recentes img {
+  object-fit: contain;
+  position: relative;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+/* Smartphone */
+@media screen and (max-width: 600px) {
+  .ranks_apis_populares {
+    min-height: 50px;
+    height: 50px;
+    gap: 70px;
+  }
+
+  .ranks_apis_populares img {
+    min-height: 70px;
+    min-width: 70px;
+    height: 70px;
+    width: 70px;
+  }
+
+  .ranks_apis_populares p {
+    font-size: small;
+    min-width: 35%;
+  }
+
+  .ranks_apis_populares p:nth-child(2)::after {
+    content: '';
+  }
+
+  .ranks_apis_recentes {
+    align-self: center !important;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  div#ranks_recentes {
+    width: 100%;
+  }
+
+}

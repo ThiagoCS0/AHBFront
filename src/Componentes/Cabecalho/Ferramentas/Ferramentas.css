@@ -1,0 +1,11 @@
+#ferramentas {
+ padding: 0 10px;
+ display: flex;
+}
+
+/* Smartphone  */
+@media screen and (max-width: 600px) {
+ #ferramentas {
+  display: flex;
+ }
+}

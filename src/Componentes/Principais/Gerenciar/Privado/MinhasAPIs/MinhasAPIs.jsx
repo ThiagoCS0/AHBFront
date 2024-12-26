@@ -8,6 +8,7 @@ import Visualizador from "../../../../Modal/API_Visualizador/Visualizador"
 import Editor from "../../../../Modal/API_Editor/Editor"
 import API from "../../../../Corpo/API/API";
 import Carregamento from "../../../Carregamento/Carregamento";
+import { validar_imagem } from "../../../Servicos/APIs/APIs";
 
 const site = import.meta.env.VITE_SITE;
 
@@ -18,16 +19,7 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
   const [nova_api, def_nova_api] = useState([]);
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
   const [api_selec, def_api_selec] = useState(null);
-  const [imagem, def_imagem] = useState("./icones/image_padrao.png");
-
-  const validar_imagem = (url) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve(url);
-      img.onerror = () => resolve("./icones/image_padrao.png");
-      img.src = url;
-    });
-  };
+  const [imagem, def_imagem] = useState("./../../../../src/Recursos/apis/imagem_padrao.png");
 
   useEffect(() => {
     //-------------------------------------------------------------------------------- isso foi criado por causa do ( React.StrictMode do main.jsx) 
@@ -45,9 +37,7 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
   }, []);
 
   useEffect(() => {
-    if (nova_api?.imagem) {
-      validar_imagem(nova_api.imagem).then((img) => def_imagem(img));
-    }
+    def_imagem(validar_imagem(nova_api.imagem, dados_offline))
   }, [nova_api?.imagem]);
 
   useEffect(() => {
@@ -173,7 +163,8 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
               Array.isArray(nova_api) && nova_api.map(api => (
                 <API
                   dados_offline={dados_offline}
-                  api={api} key={api.id}
+                  api={api}
+                  key={api.id}
                   click={() => exibir_modal_minhas_apis(api)}
                   simples={false}
                   def_api_excluir={def_api_excluir}

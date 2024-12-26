@@ -20,7 +20,7 @@ export default function Categorizar({ expandir, categorizar }) {
     <option value="SAUDE">SAÚDE</option>
    </select>
    }
-   <img className="icones" src="./icones/filtro.png" alt="Filtrar" onClick={() => { def_expandir(!expandi_local); expandir(!expandi_local ? "filtrar" : ""); categorizar("NENHUMA") }} />
+   <img className="icones" src="./../src/Recursos/icones/filtro.png" alt="Filtrar" onClick={() => { def_expandir(!expandi_local); expandir(!expandi_local ? "filtrar" : ""); categorizar("NENHUMA") }} />
   </div>
  )
 }

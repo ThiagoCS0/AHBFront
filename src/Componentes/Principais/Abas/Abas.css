@@ -15,12 +15,12 @@
 }
 
 .abas_titulos a {
+ border-bottom: 2px solid transparent;
  justify-content: center;
  align-items: center;
  display: flex;
  height: 100%;
  width: 100%;
- border-bottom: 2px solid transparent;
 }
 
 .aba_ativa {
@@ -28,14 +28,34 @@
 }
 
 .aba_conteudo {
+ max-height: calc(100% - 50px);
  flex-direction: column;
+ padding: 0 !important;
+ position: relative;
+ min-width: 100%;
  display: none;
- padding: 10px;
- height: 100%;
  width: 100%;
 }
 
+.aba_conteudo::after {
+ background: linear-gradient(to bottom, #0004 0%, #0000 20px);
+ pointer-events: none;
+ position: absolute;
+ content: '';
+ inset: 0;
+}
+
 .aba_conteudo_ativo {
+ align-items: center;
+ display: flex;
+}
+
+.aba_conteudo_ativo>div {
+ max-width: 750px !important;
+ flex-direction: column;
  overflow-y: scroll;
  display: flex;
+ padding: 20px;
+ width: 100%;
+ gap: 10px;
 }

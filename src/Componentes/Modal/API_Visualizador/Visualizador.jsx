@@ -2,32 +2,22 @@ import React, { useEffect, useState } from "react";
 import { meu_get } from "../../Principais/Servicos/Backend/Conexao";
 import "./Visualizador.css";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
+import { validar_imagem } from "../../Principais/Servicos/APIs/APIs";
 
 const site = import.meta.env.VITE_SITE;
 
 export default function Visualizador({ dados_offline, api, fechar, modal_simples = false }) {
+  const [imagem, def_imagem] = useState("./../../src/Recursos/apis/imagem_padrao.png");
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
-  const [publicador, def_publicador] = useState('');
   const [carregando, def_carregando] = useState(true);
-  const [imagem, def_imagem] = useState("./icones/image_padrao.png");
-
-  const validar_imagem = (url) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => resolve(url);
-      img.onerror = () => resolve("./icones/image_padrao.png");
-      img.src = url;
-    });
-  };
+  const [publicador, def_publicador] = useState('');
 
   useEffect(() => {
-    if (api?.imagem) {
-      if (dados_offline) {
-        def_imagem(`./apis/${api.imagem}.png`)
-      } else {
-        validar_imagem(api.imagem).then((img) => def_imagem(img));
-      }
+    const imgx = async () => {
+      const img = await validar_imagem(api.imagem, dados_offline);
+      def_imagem(img)
     }
+    imgx()
   }, [api?.imagem]);
 
   useEffect(() => {
@@ -89,7 +79,7 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
               <span className="span_destaque">Metodos</span>
               <div>
                 {
-                  api.metodos && Object.keys(dados_offline ? api.metodos : JSON.parse(api.metodos)).map(metodo => {
+                  api.metodos && Object.keys(api.metodos).map(metodo => {
                     const metodo_formatado = metodo.trim().toUpperCase();
                     const cores = { VER_SITE: "var(--destaque)", GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
                     return cores[metodo_formatado] ? (

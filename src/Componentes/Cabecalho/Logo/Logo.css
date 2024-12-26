@@ -1,44 +1,45 @@
-#logo_AHB {
+#logo {
  align-items: center;
  width: fit-content;
- flex: 0 1 260px;
+ min-width: 200px;
  color: #FFF;
  display: flex;
+ padding: 5px;
+ width: 200px;
  gap: 10px;
 }
 
-#logo_AHB img {
+#logo img {
  padding: 2px;
  height: 100%;
 }
 
-#logo_AHB div {
+#logo div {
  flex-direction: column;
  display: flex;
 }
 
-#logo_AHB span {
+#logo span {
  border-bottom: 1px solid var(--destaque);
  width: fit-content;
  font-size: 14px;
  padding: 0 2px;
 }
 
-#logo_AHB span:first-child {
- display: none;
-}
-
 /* Smartphone  */
 @media screen and (max-width: 600px) {
- #logo_AHB span:not(#logo_AHB span:first-child) {
+ #logo {
+  min-width: 60px;
+  width: 60px;
+  padding: 0;
+  gap: 0;
+ }
+
+ #logo span{
   display: none;
  }
 
- #logo_AHB span:first-child {
-  display: block;
- }
-
- #logo_AHB img {
+ #logo img {
   height: 90%;
  }
 }

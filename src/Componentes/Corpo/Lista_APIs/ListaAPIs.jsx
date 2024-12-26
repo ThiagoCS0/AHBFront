@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { clicar_apis } from "../../Principais/Servicos/APIs/APIs";
 import Visualizador from "../../Modal/API_Visualizador/Visualizador";
 import Rodape from "../../Rodape/Rodape";
@@ -6,9 +6,10 @@ import API from "../API/API";
 import "./ListaAPIs.css"
 
 export default function ListaAPIs({ dados_offline, apis }) {
-  const [apiSelec, defApiSelec] = useState(null);
+  const [api_selecionada, def_api_selecionada] = useState(null);
+
   const fecharModal = () => {
-    defApiSelec(null);
+    def_api_selecionada(null);
   };
 
   return (
@@ -21,11 +22,11 @@ export default function ListaAPIs({ dados_offline, apis }) {
               api={api}
               key={api.id}
               classe={"lista_apis_hover"}
-              click={() => { defApiSelec(api); }}
+              click={() => { def_api_selecionada(api) }}
             />
           ))}
       </div>
-      {apiSelec && <Visualizador dados_offline={dados_offline} api={apiSelec} fechar={fecharModal} />}
+      {api_selecionada && <Visualizador dados_offline={dados_offline} api={api_selecionada} fechar={fecharModal} />}
     </div>
   );
 }

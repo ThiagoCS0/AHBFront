@@ -52,16 +52,16 @@ export async function meu_post(url, corpo, usar_token = false) {
         "Content-Type": "application/json",
         ...(usar_token ? { "Authorization": `Bearer ${token}` } : {})
       },
-      body: JSON.stringify(corpo)
+      body: corpo != "click" && JSON.stringify(corpo)
     });
 
     status_post = resposta.status;
     if (Math.floor(status_post / 100) === 2) {
-      dados_post = await resposta.json();
+      dados_post = corpo === "click" ? "" : await resposta.json();
     } else {
       return { status_post, dados_post: "" }
     }
-    
+
     return { status_post, dados_post };
   } catch (erro) {
     meus_erros(import.meta.url.split('/').pop(), `CAT_CNX_POS: ${erro}`);

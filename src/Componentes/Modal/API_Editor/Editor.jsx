@@ -193,7 +193,7 @@ export default function Editor({ fechar, cadastrar_minha_api, atualizar_minha_ap
      };
 
      const validarMetodosApi = (valor) => {
-          const metodosValidos = ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS", "HEAD", "TRACE", "CONNECT"];
+          const metodosValidos = ["VER_SITE", "GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS", "HEAD", "TRACE", "CONNECT"];
           const metodos = valor.split(",").map(metodo => metodo.trim().toUpperCase());
           const unicos = new Set(metodos);
           return metodos.every(metodo => metodosValidos.includes(metodo)) && unicos.size === metodos.length;
