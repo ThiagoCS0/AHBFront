@@ -3,11 +3,12 @@ import { meu_get } from "../../Principais/Servicos/Backend/Conexao";
 import "./Visualizador.css";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
 import { validar_imagem } from "../../Principais/Servicos/APIs/APIs";
+import imagem_padrao from "./../../../../src/Recursos/apis/imagem_padrao.png";
 
 const site = import.meta.env.VITE_SITE;
 
 export default function Visualizador({ dados_offline, api, fechar, modal_simples = false }) {
-  const [imagem, def_imagem] = useState("./../../src/Recursos/apis/imagem_padrao.png");
+  const [imagem, def_imagem] = useState(imagem_padrao);
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [carregando, def_carregando] = useState(true);
   const [publicador, def_publicador] = useState('');

@@ -1,5 +1,7 @@
 import React from "react"
+import logo from './../../../../src/Recursos/icones/logo.png'
 import "./Logo.css"
+
 
 const inicio = import.meta.env.VITE_INICIAL;
 
@@ -11,7 +13,7 @@ export default function Logo() {
 
  return (
   <a id="logo" href={inicio} onClick={() => pagina_inicial()}>
-   <img src="./../src/Recursos/icones/logo.png" alt="Logo" />
+   <img src={logo} alt="Logo" />
    <div>
     <span>API</span>
     <span>HUB</span>

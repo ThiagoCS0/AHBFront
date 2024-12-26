@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { remover_token, salvar_token, validar_token } from "../../Principais/Servicos/JWT/JWT";
+import { remover_token } from "../../Principais/Servicos/JWT/JWT";
 import { cadastrar } from "../../Principais/Servicos/Usuario/Acesso";
-import { meu_post } from "../../Principais/Servicos//Backend/Conexao";
-import { meus_erros } from "../../Principais/Erros/MeusErros";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
+import icon_senha_visivel from "./../../../../src/Recursos/icones/senha_visivel.png";
+import icon_senha_invisivel from "./../../../../src/Recursos/icones/senha_invisivel.png";
 
 const inicio = import.meta.env.VITE_INICIAL;
 const site = import.meta.env.VITE_SITE;
@@ -274,7 +274,7 @@ export default function Criar() {
               />
               <img
                 className="dados_usuario_ver_senha"
-                src={senha_visivel ? "./../src/Recursos/icones/senha_visivel.png" : "./../src/Recursos/icones/senha_invisivel.png"}
+                src={senha_visivel ?  icon_senha_visivel: icon_senha_invisivel}
                 alt={senha_visivel ? "Senha Visível" : "Senha Invisível"}
                 onClick={() => def_senha_visivel(!senha_visivel)}
               />

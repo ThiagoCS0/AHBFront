@@ -1,4 +1,6 @@
 import { useState } from "react";
+import icon_fechar from "./../../../../../src/Recursos/icones/fechar.png";
+import icon_buscar from "./../../../../../src/Recursos/icones/busca.png";
 
 export default function Buscar({ expandir, buscar }) {
  const [expandi_local, def_expandir] = useState("");
@@ -31,7 +33,7 @@ export default function Buscar({ expandir, buscar }) {
    <img
     onClick={alterar_buscar}
     alt={expandi_local ? "Buscar" : "Fechar pesquisa"}
-    src={expandi_local ? "./../src/Recursos/icones/fechar.png" : "./../src/Recursos/icones/busca.png"}
+    src={expandi_local ? icon_fechar : icon_buscar}
     className="icones"
    />
   </div>

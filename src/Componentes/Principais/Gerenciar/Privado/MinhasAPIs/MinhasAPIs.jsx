@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "./MinhasAPIs.css";
-import { validar_token } from "../../../Servicos/JWT/JWT";
 import { meu_delete, meu_get } from "../../../Servicos//Backend/Conexao";
 import { usuario_id } from "../../../Servicos/Usuario/Usuario";
+import { validar_imagem } from "../../../Servicos/APIs/APIs";
+import { validar_token } from "../../../Servicos/JWT/JWT";
 import { meus_erros } from "../../../Erros/MeusErros";
 import Visualizador from "../../../../Modal/API_Visualizador/Visualizador"
+import Carregamento from "../../../Carregamento/Carregamento";
 import Editor from "../../../../Modal/API_Editor/Editor"
 import API from "../../../../Corpo/API/API";
-import Carregamento from "../../../Carregamento/Carregamento";
-import { validar_imagem } from "../../../Servicos/APIs/APIs";
+import imagem_padrao from "./../../../../../../src/Recursos/apis/imagem_padrao.png";
+import "./MinhasAPIs.css";
 
 const site = import.meta.env.VITE_SITE;
 
@@ -19,7 +20,7 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
   const [nova_api, def_nova_api] = useState([]);
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
   const [api_selec, def_api_selec] = useState(null);
-  const [imagem, def_imagem] = useState("./../../../../src/Recursos/apis/imagem_padrao.png");
+  const [imagem, def_imagem] = useState(imagem_padrao);
 
   useEffect(() => {
     //-------------------------------------------------------------------------------- isso foi criado por causa do ( React.StrictMode do main.jsx) 

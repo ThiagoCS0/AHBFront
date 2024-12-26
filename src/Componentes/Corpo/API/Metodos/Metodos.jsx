@@ -3,12 +3,13 @@ import { meu_get } from "../../../Principais/Servicos/Backend/Conexao";
 import Carregamento from "../../../Principais/Carregamento/Carregamento";
 import "./Metodos.css";
 import { validar_imagem } from "../../../Principais/Servicos/APIs/APIs";
+import imagem_padrao from "./../../../../../src/Recursos/apis/imagem_padrao.png";
 
 export default function Metodos({ dados_offline, api }) {
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [aba_ativa, def_aba_ativa] = useState("basico");
   const [carregando, def_carregando] = useState(true);
-  const [imagem, def_imagem] = useState("./../../../src/Recursos/apis/imagem_padrao.png");
+  const [imagem, def_imagem] = useState(imagem_padrao);
   const [publicador, def_publicador] = useState("");
   const abasRef = useRef(null);
   const [item_expandido, def_item_expandido] = useState({});

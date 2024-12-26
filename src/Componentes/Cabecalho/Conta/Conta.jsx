@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { remover_token, validar_token } from "../../Principais/Servicos/JWT/JWT";
 import { usuario_nome } from "../../Principais/Servicos/Usuario/Usuario";
+import icon_usuario from "./../../../../src/Recursos/icones/person.png";
+
 import "./Conta.css";
 
 const site = import.meta.env.VITE_SITE;
@@ -92,7 +94,7 @@ export default function Conta({ dados_offline }) {
       <button onClick={() => { !dados_offline && opcoes_botao_conta() }} ref={acessarRef} disabled={dados_offline}>
         {!dados_offline &&
           <>
-            <img src="./../src/Recursos/icones/person.png" alt="Usuário" />
+            <img src={icon_usuario} alt="Usuário" />
             <span>{acessando || dados_offline ? "..." : usuario ? usuario : "Entrar"}</span>
           </>
         }

@@ -9,6 +9,14 @@ import Termos from "../../AHB/Termos/Termos";
 import Perfil from "./Privado/Perfil/Perfil";
 import Ranks from "../../AHB/Ranks/Ranks";
 import Sobre from "../../AHB/Sobre/Sobre";
+import icon_usuario from "./../../../../src/Recursos/icones/usuario.png";
+import icon_minhas_apis from "./../../../../src/Recursos/icones/minhas_apis.png";
+import icon_parceria from "./../../../../src/Recursos/icones/parceria.png";
+import icon_doacao from "./../../../../src/Recursos/icones/doacao.png";
+import icon_ranks from "./../../../../src/Recursos/icones/ranks.png";
+import icon_sobre from "./../../../../src/Recursos/icones/sobre.png";
+import icon_termos from "./../../../../src/Recursos/icones/termos.png";
+
 import "./Gerenciar.css";
 
 export default function Gerenciar({ dados_offline, apis }) {
@@ -158,33 +166,33 @@ export default function Gerenciar({ dados_offline, apis }) {
         {!dados_offline && validar_token() && (
           <>
             <Link id="Perfil" onClick={() => alterar_componente("Perfil")}>
-            <img src="./../../src/Recursos/icones/usuario.png" className="gerenciar_icones" alt="Perfil" />
+            <img src={icon_usuario} className="gerenciar_icones" alt="Perfil" />
             <p className="gerenciar_texto">Perfil</p>
             </Link>
             <Link id="MinhasAPIs" onClick={() => alterar_componente("MinhasAPIs")}>
-            <img src="./../../src/Recursos/icones/minhas_apis.png" className="gerenciar_icones" alt="Perfil" />
+            <img src={icon_minhas_apis} className="gerenciar_icones" alt="Perfil" />
             <p className="gerenciar_texto">Minhas APIs</p>
             </Link>
           </>
         )}
         <Link id="Parceiros" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Parceiros", aba: "parceiros_instituicoes" }))} className="desativado" style={{ pointerEvents: 'none' }}>
-          <img src="./../../src/Recursos/icones/parceria.png" className="gerenciar_icones" alt="Parceiros" />
+          <img src={icon_parceria} className="gerenciar_icones" alt="Parceiros" />
           <p className="gerenciar_texto">Parceiros</p>
         </Link>
         <Link id="Doacao" onClick={() => alterar_componente("Doacao")} className="desativado" style={{ pointerEvents: 'none' }}>
-          <img src="./../../src/Recursos/icones/doacao.png" className="gerenciar_icones" alt="Doação" />
+          <img src={icon_doacao} className="gerenciar_icones" alt="Doação" />
           <p className="gerenciar_texto">Doação</p>
         </Link>
         <Link id="Ranks" onClick={() => alterar_componente(null, JSON.stringify({ pag: "Ranks", aba: "ranks_populares" }))}>
-          <img src="./../../src/Recursos/icones/ranks.png" className="gerenciar_icones" alt="Ranks" />
+          <img src={icon_ranks} className="gerenciar_icones" alt="Ranks" />
           <p className="gerenciar_texto">Ranks</p>
         </Link>
         <Link id="Sobre" onClick={() => alterar_componente("Sobre")}>
-          <img src="./../../src/Recursos/icones/sobre.png" className="gerenciar_icones" alt="Sobre" />
+          <img src={icon_sobre} className="gerenciar_icones" alt="Sobre" />
           <p className="gerenciar_texto">Sobre</p>
         </Link>
         <Link id="Termos" onClick={() => alterar_componente("Termos")}>
-          <img src="./../../src/Recursos/icones/termos.png" className="gerenciar_icones" alt="Termos" />
+          <img src={icon_termos} className="gerenciar_icones" alt="Termos" />
           <p className="gerenciar_texto">Termos</p>
         </Link>
       </div>

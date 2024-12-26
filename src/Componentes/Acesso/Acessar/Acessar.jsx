@@ -4,6 +4,8 @@ import { remover_token, salvar_token, validar_token } from "../../Principais/Ser
 import { acessar } from "../../Principais/Servicos/Usuario/Acesso";
 import { meus_erros } from "../../Principais/Erros/MeusErros";
 import Carregamento from "../../Principais/Carregamento/Carregamento";
+import icon_senha_visivel from "./../../../../src/Recursos/icones/senha_visivel.png";
+import icon_senha_invisivel from "./../../../../src/Recursos/icones/senha_invisivel.png";
 
 const inicio = import.meta.env.VITE_INICIAL;
 const site = import.meta.env.VITE_SITE;
@@ -110,7 +112,7 @@ export default function Acessar() {
               />
               <img
                 className="dados_usuario_ver_senha"
-                src={senha_visivel ? "./../src/Recursos/icones/senha_visivel.png" : "./../src/Recursos/icones/senha_invisivel.png"}
+                src={senha_visivel ? icon_senha_visivel : icon_senha_invisivel}
                 alt={senha_visivel ? "Senha Visível" : "Senha Invisível"}
                 onClick={() => def_senha_visivel(!senha_visivel)}
              />

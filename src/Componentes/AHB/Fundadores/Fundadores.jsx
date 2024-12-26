@@ -1,4 +1,6 @@
 import "./Fundadores.css";
+import icon_github from "./../../../../src/Recursos/icones/github.png"
+import icon_linkedin from "./../../../../src/Recursos/icones/linkedin.png"
 
 export default function Fundadores() {
   return (
@@ -17,11 +19,11 @@ export default function Fundadores() {
           </a>
           <div className="fundadores_social">
             <a href="https://github.com/rodrigosv91">
-              <img src="./../src/Recursos/icones/github.png" alt="" /></a>
+              <img src={icon_github} alt="" /></a>
             <a href="https://www.linkedin.com/in/rodrigo7791/"
               target="_blank" rel="noopener noreferrer"
               aria-hidden="true">
-              <img src="./../src/Recursos/icones/linkedin.png" alt="" /></a>
+              <img src={icon_linkedin} alt="" /></a>
           </div>
         </div>
 
@@ -34,11 +36,11 @@ export default function Fundadores() {
           </a>
           <div className="fundadores_social">
             <a href="https://github.com/RafaelaOMarques">
-              <img src="./../src/Recursos/icones/github.png" alt="" /></a>
+              <img src={icon_github} alt="" /></a>
             <a href="https://www.linkedin.com/in/rafaelaoliveiramarques/"
               target="_blank" rel="noopener noreferrer"
               aria-hidden="true">
-              <img src="./../src/Recursos/icones/linkedin.png" alt="" /></a>
+              <img src={icon_linkedin} alt="" /></a>
           </div>
         </div>
         
@@ -55,11 +57,11 @@ export default function Fundadores() {
             <a href="https://github.com/ThiagoCS0"
               target="_blank" rel="noopener noreferrer"
               aria-hidden="true">
-              <img src="./../src/Recursos/icones/github.png" alt="" /></a>
+              <img src={icon_github} alt="" /></a>
             <a href="https://www.linkedin.com/in/thiago-cs/"
               target="_blank" rel="noopener noreferrer"
               aria-hidden="true">
-              <img src="./../src/Recursos/icones/linkedin.png" alt="" /></a>
+              <img src={icon_linkedin} alt="" /></a>
           </div>
         </div>
 

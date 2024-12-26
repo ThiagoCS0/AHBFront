@@ -5,6 +5,8 @@ import { usuario_id } from "../../../Servicos/Usuario/Usuario";
 import { meus_erros } from "../../../Erros/MeusErros";
 import Carregamento from "../../../Carregamento/Carregamento";
 import Abas from "../../../Abas/Abas"
+import icon_senha_invisivel from "./../../../../../../src/Recursos/icones/senha_invisivel.png";
+import icon_senha_visivel from "./../../../../../../src/Recursos/icones/senha_visivel.png";
 
 const site = import.meta.env.VITE_SITE;
 
@@ -286,7 +288,7 @@ export default function Perfil() {
                 />
                 <img
                   className="dados_usuario_ver_senha"
-                  src={visibilidade_senha.senhaAtual ? "./../src/Recursos/icones/senha_visivel.png" : "./../src/Recursos/icones/senha_invisivel.png"}
+                  src={visibilidade_senha.senhaAtual ? {icon_senha_visivel} : {icon_senha_invisivel}}
                   onClick={() => def_visibilidade_senha({ ...visibilidade_senha, senhaAtual: !visibilidade_senha.senhaAtual })}
                   alt="Visibilidade"
                 />
@@ -316,7 +318,7 @@ export default function Perfil() {
                   />
                   <img
                     className="dados_usuario_ver_senha"
-                    src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? "./../src/Recursos/icones/senha_visivel.png" : "./../src/Recursos/icones/senha_invisivel.png" : "./../src/Recursos/icones/senha_invisivel.png"}
+                    src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? {icon_senha_visivel} : {icon_senha_invisivel} : {icon_senha_invisivel}}
                     onClick={() => def_visibilidade_senha({ ...visibilidade_senha, novaSenha: !visibilidade_senha.novaSenha })}
                     alt="Visibilidade"
                     style={{ pointerEvents: visibilidade_nova_senha ? "auto" : "none" }}

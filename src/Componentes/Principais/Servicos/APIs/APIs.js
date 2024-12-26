@@ -1,5 +1,6 @@
 import { meus_erros } from "../../Erros/MeusErros";
 import { meu_get, meu_post } from "../Backend/Conexao";
+import imagem_padrao from "./../../../../../src/Recursos/apis/imagem_padrao.png";
 
 export async function buscar_apis(pagina, tamanho, organizar, ordem, relatar_erros = true) {
 
@@ -34,18 +35,18 @@ export async function validar_imagem(imagem, dados_offline) {
       const resposta = new Promise((resolve) => {
         const img = new Image();
         img.onload = () => resolve(imagem);
-        img.onerror = () => resolve("../../../../src/Recursos/apis/imagem_padrao.png");
+        img.onerror = () => resolve(imagem_padrao);
         img.src = imagem;
       });
       return await resposta;
     }
     if (dados_offline) {
-      return `../../../../src/Recursos/apis/${imagem}.png`;
+      return `./../../../../../src/Recursos/apis/${imagem}.png`;
     } else {
       return await im();
     }
   }
-  return "../../../../src/Recursos/apis/imagem_padrao.png";
+  return imagem_padrao;
 }
 
 export function traduzir_dados(dados) {
