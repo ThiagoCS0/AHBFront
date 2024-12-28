@@ -288,7 +288,7 @@ export default function Perfil() {
                 />
                 <img
                   className="dados_usuario_ver_senha"
-                  src={visibilidade_senha.senhaAtual ? {icon_senha_visivel} : {icon_senha_invisivel}}
+                  src={visibilidade_senha.senhaAtual ? icon_senha_visivel : icon_senha_invisivel}
                   onClick={() => def_visibilidade_senha({ ...visibilidade_senha, senhaAtual: !visibilidade_senha.senhaAtual })}
                   alt="Visibilidade"
                 />
@@ -318,7 +318,7 @@ export default function Perfil() {
                   />
                   <img
                     className="dados_usuario_ver_senha"
-                    src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? {icon_senha_visivel} : {icon_senha_invisivel} : {icon_senha_invisivel}}
+                    src={visibilidade_nova_senha ? visibilidade_senha.novaSenha ? icon_senha_visivel : icon_senha_invisivel : icon_senha_invisivel}
                     onClick={() => def_visibilidade_senha({ ...visibilidade_senha, novaSenha: !visibilidade_senha.novaSenha })}
                     alt="Visibilidade"
                     style={{ pointerEvents: visibilidade_nova_senha ? "auto" : "none" }}
