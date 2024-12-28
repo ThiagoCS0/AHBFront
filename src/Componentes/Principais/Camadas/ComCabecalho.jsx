@@ -8,6 +8,7 @@ import Cabecalho from "../../Cabecalho/Cabecalho";
 import Gerenciar from "../Gerenciar/Gerenciar";
 import Rodape from "../../Rodape/Rodape";
 import Corpo from "../../Corpo/Corpo";
+import Carregamento from "../Carregamento/Carregamento";
 
 const site = import.meta.env.VITE_INICIAL;
 
@@ -608,11 +609,13 @@ export default function ComCabecalho() {
     //   // }
   ];
 
-  const [apis, def_apis] = useState(BKEND_TEMP);
-  const [populares, def_populares] = useState(BKEND_TEMP.slice(0, 5));
-  const [filtrado, def_filtrados] = useState(BKEND_TEMP);
+  const [apis, def_apis] = useState([]);
+  const [populares, def_populares] = useState([]);
+  const [filtrado, def_filtrados] = useState([]);
   const [filtrando, def_filtrando] = useState(false);
   const [dados_offline, def_dados_offline] = useState(true);
+  const [carregando, def_carregando] = useState(true);
+  const [ultimos_estado_backend, def_ultimos_estado_backend] = useState("");
   const [tmp_verificar_servidor, def_tmp_verificar_servidor] = useState(15);
   let atualizar = false;
 
@@ -627,26 +630,31 @@ export default function ComCabecalho() {
     def_apis(BKEND_TEMP);
     def_populares(BKEND_TEMP.slice(0, 5));
     def_filtrados(BKEND_TEMP);
+    def_carregando(false)
     atualizar = true;
   }
 
   const verificar_servidor = async () => {
     try {
       const [lista_populares, lista_apis] = await Promise.all([buscar_apis(0, 5, "clickCount", "desc", false), buscar_apis(0, 20, "name", "asc", false)]);
-
       const servidor_online = Math.floor(lista_populares.status_get / 100) === 2 && Math.floor(lista_apis.status_get / 100) === 2;
+      if (ultimos_estado_backend != servidor_online) { def_carregando(true) }
+        
 
       if (servidor_online) {
+        def_ultimos_estado_backend(true)
         def_dados_offline(false);
         def_populares(traduzir_dados(lista_populares.dados_get));
         def_filtrados(traduzir_dados(lista_apis.dados_get));
         def_apis(traduzir_dados(lista_apis.dados_get));
         def_tmp_verificar_servidor(30);
+        def_carregando(false)
         if (atualizar) {
           atualizar = false;
           window.location.reload();
         }
       } else {
+        def_ultimos_estado_backend(false)
         def_dados_offline(true);
         def_tmp_verificar_servidor(15);
         carregar_dados_offline();
@@ -658,45 +666,49 @@ export default function ComCabecalho() {
 
   return (
     <TemasContexto>
-      <>
-        <Cabecalho
-          dados_offline={dados_offline}
-          buscar={valor => {
-            const resultado = valor
-              ? apis.filter(
-                api =>
-                  api.nome.toLowerCase().includes(valor.toLowerCase()) ||
-                  api.descricao.toLowerCase().includes(valor.toLowerCase())
-              )
-              : apis;
-            def_filtrando(!!valor);
-            def_filtrados(resultado);
-          }}
-          categorizar={categoria => {
-            const resultado =
-              categoria === "NENHUMA"
-                ? apis
-                : apis.filter(api =>
-                  api.categoria.toLowerCase().includes(categoria.toLowerCase())
-                );
-            def_filtrando(categoria !== "NENHUMA");
-            def_filtrados(resultado);
-          }}
-        />
-        <Corpo>
-          {sessionStorage.getItem("Paginas") ? (
-            <Gerenciar dados_offline={dados_offline} apis={apis} />
-          ) : sessionStorage.getItem("API") && apis && apis.length > 0 ? (
-            <PaginaAPI dados_offline={dados_offline} dados_apis={apis} />
-          ) : (
-            <>
-              {!filtrando && <Populares dados_offline={dados_offline} populares={populares} />}
-              <ListaAPIs dados_offline={dados_offline} apis={filtrado} />
-              <Rodape fixar_abaixo={filtrando} />
-            </>
-          )}
-        </Corpo>
-      </>
+      {carregando ? <>
+        <Carregamento carregando={carregando} />
+      </> :
+        <>
+          <Cabecalho
+            dados_offline={dados_offline}
+            buscar={valor => {
+              const resultado = valor
+                ? apis.filter(
+                  api =>
+                    api.nome.toLowerCase().includes(valor.toLowerCase()) ||
+                    api.descricao.toLowerCase().includes(valor.toLowerCase())
+                )
+                : apis;
+              def_filtrando(!!valor);
+              def_filtrados(resultado);
+            }}
+            categorizar={categoria => {
+              const resultado =
+                categoria === "NENHUMA"
+                  ? apis
+                  : apis.filter(api =>
+                    api.categoria.toLowerCase().includes(categoria.toLowerCase())
+                  );
+              def_filtrando(categoria !== "NENHUMA");
+              def_filtrados(resultado);
+            }}
+          />
+          <Corpo>
+            {sessionStorage.getItem("Paginas") ? (
+              <Gerenciar dados_offline={dados_offline} apis={apis} />
+            ) : sessionStorage.getItem("API") && apis && apis.length > 0 ? (
+              <PaginaAPI dados_offline={dados_offline} dados_apis={apis} />
+            ) : (
+              <>
+                {!filtrando && <Populares dados_offline={dados_offline} populares={populares} />}
+                <ListaAPIs dados_offline={dados_offline} apis={filtrado} />
+                <Rodape fixar_abaixo={filtrando} />
+              </>
+            )}
+          </Corpo>
+        </>
+      }
     </TemasContexto>
   );
 }
