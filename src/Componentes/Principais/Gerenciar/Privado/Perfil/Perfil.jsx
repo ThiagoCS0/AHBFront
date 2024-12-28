@@ -5,8 +5,8 @@ import { usuario_id } from "../../../Servicos/Usuario/Usuario";
 import { meus_erros } from "../../../Erros/MeusErros";
 import Carregamento from "../../../Carregamento/Carregamento";
 import Abas from "../../../Abas/Abas"
-import icon_senha_invisivel from "./../../../../../../src/Recursos/icones/senha_invisivel.png";
 import icon_senha_visivel from "./../../../../../../src/Recursos/icones/senha_visivel.png";
+import icon_senha_invisivel from "./src/Recursos/icones/senha_invisivel.png";
 
 const site = import.meta.env.VITE_SITE;
 
