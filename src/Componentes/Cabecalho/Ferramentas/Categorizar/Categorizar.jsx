@@ -12,11 +12,12 @@ export default function Categorizar({ expandir, categorizar }) {
     <option value="CEP">CEP</option>
     <option value="CLIMA">CLIMA</option>
     <option value="EMPRESAS">EMPRESAS</option>
+    <option value="ENTRETENIMENTO">ENTRETENIMENTO</option>
     <option value="ESTATISTICAS">ESTATISTÍCAS</option>
     <option value="FINANCAS">FINANÇAS</option>
-    <option value="PAGAMENTO">PAGAMENTO</option>
     <option value="MAPAS">MAPAS</option>
     <option value="OUTROS">OUTROS</option>
+    <option value="PAGAMENTO">PAGAMENTO</option>
     <option value="REDE_SOCIAIS">REDE SOCIAIS</option>
     <option value="SAUDE">SAÚDE</option>
    </select>

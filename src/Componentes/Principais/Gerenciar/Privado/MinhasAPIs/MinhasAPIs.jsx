@@ -21,6 +21,7 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
   const [api_excluir, def_api_excluir] = useState({ id: null, name: "" });
   const [api_selec, def_api_selec] = useState(null);
   const [imagem, def_imagem] = useState(imagem_padrao);
+  const [cancelar, def_cancelar] = useState(false);
 
   useEffect(() => {
     //-------------------------------------------------------------------------------- isso foi criado por causa do ( React.StrictMode do main.jsx) 
@@ -118,8 +119,10 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
 
   const editar_minhas_api = (id) => {
     const api = nova_api.find(api => api.id === id);
-    def_editar_api(api);
-    def_exibir_modal_editar(true);
+    if (api) {
+      def_api_selec(api);
+      def_exibir_modal_editar(true);
+    }
   };
 
   const excluir_minhas_api = async (id) => {
@@ -172,7 +175,7 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
                   editar_minhas_api={editar_minhas_api} />
               ))}
         </div>
-        {api_excluir.id && (
+        {api_excluir.id &&
           <div id="modal_excluir" onClick={() => fechar_modais_minhas_apis()}>
             <div id="modal_excluir_conteudo" onClick={e => { e.stopPropagation(); }}>
               <div id="modal_excluir_texto">
@@ -185,12 +188,12 @@ export default function MinhasApis({ dados_offline, editar_api, exibir_modal_edi
               </div>
             </div>
           </div>
-        )}
+        }
         {/* ------------------ Modais Editar e Visualizar ------------------ */}
         {api_selec && exibir_modal_visualizar &&
           <Visualizador api={api_selec} fechar={fechar_modais_minhas_apis} />}
         {exibir_modal_editar
-          && <Editor fechar={fechar_modais_minhas_apis} cadastrar_minha_api={cadastrar_minhas_apis} atualizar_minha_api={atualizar_minhas_api} dados_minha_api={editar_api} />}
+          && <Editor fechar={fechar_modais_minhas_apis} cadastrar_minha_api={cadastrar_minhas_apis} atualizar_minha_api={atualizar_minhas_api} api_selec={api_selec} />}
       </>
   );
 };

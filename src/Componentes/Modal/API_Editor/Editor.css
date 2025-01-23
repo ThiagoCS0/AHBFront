@@ -20,10 +20,11 @@
  box-shadow: var(--sombra-0);
  padding: 0 !important;
  border-radius: 8px;
+ max-width: 1000px;
  overflow: hidden;
  cursor: default;
  height: 80vh;
- width: 500px;
+ width: 90vw;
  overflow-y: scroll;
 }
 
@@ -90,6 +91,13 @@
 textarea {
  height: 100px;
  resize: none;
+}
+
+#editor_metodos {
+ -webkit-mask-image: linear-gradient(to right, #000 80%, transparent);
+ mask-image: linear-gradient(to right, #000 80%, transparent);
+ display: flex;
+ gap: 10px;
 }
 
 /* Smartphone */

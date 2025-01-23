@@ -46,7 +46,6 @@
   content: "Nova API";
 }
 
-
 #minhas_apis .apis {
   border: 2px solid var(--destaque-escuro);
   background-color: var(--tema-fundo-3);
@@ -215,7 +214,6 @@
   }
 
 }
-
 
 @media screen and (max-width: 600px) {
 

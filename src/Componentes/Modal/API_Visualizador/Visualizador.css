@@ -107,6 +107,8 @@
 }
 
 #modal_lista_metodos>div {
+ -webkit-mask-image: linear-gradient(to right, #000 80%, transparent 100%);
+ mask-image: linear-gradient(to right, #000 80%, transparent 100%);
  flex-direction: row;
  position: relative;
  overflow: hidden;
@@ -114,14 +116,6 @@
  padding: 10px;
  width: 100%;
  gap: 5px;
-}
-
-#modal_lista_metodos>div::after {
- background: linear-gradient(to right, #0000 0%, #0000 80%, var(--tema-fundo-4) 100%);
- pointer-events: none;
- position: absolute;
- content: '';
- inset: 0;
 }
 
 #modal_lista_metodos .span_destaque {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Carregamento from "../../../Principais/Carregamento/Carregamento";
-import "./PaginaAPI.css"
 import Metodos from "../Metodos/Metodos";
+import "./PaginaAPI.css"
 
 const site = import.meta.env.VITE_SITE;
 
@@ -44,21 +44,17 @@ export default function PaginaAPI({ dados_offline, dados_apis }) {
       <Carregamento carregando={carregando} />
     ) : (
       <div id="pagina_api">
-        {api ? (
-          <>
-            <div id="pagina_api_metodos" className="ondulacao-4">
-              <Metodos dados_offline={dados_offline} api={api} />
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="sem_dados">
-              <h1>😑 Probleminha 😕</h1>
-              <p>Nenhum dado disponível ou ocorreu algum erro!</p>
-              <button onClick={() => { sessionStorage.removeItem("API"); window.location.href = site; }}>Ir para o inicio</button>
-            </div>
-          </>
-        )}
+        {api ?
+          <div id="pagina_api_metodos" className="ondulacao-4">
+            <Metodos dados_offline={dados_offline} api={api} editar={false} />
+          </div>
+          :
+          <div className="sem_dados">
+            <h1>😑 Probleminha 😕</h1>
+            <p>Nenhum dado disponível ou ocorreu algum erro!</p>
+            <button onClick={() => { sessionStorage.removeItem("API"); window.location.href = site; }}>Ir para o inicio</button>
+          </div>
+        }
       </div>
     )
   );

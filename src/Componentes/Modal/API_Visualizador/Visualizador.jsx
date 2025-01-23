@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { meu_get } from "../../Principais/Servicos/Backend/Conexao";
-import "./Visualizador.css";
-import Carregamento from "../../Principais/Carregamento/Carregamento";
 import { validar_imagem } from "../../Principais/Servicos/APIs/APIs";
+import Carregamento from "../../Principais/Carregamento/Carregamento";
 import imagem_padrao from "./../../../../public/apis/imagem_padrao.png";
+import "./Visualizador.css";
 
 const site = import.meta.env.VITE_SITE;
 
@@ -12,6 +12,7 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
   const [tamanho_img, def_tamanho_img] = useState({ lar: 0, alt: 0 });
   const [carregando, def_carregando] = useState(true);
   const [publicador, def_publicador] = useState('');
+  let metodos;
 
   useEffect(() => {
     const imgx = async () => {
@@ -46,7 +47,6 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
     return () => { window.removeEventListener("keydown", tecla); };
   }, [api])
 
-  let metodos;
   if (!Array.isArray(metodos)) { metodos = [api.metodos]; }
 
   return (
@@ -68,10 +68,8 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
               </div>
               {!modal_simples && (
                 <>
-                  <p><span className="span_destaque">Link</span>
-                    <a href={api.link} target="_blank"
-                      rel="noopener noreferrer" aria-hidden="true">
-                      {api.link}</a></p>
+                  <p><span className="span_destaque">Link</span><a href={api.link} target="_blank"
+                    rel="noopener noreferrer" aria-hidden="true">{api.link}</a></p>
                   {publicador && <p><span className="span_destaque">Publicador</span>{publicador}</p>}
                 </>
               )}
@@ -85,7 +83,9 @@ export default function Visualizador({ dados_offline, api, fechar, modal_simples
                     const cores = { VER_SITE: "var(--destaque)", GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
                     return cores[metodo_formatado] ? (
                       <button key={metodo_formatado} style={{ backgroundColor: cores[metodo_formatado] }}
-                        onClick={() => { sessionStorage.setItem("API", JSON.stringify([api.id, metodo_formatado])); window.location.reload(); }}>
+                        onClick={() => {
+                          sessionStorage.removeItem("Paginas"); sessionStorage.setItem("API", JSON.stringify([api.id, metodo_formatado])); window.location.reload();
+                        }}>
                         {metodo_formatado === "VER_SITE" ? "CONSULTE" : metodo_formatado}</button>
                     ) : null;
                   })

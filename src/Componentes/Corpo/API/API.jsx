@@ -37,7 +37,7 @@ export default function API({ dados_offline, api, classe, click, simples = true,
                 <div className="api_infor">
                   <p>{api.descricao || ""}</p>
                   <div className="lista_minhas_apis_metodos">{
-                    api.metodos && Object.keys(api.metodos).map((metodo) => {
+                    api.metodos && Object.keys(api.metodos).map(metodo => {
                       const metodo_formatado = metodo.trim().toUpperCase();
                       const cores = { VER_SITE: "var(--destaque)", GET: "#0A0", POST: "#808", DELETE: "#A00", PUT: "#AA0", PATCH: "#088", OPTIONS: "#448", HEAD: "#408", TRACE: "#48B", CONNECT: "#222", };
                       return cores[metodo_formatado] ? (
